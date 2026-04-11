@@ -65,16 +65,11 @@ body::before {
 
 /* ── NAV ── */
 .topbar {
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--r);
-  padding: 14px 20px;
-  box-shadow: var(--shadow2);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
+  margin-bottom: 0;
 }
 
 .links { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -381,6 +376,13 @@ body::before {
     </div>
   </nav>
 
+  <div class="hero">
+    <img class="hero-ghost" src="assets/img/adventure-1.png" alt="Booha" />
+    <div class="hero-eyebrow" id="heroEye">Bryan's English School</div>
+    <h1 id="heroTitle" class="jp-font">ブーハー・アドベンチャーへようこそ</h1>
+    <p id="heroSub">ここは、ブーハーの世界の中で、私が生徒に直接話すページです。</p>
+  </div>
+
   <div class="lang-pill-wrap">
     <div class="lang-pill" role="group" aria-label="Language">
       <button class="langBtn" id="btnEN" type="button">English</button>
@@ -388,14 +390,6 @@ body::before {
     </div>
   </div>
 
-  <div class="hero">
-    <img class="hero-ghost" src="assets/img/adventure.png" alt="Booha" />
-    <div class="hero-eyebrow" id="heroEye">Bryan's English School</div>
-    <h1 id="heroTitle" class="jp-font">ブーハー・アドベンチャーへようこそ</h1>
-    <p id="heroSub">ここは、ブーハーの世界の中で、私が生徒に直接話すページです。</p>
-  </div>
-
-  <!-- EN -->
   <section class="accordion hidden" id="accEN" aria-label="Information (English)">
 
     <div class="item">
