@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Booha Adventure</title>
+<link rel="icon" type="image/png" href="assets/img/adventure.png">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:        #1a1614;
+  --surface:   #221e1b;
+  --card:      #2a2420;
+  --border:    rgba(255,255,255,.06);
+  --border2:   rgba(255,255,255,.11);
+  --text:      #e8e0d0;
+  --muted:     #9a9080;
+  --ivory:     #f5ecd7;
+  --yellow:    #f7d040;
+  --yellow2:   #ffb830;
+  --moss:      #7ec87a;
+  --amber:     #e8a050;
+  --r:         16px;
+  --r2:        10px;
+  --shadow:    0 24px 48px rgba(0,0,0,.5);
+  --shadow2:   0 8px 24px rgba(0,0,0,.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* warm radial atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 800px 400px at 50% -5%,  rgba(247,208,64,.07)  0%, transparent 65%),
+    radial-gradient(ellipse 600px 500px at 10% 80%,  rgba(126,200,122,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 90% 60%,  rgba(232,160,80,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 300px 300px at 50% 100%, rgba(247,208,64,.04)  0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── NAV ── */
+.topbar {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 14px 20px;
+  box-shadow: var(--shadow2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.links { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.aLink {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: 999px;
+  border: 1px solid var(--border2); background: var(--card);
+  color: var(--text); text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: .3px; white-space: nowrap;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .2s ease;
+  position: relative; overflow: hidden;
+}
+.aLink::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  transition: opacity .2s ease;
+}
+.aLink.back::before  { background: radial-gradient(circle at 50% 50%, rgba(247,208,64,.15),  transparent 70%); }
+.aLink.world::before { background: radial-gradient(circle at 50% 50%, rgba(126,200,122,.15), transparent 70%); }
+.aLink:hover::before { opacity: 1; }
+
+@keyframes pulseY { 0%,100%{ box-shadow:0 0 0 rgba(247,208,64,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(247,208,64,.3),var(--shadow2); } }
+@keyframes pulseG { 0%,100%{ box-shadow:0 0 0 rgba(126,200,122,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(126,200,122,.3),var(--shadow2); } }
+.aLink.back  { animation: pulseY 3.5s ease-in-out infinite; }
+.aLink.world { animation: pulseG 3.5s ease-in-out infinite 1.75s; }
+.aLink:hover { transform: translateY(-2px); }
+
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.back  .dot { background: var(--yellow); }
+.world .dot { background: var(--moss); }
+
+.lang-pill {
+  display: flex; background: var(--bg);
+  border: 1px solid var(--border2); border-radius: 999px; padding: 3px; gap: 2px;
+  flex-shrink: 0;
+}
+.langBtn {
+  padding: 7px 18px; border-radius: 999px; border: none;
+  background: transparent; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .18s ease; letter-spacing: .3px;
+}
+.langBtn.active { background: var(--card); color: var(--ivory); box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+
+/* ── HERO ── */
+.hero {
+  margin: 20px 0 18px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 48px 32px 40px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 400px 300px at 50% 0%,   rgba(247,208,64,.09),  transparent 65%),
+    radial-gradient(ellipse 300px 200px at 80% 100%, rgba(126,200,122,.06), transparent 60%);
+  pointer-events: none;
+}
+
+.hero-ghost {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  display: block;
+  position: relative;
+  filter: drop-shadow(0 0 28px rgba(247,208,64,.45));
+  animation: floatGhost 4s ease-in-out infinite;
+}
+
+@keyframes floatGhost {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+.hero-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--yellow);
+  margin-bottom: 12px; position: relative;
+}
+.hero h1 {
+  font-family: 'Notable', sans-serif;
+  font-weight: 400;
+  font-size: clamp(22px, 4vw, 36px);
+  line-height: 1.2;
+  color: var(--ivory);
+  letter-spacing: .04em;
+  margin-bottom: 12px;
+  position: relative;
+}
+.hero h1.jp-font {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700; letter-spacing: .5px; line-height: 1.3;
+}
+.hero p { color: var(--muted); font-size: 14.5px; position: relative; }
+
+/* ── ACCORDION ── */
+.accordion { display: flex; flex-direction: column; gap: 10px; }
+.accordion.hidden { display: none !important; }
+
+.item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+.item.open {
+  border-color: var(--border2);
+  box-shadow: 0 8px 32px rgba(0,0,0,.4);
+}
+
+.acc-btn {
+  width: 100%; background: transparent; border: none;
+  padding: 20px 22px; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; text-align: left;
+  transition: background .18s ease;
+}
+.item.open .acc-btn { background: rgba(255,255,255,.02); }
+
+.acc-label { flex: 1; }
+.acc-num {
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.item:nth-child(1) .acc-num { color: var(--yellow); }
+.item:nth-child(2) .acc-num { color: var(--amber); }
+.item:nth-child(3) .acc-num { color: var(--moss); }
+.item:nth-child(4) .acc-num { color: var(--yellow2); }
+
+.acc-title {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 600; font-size: 17px;
+  color: var(--ivory); line-height: 1.2; letter-spacing: -.1px;
+}
+.jp .acc-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: .3px;
+}
+.acc-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
+.acc-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border2); background: var(--card);
+  display: grid; place-items: center; flex-shrink: 0;
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .18s ease;
+  font-size: 18px; color: var(--muted); line-height: 1;
+}
+.item.open .acc-icon {
+  transform: rotate(45deg);
+  background: rgba(247,208,64,.1);
+  border-color: rgba(247,208,64,.3);
+  color: var(--yellow);
+}
+
+.panel { max-height: 0; overflow: hidden; transition: max-height .35s cubic-bezier(.4,0,.2,1); }
+.item.open .panel { max-height: 9999px; }
+.panel-inner { padding: 0 22px 24px; }
+
+.panel-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 22px;
+  color: #c8bfb0;
+  line-height: 1.85; font-size: 14.5px;
+}
+.jp .panel-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px; line-height: 2.1;
+}
+.item:nth-child(1) .panel-body { border-top: 2px solid rgba(247,208,64,.3); }
+.item:nth-child(2) .panel-body { border-top: 2px solid rgba(232,160,80,.3); }
+.item:nth-child(3) .panel-body { border-top: 2px solid rgba(126,200,122,.3); }
+.item:nth-child(4) .panel-body { border-top: 2px solid rgba(255,184,48,.3); }
+
+.panel-body .lead {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 700; font-size: 16px;
+  color: var(--ivory); display: block;
+  margin-bottom: 8px; margin-top: 4px;
+}
+.jp .panel-body .lead {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px; font-weight: 700;
+}
+.panel-body strong { color: var(--ivory); font-weight: 600; }
+.panel-body ul { padding-left: 20px; margin: 8px 0; }
+.panel-body li { margin-bottom: 10px; }
+.panel-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+.pin-table { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 13.5px; }
+.pin-table th {
+  text-align: left; color: var(--muted);
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.pin-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--ivory); }
+.pin-table tr:last-child td { border-bottom: none; }
+.pin-table .price { color: var(--yellow); font-weight: 600; }
+
+.note {
+  margin-top: 16px;
+  background: rgba(247,208,64,.05);
+  border: 1px solid rgba(247,208,64,.18);
+  border-radius: 10px; padding: 14px 16px;
+  font-size: 13.5px; color: var(--muted);
+}
+.note strong { color: var(--yellow); }
+.note.moss {
+  background: rgba(126,200,122,.05);
+  border-color: rgba(126,200,122,.18);
+}
+.note.moss strong { color: var(--moss); }
+.jp .note { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; line-height: 1.9; }
+
+.level-block {
+  margin-bottom: 16px; padding: 14px 16px;
+  background: rgba(255,255,255,.025);
+  border-radius: 10px; border-left: 3px solid transparent;
+}
+.level-block:nth-child(odd)  { border-color: var(--yellow); }
+.level-block:nth-child(even) { border-color: var(--moss); }
+.level-title { font-weight: 600; color: var(--ivory); font-size: 13.5px; margin-bottom: 6px; }
+.level-block ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 13px; }
+.level-block li { margin-bottom: 3px; }
+.jp .level-block { font-family: 'Noto Sans JP', sans-serif; }
+.jp .level-title { font-size: 13px; }
+.jp .level-block li { font-size: 12.5px; }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 40px; text-align: center;
+  color: var(--muted); font-size: 13px; letter-spacing: .5px;
+}
+.footer span { color: var(--yellow); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .topbar { justify-content: center; }
+  .hero { padding: 36px 20px 28px; }
+  .hero-ghost { width: 90px; height: 90px; }
+  .acc-btn { padding: 16px; }
+  .panel-inner { padding: 0 14px 20px; }
+  .panel-body { padding: 16px; }
+  .aLink { font-size: 12px; padding: 8px 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aLink, .hero-ghost { animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <nav class="topbar" aria-label="Booha navigation">
+    <div class="links">
+      <a class="aLink back" href="https://www.bryanharper.tokyo" target="_blank" rel="noopener">
+        <span class="dot"></span><span id="lbl-site">bryanharper.tokyo</span>
+      </a>
+      <a class="aLink world" href="https://booha-adventure-studios.github.io/booha-world/">
+        <span class="dot"></span><span id="lbl-world">Booha World</span>
+      </a>
+    </div>
+    <div class="lang-pill" role="group" aria-label="Language">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <img class="hero-ghost" src="assets/img/adventure.png" alt="Booha" />
+    <div class="hero-eyebrow" id="heroEye">Bryan's English School</div>
+    <h1 id="heroTitle" class="jp-font">ブーハー・アドベンチャーへようこそ</h1>
+    <p id="heroSub">ここは、ブーハーの世界の中で、私が生徒に直接話すページです。</p>
+  </div>
+
+  <!-- EN -->
+  <section class="accordion hidden" id="accEN" aria-label="Information (English)">
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">01 — Welcome</div>
+          <div class="acc-title">The Booha Adventure</div>
+          <div class="acc-sub">A world. English is the entry room.</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+
+        <span class="lead">This is The Booha Adventure, and it connects to the world of my novel Karasuki.</span>
+
+        Once you enter, you can review, listen, and practice all the weekly content without going any further. There are three curricula to choose from.
+        <br><br>
+        This app isn't connected to AI or any external API. Everything is local. Everything you read, see, and hear lives inside the app. From the study deck page, you can even chat with Uhibon. He knows everything about the app—and nothing about anything else. LOL.
+        <br><br>
+        I designed this app to be explored and to get lost in. The further you go, the more you find. Click the maze and you'll see the Booha Ghost flying around. One of them will meet you at the start and guide you to this week's games. Each curriculum has its own set of 9 games and its own theme. The more you play, the more unlocks in Karasuki. That's all I'm going to say.
+        <br><br>
+        Play a game and travel to the Karasuki tree. Remember—most trees are doorways to something.
+        <br><br>
+        You'll find your Adventure Profile page in Karasuki. Only you can see it. No one else—not even me—can see your progress or scores. You're in charge of your motivation and your output.
+
+        <br><br><span class="lead">Curriculum guide</span>
+        <br><br>
+        <table class="pin-table">
+          <tr><th>Curriculum</th><th>Eiken Level</th></tr>
+          <tr><td>Pre-Boo</td><td>Around Grade 5–4</td></tr>
+          <tr><td>Boo-riculum</td><td>Grade 4–2</td></tr>
+          <tr><td>Boo-Continuum</td><td>Grade 2 and above</td></tr>
+        </table>
+
+        <br>
+        I built this app for my output-based school. Output is the language you produce—not what you read aloud or memorize, but what you actually use to communicate. Most students use Boo-riculum. All curricula overlap, so they can be combined. They loop and build practical conversational English without locking you into a fixed level. Your level is based on how much you use the language.
+        <br><br>
+        Each curriculum shows three weeks of study decks at a time: this week, last week, and next week. Each week includes 15 vocabulary words, 15 sentences, and 15 questions, all with full audio and Japanese translations, plus a hands-free stream for listening and repeating.
+        <br><br>
+        Nothing is recorded outside your device. Your data belongs to you.
+
+        <div class="note moss"><strong>Your Booha login:</strong><br>
+        Your PIN works on one device at a time. If someone logs in with your name and PIN while you're already logged in, your session ends automatically. Keep your PIN private. If you're logged out, just log in again and continue.</div>
+
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">02 — Pricing</div>
+          <div class="acc-title">School Access and PIN Pricing</div>
+          <div class="acc-sub">Included with lessons. Other schools welcome.</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        The Booha Adventure was built for my school and is included with lessons. Other schools are welcome to use it. I offer a two-week free trial.
+        <table class="pin-table">
+          <tr><th>PINs</th><th class="price">Price</th></tr>
+          <tr><td>1 PIN</td><td class="price">¥500</td></tr>
+          <tr><td>10 PINs</td><td class="price">¥5,000</td></tr>
+          <tr><td>20 PINs</td><td class="price">¥9,000</td></tr>
+          <tr><td>50 PINs</td><td class="price">¥50,000</td></tr>
+        </table>
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">03 — Homework</div>
+          <div class="acc-title">Homework and Preparation</div>
+          <div class="acc-sub">Prepare at home so class time is speaking time.</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        We do not write during lessons. Writing happens at home so class time can be used for speaking and real communication. Every student keeps a diary. Each week, write the weekly vocabulary in <strong>English and Japanese</strong> and bring it to class.
+        <br><br>
+        <div class="level-block"><div class="level-title">Preschool — under 5 minutes</div><ul><li>Practice writing their name</li><li>Trace the alphabet</li><li>Listen to the question audio</li></ul></div>
+        <div class="level-block"><div class="level-title">Grades 1–3 — 5 to 10 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Listen to the Study Deck audio</li><li>Review the sentence cards</li><li>Practice answering 1 to 2 speaking questions out loud</li></ul></div>
+        <div class="level-block"><div class="level-title">Grades 4–6 — 10 to 12 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the sentence and question decks</li><li>Practice saying the weekly answers out loud</li><li>Keep a short diary (3 to 4 sentences per week)</li></ul></div>
+        <div class="level-block"><div class="level-title">Junior High — 10 to 15 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocabulary, sentences, questions)</li><li>Say the weekly answers out loud</li><li>Keep a weekly English diary (4 to 5 sentences)</li></ul></div>
+        <div class="level-block"><div class="level-title">High School — 12 to 20 minutes</div><ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions</li><li>Say answers out loud. Fluency over perfection.</li><li>Keep an English diary (5 to 8 sentences, including opinions)</li><li>Use the Game Deck when possible</li></ul></div>
+        <div class="level-block"><div class="level-title">Adults</div><ul><li>Come prepared. The goal is to move away from scripts and into real communication.</li><li>Common habits that slow progress: speaking English with Japanese logic, wanting perfect lines instead of real conversations, filling every answer with vague words like enjoy, famous, so-so, or busy, and having little curiosity about English-speaking culture.</li><li>Adults improve fastest when they talk about what they actually think, not just where they went and what they ate.</li></ul></div>
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">04 — Study</div>
+          <div class="acc-title">Study Decks and Game Decks</div>
+          <div class="acc-sub">The foundation and the arena.</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        <span class="lead">Study Decks</span>
+        The study decks are the foundation of everything. Nothing else works properly without them. Every week includes vocabulary cards, sentence cards, and question cards, all with full audio, along with a hands-free stream for listening and repeating.
+        <br><br>
+        The vocabulary cards train your ear and eyes to recognize the week's core words quickly. The sentence cards show how those words live inside real English. The question cards prepare you to respond, not just understand, so when it's time to speak you're not starting from zero.
+        <br><br>
+        The hands-free stream is where everything connects. You listen, repeat, and move with the language without stopping. This is where rhythm, confidence, and flow build.
+        <br><br>
+        These decks are not something you finish once. Come back to them until the English feels familiar.
+
+        <br><br><span class="lead">Game Decks</span>
+        Each week includes 9 games built around the same English you studied.
+        <br><br>
+        The games are not separate from the study. They are where you use it. When the study decks feel familiar, the games feel smooth. When you skip the decks, the games feel hard. The system is honest like that.
+        <br><br>
+        As you complete games, more things begin to appear and unlock across the Adventure. The more you play, the more the world responds.
+      </div></div></div>
+    </div>
+
+  </section>
+
+  <!-- JP -->
+  <section class="accordion jp" id="accJP" aria-label="案内（日本語）">
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">01 — ようこそ</div>
+          <div class="acc-title">ブーハー・アドベンチャー</div>
+          <div class="acc-sub">ひとつの世界。英語は、その入口。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+
+        <span class="lead">ここは「The Booha Adventure」です。私の小説『カラスキー』の世界ともつながっています。</span>
+
+        中に入ると、奥へ進まなくても、毎週のコンテンツをここで見て、聞いて、練習できます。カリキュラムは3つあります。
+        <br><br>
+        このアプリはAIや外部APIとはつながっていません。すべてローカルで動いています。ここで見て、聞いて、使うものは全部このアプリの中にあります。スタディデッキのページではUhibonと話すこともできます。彼はこのアプリのことは全部知っていますが、それ以外は何も知りません。wwww
+        <br><br>
+        このアプリは、探して、迷うために作りました。進めば進むほど、いろいろ見つかります。迷路をクリックすると、ブーハーゴーストが飛んでいます。そのうちの1体がスタートで出迎えて、今週のゲームへ案内してくれます。各カリキュラムには、それぞれ9つのゲームとテーマがあります。プレイするほど、カラスキの中でいろいろ解放されていきます。ここではそれ以上は言いません。
+        <br><br>
+        ゲームを1つやって、カラスキの木まで進んでみてください。覚えておいてください——多くの木は、どこかにつながる扉です。
+        <br><br>
+        カラスキの中には「Adventure Profile」があります。これは自分にしか見えません。他の誰にも——私にも——進捗やスコアは見えません。やるかどうかは自分次第。
+
+        <br><br><span class="lead">カリキュラムガイド</span>
+        <br><br>
+        <table class="pin-table">
+          <tr><th>カリキュラム</th><th>英検レベルの目安</th></tr>
+          <tr><td>Pre-Boo</td><td>英検5級〜4級程度</td></tr>
+          <tr><td>Boo-riculum</td><td>英検4級〜2級程度</td></tr>
+          <tr><td>Boo-Continuum</td><td>英検2級以上</td></tr>
+        </table>
+
+        <br>
+        このアプリは、私のアウトプット中心の英語教室のために作りました。アウトプットとは、読むことや暗記ではなく、「実際に使う英語」です。多くの生徒はBoo-riculumを使っています。カリキュラム同士は重なっているので、組み合わせて使えます。同じ英語を形を変えて繰り返す仕組みで、気づいたら話せるようになっています。レベルで区切りません。どれだけ使ったかが、そのまま力になります。
+        <br><br>
+        各カリキュラムでは、「今週・先週・来週」の3週間分のスタディデッキを見ることができます。毎週、単語15個・文15個・質問15個。すべて音声と日本語付きです。ハンズフリーで聞いてリピートするストリームもあります。
+        <br><br>
+        データは端末の外には出ません。あなたのデータは、あなたのものです。
+
+        <div class="note moss"><strong>ログインについて：</strong><br>
+        PINは1台の端末でのみ使えます。すでにログインしている状態で、別の端末から同じ名前とPINでログインすると、今のセッションは自動的に終了します。PINは他の人に教えないでください。ログアウトした場合は、もう一度ログインすれば続きから再開できます。</div>
+
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">02 — 料金</div>
+          <div class="acc-title">スクール利用とPIN料金</div>
+          <div class="acc-sub">レッスンに含まれています。他のスクールも歓迎。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        ブーハー・アドベンチャーは私の教室のために作ったシステムで、レッスンに含まれています。他のスクールの方もご利用いただけます。2週間の無料トライアルをご用意しています。
+        <table class="pin-table">
+          <tr><th>PIN数</th><th class="price">料金</th></tr>
+          <tr><td>1 PIN</td><td class="price">¥500</td></tr>
+          <tr><td>10 PIN</td><td class="price">¥5,000</td></tr>
+          <tr><td>20 PIN</td><td class="price">¥9,000</td></tr>
+          <tr><td>50 PIN</td><td class="price">¥50,000</td></tr>
+        </table>
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">03 — 宿題</div>
+          <div class="acc-title">宿題と準備</div>
+          <div class="acc-sub">家で準備して、授業は話す時間にする。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        授業中に書く時間はとりません。書くのは家でやってきてください。授業はスピーキングとコミュニケーションの時間にします。全員、ダイアリーを続けてください。その週の単語を<strong>英語と日本語</strong>で書いて、学校に持ってきてください。
+        <br><br>
+        <div class="level-block"><div class="level-title">未就学（幼児）— 5分以内</div><ul><li>名前を書く練習をする</li><li>アルファベットをなぞる</li><li>質問の音声を聞く</li></ul></div>
+        <div class="level-block"><div class="level-title">小1〜小3 — 5〜10分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキの音声を聞く</li><li>文カードを見直す</li><li>質問を1〜2個、声に出して答える練習をする</li></ul></div>
+        <div class="level-block"><div class="level-title">小4〜小6 — 10〜12分</div><ul><li>週の単語を書く（英語と日本語）</li><li>文デッキと質問デッキを確認する</li><li>週の答えを声に出して練習する</li><li>短い日記を書く（週に3〜4文）</li></ul></div>
+        <div class="level-block"><div class="level-title">中学生 — 10〜15分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキ（単語・文・質問）を復習する</li><li>週の答えを声に出す</li><li>英語日記を書く（週に4〜5文）</li></ul></div>
+        <div class="level-block"><div class="level-title">高校生 — 12〜20分</div><ul><li>週の単語を書く（英語と日本語）</li><li>文と質問を復習する</li><li>答えを声に出す。完璧じゃなくていい、流暢さを意識して。</li><li>英語日記を書く（週に5〜8文。自分の意見も入れてみて）</li><li>できればゲームデッキも使う</li></ul></div>
+        <div class="level-block"><div class="level-title">大人</div><ul><li>準備して来てください。台本を読むのではなく、本当に話す練習をしましょう。</li><li>伸びにくい人によくあるパターン：日本語の発想のまま英語を話す。完璧な言い方を探しすぎる。「楽しかった」「有名な」「まあまあ」「忙しい」ばかりで答える。英語圏の文化にあまり興味がない。</li><li>「どこへ行った・何を食べた」より「何を感じた・どう思った」を話せるようになると、ぐっと伸びます。</li></ul></div>
+      </div></div></div>
+    </div>
+
+    <div class="item">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-label">
+          <div class="acc-num">04 — 学習</div>
+          <div class="acc-title">スタディデッキとゲームデッキ</div>
+          <div class="acc-sub">土台と、それを使う場所。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="panel"><div class="panel-inner"><div class="panel-body">
+        <span class="lead">スタディデッキ</span>
+        スタディデッキはブーハーの土台です。ここをしっかりやっておかないと、他がうまくいきません。毎週、単語カード・文カード・質問カードが入っていて、すべて音声付きです。ハンズフリーで聞いてリピートできるストリームもあります。
+        <br><br>
+        単語カードは、その週のキーワードを音と文字の両方で素早く覚えるためのもの。文カードは、その単語が実際の英語の中でどう使われるかを見せてくれます。質問カードは、「分かる」じゃなくて「答える」ための準備です。ゲームで急に詰まらないように、先に英語を体に入れておきます。
+        <br><br>
+        ストリームはその全部をつなぐ場所です。止めずに聞いて、繰り返して、英語のリズムに乗っていく。ここで自信とスピードがついてきます。
+        <br><br>
+        1回やったら終わり、じゃありません。「見たことある」「聞いたことある」になるまで、何度でも開いてください。
+
+        <br><br><span class="lead">ゲームデッキ</span>
+        毎週、同じ英語を使った9つのゲームが用意されています。
+        <br><br>
+        ゲームは勉強とは別のものじゃありません。ゲームが、使う場所です。スタディデッキに慣れていると、ゲームはスムーズに進みます。飛ばすと、急に難しく感じます。ブーハーはそういうところが正直です。
+        <br><br>
+        ゲームを進めるほど、アドベンチャーの中でいろんなものが現れたり、解放されたりしていきます。やればやるほど、世界が動きます。
+      </div></div></div>
+    </div>
+
+  </section>
+
+  <div class="footer">
+    Bryan's English School &nbsp;·&nbsp; <span>Booha Adventure</span>
+  </div>
+
+</div>
+
+<script>
+(() => {
+  const accEN    = document.getElementById('accEN');
+  const accJP    = document.getElementById('accJP');
+  const btnEN    = document.getElementById('btnEN');
+  const btnJP    = document.getElementById('btnJP');
+  const heroTitle = document.getElementById('heroTitle');
+  const heroSub   = document.getElementById('heroSub');
+
+  function setLang(lang) {
+    const jp = lang === 'jp';
+    accEN.classList.toggle('hidden', jp);
+    accJP.classList.toggle('hidden', !jp);
+    btnEN.classList.toggle('active', !jp);
+    btnJP.classList.toggle('active', jp);
+    document.documentElement.lang = jp ? 'ja' : 'en';
+    if (jp) {
+      heroTitle.textContent = 'ブーハー・アドベンチャーへようこそ';
+      heroTitle.classList.add('jp-font');
+      heroSub.textContent   = 'ここは、ブーハーの世界の中で、私が生徒に直接話すページです。';
+    } else {
+      heroTitle.textContent = 'Welcome to the Booha Adventure';
+      heroTitle.classList.remove('jp-font');
+      heroSub.textContent   = 'This is my page to talk to you directly inside the Booha world.';
+    }
+  }
+
+  function bindAccordion(root) {
+    root.querySelectorAll('.item').forEach(item => {
+      const btn = item.querySelector('.acc-btn');
+      if (!btn) return;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        root.querySelectorAll('.item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  }
+
+  bindAccordion(accEN);
+  bindAccordion(accJP);
+  btnEN.addEventListener('click', () => setLang('en'));
+  btnJP.addEventListener('click', () => setLang('jp'));
+  setLang('jp');
+})();
+</script>
+
+</body>
+</html>
