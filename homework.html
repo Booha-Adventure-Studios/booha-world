@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Our Learning System &amp; Lesson Prices</title>
+<link rel="icon" type="image/png" href="assets/img/school-1.png">
+<link rel="apple-touch-icon" href="assets/img/school-1.png">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --bg:      #1a1614;
+  --surface: #221e1b;
+  --card:    #2a2420;
+  --card2:   #302820;
+  --border:  rgba(255,255,255,.06);
+  --border2: rgba(255,255,255,.11);
+  --text:    #e8e0d0;
+  --muted:   #9a9080;
+  --ivory:   #f5ecd7;
+
+  --yellow:  #f7d040;
+  --amber:   #e8a050;
+  --moss:    #7ec87a;
+  --moss2:   #a0d870;
+  --bark:    #c87840;
+
+  --c1: var(--amber);
+  --c2: var(--moss);
+  --c3: var(--yellow);
+  --c4: var(--moss2);
+  --c5: var(--bark);
+  --c6: var(--amber);
+  --c7: var(--moss);
+
+  --r:  16px;
+  --r2: 10px;
+  --shadow:  0 20px 48px rgba(0,0,0,.55);
+  --shadow2: 0 6px 20px rgba(0,0,0,.4);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* warm forest atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 500px at 50% -5%,  rgba(126,200,122,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 400px at 5%  40%,  rgba(247,208,64,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 400px 400px at 90% 70%,  rgba(200,120,64,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 300px 300px at 50% 100%, rgba(126,200,122,.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── NAV ── */
+.top-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color .15s, border-color .15s, transform .12s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+.back-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+.back-btn.site::before  { background: radial-gradient(circle at 50% 50%, rgba(247,208,64,.15),  transparent 70%); }
+.back-btn.world::before { background: radial-gradient(circle at 50% 50%, rgba(126,200,122,.15), transparent 70%); }
+.back-btn:hover::before { opacity: 1; }
+
+@keyframes pulseY { 0%,100%{ box-shadow:0 0 0 rgba(247,208,64,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(247,208,64,.28),var(--shadow2); } }
+@keyframes pulseG { 0%,100%{ box-shadow:0 0 0 rgba(126,200,122,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(126,200,122,.28),var(--shadow2); } }
+.back-btn.site  { animation: pulseY 3.5s ease-in-out infinite; }
+.back-btn.world { animation: pulseG 3.5s ease-in-out infinite 1.75s; }
+.back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.2); transform: translateY(-2px); }
+
+.btn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.back-btn.site  .btn-dot { background: var(--yellow); }
+.back-btn.world .btn-dot { background: var(--moss); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  text-align: center;
+  padding: 40px 20px 32px;
+  position: relative;
+}
+.page-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--moss), transparent);
+}
+
+.hero-tree {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  display: block;
+  filter: drop-shadow(0 0 32px rgba(126,200,122,.35));
+  animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { filter: drop-shadow(0 0 28px rgba(126,200,122,.3)); transform: scale(1); }
+  50%       { filter: drop-shadow(0 0 44px rgba(126,200,122,.5)); transform: scale(1.02); }
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 12px;
+}
+
+.page-title {
+  font-family: 'Notable', sans-serif;
+  font-weight: 400;
+  font-size: clamp(20px, 3.5vw, 34px);
+  color: var(--ivory);
+  line-height: 1.2;
+  letter-spacing: .04em;
+  margin-bottom: 10px;
+}
+.page-title.jp {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  font-size: clamp(18px, 3vw, 28px);
+  letter-spacing: .02em;
+  line-height: 1.35;
+}
+.page-sub {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── LANG TOGGLE ── */
+.lang-pill {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 28px;
+}
+.lang-inner {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 3px;
+}
+.langBtn {
+  padding: 7px 24px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s ease;
+  letter-spacing: .3px;
+}
+.langBtn.active {
+  background: var(--card2);
+  color: var(--ivory);
+  box-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+
+/* ── INTRO CARD ── */
+.intro-card {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-top: 2px solid rgba(126,200,122,.35);
+  border-radius: var(--r);
+  padding: 22px 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow2);
+  font-size: 14.5px;
+  color: #c0baa8;
+  line-height: 1.85;
+}
+.jp .intro-card { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; line-height: 2; }
+
+/* ── SECTION DIVIDER ── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 12px;
+}
+.section-divider span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── ACCORDION ── */
+.acc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.acc-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.acc-item[data-color="1"] { --c: var(--c1); }
+.acc-item[data-color="2"] { --c: var(--c2); }
+.acc-item[data-color="3"] { --c: var(--c3); }
+.acc-item[data-color="4"] { --c: var(--c4); }
+.acc-item[data-color="5"] { --c: var(--c5); }
+.acc-item[data-color="6"] { --c: var(--c6); }
+.acc-item[data-color="7"] { --c: var(--c7); }
+
+.acc-item.open {
+  border-color: color-mix(in srgb, var(--c) 40%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 10%, transparent),
+              0 12px 36px rgba(0,0,0,.45);
+}
+
+.acc-btn {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  transition: background .15s;
+}
+.acc-item.open .acc-btn { background: rgba(255,255,255,.02); }
+
+.acc-stripe {
+  width: 3px;
+  height: 36px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--c) 50%, transparent);
+  flex-shrink: 0;
+  transition: height .2s, background .2s, box-shadow .2s;
+}
+.acc-item.open .acc-stripe {
+  height: 46px;
+  background: var(--c);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--c) 45%, transparent);
+}
+
+.acc-label { flex: 1; min-width: 0; }
+.acc-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--c);
+  margin-bottom: 3px;
+}
+.acc-title {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 600;
+  font-size: 16.5px;
+  color: var(--ivory);
+  line-height: 1.2;
+  letter-spacing: -.1px;
+}
+.jp .acc-title {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+}
+.acc-sub { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+.acc-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 15px;
+  color: var(--muted);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1), background .18s, color .18s, border-color .18s;
+}
+.acc-item.open .acc-icon {
+  transform: rotate(45deg);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  border-color: color-mix(in srgb, var(--c) 38%, transparent);
+  color: var(--c);
+}
+
+.acc-panel { max-height: 0; overflow: hidden; transition: max-height .38s cubic-bezier(.4,0,.2,1); }
+.acc-item.open .acc-panel { max-height: 9999px; }
+.acc-panel-inner { padding: 0 20px 24px; }
+
+.panel-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 2px solid color-mix(in srgb, var(--c) 40%, transparent);
+  border-radius: var(--r2);
+  padding: 20px 22px;
+  font-size: 14px;
+  color: #c0baa8;
+  line-height: 1.85;
+}
+.jp .panel-body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13.5px;
+  line-height: 2;
+}
+.panel-body p { margin-bottom: 10px; }
+.panel-body p:last-child { margin-bottom: 0; }
+.panel-body strong { color: var(--ivory); font-weight: 600; }
+.panel-body em { color: var(--muted); font-style: italic; }
+
+/* ── PRICE LIST ── */
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.price-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--card2);
+  border-radius: var(--r2);
+  border: 1px solid var(--border);
+  font-size: 13.5px;
+  flex-wrap: wrap;
+}
+.jp .price-list li { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; }
+.price-list .pl-label { color: #b0a898; flex: 1; min-width: 0; }
+.price-list .pl-price {
+  font-family: 'Spectral', serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--c);
+  white-space: nowrap;
+  letter-spacing: -.1px;
+}
+.jp .price-list .pl-price { font-family: 'Noto Sans JP', sans-serif; }
+
+.price-list.zeroes li {
+  border-color: rgba(126,200,122,.2);
+  background: rgba(126,200,122,.04);
+}
+.price-list.zeroes .pl-price { color: var(--moss); }
+
+/* ── CALLOUT ── */
+.callout {
+  margin-top: 14px;
+  background: color-mix(in srgb, var(--c) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c) 20%, transparent);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.callout strong { color: var(--c); }
+
+/* ── BULLET LIST ── */
+.bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+.bullet-list li {
+  padding: 5px 0 5px 16px;
+  position: relative;
+  font-size: 13.5px;
+  color: #b0a898;
+  border-bottom: 1px solid var(--border);
+}
+.jp .bullet-list li { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; }
+.bullet-list li:last-child { border-bottom: none; }
+.bullet-list li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: .6;
+}
+
+/* ── FADE UP ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 52px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer span { color: var(--moss); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 580px) {
+  .acc-btn { padding: 15px 14px; }
+  .acc-panel-inner { padding: 0 14px 20px; }
+  .panel-body { padding: 16px; }
+  .acc-title { font-size: 15px; }
+  .price-list li { flex-direction: column; gap: 4px; }
+  .intro-card { padding: 16px; }
+  .hero-tree { width: 120px; height: 120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="root">
+
+  <nav class="top-nav fade-up">
+    <a href="https://www.bryanharper.tokyo" class="back-btn site">
+      <span class="btn-dot"></span>
+      <span>bryanharper.tokyo</span>
+    </a>
+    <a href="https://booha-adventure-studios.github.io/booha-world/" class="back-btn world">
+      <span class="btn-dot"></span>
+      <span>Booha World</span>
+    </a>
+  </nav>
+
+  <header class="page-header fade-up">
+    <img class="hero-tree" src="assets/img/school-1.png" alt="Bryan's English School" />
+    <div class="eyebrow">Bryan's English School</div>
+    <h1 class="page-title jp" id="page-title">学習システムとレッスン料金</h1>
+    <p class="page-sub" id="page-sub">ブライアン英会話教室（Booha Adventure）</p>
+  </header>
+
+  <div class="lang-pill fade-up">
+    <div class="lang-inner">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
+    </div>
+  </div>
+
+  <div class="intro-card fade-up">
+    <p id="intro-text">ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。</p>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section-divider fade-up"><span id="div1-label">料金</span></div>
+  <div class="acc-list">
+
+    <div class="acc-item fade-up" data-color="1">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="01 — Pricing" data-jp="01 — 料金">01 — 料金</div>
+          <div class="acc-title" data-en="Group Lesson Prices" data-jp="グループレッスン料金">グループレッスン料金</div>
+          <div class="acc-sub" data-en="Small classes, real output, separated by age." data-jp="少人数・アウトプット重視・年齢別クラス">少人数・アウトプット重視・年齢別クラス</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>グループレッスンではBooha Adventureを使用します。ただ聞くだけでなく、話す・質問する・反応することを中心に進めます。年齢ごとにクラスを分け、少人数で行います。</p>
+          <p><strong>体験を始める前に、全員面談への参加が必要です。</strong></p>
+          <ul class="price-list">
+            <li><span class="pl-label">幼稚園（5〜6歳）/ 25分・最大2名</span><span class="pl-price">月 ¥4,000</span></li>
+            <li><span class="pl-label">小学生〜中学生 / 50分・最大4名</span><span class="pl-price">月 ¥7,500</span></li>
+            <li><span class="pl-label">高校生〜大人 / 50分・最大3名</span><span class="pl-price">月 ¥7,500</span></li>
+            <li><span class="pl-label">追加プラン：週2回（月8レッスン）</span><span class="pl-price">月 ¥15,000</span></li>
+          </ul>
+          <div class="callout">Booha Adventureは月謝に含まれています。退会後も利用を続ける場合は、月額PINが必要です。他のスクール向けのライセンス提供も行っています。</div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>Group lessons use the Booha Adventure app. Students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.</p>
+          <p><strong>All students must attend a meeting before starting a trial period.</strong></p>
+          <ul class="price-list">
+            <li><span class="pl-label">Kindergarten (age 5–6) / 25 min, max 2 students</span><span class="pl-price">¥4,000 / month</span></li>
+            <li><span class="pl-label">Elementary – Junior High / 50 min, max 4 students</span><span class="pl-price">¥7,500 / month</span></li>
+            <li><span class="pl-label">High School – Adults / 50 min, max 3 students</span><span class="pl-price">¥7,500 / month</span></li>
+            <li><span class="pl-label">Extra Plan: Group twice per week (8 lessons)</span><span class="pl-price">¥15,000 / month</span></li>
+          </ul>
+          <div class="callout">The Booha Adventure is included in monthly tuition. If a student leaves, continued access requires a monthly PIN. Licensing is also available for other schools.</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item fade-up" data-color="2">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="02 — Pricing" data-jp="02 — 料金">02 — 料金</div>
+          <div class="acc-title" data-en="Private Lesson Prices" data-jp="プライベートレッスン料金">プライベートレッスン料金</div>
+          <div class="acc-sub" data-en="Individual coaching at your level and pace." data-jp="個別コーチング。レベルとペースに合わせた内容。">個別コーチング。レベルとペースに合わせた内容。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>プライベートレッスンは、個別に集中して英語を学びたい方のためのレッスンです。Booha Adventureをベースにしながら、生徒のレベル・ペース・目標に合わせて内容を調整します。</p>
+          <ul class="bullet-list">
+            <li>個別の学習プラン作成</li>
+            <li>毎回のレッスン後に届く英語・日本語の個別メモ</li>
+            <li>面接・プレゼンなどの対策</li>
+            <li>長期的な目標に向けたサポート</li>
+          </ul>
+          <ul class="price-list">
+            <li><span class="pl-label">週1回（50分 × 月4回）</span><span class="pl-price">月 ¥20,000</span></li>
+          </ul>
+          <div class="callout">現在プライベートレッスンを受けている生徒の料金は変更されません。この料金は<strong>新規の方に適用</strong>されます。</div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>Private lessons are for students who need focused, individual English coaching. I use Booha Adventure as the base, but adjust the lesson to the student's level, pace, and goals.</p>
+          <ul class="bullet-list">
+            <li>A tailored study outline</li>
+            <li>Personalized lesson notes after each session in English and Japanese</li>
+            <li>Interview, presentation, or specific speaking support</li>
+            <li>Clear long-term guidance</li>
+          </ul>
+          <ul class="price-list">
+            <li><span class="pl-label">Once per week (4 x 50-minute lessons)</span><span class="pl-price">¥20,000 / month</span></li>
+          </ul>
+          <div class="callout">Current private students are not affected. This rate applies to <strong>new students only.</strong></div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item fade-up" data-color="3">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="03 — Special" data-jp="03 — 特別">03 — 特別</div>
+          <div class="acc-title" data-en="Parent Observation Lessons" data-jp="親子オブザベーションレッスン">親子オブザベーションレッスン</div>
+          <div class="acc-sub" data-en="Parents join the lesson. Not a passive visit." data-jp="後ろで見るだけではありません。親御さんも参加します。">後ろで見るだけではありません。親御さんも参加します。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>親御さん向けのオブザベーションレッスンは、後ろで見るだけの見学ではありません。親御さんにもお子さんと一緒にレッスンに参加していただきます。</p>
+          <p>実際にレッスンに入り、<strong>答える・待つ・考える・分からない中でやる</strong>という体験をすることで、お子さんが何を感じているのか、家庭で何が必要なのかが分かります。</p>
+          <div class="callout">システムの仕組みや、お子さんの学習の状態、<strong>家庭でどのようなサポートが必要か</strong>を理解したい方に向いています。</div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>Parent observation lessons are not stand-in-the-back visits. Parents join the lesson actively with their child.</p>
+          <p>It is far more useful to join the lesson — to answer, wait, think, and feel what the child is feeling. That is how you understand what the lesson requires and what helps at home.</p>
+          <div class="callout">These lessons are for families who want a clear understanding of how the system works, what their child is experiencing, and <strong>what actually helps at home.</strong></div>
+        </div>
+      </div></div></div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section-divider fade-up"><span id="div2-label">仕組み</span></div>
+  <div class="acc-list">
+
+    <div class="acc-item fade-up" data-color="4">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="04 — System" data-jp="04 — 仕組み">04 — 仕組み</div>
+          <div class="acc-title" data-en="How Lessons Work" data-jp="レッスンの仕組み">レッスンの仕組み</div>
+          <div class="acc-sub" data-en="Prepare at home. Speak in class." data-jp="家で準備して、教室で話す。">家で準備して、教室で話す。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>ブライアン英会話教室は反転型レッスンです。生徒は自宅でBooha Adventureを開き、その週の単語・文・質問を確認してから来ます。</p>
+          <p>レッスンでは、その週の内容を使ってアウトプットを行います。質問に答える、自分のことを話す、やり取りする、文を作るといった活動を中心に進めます。</p>
+          <p><strong>毎回デバイス（スマホ・タブレット）が必要です。</strong></p>
+          <p>すべての生徒は英語ノートを使います。最低でも週ごとの単語を英語と日本語で書き、教室に持ってきてください。</p>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>Bryan's English School uses a flipped system. Students open the Booha Adventure at home and review that week's vocabulary, sentences, and questions before class.</p>
+          <p>In lessons, we use the weekly content to focus on output: talking about themselves, asking and answering, reacting, and building sentences.</p>
+          <p><strong>A device (phone or tablet) is required every lesson.</strong></p>
+          <p>All students keep a personal English notebook. Write at least the weekly vocabulary in English and Japanese and bring it to class.</p>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item fade-up" data-color="5">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="05 — Fees" data-jp="05 — 費用">05 — 費用</div>
+          <div class="acc-title" data-en="What's Included and Extra Fees" data-jp="含まれるもの・追加費用">含まれるもの・追加費用</div>
+          <div class="acc-sub" data-en="No enrollment fee. No hidden charges." data-jp="入会金なし。隠れた追加費用もありません。">入会金なし。隠れた追加費用もありません。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>ブライアン英会話教室では、以下の費用はかかりません：</p>
+          <ul class="price-list zeroes">
+            <li><span class="pl-label">入会金</span><span class="pl-price">0円</span></li>
+            <li><span class="pl-label">教材費（Booha Adventure利用料）</span><span class="pl-price">0円</span></li>
+            <li><span class="pl-label">管理費・システム利用料</span><span class="pl-price">0円</span></li>
+          </ul>
+          <p>追加で必要になるのはノート代（約100〜200円）のみです。</p>
+          <div class="callout"><strong>月末に月謝袋をお渡しします。</strong>次のレッスン時にご提出ください。</div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>At Bryan's English School, the following fees are not charged:</p>
+          <ul class="price-list zeroes">
+            <li><span class="pl-label">Enrollment fee</span><span class="pl-price">¥0</span></li>
+            <li><span class="pl-label">Textbook / Booha Adventure usage fee</span><span class="pl-price">¥0</span></li>
+            <li><span class="pl-label">Administrative or system fees</span><span class="pl-price">¥0</span></li>
+          </ul>
+          <p>The only regular extra cost is a notebook (around ¥100–¥200).</p>
+          <div class="callout"><strong>A tuition envelope is given out at the end of each month.</strong> Please return it at the next lesson.</div>
+        </div>
+      </div></div></div>
+    </div>
+
+    <div class="acc-item fade-up" data-color="6">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="06 — Trial" data-jp="06 — 体験">06 — 体験</div>
+          <div class="acc-title" data-en="First 8 Lessons and Refunds" data-jp="最初の8回レッスンと返金について">最初の8回レッスンと返金について</div>
+          <div class="acc-sub" data-en="A real trial period with flexible scheduling." data-jp="本当の体験期間。日程は柔軟に対応します。">本当の体験期間。日程は柔軟に対応します。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>1回の体験だけでは、その教室が合っているかどうかは分かりません。そのため、<strong>最初の8回は4,000円（2ヶ月分）</strong>でご案内しています。</p>
+          <p>この期間中に合わないと感じた場合は、<strong>未消化分のレッスン料金を返金します。</strong></p>
+          <div class="callout">体験期間中も、参加・準備・家庭での学習が求められます。<strong>準備して、話す姿勢で来てください。</strong></div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>One free lesson is not enough to understand if a school is the right fit. For this reason, the <strong>first 8 lessons are offered at ¥4,000 for two months.</strong></p>
+          <p>If during this time you feel it is not the right fit, <strong>I refund the remaining unused lessons.</strong></p>
+          <div class="callout">Students are still expected to participate, prepare, and study at home during the trial. <strong>Come prepared and be ready to speak.</strong></div>
+        </div>
+      </div></div></div>
+    </div>
+
+  </div>
+
+  <!-- TESTING -->
+  <div class="section-divider fade-up"><span id="div3-label">テスト</span></div>
+  <div class="acc-list">
+
+    <div class="acc-item fade-up" data-color="7">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="07 — Testing" data-jp="07 — テスト">07 — テスト</div>
+          <div class="acc-title" data-en="EIKEN and TOEIC Practice Tests" data-jp="英検・TOEIC 練習テスト">英検・TOEIC 練習テスト</div>
+          <div class="acc-sub" data-en="Honest results. No cramming. No ranking." data-jp="正直なレベル確認。詰め込みではありません。">正直なレベル確認。詰め込みではありません。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
+        <div class="lang-jp">
+          <p>英検・TOEICの練習テストを実施しています。点数で順位をつけるためではありません。<strong>今の自分の現在地を正直に知るためのものです。</strong></p>
+          <ul class="price-list">
+            <li><span class="pl-label">在校生</span><span class="pl-price">無料</span></li>
+            <li><span class="pl-label">Booha Adventure利用中の非在校生</span><span class="pl-price">¥2,000</span></li>
+          </ul>
+          <div class="callout">テスト日のスケジュールは随時お知らせします。詳細は<strong>お問い合わせください。</strong></div>
+        </div>
+        <div class="lang-en" style="display:none">
+          <p>Practice tests are available for EIKEN and TOEIC. This is not about ranking students. It is about giving an <strong>honest picture of where they are right now.</strong></p>
+          <ul class="price-list">
+            <li><span class="pl-label">Current students</span><span class="pl-price">Free</span></li>
+            <li><span class="pl-label">Non-students using Booha Adventure</span><span class="pl-price">¥2,000</span></li>
+          </ul>
+          <div class="callout">Test day schedules will be announced. <strong>Contact us for more details.</strong></div>
+        </div>
+      </div></div></div>
+    </div>
+
+  </div>
+
+  <div class="footer fade-up">
+    Bryan's English School &nbsp;·&nbsp; <span>Booha Adventure</span>
+  </div>
+
+</div>
+
+<script>
+(() => {
+  const btnEN    = document.getElementById('btnEN');
+  const btnJP    = document.getElementById('btnJP');
+  const pageTitle = document.getElementById('page-title');
+  const pageSub   = document.getElementById('page-sub');
+  const div1 = document.getElementById('div1-label');
+  const div2 = document.getElementById('div2-label');
+  const div3 = document.getElementById('div3-label');
+  const intro = document.getElementById('intro-text');
+
+  const strings = {
+    titleEN: 'Our Learning System &amp; Lesson Prices',
+    titleJP: '学習システムとレッスン料金',
+    subEN:   "Bryan's English School · Booha Adventure",
+    subJP:   'ブライアン英会話教室（Booha Adventure）',
+    introEN: "Bryan's English School uses the Booha Adventure app in a flipped, output-focused system. This page gives you a clear view of lesson prices, how the system works, and what to expect.",
+    introJP: 'ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。',
+    div1EN: 'Pricing', div1JP: '料金',
+    div2EN: 'How It Works', div2JP: '仕組み',
+    div3EN: 'Testing', div3JP: 'テスト',
+  };
+
+  function setLang(lang) {
+    const isJP = lang === 'jp';
+    btnEN.classList.toggle('active', !isJP);
+    btnJP.classList.toggle('active', isJP);
+    document.documentElement.lang = isJP ? 'ja' : 'en';
+    document.getElementById('root').classList.toggle('jp', isJP);
+
+    pageTitle.innerHTML = isJP ? strings.titleJP : strings.titleEN;
+    pageTitle.className = 'page-title' + (isJP ? ' jp' : '');
+    pageSub.textContent  = isJP ? strings.subJP  : strings.subEN;
+    intro.textContent    = isJP ? strings.introJP : strings.introEN;
+    div1.textContent     = isJP ? strings.div1JP  : strings.div1EN;
+    div2.textContent     = isJP ? strings.div2JP  : strings.div2EN;
+    div3.textContent     = isJP ? strings.div3JP  : strings.div3EN;
+
+    document.querySelectorAll('[data-en][data-jp]').forEach(el => {
+      el.textContent = el.dataset[isJP ? 'jp' : 'en'];
+    });
+    document.querySelectorAll('.lang-jp, .lang-en').forEach(el => {
+      if (el.classList.contains('lang-jp')) el.style.display = isJP ? '' : 'none';
+      if (el.classList.contains('lang-en')) el.style.display = isJP ? 'none' : '';
+    });
+  }
+
+  btnEN.addEventListener('click', () => setLang('en'));
+  btnJP.addEventListener('click', () => setLang('jp'));
+
+  document.querySelectorAll('.acc-item').forEach(item => {
+    item.querySelector('.acc-btn')?.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        item.querySelector('.acc-btn').setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  setLang('jp');
+})();
+</script>
+</body>
+</html>
