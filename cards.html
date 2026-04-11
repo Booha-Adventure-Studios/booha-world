@@ -1,0 +1,1017 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Booha Cards</title>
+<link rel="icon" type="image/png" href="assets/img/cards.png">
+<link rel="apple-touch-icon" href="assets/img/cards.png">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --bg:      #1a1614;
+  --surface: #221e1b;
+  --card:    #2a2420;
+  --card2:   #302820;
+  --border:  rgba(255,255,255,.06);
+  --border2: rgba(255,255,255,.11);
+  --text:    #e8e0d0;
+  --muted:   #9a9080;
+  --ivory:   #f5ecd7;
+
+  --pink:    #ff4d9e;
+  --yellow:  #f7d040;
+  --blue:    #3ec8f0;
+  --green:   #6abf40;
+  --purple:  #a060e0;
+
+  --r:  16px;
+  --r2: 10px;
+  --shadow:  0 20px 48px rgba(0,0,0,.55);
+  --shadow2: 0 6px 20px rgba(0,0,0,.4);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* warm atmosphere */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 700px 400px at 20% -5%,  rgba(255,77,158,.05)  0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 80% 10%,  rgba(62,200,240,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 500px 400px at 50% 90%,  rgba(247,208,64,.04)  0%, transparent 55%),
+    radial-gradient(ellipse 400px 300px at 5%  70%,  rgba(106,191,64,.03)  0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── FLOATING GHOSTS ── */
+.ghost-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.ghost {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  opacity: 0.18;
+  will-change: transform;
+}
+
+.ghost-1 { animation: drift1 28s ease-in-out infinite; top: 10%; left: 5%; }
+.ghost-2 { animation: drift2 34s ease-in-out infinite; top: 30%; right: 8%; }
+.ghost-3 { animation: drift3 22s ease-in-out infinite; top: 60%; left: 12%; }
+.ghost-4 { animation: drift4 30s ease-in-out infinite; top: 75%; right: 5%; }
+.ghost-5 { animation: drift5 26s ease-in-out infinite; top: 45%; left: 3%; }
+
+@keyframes drift1 {
+  0%,100% { transform: translate(0,0) rotate(-8deg); }
+  25%     { transform: translate(18px,-24px) rotate(4deg); }
+  50%     { transform: translate(8px,12px) rotate(-3deg); }
+  75%     { transform: translate(-10px,-8px) rotate(6deg); }
+}
+@keyframes drift2 {
+  0%,100% { transform: translate(0,0) rotate(6deg); }
+  33%     { transform: translate(-20px,16px) rotate(-5deg); }
+  66%     { transform: translate(12px,-20px) rotate(8deg); }
+}
+@keyframes drift3 {
+  0%,100% { transform: translate(0,0) rotate(-4deg); }
+  40%     { transform: translate(16px,-18px) rotate(7deg); }
+  70%     { transform: translate(-8px,10px) rotate(-6deg); }
+}
+@keyframes drift4 {
+  0%,100% { transform: translate(0,0) rotate(10deg); }
+  30%     { transform: translate(-14px,-22px) rotate(-4deg); }
+  60%     { transform: translate(10px,14px) rotate(5deg); }
+}
+@keyframes drift5 {
+  0%,100% { transform: translate(0,0) rotate(-6deg); }
+  50%     { transform: translate(20px,-14px) rotate(8deg); }
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── NAV ── */
+.top-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  transition: color .15s, border-color .15s, transform .12s, box-shadow .3s;
+  position: relative;
+  overflow: hidden;
+}
+.back-btn::before {
+  content: ''; position: absolute; inset: 0; opacity: 0;
+  transition: opacity .2s ease;
+}
+.back-btn.site::before  { background: radial-gradient(circle at 50% 50%, rgba(247,208,64,.15),  transparent 70%); }
+.back-btn.world::before { background: radial-gradient(circle at 50% 50%, rgba(126,200,122,.15), transparent 70%); }
+.back-btn:hover::before { opacity: 1; }
+
+@keyframes pulseY { 0%,100%{ box-shadow:0 0 0 rgba(247,208,64,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(247,208,64,.28),var(--shadow2); } }
+@keyframes pulseG { 0%,100%{ box-shadow:0 0 0 rgba(126,200,122,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(126,200,122,.28),var(--shadow2); } }
+.back-btn.site  { animation: pulseY 3.5s ease-in-out infinite; }
+.back-btn.world { animation: pulseG 3.5s ease-in-out infinite 1.75s; }
+.back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.2); transform: translateY(-2px); }
+
+.btn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.back-btn.site  .btn-dot { background: var(--yellow); }
+.back-btn.world .btn-dot { background: #7ec87a; }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 32px 20px 24px;
+}
+
+.hero-img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin: 0 auto 28px;
+  display: block;
+  filter: drop-shadow(0 0 40px rgba(255,77,158,.2))
+          drop-shadow(0 0 24px rgba(62,200,240,.15));
+  animation: heroGlow 5s ease-in-out infinite;
+}
+
+@keyframes heroGlow {
+  0%,100% {
+    filter: drop-shadow(0 0 36px rgba(255,77,158,.18))
+            drop-shadow(0 0 20px rgba(62,200,240,.12));
+  }
+  50% {
+    filter: drop-shadow(0 0 48px rgba(62,200,240,.22))
+            drop-shadow(0 0 28px rgba(255,77,158,.15));
+  }
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-family: 'Notable', sans-serif;
+  font-size: clamp(28px, 6vw, 52px);
+  color: var(--ivory);
+  letter-spacing: .06em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 24px;
+  line-height: 1.75;
+}
+
+/* ghost color strip under title */
+.color-strip {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ── LANG PILL ── */
+.lang-pill-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.lang-pill {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 3px;
+}
+.langBtn {
+  padding: 7px 24px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.langBtn.active {
+  background: var(--card2);
+  color: var(--ivory);
+  box-shadow: 0 2px 10px rgba(0,0,0,.45);
+}
+
+/* ── THE GOLDEN RULE ── */
+.golden-rule {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-top: 2px solid var(--pink);
+  border-radius: var(--r);
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  text-align: center;
+  box-shadow: var(--shadow2);
+}
+
+.golden-rule .rule-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--pink);
+  margin-bottom: 10px;
+}
+
+.golden-rule .rule-text {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: clamp(15px, 2.5vw, 19px);
+  font-weight: 600;
+  color: var(--ivory);
+  line-height: 1.6;
+}
+
+.jp .golden-rule .rule-text {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: clamp(14px, 2.2vw, 17px);
+  line-height: 1.8;
+}
+
+/* highlight colors inline */
+.c-pink   { color: var(--pink); font-weight: 700; }
+.c-yellow { color: var(--yellow); font-weight: 700; }
+.c-blue   { color: var(--blue); font-weight: 700; }
+.c-green  { color: var(--green); font-weight: 700; }
+
+/* ── DECK SELECTOR ── */
+.deck-section {
+  margin-bottom: 28px;
+}
+
+.deck-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.deck-tab {
+  flex: 1;
+  min-width: 140px;
+  padding: 14px 20px;
+  border-radius: var(--r);
+  border: 2px solid var(--border2);
+  background: var(--surface);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s ease;
+  text-align: center;
+  letter-spacing: .5px;
+}
+
+.deck-tab .tab-num {
+  font-family: 'Notable', sans-serif;
+  font-size: 20px;
+  display: block;
+  margin-bottom: 2px;
+  color: var(--ivory);
+}
+
+.deck-tab.active-1 {
+  border-color: var(--pink);
+  background: rgba(255,77,158,.08);
+  color: var(--ivory);
+  box-shadow: 0 0 24px rgba(255,77,158,.15);
+}
+
+.deck-tab.active-2 {
+  border-color: var(--blue);
+  background: rgba(62,200,240,.08);
+  color: var(--ivory);
+  box-shadow: 0 0 24px rgba(62,200,240,.15);
+}
+
+.deck-tab:hover:not(.active-1):not(.active-2) {
+  border-color: rgba(255,255,255,.2);
+  color: var(--ivory);
+}
+
+/* deck panels */
+.deck-panel {
+  display: none;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow2);
+  animation: fadeIn .3s ease;
+}
+.deck-panel.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.deck-panel.d1 { border-top: 2px solid var(--pink); }
+.deck-panel.d2 { border-top: 2px solid var(--blue); }
+
+.deck-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.deck-photo {
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.deck-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  min-height: 240px;
+}
+
+.deck-info {
+  padding: 24px;
+}
+
+.deck-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.d1 .deck-tag { color: var(--pink); }
+.d2 .deck-tag { color: var(--blue); }
+
+.deck-name {
+  font-family: 'Notable', sans-serif;
+  font-size: clamp(18px, 3vw, 26px);
+  color: var(--ivory);
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: .04em;
+}
+
+.deck-desc {
+  font-size: 13.5px;
+  color: #c0baa8;
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.jp .deck-desc { font-family: 'Noto Sans JP', sans-serif; font-size: 13px; line-height: 2; }
+
+.deck-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.jp .stat { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; }
+
+.stat-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.d1 .stat-dot { background: var(--pink); }
+.d2 .stat-dot { background: var(--blue); }
+.stat strong { color: var(--ivory); }
+
+/* ── PHOTO ROW ── */
+.photo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.photo-card {
+  background: #f0ece4;
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--shadow2);
+}
+
+.photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── WHY IT WORKS ── */
+.why-section {
+  margin-bottom: 28px;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.section-label span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.why-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 16px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.why-item:hover {
+  border-color: var(--border2);
+  box-shadow: 0 4px 16px rgba(0,0,0,.3);
+}
+
+.why-num {
+  font-family: 'Notable', sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.why-item:nth-child(1) .why-num { color: var(--pink); }
+.why-item:nth-child(2) .why-num { color: var(--yellow); }
+.why-item:nth-child(3) .why-num { color: var(--blue); }
+.why-item:nth-child(4) .why-num { color: var(--green); }
+.why-item:nth-child(5) .why-num { color: var(--purple); }
+
+.why-title {
+  font-family: 'Spectral', serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--ivory);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.jp .why-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12.5px; }
+
+.why-body {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.jp .why-body { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; line-height: 1.9; }
+
+/* wide item spans both columns */
+.why-item.wide { grid-column: 1 / -1; }
+
+/* ── WHAT'S INCLUDED ── */
+.included-section {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow2);
+}
+
+.included-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.inc-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 14px;
+  text-align: center;
+}
+
+.inc-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.inc-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ivory);
+  margin-bottom: 3px;
+  display: block;
+}
+.jp .inc-label { font-family: 'Noto Sans JP', sans-serif; }
+
+.inc-sub {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.jp .inc-sub { font-family: 'Noto Sans JP', sans-serif; }
+
+/* ── ORDER ── */
+.order-section {
+  background: var(--surface);
+  border: 2px solid rgba(255,77,158,.3);
+  border-radius: var(--r);
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,77,158,.08);
+}
+
+.order-price {
+  font-family: 'Notable', sans-serif;
+  font-size: clamp(36px, 7vw, 56px);
+  color: var(--yellow);
+  letter-spacing: .04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.order-price-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.jp .order-price-sub { font-family: 'Noto Sans JP', sans-serif; }
+
+.order-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.jp .order-note { font-family: 'Noto Sans JP', sans-serif; }
+
+.order-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 999px;
+  background: var(--pink);
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  box-shadow: 0 0 28px rgba(255,77,158,.4);
+}
+.order-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgba(255,77,158,.55);
+  background: #ff2d8a;
+}
+
+.order-btn-jp {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.jp .order-btn-jp { font-family: 'Noto Sans JP', sans-serif; }
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 48px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer span { color: var(--pink); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 620px) {
+  .deck-inner { grid-template-columns: 1fr; }
+  .deck-photo img { min-height: 200px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-item.wide { grid-column: 1; }
+  .included-grid { grid-template-columns: 1fr 1fr; }
+  .photo-row { grid-template-columns: 1fr; }
+  .ghost { width: 44px; height: 44px; }
+  .deck-tab { min-width: 100px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- floating ghosts -->
+<div class="ghost-layer" aria-hidden="true">
+  <img class="ghost ghost-1" src="assets/img/pink.png"   alt="" />
+  <img class="ghost ghost-2" src="assets/img/blue.png"   alt="" />
+  <img class="ghost ghost-3" src="assets/img/green.png"  alt="" />
+  <img class="ghost ghost-4" src="assets/img/purple.png" alt="" />
+  <img class="ghost ghost-5" src="assets/img/yellow.png" alt="" />
+</div>
+
+<div class="wrap" id="root">
+
+  <!-- NAV -->
+  <nav class="top-nav">
+    <a href="https://www.bryanharper.tokyo" class="back-btn site">
+      <span class="btn-dot"></span>
+      <span>bryanharper.tokyo</span>
+    </a>
+    <a href="https://booha-adventure-studios.github.io/booha-world/" class="back-btn world">
+      <span class="btn-dot"></span>
+      <span>Booha World</span>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img class="hero-img" src="assets/img/boo-cards-1.png" alt="Booha Cards Deck 1 and Deck 2" />
+    <div class="hero-eyebrow">Bryan's English School</div>
+    <h1 class="hero-title">BOOHA CARDS</h1>
+    <div class="color-strip">
+      <div class="color-dot" style="background:var(--pink)"></div>
+      <div class="color-dot" style="background:var(--blue)"></div>
+      <div class="color-dot" style="background:var(--green)"></div>
+      <div class="color-dot" style="background:var(--yellow)"></div>
+      <div class="color-dot" style="background:var(--purple)"></div>
+    </div>
+    <p class="hero-sub" id="hero-sub">英語の発音を、ゲームで身につける。ブライアン英会話教室オリジナルカードゲーム。</p>
+  </header>
+
+  <!-- LANG TOGGLE -->
+  <div class="lang-pill-wrap">
+    <div class="lang-pill" role="group" aria-label="Language">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
+    </div>
+  </div>
+
+  <!-- GOLDEN RULE -->
+  <div class="golden-rule">
+    <div class="rule-label" id="rule-label">ゴールデンルール</div>
+    <div class="rule-text" id="rule-text">
+      カードを出すとき、必ず声に出して読む。<br>
+      <span class="c-pink">色</span>、<span class="c-yellow">数字</span>、<span class="c-blue">アルファベット</span>、<span class="c-green">単語</span>——全部。
+    </div>
+  </div>
+
+  <!-- DECK SELECTOR -->
+  <div class="deck-section">
+    <div class="deck-tabs">
+      <button class="deck-tab active-1" id="tab1" onclick="showDeck(1)">
+        <span class="tab-num">Deck ①</span>
+        <span id="tab1-sub">CVC ワード</span>
+      </button>
+      <button class="deck-tab" id="tab2" onclick="showDeck(2)">
+        <span class="tab-num">Deck ②</span>
+        <span id="tab2-sub">ナンセンスワード＋スペシャルカード</span>
+      </button>
+    </div>
+
+    <!-- Deck 1 -->
+    <div class="deck-panel d1 active" id="panel1">
+      <div class="deck-inner">
+        <div class="deck-photo">
+          <img src="assets/img/boo-cards-3.png" alt="Booha Cards word cards" />
+        </div>
+        <div class="deck-info">
+          <div class="deck-tag" id="d1-tag">ビギナー・英語初心者</div>
+          <div class="deck-name">Three-letter<br>CVC Words</div>
+          <p class="deck-desc" id="d1-desc">
+            3文字の英単語を120語練習できます。イラストなどの余計な情報はなく、単語をシンプルにきちんと読むことを重視しています。まずここからスタート。
+          </p>
+          <div class="deck-stats">
+            <div class="stat"><div class="stat-dot"></div><span id="d1-s1"><strong>32枚</strong>のカード</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d1-s2"><strong>120語</strong>の3文字英単語</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d1-s3"><strong>5色</strong>：ピンク・青・黄・緑・紫</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d1-s4">数字 <strong>1〜9</strong> 入り</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d1-s5">Deck ②と組み合わせて <strong>64枚</strong></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deck 2 -->
+    <div class="deck-panel d2" id="panel2">
+      <div class="deck-inner">
+        <div class="deck-photo">
+          <img src="assets/img/boo-cards-3.png" alt="Booha Cards special cards" />
+        </div>
+        <div class="deck-info">
+          <div class="deck-tag" id="d2-tag">慣れてきたら</div>
+          <div class="deck-name">Nonsense Words<br>+ Special Cards</div>
+          <p class="deck-desc" id="d2-desc">
+            60の意味のない英単語を正確に読むことで、初見の単語の正しい発音を徐々に学んでいきます。12種類のスペシャルカードでゲームがもっと面白くなる。
+          </p>
+          <div class="deck-stats">
+            <div class="stat"><div class="stat-dot"></div><span id="d2-s1"><strong>32枚</strong>のカード</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d2-s2"><strong>60語</strong>のナンセンスワード</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d2-s3"><strong>12種類</strong>のスペシャルカード</span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d2-s4">Deck ①と組み合わせて <strong>64枚</strong></span></div>
+            <div class="stat"><div class="stat-dot"></div><span id="d2-s5">Deck ①を終えてから</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO ROW -->
+  <div class="photo-row">
+    <div class="photo-card">
+      <img src="assets/img/boo-cards-2.png" alt="Booha Cards product shot" />
+    </div>
+    <div class="photo-card">
+      <img src="assets/img/boo-cards-4.png" alt="Booha Cards spread" />
+    </div>
+  </div>
+
+  <!-- WHY IT WORKS -->
+  <div class="why-section">
+    <div class="section-label"><span id="why-label">なぜ効果があるのか</span></div>
+    <div class="why-grid">
+
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <div class="why-title" id="w1-title">沈黙の壁をなくす</div>
+        <div class="why-body" id="w1-body">ゲームに集中するから、「間違えたくない」という気持ちが薄れる。気づいたら話している。</div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <div class="why-title" id="w2-title">飽きない繰り返し</div>
+        <div class="why-body" id="w2-body">同じ単語を何度も言うのに、それが「戦略」に感じる。ゲームだから繰り返しが苦にならない。</div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <div class="why-title" id="w3-title">すぐに確認できる</div>
+        <div class="why-body" id="w3-body">音声サポートで正しい発音をすぐチェック。間違った発音が定着する前に修正できる。</div>
+      </div>
+
+      <div class="why-item">
+        <div class="why-num">04</div>
+        <div class="why-title" id="w4-title">五感で覚える</div>
+        <div class="why-body" id="w4-body">見て・持って・声に出して・聞いて・感じる。脳の複数の部分を同時に使うから定着が早い。</div>
+      </div>
+
+      <div class="why-item wide">
+        <div class="why-num">05</div>
+        <div class="why-title" id="w5-title">英語をスポーツにする</div>
+        <div class="why-body" id="w5-body">英語は暗記科目じゃない。スポーツや楽器と同じ「体で覚えるスキル」。Boohaカードは、その筋肉をつくる練習場です。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- WHAT'S INCLUDED -->
+  <div class="included-section">
+    <div class="section-label"><span id="inc-label">セットの内容</span></div>
+    <div class="included-grid">
+      <div class="inc-item">
+        <span class="inc-icon">🃏</span>
+        <span class="inc-label" id="inc-1-label">Deck ① + ②</span>
+        <span class="inc-sub" id="inc-1-sub">合計64枚・日本製</span>
+      </div>
+      <div class="inc-item">
+        <span class="inc-icon">📄</span>
+        <span class="inc-label" id="inc-2-label">137枚のワークシート</span>
+        <span class="inc-sub" id="inc-2-sub">PDF・メールで送付</span>
+      </div>
+      <div class="inc-item">
+        <span class="inc-icon">🔊</span>
+        <span class="inc-label" id="inc-3-label">音声サポート</span>
+        <span class="inc-sub" id="inc-3-sub">Instagram で発音確認</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDER -->
+  <div class="order-section">
+    <div class="order-price">¥2,000</div>
+    <div class="order-price-sub" id="order-price-sub">Deck ① + ② セット・送料別</div>
+    <p class="order-note" id="order-note">
+      メールでご注文ください。お名前・ご住所・枚数をお知らせいただければ、折り返しご連絡します。ワークシートPDFも一緒にお送りします。
+    </p>
+    <a class="order-btn"
+       href="mailto:bryans.english@gmail.com?subject=Booha Cards Order&body=Name:%0AAddress:%0ANumber of sets:"
+       id="order-btn">
+      ✉ <span id="order-btn-text">注文する / Order</span>
+    </a>
+    <div class="order-btn-jp" id="order-btn-note">bryans.english@gmail.com</div>
+  </div>
+
+  <div class="footer">
+    Bryan's English School &nbsp;·&nbsp; <span>Booha Cards</span>
+  </div>
+
+</div>
+
+<script>
+function showDeck(n) {
+  document.getElementById('panel1').classList.toggle('active', n === 1);
+  document.getElementById('panel2').classList.toggle('active', n === 2);
+  const t1 = document.getElementById('tab1');
+  const t2 = document.getElementById('tab2');
+  t1.className = 'deck-tab' + (n === 1 ? ' active-1' : '');
+  t2.className = 'deck-tab' + (n === 2 ? ' active-2' : '');
+}
+
+(() => {
+  const btnEN = document.getElementById('btnEN');
+  const btnJP = document.getElementById('btnJP');
+
+  const strings = {
+    heroSubEN: "An original English card game from Bryan's English School. Read the cards. Say the words. Play to win.",
+    heroSubJP: '英語の発音を、ゲームで身につける。ブライアン英会話教室オリジナルカードゲーム。',
+    ruleLabelEN: 'The Golden Rule',
+    ruleLabelJP: 'ゴールデンルール',
+    ruleTextEN: `When you play a card, you must read it aloud.<br><span class="c-pink">Colors</span>, <span class="c-yellow">numbers</span>, <span class="c-blue">letters</span>, <span class="c-green">words</span> — everything.`,
+    ruleTextJP: `カードを出すとき、必ず声に出して読む。<br><span class="c-pink">色</span>、<span class="c-yellow">数字</span>、<span class="c-blue">アルファベット</span>、<span class="c-green">単語</span>——全部。`,
+    tab1SubEN: 'CVC Words', tab1SubJP: 'CVC ワード',
+    tab2SubEN: 'Nonsense + Special Cards', tab2SubJP: 'ナンセンスワード＋スペシャルカード',
+    d1TagEN: 'Beginners & First-time learners', d1TagJP: 'ビギナー・英語初心者',
+    d1DescEN: '32 cards covering 120 three-letter CVC words. No pictures, no clutter — just the words. Simple and focused. This is where everyone starts.',
+    d1DescJP: '3文字の英単語を120語練習できます。イラストなどの余計な情報はなく、単語をシンプルにきちんと読むことを重視しています。まずここからスタート。',
+    d1S1EN: '<strong>32 cards</strong>', d1S1JP: '<strong>32枚</strong>のカード',
+    d1S2EN: '<strong>120</strong> three-letter CVC words', d1S2JP: '<strong>120語</strong>の3文字英単語',
+    d1S3EN: '<strong>5 colors</strong>: pink, blue, yellow, green, purple', d1S3JP: '<strong>5色</strong>：ピンク・青・黄・緑・紫',
+    d1S4EN: 'Numbers <strong>1–9</strong> on every card', d1S4JP: '数字 <strong>1〜9</strong> 入り',
+    d1S5EN: 'Combine with Deck ② for <strong>64 cards</strong>', d1S5JP: 'Deck ②と組み合わせて <strong>64枚</strong>',
+    d2TagEN: 'Once you\'re comfortable with Deck ①', d2TagJP: '慣れてきたら',
+    d2DescEN: '60 nonsense words train your brain to decode new English sounds on sight. Plus 12 special action cards that shake up the game.',
+    d2DescJP: '60の意味のない英単語を正確に読むことで、初見の単語の正しい発音を徐々に学んでいきます。12種類のスペシャルカードでゲームがもっと面白くなる。',
+    d2S1EN: '<strong>32 cards</strong>', d2S1JP: '<strong>32枚</strong>のカード',
+    d2S2EN: '<strong>60</strong> nonsense words', d2S2JP: '<strong>60語</strong>のナンセンスワード',
+    d2S3EN: '<strong>12 types</strong> of special action cards', d2S3JP: '<strong>12種類</strong>のスペシャルカード',
+    d2S4EN: 'Combine with Deck ① for <strong>64 cards</strong>', d2S4JP: 'Deck ①と組み合わせて <strong>64枚</strong>',
+    d2S5EN: 'Start after Deck ①', d2S5JP: 'Deck ①を終えてから',
+    whyLabelEN: 'Why It Works', whyLabelJP: 'なぜ効果があるのか',
+    w1TitleEN: 'Breaks the wall of silence', w1TitleJP: '沈黙の壁をなくす',
+    w1BodyEN: "Focus shifts to the game, not the fear of mistakes. Students start speaking without realizing it.",
+    w1BodyJP: 'ゲームに集中するから、「間違えたくない」という気持ちが薄れる。気づいたら話している。',
+    w2TitleEN: 'Repetition that doesn\'t bore', w2TitleJP: '飽きない繰り返し',
+    w2BodyEN: "Saying the same word over and over feels like strategy, not drilling. The game makes it natural.",
+    w2BodyJP: '同じ単語を何度も言うのに、それが「戦略」に感じる。ゲームだから繰り返しが苦にならない。',
+    w3TitleEN: 'Instant feedback', w3TitleJP: 'すぐに確認できる',
+    w3BodyEN: "Audio support lets players verify pronunciation immediately — before wrong sounds get locked in.",
+    w3BodyJP: '音声サポートで正しい発音をすぐチェック。間違った発音が定着する前に修正できる。',
+    w4TitleEN: 'All senses engaged', w4TitleJP: '五感で覚える',
+    w4BodyEN: "See it, hold it, say it, hear it, feel it. Multiple parts of the brain working at once means faster retention.",
+    w4BodyJP: '見て・持って・声に出して・聞いて・感じる。脳の複数の部分を同時に使うから定着が早い。',
+    w5TitleEN: 'English as a physical skill', w5TitleJP: '英語をスポーツにする',
+    w5BodyEN: "English isn't a subject to memorize. It's a skill to practice — like sports or music. Booha Cards build that muscle.",
+    w5BodyJP: '英語は暗記科目じゃない。スポーツや楽器と同じ「体で覚えるスキル」。Boohaカードは、その筋肉をつくる練習場です。',
+    incLabelEN: "What's Included", incLabelJP: 'セットの内容',
+    inc1LabelEN: 'Deck ① + ②', inc1LabelJP: 'Deck ① + ②',
+    inc1SubEN: '64 cards total · Made in Japan', inc1SubJP: '合計64枚・日本製',
+    inc2LabelEN: '137 Worksheets', inc2LabelJP: '137枚のワークシート',
+    inc2SubEN: 'PDF · sent by email', inc2SubJP: 'PDF・メールで送付',
+    inc3LabelEN: 'Audio support', inc3LabelJP: '音声サポート',
+    inc3SubEN: 'Check pronunciation on Instagram', inc3SubJP: 'Instagram で発音確認',
+    orderPriceSubEN: 'Deck ① + ② · Shipping extra', orderPriceSubJP: 'Deck ① + ② セット・送料別',
+    orderNoteEN: "Email us to order. Include your name, address, and how many sets. We'll reply with details and send the worksheet PDF at the same time.",
+    orderNoteJP: 'メールでご注文ください。お名前・ご住所・枚数をお知らせいただければ、折り返しご連絡します。ワークシートPDFも一緒にお送りします。',
+    orderBtnTextEN: 'Order by Email', orderBtnTextJP: '注文する / Order',
+  };
+
+  function setLang(lang) {
+    const isJP = lang === 'jp';
+    btnEN.classList.toggle('active', !isJP);
+    btnJP.classList.toggle('active', isJP);
+    document.documentElement.lang = isJP ? 'ja' : 'en';
+    document.getElementById('root').classList.toggle('jp', isJP);
+
+    const s = strings;
+    document.getElementById('hero-sub').textContent    = isJP ? s.heroSubJP    : s.heroSubEN;
+    document.getElementById('rule-label').textContent  = isJP ? s.ruleLabelJP  : s.ruleLabelEN;
+    document.getElementById('rule-text').innerHTML     = isJP ? s.ruleTextJP   : s.ruleTextEN;
+    document.getElementById('tab1-sub').textContent    = isJP ? s.tab1SubJP    : s.tab1SubEN;
+    document.getElementById('tab2-sub').textContent    = isJP ? s.tab2SubJP    : s.tab2SubEN;
+    document.getElementById('d1-tag').textContent      = isJP ? s.d1TagJP      : s.d1TagEN;
+    document.getElementById('d1-desc').textContent     = isJP ? s.d1DescJP     : s.d1DescEN;
+    document.getElementById('d1-s1').innerHTML         = isJP ? s.d1S1JP       : s.d1S1EN;
+    document.getElementById('d1-s2').innerHTML         = isJP ? s.d1S2JP       : s.d1S2EN;
+    document.getElementById('d1-s3').innerHTML         = isJP ? s.d1S3JP       : s.d1S3EN;
+    document.getElementById('d1-s4').innerHTML         = isJP ? s.d1S4JP       : s.d1S4EN;
+    document.getElementById('d1-s5').innerHTML         = isJP ? s.d1S5JP       : s.d1S5EN;
+    document.getElementById('d2-tag').textContent      = isJP ? s.d2TagJP      : s.d2TagEN;
+    document.getElementById('d2-desc').textContent     = isJP ? s.d2DescJP     : s.d2DescEN;
+    document.getElementById('d2-s1').innerHTML         = isJP ? s.d2S1JP       : s.d2S1EN;
+    document.getElementById('d2-s2').innerHTML         = isJP ? s.d2S2JP       : s.d2S2EN;
+    document.getElementById('d2-s3').innerHTML         = isJP ? s.d2S3JP       : s.d2S3EN;
+    document.getElementById('d2-s4').innerHTML         = isJP ? s.d2S4JP       : s.d2S4EN;
+    document.getElementById('d2-s5').innerHTML         = isJP ? s.d2S5JP       : s.d2S5EN;
+    document.getElementById('why-label').textContent   = isJP ? s.whyLabelJP   : s.whyLabelEN;
+    document.getElementById('w1-title').textContent    = isJP ? s.w1TitleJP    : s.w1TitleEN;
+    document.getElementById('w1-body').textContent     = isJP ? s.w1BodyJP     : s.w1BodyEN;
+    document.getElementById('w2-title').textContent    = isJP ? s.w2TitleJP    : s.w2TitleEN;
+    document.getElementById('w2-body').textContent     = isJP ? s.w2BodyJP     : s.w2BodyEN;
+    document.getElementById('w3-title').textContent    = isJP ? s.w3TitleJP    : s.w3TitleEN;
+    document.getElementById('w3-body').textContent     = isJP ? s.w3BodyJP     : s.w3BodyEN;
+    document.getElementById('w4-title').textContent    = isJP ? s.w4TitleJP    : s.w4TitleEN;
+    document.getElementById('w4-body').textContent     = isJP ? s.w4BodyJP     : s.w4BodyEN;
+    document.getElementById('w5-title').textContent    = isJP ? s.w5TitleJP    : s.w5TitleEN;
+    document.getElementById('w5-body').textContent     = isJP ? s.w5BodyJP     : s.w5BodyEN;
+    document.getElementById('inc-label').textContent   = isJP ? s.incLabelJP   : s.incLabelEN;
+    document.getElementById('inc-1-label').textContent = isJP ? s.inc1LabelJP  : s.inc1LabelEN;
+    document.getElementById('inc-1-sub').textContent   = isJP ? s.inc1SubJP    : s.inc1SubEN;
+    document.getElementById('inc-2-label').textContent = isJP ? s.inc2LabelJP  : s.inc2LabelEN;
+    document.getElementById('inc-2-sub').textContent   = isJP ? s.inc2SubJP    : s.inc2SubEN;
+    document.getElementById('inc-3-label').textContent = isJP ? s.inc3LabelJP  : s.inc3LabelEN;
+    document.getElementById('inc-3-sub').textContent   = isJP ? s.inc3SubJP    : s.inc3SubEN;
+    document.getElementById('order-price-sub').textContent = isJP ? s.orderPriceSubJP : s.orderPriceSubEN;
+    document.getElementById('order-note').textContent  = isJP ? s.orderNoteJP  : s.orderNoteEN;
+    document.getElementById('order-btn-text').textContent = isJP ? s.orderBtnTextJP : s.orderBtnTextEN;
+  }
+
+  btnEN.addEventListener('click', () => setLang('en'));
+  btnJP.addEventListener('click', () => setLang('jp'));
+  setLang('jp');
+})();
+</script>
+</body>
+</html>
