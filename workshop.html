@@ -1,13 +1,12 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <title>Bryan's Workshop</title>
 <link rel="icon" type="image/png" href="assets/img/workshop-1.png">
-<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --bg:      #1a1614;
@@ -21,499 +20,140 @@
   --ivory:   #f5ecd7;
   --orange:  #d85828;
   --amber:   #e8a050;
-  --rust:    #c04820;
-  --warm:    #f0c878;
   --r:  16px;
   --r2: 10px;
   --shadow:  0 20px 48px rgba(0,0,0,.55);
   --shadow2: 0 6px 20px rgba(0,0,0,.4);
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 700px 400px at 15% -5%,rgba(216,88,40,.06) 0%,transparent 60%),radial-gradient(ellipse 600px 400px at 85% 20%,rgba(232,160,80,.04) 0%,transparent 55%),radial-gradient(ellipse 500px 400px at 50% 90%,rgba(192,72,32,.04) 0%,transparent 55%);pointer-events:none;z-index:0;}
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 100px;position:relative;z-index:1;}
 
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* NAV */
+.top-nav{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.back-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;border:1px solid var(--border2);background:var(--surface);color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;transition:color .15s,border-color .15s,transform .12s,box-shadow .3s;position:relative;overflow:hidden;}
+.back-btn::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s ease;}
+.back-btn.site::before{background:radial-gradient(circle at 50% 50%,rgba(216,88,40,.15),transparent 70%);}
+.back-btn.world::before{background:radial-gradient(circle at 50% 50%,rgba(126,200,122,.15),transparent 70%);}
+.back-btn:hover::before{opacity:1;}
+@keyframes pulseO{0%,100%{box-shadow:0 0 0 rgba(216,88,40,0),var(--shadow2);}50%{box-shadow:0 0 20px rgba(216,88,40,.28),var(--shadow2);}}
+@keyframes pulseG{0%,100%{box-shadow:0 0 0 rgba(126,200,122,0),var(--shadow2);}50%{box-shadow:0 0 20px rgba(126,200,122,.28),var(--shadow2);}}
+.back-btn.site{animation:pulseO 3.5s ease-in-out infinite;}
+.back-btn.world{animation:pulseG 3.5s ease-in-out infinite 1.75s;}
+.back-btn:hover{color:var(--ivory);border-color:rgba(255,255,255,.2);transform:translateY(-2px);}
+.btn-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.back-btn.site .btn-dot{background:var(--orange);}
+.back-btn.world .btn-dot{background:#7ec87a;}
 
-body {
-  font-family: 'DM Sans', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 15px;
-  line-height: 1.7;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+/* HERO */
+.hero{text-align:center;padding:32px 20px 28px;position:relative;}
+.hero::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+.hero-logo{width:180px;height:180px;object-fit:contain;margin:0 auto 20px;display:block;filter:drop-shadow(0 0 32px rgba(216,88,40,.35));animation:logoGlow 5s ease-in-out infinite;}
+@keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 28px rgba(216,88,40,.3));}50%{filter:drop-shadow(0 0 44px rgba(232,160,80,.45));}}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.hero-title{font-family:'Notable',sans-serif;font-size:clamp(26px,5vw,44px);color:var(--ivory);letter-spacing:.06em;line-height:1.1;margin-bottom:10px;}
+.hero-sub{font-size:14px;color:var(--muted);max-width:440px;margin:0 auto;line-height:1.75;}
+.jp .hero-sub{font-family:'Noto Sans JP',sans-serif;font-size:13.5px;}
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 700px 400px at 15% -5%,  rgba(216,88,40,.06)  0%, transparent 60%),
-    radial-gradient(ellipse 600px 400px at 85% 20%,  rgba(232,160,80,.04) 0%, transparent 55%),
-    radial-gradient(ellipse 500px 400px at 50% 90%,  rgba(192,72,32,.04)  0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* LANG PILL */
+.lang-pill-wrap{display:flex;justify-content:center;margin:24px 0 0;}
+.lang-pill{display:flex;background:var(--surface);border:1px solid var(--border2);border-radius:999px;padding:3px;}
+.langBtn{padding:7px 24px;border-radius:999px;border:none;background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .18s ease;letter-spacing:.3px;}
+.langBtn.active{background:var(--card2);color:var(--ivory);box-shadow:0 2px 10px rgba(0,0,0,.45);}
 
-.wrap {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 28px 20px 100px;
-  position: relative;
-  z-index: 1;
-}
+/* COUNT BAR */
+.count-bar{display:flex;align-items:center;justify-content:space-between;margin:32px 0 16px;gap:12px;}
+.count-label{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);}
+.jp .count-label{font-family:'Noto Sans JP',sans-serif;letter-spacing:.5px;}
+.count-bar::after{content:'';flex:1;height:1px;background:var(--border);}
+.count-num{font-family:'Notable',sans-serif;font-size:13px;color:var(--orange);letter-spacing:.1em;}
 
-/* ── NAV ── */
-.top-nav {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
+/* GRID */
+.project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;position:relative;}
+.project-card:hover{transform:translateY(-5px);border-color:rgba(216,88,40,.35);box-shadow:0 12px 40px rgba(0,0,0,.5),0 0 30px rgba(216,88,40,.1);}
+.project-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .35s ease;background:var(--card);}
+.project-card:hover .project-thumb{transform:scale(1.04);}
+.project-info{padding:12px 14px 14px;}
+.project-num{font-family:'Notable',sans-serif;font-size:11px;color:var(--orange);letter-spacing:.15em;margin-bottom:4px;}
+.project-name{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:14px;color:var(--ivory);line-height:1.3;margin-bottom:6px;}
+.jp .project-name{font-family:'Noto Sans JP',sans-serif;font-size:12.5px;font-weight:700;}
+.project-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag{font-size:10px;font-weight:600;color:var(--muted);background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2px 6px;letter-spacing:.3px;}
+.jp .tag{font-family:'Noto Sans JP',sans-serif;letter-spacing:0;}
+.project-card::after{content:'↗';position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(216,88,40,.9);color:#fff;font-size:13px;display:grid;place-items:center;opacity:0;transition:opacity .2s ease;}
+.project-card:hover::after{opacity:1;}
 
-.back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  transition: color .15s, border-color .15s, transform .12s, box-shadow .3s;
-  position: relative;
-  overflow: hidden;
-}
-.back-btn::before {
-  content: ''; position: absolute; inset: 0; opacity: 0;
-  transition: opacity .2s ease;
-}
-.back-btn.site::before  { background: radial-gradient(circle at 50% 50%, rgba(247,208,64,.15),  transparent 70%); }
-.back-btn.world::before { background: radial-gradient(circle at 50% 50%, rgba(126,200,122,.15), transparent 70%); }
-.back-btn:hover::before { opacity: 1; }
-@keyframes pulseO { 0%,100%{ box-shadow:0 0 0 rgba(216,88,40,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(216,88,40,.28),var(--shadow2); } }
-@keyframes pulseG { 0%,100%{ box-shadow:0 0 0 rgba(126,200,122,0),var(--shadow2); } 50%{ box-shadow:0 0 20px rgba(126,200,122,.28),var(--shadow2); } }
-.back-btn.site  { animation: pulseO 3.5s ease-in-out infinite; }
-.back-btn.world { animation: pulseG 3.5s ease-in-out infinite 1.75s; }
-.back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.2); transform: translateY(-2px); }
-.btn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.back-btn.site  .btn-dot { background: var(--orange); }
-.back-btn.world .btn-dot { background: #7ec87a; }
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;}
+.lightbox.open{display:flex;}
+.lb-backdrop{position:absolute;inset:0;background:rgba(10,8,6,.92);backdrop-filter:blur(8px);}
+.lb-panel{position:relative;z-index:1;width:min(92vw,900px);max-height:92vh;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.7);animation:lbIn .25s ease;}
+@keyframes lbIn{from{opacity:0;transform:scale(.96) translateY(12px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.lb-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.lb-project-num{font-family:'Notable',sans-serif;font-size:11px;color:var(--orange);letter-spacing:.15em;}
+.lb-project-name{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:17px;color:var(--ivory);margin-top:2px;}
+.jp .lb-project-name{font-family:'Noto Sans JP',sans-serif;font-size:15px;font-weight:700;}
+.lb-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:20px;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,transform .15s;flex-shrink:0;line-height:1;}
+.lb-close:hover{background:var(--orange);color:#fff;transform:rotate(90deg);}
+.lb-img-wrap{position:relative;flex-shrink:0;background:#0e0c0a;overflow:hidden;}
+.lb-img{width:100%;height:52vh;object-fit:contain;display:block;transition:opacity .2s ease;}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(26,22,20,.8);color:var(--ivory);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .15s,border-color .15s;backdrop-filter:blur(4px);}
+.lb-arrow:hover{background:var(--orange);border-color:var(--orange);}
+.lb-arrow.prev{left:12px;}
+.lb-arrow.next{right:12px;}
+.lb-counter{position:absolute;bottom:10px;right:14px;font-size:11px;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.5px;}
+.lb-thumbs{display:flex;gap:6px;padding:12px 16px;overflow-x:auto;flex-shrink:0;border-bottom:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border2) transparent;}
+.lb-thumb{width:60px;height:46px;object-fit:cover;border-radius:6px;cursor:pointer;flex-shrink:0;border:2px solid transparent;transition:border-color .15s,opacity .15s;opacity:.6;}
+.lb-thumb.active{border-color:var(--orange);opacity:1;}
+.lb-thumb:hover{opacity:.85;}
+.lb-desc{padding:16px 20px;overflow-y:auto;flex:1;}
+.lb-desc-text{font-size:13.5px;color:#c0baa8;line-height:1.85;margin-bottom:12px;}
+.jp .lb-desc-text{font-family:'Noto Sans JP',sans-serif;font-size:13px;line-height:2;}
+.lb-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.lb-tag{font-size:11px;font-weight:600;color:var(--amber);background:rgba(232,160,80,.08);border:1px solid rgba(232,160,80,.2);border-radius:5px;padding:3px 8px;letter-spacing:.3px;}
+.jp .lb-tag{font-family:'Noto Sans JP',sans-serif;letter-spacing:0;}
 
-/* ── HERO ── */
-.hero {
-  text-align: center;
-  padding: 32px 20px 28px;
-  position: relative;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--orange), transparent);
-}
+/* FOOTER */
+.footer{margin-top:60px;text-align:center;font-size:12.5px;color:var(--muted);padding-top:24px;border-top:1px solid var(--border);}
+.footer span{color:var(--orange);}
 
-.hero-logo {
-  width: 180px;
-  height: 180px;
-  object-fit: contain;
-  margin: 0 auto 20px;
-  display: block;
-  filter: drop-shadow(0 0 32px rgba(216,88,40,.35));
-  animation: logoGlow 5s ease-in-out infinite;
-}
-
-@keyframes logoGlow {
-  0%,100% { filter: drop-shadow(0 0 28px rgba(216,88,40,.3)); }
-  50%      { filter: drop-shadow(0 0 44px rgba(232,160,80,.45)); }
-}
-
-.hero-eyebrow {
-  font-size: 11px; font-weight: 600; letter-spacing: 2.5px;
-  text-transform: uppercase; color: var(--orange); margin-bottom: 10px;
-}
-
-.hero-title {
-  font-family: 'Notable', sans-serif;
-  font-size: clamp(26px, 5vw, 44px);
-  color: var(--ivory);
-  letter-spacing: .06em;
-  line-height: 1.1;
-  margin-bottom: 10px;
-}
-
-.hero-sub {
-  font-size: 14px;
-  color: var(--muted);
-  max-width: 440px;
-  margin: 0 auto;
-  line-height: 1.75;
-}
-
-/* ── PROJECT COUNT ── */
-.count-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 32px 0 16px;
-  gap: 12px;
-}
-.count-label {
-  font-size: 10.5px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.count-bar::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-.count-num {
-  font-family: 'Notable', sans-serif;
-  font-size: 13px;
-  color: var(--orange);
-  letter-spacing: .1em;
-}
-
-/* ── PROJECT GRID ── */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  position: relative;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(216,88,40,.35);
-  box-shadow: 0 12px 40px rgba(0,0,0,.5), 0 0 30px rgba(216,88,40,.1);
-}
-
-.project-thumb {
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  display: block;
-  transition: transform .35s ease;
-  background: var(--card);
-}
-
-.project-card:hover .project-thumb {
-  transform: scale(1.04);
-}
-
-.project-info {
-  padding: 12px 14px 14px;
-}
-
-.project-num {
-  font-family: 'Notable', sans-serif;
-  font-size: 11px;
-  color: var(--orange);
-  letter-spacing: .15em;
-  margin-bottom: 4px;
-}
-
-.project-name {
-  font-family: 'Spectral', Georgia, serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--ivory);
-  line-height: 1.3;
-  margin-bottom: 6px;
-}
-
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.tag {
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--muted);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 2px 6px;
-  letter-spacing: .3px;
-}
-
-/* hover overlay */
-.project-card::after {
-  content: '↗';
-  position: absolute;
-  top: 10px; right: 10px;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: rgba(216,88,40,.9);
-  color: #fff;
-  font-size: 13px;
-  display: grid;
-  place-items: center;
-  opacity: 0;
-  transition: opacity .2s ease;
-}
-.project-card:hover::after { opacity: 1; }
-
-/* ── LIGHTBOX ── */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.lightbox.open { display: flex; }
-
-.lb-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(10,8,6,.92);
-  backdrop-filter: blur(8px);
-}
-
-.lb-panel {
-  position: relative;
-  z-index: 1;
-  width: min(92vw, 900px);
-  max-height: 92vh;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--r);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 32px 80px rgba(0,0,0,.7);
-  animation: lbIn .25s ease;
-}
-
-@keyframes lbIn {
-  from { opacity: 0; transform: scale(.96) translateY(12px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.lb-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.lb-project-num {
-  font-family: 'Notable', sans-serif;
-  font-size: 11px;
-  color: var(--orange);
-  letter-spacing: .15em;
-}
-
-.lb-project-name {
-  font-family: 'Spectral', Georgia, serif;
-  font-weight: 600;
-  font-size: 17px;
-  color: var(--ivory);
-  margin-top: 2px;
-}
-
-.lb-close {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border2);
-  background: var(--card);
-  color: var(--muted);
-  font-size: 20px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background .15s, color .15s, transform .15s;
-  flex-shrink: 0;
-  line-height: 1;
-}
-.lb-close:hover { background: var(--orange); color: #fff; transform: rotate(90deg); }
-
-/* main image area */
-.lb-img-wrap {
-  position: relative;
-  flex-shrink: 0;
-  background: #0e0c0a;
-  overflow: hidden;
-}
-
-.lb-img {
-  width: 100%;
-  height: 52vh;
-  object-fit: contain;
-  display: block;
-  transition: opacity .2s ease;
-}
-
-.lb-arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.2);
-  background: rgba(26,22,20,.8);
-  color: var(--ivory);
-  font-size: 18px;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background .15s, border-color .15s;
-  backdrop-filter: blur(4px);
-}
-.lb-arrow:hover { background: var(--orange); border-color: var(--orange); }
-.lb-arrow.prev { left: 12px; }
-.lb-arrow.next { right: 12px; }
-
-.lb-counter {
-  position: absolute;
-  bottom: 10px; right: 14px;
-  font-size: 11px;
-  font-weight: 600;
-  color: rgba(255,255,255,.5);
-  letter-spacing: .5px;
-}
-
-/* thumbnails */
-.lb-thumbs {
-  display: flex;
-  gap: 6px;
-  padding: 12px 16px;
-  overflow-x: auto;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--border);
-  scrollbar-width: thin;
-  scrollbar-color: var(--border2) transparent;
-}
-
-.lb-thumb {
-  width: 60px;
-  height: 46px;
-  object-fit: cover;
-  border-radius: 6px;
-  cursor: pointer;
-  flex-shrink: 0;
-  border: 2px solid transparent;
-  transition: border-color .15s, opacity .15s;
-  opacity: .6;
-}
-.lb-thumb.active {
-  border-color: var(--orange);
-  opacity: 1;
-}
-.lb-thumb:hover { opacity: .85; }
-
-/* description */
-.lb-desc {
-  padding: 16px 20px;
-  overflow-y: auto;
-  flex: 1;
-}
-
-.lb-desc-text {
-  font-size: 13.5px;
-  color: #c0baa8;
-  line-height: 1.85;
-  margin-bottom: 12px;
-}
-
-.lb-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.lb-tag {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--amber);
-  background: rgba(232,160,80,.08);
-  border: 1px solid rgba(232,160,80,.2);
-  border-radius: 5px;
-  padding: 3px 8px;
-  letter-spacing: .3px;
-}
-
-/* ── FOOTER ── */
-.footer {
-  margin-top: 60px;
-  text-align: center;
-  font-size: 12.5px;
-  color: var(--muted);
-  padding-top: 24px;
-  border-top: 1px solid var(--border);
-}
-.footer span { color: var(--orange); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 680px) {
-  .project-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .lb-img { height: 40vh; }
-  .lb-panel { width: 96vw; max-height: 94vh; }
-}
-@media (max-width: 420px) {
-  .project-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
-}
+@media(max-width:680px){.project-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.lb-img{height:38vh;}.lb-panel{width:96vw;max-height:94vh;}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 </style>
 </head>
 <body>
-
-<div class="wrap">
+<div class="wrap" id="root">
 
   <nav class="top-nav">
-    <a href="https://www.bryanharper.tokyo" class="back-btn site">
-      <span class="btn-dot"></span>
-      <span>bryanharper.tokyo</span>
-    </a>
-    <a href="https://booha-adventure-studios.github.io/booha-world/" class="back-btn world">
-      <span class="btn-dot"></span>
-      <span>Booha World</span>
-    </a>
+    <a href="https://www.bryanharper.tokyo" class="back-btn site"><span class="btn-dot"></span><span>bryanharper.tokyo</span></a>
+    <a href="https://booha-adventure-studios.github.io/booha-world/" class="back-btn world"><span class="btn-dot"></span><span>Booha World</span></a>
   </nav>
 
   <header class="hero">
     <img class="hero-logo" src="assets/img/workshop-1.png" alt="Bryan's Workshop" />
     <div class="hero-eyebrow">Tomisato, Chiba</div>
     <h1 class="hero-title">BRYAN'S WORKSHOP</h1>
-    <p class="hero-sub">A house built by hand. Chalk paint, wood, wax, and time.</p>
+    <p class="hero-sub" id="hero-sub">手でつくった家。チョークペイント、木材、ワックス、そして時間。</p>
   </header>
 
+  <div class="lang-pill-wrap">
+    <div class="lang-pill" role="group" aria-label="Language">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
+    </div>
+  </div>
+
   <div class="count-bar">
-    <span class="count-label">Projects</span>
+    <span class="count-label" id="count-label">プロジェクト</span>
     <span class="count-num">001 — 015</span>
   </div>
 
   <div class="project-grid" id="project-grid"></div>
 
-  <div class="footer">
-    Bryan Harper &nbsp;·&nbsp; <span>Bryan's Workshop</span>
-  </div>
-
+  <div class="footer">Bryan Harper &nbsp;·&nbsp; <span>Bryan's Workshop</span></div>
 </div>
 
 <!-- LIGHTBOX -->
@@ -543,135 +183,88 @@ body::before {
 
 <script>
 const PROJECTS = [
-  {
-    num: '001',
-    name: 'Living Room & Kitchen Renovation',
-    tags: ['board & batten', 'new ceiling', 'new flooring', 'custom shelving'],
-    desc: 'A major overhaul of the central living and kitchen area. Board and batten walls, a new ceiling, and updated flooring throughout. Custom shelving and a music box display were added to bring character and warmth to the heart of the house.',
-    photos: 8
-  },
-  {
-    num: '002',
-    name: 'Pink Bedroom',
-    tags: ['board & batten', 'new ceiling', 'carpet'],
-    desc: 'A complete bedroom transformation. Board and batten walls and a new ceiling mirror the living room work, but the pink palette and plush carpet give this room its own distinct energy.',
-    photos: 8
-  },
-  {
-    num: '003',
-    name: 'Corner Cabinet',
-    tags: ['chalk paint', 'clear wax', 'new window'],
-    desc: 'A corner cabinet upcycled with chalk paint and clear wax, paired with a new window installation that changed the light and feel of the entire corner.',
-    photos: 8
-  },
-  {
-    num: '004',
-    name: 'Shoe Cabinet Renovation',
-    tags: ['new shelves', 'paint', 'wood stain'],
-    desc: 'New internal shelves built inside a standard entryway shoe cabinet. Paint and wood stain transformed a utility item into something that belongs in the space.',
-    photos: 8
-  },
-  {
-    num: '005',
-    name: 'Hallway Ceiling',
-    tags: ['wood planks', 'oil stain', 'paint'],
-    desc: 'Wood planks installed across the hallway ceiling, finished with oil stain and paint. The corridor went from bare to rustic and hand-crafted.',
-    photos: 8
-  },
-  {
-    num: '006',
-    name: 'Under the Stairs',
-    tags: ['new walls', 'new floor', 'new ceiling', 'lighting', 'carpet'],
-    desc: 'The dead space beneath the staircase converted into a fully finished storage room. New walls, floor, ceiling, lighting, and carpet — a space that didn\'t exist before.',
-    photos: 8
-  },
-  {
-    num: '007',
-    name: 'Wood Filing Cabinet',
-    tags: ['black chalk paint', 'clear wax', 'polyurethane'],
-    desc: 'A vintage wood filing cabinet restored with black chalk paint and clear wax on the body, polyurethane coating on the drawers to preserve the natural wood while making it durable.',
-    photos: 8
-  },
-  {
-    num: '008',
-    name: 'Stained Glass Windows',
-    tags: ['custom frames', 'scrap stained glass'],
-    desc: 'Custom-framed decorative panels built from scrap stained glass. They filter light and add color and character to rooms that had none.',
-    photos: 8
-  },
-  {
-    num: '009',
-    name: 'Rolltop Desk',
-    tags: ['red chalk paint', 'dark briwax'],
-    desc: 'A classic rolltop desk refinished with bold red chalk paint and dark Briwax. Weathered and confident — exactly what a rolltop desk should be.',
-    photos: 8
-  },
-  {
-    num: '010',
-    name: 'Aichi Super Eight Chairs',
-    tags: ['pistachio milk paint', 'black milk paint', 'emerald milk paint', 'wax'],
-    desc: 'A set of vintage Aichi Super Eight chairs repaired and refinished in pistachio, black, and emerald milk paint with a protective wax finish. Colorful, vintage, and built to last.',
-    photos: 8
-  },
-  {
-    num: '011',
-    name: 'Tambour Door Stand',
-    tags: ['black chalk paint', 'dark briwax', 'gold paint'],
-    desc: 'A compact stand with a tambour sliding door finished in black chalk paint and dark Briwax. Gold paint accents bring out the texture of the door and hardware.',
-    photos: 8
-  },
-  {
-    num: '012',
-    name: 'Built-in Kitchen Shelves',
-    tags: ['wood', 'oil stain', 'black paint', 'wax'],
-    desc: 'Custom shelves built and installed in the kitchen from scratch. Wood, oil stain, black paint, and wax — storage and display that feels like it was always there.',
-    photos: 8
-  },
-  {
-    num: '013',
-    name: 'School Signs',
-    tags: ['sign post', 'swinging signs', 'hand-crafted'],
-    desc: 'Custom sign posts and swinging signs built by hand for the school entrance. The first thing visitors see — and they know immediately what kind of place this is.',
-    photos: 8
-  },
-  {
-    num: '014',
-    name: 'Beer Sign',
-    tags: ['wood', 'paper clay', 'paint', 'top coat', 'gold leaf'],
-    desc: 'A pub-style sign built from wood with paper clay for 3D texture, finished with paint, a protective top coat, and intricate gold leafing. The kind of sign you\'d find in a proper old tavern.',
-    photos: 8
-  },
-  {
-    num: '015',
-    name: 'Entryway Renovation',
-    tags: ['board & batten', 'new ceiling', 'white paint'],
-    desc: 'The main entrance updated with a new ceiling and board and batten walls, finished in clean white paint. Bright, open, and welcoming — the right first impression.',
-    photos: 8
-  }
+  { num:'001', nameEN:'Living Room & Kitchen Renovation', nameJP:'リビング＆キッチンのリノベーション',
+    tagsEN:['board & batten','new ceiling','new flooring','custom shelving'],
+    tagsJP:['ボード＆バテン','天井の新設','床の張り替え','棚のカスタム'],
+    descEN:'A major overhaul of the central living and kitchen area. Board and batten walls, a new ceiling, and updated flooring throughout. Custom shelving and a music box display were added to bring character and warmth to the heart of the house.',
+    descJP:'リビングとキッチンの大規模なリノベーション。ボード＆バテンの壁、新しい天井、床の張り替えをすべて施工。オリジナルの棚とオルゴールのディスプレイを加え、家の中心に個性と温かみをつくり出した。', photos:8 },
+  { num:'002', nameEN:'Pink Bedroom', nameJP:'ピンクの寝室',
+    tagsEN:['board & batten','new ceiling','carpet'],
+    tagsJP:['ボード＆バテン','天井の新設','カーペット'],
+    descEN:'A complete bedroom transformation. Board and batten walls and a new ceiling mirror the living room work, but the pink palette and plush carpet give this room its own distinct energy.',
+    descJP:'寝室の完全改装。ボード＆バテンの壁と新しい天井はリビングと同様の仕上げだが、ピンクのカラーパレットとふかふかのカーペットがこの部屋だけの独自の空気をつくっている。', photos:8 },
+  { num:'003', nameEN:'Corner Cabinet', nameJP:'コーナーキャビネット',
+    tagsEN:['chalk paint','clear wax','new window'],
+    tagsJP:['チョークペイント','クリアワックス','窓の新設'],
+    descEN:'A corner cabinet upcycled with chalk paint and clear wax, paired with a new window installation that changed the light and feel of the entire corner.',
+    descJP:'チョークペイントとクリアワックスでアップサイクルしたコーナーキャビネット。新しい窓を設置したことで、そのコーナー全体の光の入り方と雰囲気が変わった。', photos:8 },
+  { num:'004', nameEN:'Shoe Cabinet Renovation', nameJP:'下駄箱のリノベーション',
+    tagsEN:['new shelves','paint','wood stain'],
+    tagsJP:['棚の新設','ペイント','ウッドステイン'],
+    descEN:'New internal shelves built inside a standard entryway shoe cabinet. Paint and wood stain transformed a utility item into something that belongs in the space.',
+    descJP:'玄関の下駄箱に棚を新たに製作して設置。ペイントとウッドステインで、ただの実用品をこの空間にしっくりくるものへと変えた。', photos:8 },
+  { num:'005', nameEN:'Hallway Ceiling', nameJP:'廊下の天井',
+    tagsEN:['wood planks','oil stain','paint'],
+    tagsJP:['木材の板張り','オイルステイン','ペイント'],
+    descEN:'Wood planks installed across the hallway ceiling, finished with oil stain and paint. The corridor went from bare to rustic and hand-crafted.',
+    descJP:'廊下の天井に木の板を張り、オイルステインとペイントで仕上げた。何もなかった廊下が、手づくりのぬくもりある空間へと変わった。', photos:8 },
+  { num:'006', nameEN:'Under the Stairs', nameJP:'階段下のスペース',
+    tagsEN:['new walls','new floor','new ceiling','lighting','carpet'],
+    tagsJP:['壁の新設','床の新設','天井の新設','照明','カーペット'],
+    descEN:"The dead space beneath the staircase converted into a fully finished storage room. New walls, floor, ceiling, lighting, and carpet — a space that didn't exist before.",
+    descJP:'階段下のデッドスペースを、完全に仕上げた収納部屋へと改造。壁・床・天井・照明・カーペットをすべて新設。存在しなかった空間をつくった。', photos:8 },
+  { num:'007', nameEN:'Wood Filing Cabinet', nameJP:'ウッドファイリングキャビネット',
+    tagsEN:['black chalk paint','clear wax','polyurethane'],
+    tagsJP:['ブラックチョークペイント','クリアワックス','ポリウレタン'],
+    descEN:'A vintage wood filing cabinet restored with black chalk paint and clear wax on the body, polyurethane coating on the drawers to preserve the natural wood while making it durable.',
+    descJP:'ヴィンテージの木製ファイリングキャビネットをレストア。本体はブラックチョークペイントとクリアワックスで仕上げ、引き出しはポリウレタンでコーティングして木の風合いを保ちながら耐久性を高めた。', photos:8 },
+  { num:'008', nameEN:'Stained Glass Windows', nameJP:'ステンドグラスの窓',
+    tagsEN:['custom frames','scrap stained glass'],
+    tagsJP:['カスタムフレーム','端材ステンドグラス'],
+    descEN:'Custom-framed decorative panels built from scrap stained glass. They filter light and add color and character to rooms that had none.',
+    descJP:'端材のステンドグラスを使って、カスタムフレームのデコラティブパネルを製作。光をやわらかく透過させ、何もなかった部屋に色と個性を加えた。', photos:8 },
+  { num:'009', nameEN:'Rolltop Desk', nameJP:'ロールトップデスク',
+    tagsEN:['red chalk paint','dark briwax'],
+    tagsJP:['レッドチョークペイント','ダークブライワックス'],
+    descEN:'A classic rolltop desk refinished with bold red chalk paint and dark Briwax. Weathered and confident — exactly what a rolltop desk should be.',
+    descJP:'クラシックなロールトップデスクを、大胆なレッドチョークペイントとダークブライワックスで仕上げ直した。風格があって堂々としている——ロールトップデスクはこうあるべき。', photos:8 },
+  { num:'010', nameEN:'Aichi Super Eight Chairs', nameJP:'アイチスーパーエイトの椅子',
+    tagsEN:['pistachio milk paint','black milk paint','emerald milk paint','wax'],
+    tagsJP:['ピスタチオミルクペイント','ブラックミルクペイント','エメラルドミルクペイント','ワックス'],
+    descEN:'A set of vintage Aichi Super Eight chairs repaired and refinished in pistachio, black, and emerald milk paint with a protective wax finish. Colorful, vintage, and built to last.',
+    descJP:'ヴィンテージのアイチスーパーエイトの椅子を修理・再塗装。ピスタチオ・ブラック・エメラルドのミルクペイントとワックスで仕上げた。カラフルで、ヴィンテージで、長く使えるように。', photos:8 },
+  { num:'011', nameEN:'Tambour Door Stand', nameJP:'タンバードアスタンド',
+    tagsEN:['black chalk paint','dark briwax','gold paint'],
+    tagsJP:['ブラックチョークペイント','ダークブライワックス','ゴールドペイント'],
+    descEN:'A compact stand with a tambour sliding door finished in black chalk paint and dark Briwax. Gold paint accents bring out the texture of the door and hardware.',
+    descJP:'タンバードア付きのコンパクトなスタンドを、ブラックチョークペイントとダークブライワックスで仕上げた。ゴールドペイントのアクセントが扉と金具の質感を引き立てている。', photos:8 },
+  { num:'012', nameEN:'Built-in Kitchen Shelves', nameJP:'キッチンの造り付け棚',
+    tagsEN:['wood','oil stain','black paint','wax'],
+    tagsJP:['木材','オイルステイン','ブラックペイント','ワックス'],
+    descEN:'Custom shelves built and installed in the kitchen from scratch. Wood, oil stain, black paint, and wax — storage and display that feels like it was always there.',
+    descJP:'キッチンにゼロから棚を製作・設置。木材・オイルステイン・ブラックペイント・ワックスで仕上げた収納と飾り棚は、最初からそこにあったかのように空間に馴染んでいる。', photos:8 },
+  { num:'013', nameEN:'School Signs', nameJP:'教室のサイン',
+    tagsEN:['sign post','swinging signs','hand-crafted'],
+    tagsJP:['サインポスト','スウィングサイン','ハンドメイド'],
+    descEN:'Custom sign posts and swinging signs built by hand for the school entrance. The first thing visitors see — and they know immediately what kind of place this is.',
+    descJP:'教室の入口に手製のサインポストとスウィングサインを設置。訪れた人が最初に目にするもの——そしてすぐに、ここがどんな場所かが伝わる。', photos:8 },
+  { num:'014', nameEN:"Beer Sign", nameJP:'ビールサイン',
+    tagsEN:['wood','paper clay','paint','top coat','gold leaf'],
+    tagsJP:['木材','紙粘土','ペイント','トップコート','金箔'],
+    descEN:"A pub-style sign built from wood with paper clay for 3D texture, finished with paint, a protective top coat, and intricate gold leafing. The kind of sign you'd find in a proper old tavern.",
+    descJP:'木材と紙粘土で立体的なテクスチャーを表現したパブスタイルのサイン。ペイント・トップコート・精緻な金箔仕上げ。本物の古い酒場で見かけるような看板。', photos:8 },
+  { num:'015', nameEN:'Entryway Renovation', nameJP:'玄関のリノベーション',
+    tagsEN:['board & batten','new ceiling','white paint'],
+    tagsJP:['ボード＆バテン','天井の新設','ホワイトペイント'],
+    descEN:'The main entrance updated with a new ceiling and board and batten walls, finished in clean white paint. Bright, open, and welcoming — the right first impression.',
+    descJP:'玄関を新しい天井とボード＆バテンの壁でアップデートし、クリーンなホワイトペイントで仕上げた。明るく、開放的で、歓迎感がある——正しい第一印象。', photos:8 }
 ];
 
-// ── BUILD GRID ──
-const grid = document.getElementById('project-grid');
-
-PROJECTS.forEach((p, i) => {
-  const card = document.createElement('div');
-  card.className = 'project-card';
-  card.innerHTML = `
-    <img class="project-thumb" src="assets/workshop/${p.num}/1.png" alt="${p.name}" loading="lazy" />
-    <div class="project-info">
-      <div class="project-num">${p.num}</div>
-      <div class="project-name">${p.name}</div>
-      <div class="project-tags">${p.tags.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('')}</div>
-    </div>
-  `;
-  card.addEventListener('click', () => openLightbox(i));
-  grid.appendChild(card);
-});
-
-// ── LIGHTBOX ──
+let currentLang = 'jp';
 let currentProject = 0;
 let currentPhoto = 0;
 
+const grid      = document.getElementById('project-grid');
 const lightbox  = document.getElementById('lightbox');
 const lbImg     = document.getElementById('lb-img');
 const lbNum     = document.getElementById('lb-num');
@@ -681,90 +274,107 @@ const lbTags    = document.getElementById('lb-tags');
 const lbThumbs  = document.getElementById('lb-thumbs');
 const lbCounter = document.getElementById('lb-counter');
 
-function openLightbox(projectIndex, photoIndex = 0) {
-  currentProject = projectIndex;
-  currentPhoto = photoIndex;
-  const p = PROJECTS[projectIndex];
+function isJP() { return currentLang === 'jp'; }
 
-  lbNum.textContent  = p.num;
-  lbName.textContent = p.name;
-  lbDesc.textContent = p.desc;
-  lbTags.innerHTML   = p.tags.map(t => `<span class="lb-tag">${t}</span>`).join('');
+function buildGrid() {
+  grid.innerHTML = '';
+  PROJECTS.forEach((p, i) => {
+    const name = isJP() ? p.nameJP : p.nameEN;
+    const tags = isJP() ? p.tagsJP : p.tagsEN;
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <img class="project-thumb" src="assets/workshop/${p.num}/1.png" alt="${name}" loading="lazy"/>
+      <div class="project-info">
+        <div class="project-num">${p.num}</div>
+        <div class="project-name">${name}</div>
+        <div class="project-tags">${tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      </div>`;
+    card.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(card);
+  });
+}
 
-  // build thumbnails
-  lbThumbs.innerHTML = '';
-  for (let i = 1; i <= p.photos; i++) {
-    const thumb = document.createElement('img');
-    thumb.className = 'lb-thumb' + (i - 1 === photoIndex ? ' active' : '');
-    thumb.src = `assets/workshop/${p.num}/${i}.png`;
-    thumb.alt = `${p.name} photo ${i}`;
-    thumb.loading = 'lazy';
-    const idx = i - 1;
-    thumb.addEventListener('click', () => setPhoto(idx));
-    lbThumbs.appendChild(thumb);
-  }
-
-  setPhoto(photoIndex);
+function openLightbox(idx, photo = 0) {
+  currentProject = idx;
+  currentPhoto = photo;
+  updateLightboxContent();
+  buildThumbs();
+  setPhoto(photo);
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+
+function updateLightboxContent() {
+  const p = PROJECTS[currentProject];
+  lbNum.textContent  = p.num;
+  lbName.textContent = isJP() ? p.nameJP : p.nameEN;
+  lbDesc.textContent = isJP() ? p.descJP : p.descEN;
+  const tags = isJP() ? p.tagsJP : p.tagsEN;
+  lbTags.innerHTML = tags.map(t=>`<span class="lb-tag">${t}</span>`).join('');
+}
+
+function buildThumbs() {
+  const p = PROJECTS[currentProject];
+  lbThumbs.innerHTML = '';
+  for (let i = 1; i <= p.photos; i++) {
+    const t = document.createElement('img');
+    t.className = 'lb-thumb' + (i-1 === currentPhoto ? ' active' : '');
+    t.src = `assets/workshop/${p.num}/${i}.png`;
+    t.loading = 'lazy';
+    const idx = i - 1;
+    t.addEventListener('click', () => setPhoto(idx));
+    lbThumbs.appendChild(t);
+  }
 }
 
 function setPhoto(idx) {
   const p = PROJECTS[currentProject];
   currentPhoto = idx;
   lbImg.style.opacity = '0';
-  setTimeout(() => {
-    lbImg.src = `assets/workshop/${p.num}/${idx + 1}.png`;
-    lbImg.alt = `${p.name} photo ${idx + 1}`;
-    lbImg.style.opacity = '1';
-  }, 120);
-  lbCounter.textContent = `${idx + 1} / ${p.photos}`;
-
-  // update thumb highlights
-  lbThumbs.querySelectorAll('.lb-thumb').forEach((t, i) => {
-    t.classList.toggle('active', i === idx);
-  });
-
-  // scroll thumb into view
-  const activeThumb = lbThumbs.children[idx];
-  if (activeThumb) activeThumb.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  setTimeout(() => { lbImg.src = `assets/workshop/${p.num}/${idx+1}.png`; lbImg.style.opacity = '1'; }, 120);
+  lbCounter.textContent = `${idx+1} / ${p.photos}`;
+  lbThumbs.querySelectorAll('.lb-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
+  const active = lbThumbs.children[idx];
+  if (active) active.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
 }
 
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function prevPhoto() {
-  const p = PROJECTS[currentProject];
-  setPhoto((currentPhoto - 1 + p.photos) % p.photos);
-}
-
-function nextPhoto() {
-  const p = PROJECTS[currentProject];
-  setPhoto((currentPhoto + 1) % p.photos);
-}
+function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+function prevPhoto() { setPhoto((currentPhoto - 1 + PROJECTS[currentProject].photos) % PROJECTS[currentProject].photos); }
+function nextPhoto() { setPhoto((currentPhoto + 1) % PROJECTS[currentProject].photos); }
 
 document.getElementById('lb-close').addEventListener('click', closeLightbox);
 document.getElementById('lb-backdrop').addEventListener('click', closeLightbox);
 document.getElementById('lb-prev').addEventListener('click', prevPhoto);
 document.getElementById('lb-next').addEventListener('click', nextPhoto);
-
-// keyboard nav
 document.addEventListener('keydown', e => {
   if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowLeft')   prevPhoto();
-  if (e.key === 'ArrowRight')  nextPhoto();
+  if (e.key==='Escape') closeLightbox();
+  if (e.key==='ArrowLeft') prevPhoto();
+  if (e.key==='ArrowRight') nextPhoto();
 });
+let touchX = 0;
+lbImg.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive:true });
+lbImg.addEventListener('touchend', e => { const d = touchX - e.changedTouches[0].clientX; if (Math.abs(d)>40) d>0 ? nextPhoto() : prevPhoto(); });
 
-// touch swipe
-let touchStartX = 0;
-lbImg.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-lbImg.addEventListener('touchend', e => {
-  const diff = touchStartX - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 40) diff > 0 ? nextPhoto() : prevPhoto();
-});
+function setLang(lang) {
+  currentLang = lang;
+  const jp = lang === 'jp';
+  document.getElementById('btnEN').classList.toggle('active', !jp);
+  document.getElementById('btnJP').classList.toggle('active', jp);
+  document.documentElement.lang = jp ? 'ja' : 'en';
+  document.getElementById('root').classList.toggle('jp', jp);
+  document.getElementById('hero-sub').textContent = jp
+    ? '手でつくった家。チョークペイント、木材、ワックス、そして時間。'
+    : 'A house built by hand. Chalk paint, wood, wax, and time.';
+  document.getElementById('count-label').textContent = jp ? 'プロジェクト' : 'Projects';
+  buildGrid();
+  if (lightbox.classList.contains('open')) updateLightboxContent();
+}
+
+document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
+document.getElementById('btnJP').addEventListener('click', () => setLang('jp'));
+setLang('jp');
 </script>
 </body>
 </html>
