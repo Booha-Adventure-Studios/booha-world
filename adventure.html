@@ -5,7 +5,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Booha Adventure</title>
-<link rel="icon" type="image/png" href="assets/img/adventure-1.png">
+<link rel="icon" type="image/png" href="assets/img/adventure.png">
 <link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -312,6 +312,38 @@ body::before {
 .jp .level-title { font-size: 13px; }
 .jp .level-block li { font-size: 12.5px; }
 
+/* ── LANG PILL ── */
+.lang-pill-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 0;
+}
+.lang-pill {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 999px;
+  padding: 3px;
+}
+.langBtn {
+  padding: 7px 24px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s ease;
+  letter-spacing: .3px;
+}
+.langBtn.active {
+  background: var(--card);
+  color: var(--ivory);
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
 /* ── FOOTER ── */
 .footer {
   margin-top: 40px; text-align: center;
@@ -347,14 +379,17 @@ body::before {
         <span class="dot"></span><span id="lbl-world">Booha World</span>
       </a>
     </div>
+  </nav>
+
+  <div class="lang-pill-wrap">
     <div class="lang-pill" role="group" aria-label="Language">
       <button class="langBtn" id="btnEN" type="button">English</button>
       <button class="langBtn active" id="btnJP" type="button">日本語</button>
     </div>
-  </nav>
+  </div>
 
   <div class="hero">
-    <img class="hero-ghost" src="assets/img/adventure-1.png" alt="Booha" />
+    <img class="hero-ghost" src="assets/img/adventure.png" alt="Booha" />
     <div class="hero-eyebrow" id="heroEye">Bryan's English School</div>
     <h1 id="heroTitle" class="jp-font">ブーハー・アドベンチャーへようこそ</h1>
     <p id="heroSub">ここは、ブーハーの世界の中で、私が生徒に直接話すページです。</p>
@@ -627,7 +662,7 @@ body::before {
       heroTitle.classList.add('jp-font');
       heroSub.textContent   = 'ここは、ブーハーの世界の中で、私が生徒に直接話すページです。';
     } else {
-      heroTitle.textContent = 'Welcome to the Booha Adventure';
+      heroTitle.innerHTML = 'Welcome to the<br>Booha Adventure';
       heroTitle.classList.remove('jp-font');
       heroSub.textContent   = 'This is my page to talk to you directly inside the Booha world.';
     }
