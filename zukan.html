@@ -472,7 +472,7 @@ body::before {
     <img class="hero-img" src="assets/img/zukan-1.png" alt="Zukan" />
     <div class="hero-eyebrow">Karasuki</div>
     <h1 class="hero-title" id="hero-title">ZUKAN</h1>
-    <p class="hero-sub" id="hero-sub">カラスキで出会ったものたちの記録。見たものは、あなたを見ている。</p>
+    <p class="hero-sub" id="hero-sub">カラスキで出会ったものたちの記録。<br>見たものは、あなたを見ている。</p>
   </header>
 
   <div class="lang-pill-wrap">
@@ -695,9 +695,9 @@ function setLang(lang) {
   document.documentElement.lang = jp ? 'ja' : 'en';
   document.getElementById('root').classList.toggle('jp', jp);
 
-  document.getElementById('hero-sub').textContent = jp
-    ? 'カラスキで出会ったものたちの記録。見たものは、あなたを見ている。'
-    : 'A record of what was found in Karasuki. What you see — sees you.';
+  document.getElementById('hero-sub').innerHTML = jp
+    ? 'カラスキで出会ったものたちの記録。<br>見たものは、あなたを見ている。'
+    : 'A record of what was found in Karasuki.<br>What you see — sees you.';
 
   document.getElementById('section-label').textContent = jp ? '登場人物' : 'Characters';
 
