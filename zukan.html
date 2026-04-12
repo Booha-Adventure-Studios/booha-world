@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Zukan — Karasuki</title>
+<link rel="icon" type="image/png" href="assets/img/zukan.png">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet"/>
+
+<style>
+:root {
+  --bg:       #141210;
+  --surface:  #1c1916;
+  --card:     #221e1a;
+  --card2:    #2a2420;
+  --border:   rgba(255,255,255,.05);
+  --border2:  rgba(255,255,255,.10);
+  --text:     #e0d8c8;
+  --muted:    #806858;
+  --ivory:    #f0e8d8;
+  --dim:      #a09080;
+
+  /* Karasuki accent — cool moss, not warm orange */
+  --moss:     #6a9860;
+  --fog:      #8899aa;
+  --dusk:     #7070a0;
+  --bone:     #d8cfc0;
+
+  --r:  14px;
+  --r2: 8px;
+  --shadow:  0 24px 56px rgba(0,0,0,.65);
+  --shadow2: 0 8px 24px rgba(0,0,0,.5);
+}
+
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* subtle grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: .6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 800px 500px at 30% -10%, rgba(106,152,96,.05) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 80% 80%,  rgba(112,112,160,.04) 0%, transparent 55%),
+    radial-gradient(ellipse 400px 600px at 5%  60%,  rgba(136,153,170,.03) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── NAV ── */
+.top-nav { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 999px;
+  border: 1px solid var(--border2); background: var(--surface);
+  color: var(--muted); text-decoration: none;
+  font-size: 13px; font-weight: 600;
+  transition: color .15s, border-color .15s, transform .12s, box-shadow .3s;
+  position: relative; overflow: hidden;
+}
+.back-btn::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity .2s ease; }
+.back-btn.site::before  { background: radial-gradient(circle at 50% 50%, rgba(247,208,64,.12), transparent 70%); }
+.back-btn.world::before { background: radial-gradient(circle at 50% 50%, rgba(106,152,96,.15), transparent 70%); }
+.back-btn:hover::before { opacity: 1; }
+@keyframes pulseY { 0%,100%{ box-shadow:0 0 0 rgba(247,208,64,0); } 50%{ box-shadow:0 0 18px rgba(247,208,64,.2); } }
+@keyframes pulseM { 0%,100%{ box-shadow:0 0 0 rgba(106,152,96,0); } 50%{ box-shadow:0 0 18px rgba(106,152,96,.22); } }
+.back-btn.site  { animation: pulseY 3.5s ease-in-out infinite; }
+.back-btn.world { animation: pulseM 3.5s ease-in-out infinite 1.75s; }
+.back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
+.btn-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.back-btn.site  .btn-dot { background: #f7d040; }
+.back-btn.world .btn-dot { background: var(--moss); }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 40px 20px 32px;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 48px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--moss), transparent);
+}
+
+.hero-img {
+  width: 160px; height: 160px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  display: block;
+  filter: drop-shadow(0 0 32px rgba(106,152,96,.25));
+  animation: zukanGlow 6s ease-in-out infinite;
+}
+@keyframes zukanGlow {
+  0%,100% { filter: drop-shadow(0 0 28px rgba(106,152,96,.2)); }
+  50%      { filter: drop-shadow(0 0 44px rgba(136,153,170,.3)); }
+}
+
+.hero-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--moss); margin-bottom: 10px;
+}
+.hero-title {
+  font-family: 'Notable', sans-serif;
+  font-size: clamp(28px, 5vw, 46px);
+  color: var(--ivory);
+  letter-spacing: .08em;
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+.hero-sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-style: italic;
+}
+.jp .hero-sub { font-family: 'Noto Serif JP', serif; font-style: normal; font-size: 13px; }
+
+/* ── LANG PILL ── */
+.lang-pill-wrap { display: flex; justify-content: center; margin: 28px 0 0; }
+.lang-pill {
+  display: flex; background: var(--surface);
+  border: 1px solid var(--border2); border-radius: 999px; padding: 3px;
+}
+.langBtn {
+  padding: 7px 24px; border-radius: 999px; border: none;
+  background: transparent; color: var(--muted);
+  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all .18s ease; letter-spacing: .3px;
+}
+.langBtn.active { background: var(--card2); color: var(--ivory); box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+
+/* ── SECTION DIVIDER ── */
+.section-div {
+  display: flex; align-items: center; gap: 12px;
+  margin: 40px 0 24px;
+}
+.section-div span {
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--muted); white-space: nowrap;
+}
+.section-div::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+/* ── CHARACTER GRID ── */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.char-tile {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  position: relative;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: flex-end;
+}
+
+.char-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(106,152,96,.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,.6), 0 0 24px rgba(106,152,96,.08);
+}
+
+.char-tile-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px 12px 40px;
+  transition: transform .4s ease;
+}
+.char-tile:hover .char-tile-img { transform: scale(1.04); }
+
+.char-tile-label {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 10px 12px;
+  background: linear-gradient(to top, rgba(20,18,16,.95) 0%, transparent 100%);
+}
+.char-tile-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ivory);
+  line-height: 1.2;
+}
+.jp .char-tile-name { font-family: 'Noto Serif JP', serif; font-size: 12px; }
+.char-tile-sub {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: .5px;
+  margin-top: 2px;
+}
+
+/* hover arrow */
+.char-tile::after {
+  content: '';
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(106,152,96,.85);
+  opacity: 0;
+  transition: opacity .2s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.char-tile:hover::after { opacity: 1; }
+
+/* ── CHARACTER MODAL ── */
+.char-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.char-modal.open { display: flex; }
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8,6,4,.94);
+  backdrop-filter: blur(10px);
+}
+
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(94vw, 820px);
+  max-height: 92vh;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: var(--shadow);
+  animation: modalIn .3s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(.95) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* left — image viewer */
+.modal-viewer {
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.viewer-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 32px;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.viewer-img.visible { opacity: 1; }
+
+/* stage dots */
+.stage-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.stage-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.3);
+  background: transparent;
+  cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  padding: 0;
+}
+.stage-dot.active {
+  background: var(--moss);
+  border-color: var(--moss);
+  transform: scale(1.3);
+}
+
+/* stage label */
+.stage-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--moss);
+  background: rgba(20,18,16,.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+/* right — text */
+.modal-text {
+  padding: 36px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--border);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border2);
+  background: var(--card);
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background .15s, color .15s, transform .15s;
+  z-index: 10;
+  line-height: 1;
+}
+.modal-close:hover { background: var(--moss); color: #fff; transform: rotate(90deg); }
+
+.modal-char-num {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.modal-char-name {
+  font-family: 'Spectral', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(20px, 3vw, 28px);
+  color: var(--ivory);
+  line-height: 1.15;
+  margin-bottom: 4px;
+  letter-spacing: -.2px;
+}
+.jp .modal-char-name { font-family: 'Noto Serif JP', serif; font-size: clamp(18px, 2.8vw, 24px); }
+
+.modal-char-name-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  letter-spacing: .5px;
+}
+.jp .modal-char-name-sub { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; }
+
+.modal-divider {
+  width: 32px; height: 1px;
+  background: var(--moss);
+  margin-bottom: 24px;
+  opacity: .6;
+}
+
+.modal-entry {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 15px;
+  color: #c8c0b0;
+  line-height: 2;
+  letter-spacing: .01em;
+}
+.jp .modal-entry { font-family: 'Noto Serif JP', serif; font-size: 13.5px; line-height: 2.2; }
+
+.modal-entry em {
+  color: var(--bone);
+  font-style: italic;
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+  letter-spacing: .5px;
+}
+.footer span { color: var(--moss); font-style: normal; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .char-grid { grid-template-columns: repeat(2, 1fr); }
+  .modal-panel { grid-template-columns: 1fr; max-height: 88vh; }
+  .modal-viewer { min-height: 280px; }
+  .modal-text { padding: 24px 20px; border-left: none; border-top: 1px solid var(--border); }
+  .modal-close { top: 10px; right: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: opacity .3s ease !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="root">
+
+  <nav class="top-nav">
+    <a href="https://www.bryanharper.tokyo" class="back-btn site">
+      <span class="btn-dot"></span><span>bryanharper.tokyo</span>
+    </a>
+    <a href="https://booha-adventure-studios.github.io/booha-world/" class="back-btn world">
+      <span class="btn-dot"></span><span>Booha World</span>
+    </a>
+  </nav>
+
+  <header class="hero">
+    <img class="hero-img" src="assets/img/zukan-1.png" alt="Zukan" />
+    <div class="hero-eyebrow">Karasuki</div>
+    <h1 class="hero-title" id="hero-title">ZUKAN</h1>
+    <p class="hero-sub" id="hero-sub">カラスキで出会ったものたちの記録。見たものは、あなたを見ている。</p>
+  </header>
+
+  <div class="lang-pill-wrap">
+    <div class="lang-pill" role="group" aria-label="Language">
+      <button class="langBtn" id="btnEN" type="button">English</button>
+      <button class="langBtn active" id="btnJP" type="button">日本語</button>
+    </div>
+  </div>
+
+  <div class="section-div"><span id="section-label">登場人物</span></div>
+
+  <div class="char-grid" id="char-grid"></div>
+
+  <div class="footer">
+    <span>Karasuki</span> &nbsp;·&nbsp; Nothing is truly gone. Only forgotten.
+  </div>
+
+</div>
+
+<!-- CHARACTER MODAL -->
+<div class="char-modal" id="char-modal" role="dialog" aria-modal="true">
+  <div class="modal-backdrop" id="modal-backdrop"></div>
+  <div class="modal-panel">
+
+    <!-- image viewer -->
+    <div class="modal-viewer" id="modal-viewer">
+      <div class="stage-label" id="stage-label">SKETCH</div>
+      <img class="viewer-img" id="viewer-sketch" src="" alt="" />
+      <img class="viewer-img" id="viewer-procreate" src="" alt="" />
+      <img class="viewer-img" id="viewer-tools" src="" alt="" />
+      <div class="stage-dots" id="stage-dots">
+        <button class="stage-dot active" data-stage="0" aria-label="Sketch"></button>
+        <button class="stage-dot" data-stage="1" aria-label="Color"></button>
+        <button class="stage-dot" data-stage="2" aria-label="Real"></button>
+      </div>
+    </div>
+
+    <!-- text -->
+    <div class="modal-text">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div class="modal-char-num" id="modal-num"></div>
+      <div class="modal-char-name" id="modal-name"></div>
+      <div class="modal-char-name-sub" id="modal-name-sub"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-entry" id="modal-entry"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const CHARACTERS = [
+  {
+    id: 'takachika',
+    num: '001',
+    nameEN: 'Takachika Green',
+    nameJP: 'グリーン・タカチカ',
+    nameSubEN: 'Karasuki — Book One',
+    nameSubJP: 'カラスキ — 第一巻',
+    stages: ['sketch', 'procreate', 'tools'],
+    stageLabelEN: ['Sketch', 'Color', 'Real'],
+    stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
+    entryEN: `Have you ever wondered if something lives in the shadows? If there's nothing there, why are we afraid to look?
+
+Takachika Green wanted to see something. Anything. It started as a quiet wish he repeated to himself, every day.
+
+But the things we've decided not to see… still want to be seen.
+
+If you wish hard enough, you might get your chance. But once you see them—
+
+they see you.
+
+He got what he wanted.`,
+    entryJP: `影の中に何かが潜んでいるのかと、考えたことはあるか。何もいないなら、なぜ私たちは見るのを恐れるのか。
+
+タカチカ・グリーンは何かを見たかった。何でもよかった。それは、毎日心の中で繰り返す、静かな願いとして始まった。
+
+でも、私たちが見ないと決めたものたちは……まだ、見られたいと思っている。
+
+強く願えば、チャンスが来るかもしれない。でも、一度見てしまったら——
+
+向こうも、あなたを見る。
+
+彼は、望んだものを手に入れた。`
+  }
+  // Add more characters here as:
+  // { id:'character-id', num:'002', nameEN:'...', nameJP:'...', ... }
+];
+
+let currentLang = 'jp';
+let currentChar = null;
+let currentStage = 0;
+let autoTimer = null;
+
+function isJP() { return currentLang === 'jp'; }
+
+// ── BUILD GRID ──
+function buildGrid() {
+  const grid = document.getElementById('char-grid');
+  grid.innerHTML = '';
+  CHARACTERS.forEach((c, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'char-tile';
+    tile.innerHTML = `
+      <img class="char-tile-img"
+           src="assets/zukan/${c.id}/sketch.png"
+           alt="${isJP() ? c.nameJP : c.nameEN}"
+           loading="lazy" />
+      <div class="char-tile-label">
+        <div class="char-tile-name">${isJP() ? c.nameJP : c.nameEN}</div>
+        <div class="char-tile-sub">${c.num}</div>
+      </div>`;
+    tile.addEventListener('click', () => openChar(i));
+    grid.appendChild(tile);
+  });
+}
+
+// ── MODAL ──
+const modal       = document.getElementById('char-modal');
+const vSketch     = document.getElementById('viewer-sketch');
+const vProcreate  = document.getElementById('viewer-procreate');
+const vTools      = document.getElementById('viewer-tools');
+const stageLabel  = document.getElementById('stage-label');
+const stageDots   = document.getElementById('stage-dots').querySelectorAll('.stage-dot');
+const modalNum    = document.getElementById('modal-num');
+const modalName   = document.getElementById('modal-name');
+const modalNameSub= document.getElementById('modal-name-sub');
+const modalEntry  = document.getElementById('modal-entry');
+
+const VIEWERS = [vSketch, vProcreate, vTools];
+
+function openChar(idx) {
+  currentChar  = idx;
+  currentStage = 0;
+  const c = CHARACTERS[idx];
+
+  // preload images
+  vSketch.src    = `assets/zukan/${c.id}/sketch.png`;
+  vProcreate.src = `assets/zukan/${c.id}/procreate.png`;
+  vTools.src     = `assets/zukan/${c.id}/tools.png`;
+
+  // text
+  modalNum.textContent     = c.num;
+  modalName.textContent    = isJP() ? c.nameJP    : c.nameEN;
+  modalNameSub.textContent = isJP() ? c.nameSubJP : c.nameSubEN;
+  setEntryText(c);
+
+  setStage(0);
+  startAuto();
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function setEntryText(c) {
+  const text = isJP() ? c.entryJP : c.entryEN;
+  // convert double newlines to paragraph breaks
+  modalEntry.innerHTML = text
+    .split('\n\n')
+    .map(p => `<p style="margin-bottom:1.4em">${p.replace(/\n/g, '<br>')}</p>`)
+    .join('');
+}
+
+function setStage(n) {
+  currentStage = n;
+  const c = CHARACTERS[currentChar];
+
+  VIEWERS.forEach((v, i) => v.classList.toggle('visible', i === n));
+  stageDots.forEach((d, i) => d.classList.toggle('active', i === n));
+
+  const labels = isJP() ? c.stageLabelJP : c.stageLabelEN;
+  stageLabel.textContent = labels[n];
+}
+
+function nextStage() {
+  const c = CHARACTERS[currentChar];
+  setStage((currentStage + 1) % c.stages.length);
+}
+
+function startAuto() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(nextStage, 4000);
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  clearInterval(autoTimer);
+}
+
+// dot clicks
+document.getElementById('stage-dots').addEventListener('click', e => {
+  const dot = e.target.closest('.stage-dot');
+  if (!dot) return;
+  clearInterval(autoTimer);
+  setStage(parseInt(dot.dataset.stage));
+  startAuto(); // restart timer from this stage
+});
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => {
+  if (!modal.classList.contains('open')) return;
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowRight') { clearInterval(autoTimer); nextStage(); startAuto(); }
+  if (e.key === 'ArrowLeft') {
+    clearInterval(autoTimer);
+    const c = CHARACTERS[currentChar];
+    setStage((currentStage - 1 + c.stages.length) % c.stages.length);
+    startAuto();
+  }
+});
+
+// ── LANG TOGGLE ──
+function setLang(lang) {
+  currentLang = lang;
+  const jp = lang === 'jp';
+  document.getElementById('btnEN').classList.toggle('active', !jp);
+  document.getElementById('btnJP').classList.toggle('active', jp);
+  document.documentElement.lang = jp ? 'ja' : 'en';
+  document.getElementById('root').classList.toggle('jp', jp);
+
+  document.getElementById('hero-sub').textContent = jp
+    ? 'カラスキで出会ったものたちの記録。見たものは、あなたを見ている。'
+    : 'A record of what was found in Karasuki. What you see — sees you.';
+
+  document.getElementById('section-label').textContent = jp ? '登場人物' : 'Characters';
+
+  buildGrid();
+
+  // update modal if open
+  if (modal.classList.contains('open') && currentChar !== null) {
+    const c = CHARACTERS[currentChar];
+    modalName.textContent    = jp ? c.nameJP    : c.nameEN;
+    modalNameSub.textContent = jp ? c.nameSubJP : c.nameSubEN;
+    setEntryText(c);
+    const labels = jp ? c.stageLabelJP : c.stageLabelEN;
+    stageLabel.textContent = labels[currentStage];
+  }
+}
+
+document.getElementById('btnEN').addEventListener('click', () => setLang('en'));
+document.getElementById('btnJP').addEventListener('click', () => setLang('jp'));
+
+// init
+setLang('jp');
+</script>
+</body>
+</html>
