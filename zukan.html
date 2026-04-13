@@ -503,7 +503,7 @@ body::before {
     <img class="hero-img" src="assets/img/zukan-1.png" alt="Zukan" />
     <div class="hero-eyebrow">Karasuki</div>
     <h1 class="hero-title">ZUKAN</h1>
-    <p class="hero-sub" id="hero-sub">カラスキで出会ったものたちの記録。<br>見たものは、あなたを見ている。</p>
+    <p class="hero-sub" id="hero-sub">カラスキーで出会ったものたちの記録。<br>見たものは、あなたを見ている。</p>
   </header>
 
   <div class="lang-pill-wrap">
@@ -517,7 +517,7 @@ body::before {
   <div class="char-grid" id="char-grid"></div>
 
   <!-- PICTURE BOOK -->
-  <div class="section-div" style="margin-top:48px"><span id="illus-label">カラスキより</span></div>
+  <div class="section-div" style="margin-top:48px"><span id="illus-label">カラスキーより</span></div>
   <div class="illus-scroll-wrap">
     <div class="illus-scroll" id="illus-scroll"></div>
   </div>
@@ -563,7 +563,7 @@ const CHARACTERS = [
     nameEN: 'Takachika Green',
     nameJP: 'グリーン・タカチカ',
     nameSubEN: 'Karasuki — Book One',
-    nameSubJP: 'カラスキ — 第一巻',
+    nameSubJP: 'カラスキー — 第一巻',
     stages: ['sketch', 'procreate', 'tools'],
     stageLabelEN: ['Sketch', 'Color', 'Real'],
     stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
@@ -601,7 +601,7 @@ He got what he wanted.`,
     nameEN: 'Mister Happy',
     nameJP: 'ミスター・ハッピー',
     nameSubEN: 'Karasuki — Book One',
-    nameSubJP: 'カラスキ — 第一巻',
+    nameSubJP: 'カラスキー — 第一巻',
     stages: ['sketch', 'procreate', 'tools'],
     stageLabelEN: ['Sketch', 'Color', 'Real'],
     stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
@@ -634,7 +634,7 @@ At least, that's what I assume.`,
     nameEN: 'Pugoo',
     nameJP: 'パグー',
     nameSubEN: 'Karasuki — Book One',
-    nameSubJP: 'カラスキ — 第一巻',
+    nameSubJP: 'カラスキー — 第一巻',
     stages: ['sketch', 'procreate', 'tools'],
     stageLabelEN: ['Sketch', 'Color', 'Real'],
     stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
@@ -667,7 +667,7 @@ His hiss sends them away.`,
     nameEN: 'Columbus',
     nameJP: 'コロンバス',
     nameSubEN: 'Karasuki — Book One',
-    nameSubJP: 'カラスキ — 第一巻',
+    nameSubJP: 'カラスキー — 第一巻',
     stages: ['sketch', 'procreate', 'tools'],
     stageLabelEN: ['Sketch', 'Color', 'Real'],
     stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
@@ -708,7 +708,7 @@ They just find them… annoying.`,
     nameEN: 'Tom Katsu',
     nameJP: 'トム・カツ',
     nameSubEN: 'Karasuki — Book One',
-    nameSubJP: 'カラスキ — 第一巻',
+    nameSubJP: 'カラスキー — 第一巻',
     stages: ['sketch', 'procreate', 'tools'],
     stageLabelEN: ['Sketch', 'Color', 'Real'],
     stageLabelJP: ['スケッチ', 'カラー', 'リアル'],
@@ -820,7 +820,7 @@ function buildIllus() {
     scroll.appendChild(card);
   });
 
-  document.getElementById('illus-label').textContent = isJP() ? 'カラスキより' : 'From Karasuki';
+  document.getElementById('illus-label').textContent = isJP() ? 'カラスキーより' : 'From Karasuki';
 }
 
 // ── MODAL ──
@@ -918,7 +918,7 @@ function setLang(lang) {
   document.getElementById('root').classList.toggle('jp', jp);
 
   document.getElementById('hero-sub').innerHTML = jp
-    ? 'カラスキで出会ったものたちの記録。<br>見たものは、あなたを見ている。'
+    ? 'カラスキーで出会ったものたちの記録。<br>見たものは、あなたを見ている。'
     : 'A record of what was found in Karasuki.<br>What you see — sees you.';
 
   document.getElementById('section-label').textContent = jp ? '登場人物' : 'Characters';
