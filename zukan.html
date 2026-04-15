@@ -87,7 +87,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 .illus-lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .illus-lightbox.open{display:flex;}
-.illus-lb-backdrop{position:absolute;inset:0;background:rgba(6,4,2,.96);backdrop-filter:blur(12px);cursor:pointer;}
+.illus-lb-backdrop{position:absolute;inset:0;background:rgba(6,4,2,.96);backdrop-filter:blur(12px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .illus-lb-inner{position:relative;z-index:1;max-width:min(90vw,700px);max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:14px;animation:lbIn .25s ease;}
 @keyframes lbIn{from{opacity:0;transform:scale(.94);}to{opacity:1;transform:scale(1);}}
 .illus-lb-img{max-width:100%;max-height:78vh;object-fit:contain;border-radius:var(--r);box-shadow:0 32px 80px rgba(0,0,0,.8);display:block;}
@@ -96,9 +96,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .illus-lb-title{font-family:'Spectral',Georgia,serif;font-size:16px;font-weight:600;color:var(--ivory);}
 .jp .illus-lb-title{font-family:'Noto Serif JP',serif;font-size:15px;}
 .illus-lb-hint{font-size:11px;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
-.illus-lb-close{position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,transform .15s;line-height:1;z-index:2;}
+.illus-lb-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,transform .15s;line-height:1;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .illus-lb-close:hover{background:var(--moss);color:#fff;transform:rotate(90deg);}
 
+/* CHARACTER MODAL */
 .char-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;}
 .char-modal.open{display:flex;}
 .modal-backdrop{position:absolute;inset:0;background:rgba(8,6,4,.94);backdrop-filter:blur(10px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -127,33 +128,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .footer{margin-top:60px;text-align:center;font-size:12px;color:var(--muted);padding-top:20px;border-top:1px solid var(--border);font-style:italic;letter-spacing:.5px;}
 .footer span{color:var(--moss);font-style:normal;}
 
-/* ── MOBILE ── */
 @media(max-width:640px){
   .char-grid{grid-template-columns:repeat(2,1fr);}
-
-  .modal-panel{
-    grid-template-columns:1fr;
-    grid-template-rows:auto 1fr;
-    max-height:92vh;
-    overflow:hidden;
-  }
-  .modal-viewer{
-    min-height:0;
-    height:36vh;
-    flex-shrink:0;
-  }
-  /* THE FIX: text panel scrolls independently */
-  .modal-text{
-    padding:20px 18px 32px;
-    border-left:none;
-    border-top:1px solid var(--border);
-    overflow-y:auto;
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior:contain;
-    justify-content:flex-start;
-    flex:1;
-    min-height:0;
-  }
+  .modal-panel{grid-template-columns:1fr;grid-template-rows:auto 1fr;max-height:92vh;overflow:hidden;}
+  .modal-viewer{min-height:0;height:36vh;flex-shrink:0;}
+  .modal-text{padding:20px 18px 32px;border-left:none;border-top:1px solid var(--border);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;justify-content:flex-start;flex:1;min-height:0;}
   .modal-char-name-sub{margin-bottom:16px;}
   .modal-close{top:10px;right:10px;}
   .illus-card{width:200px;}
@@ -443,6 +422,28 @@ She's just as happy now.`,
 ポーチをもらい、卵の形をした石を飾って持たせてくれる。
 
 今でも、彼女は変わらず幸せそうだ。`
+  },
+  {
+    id:'uhibon',num:'008',
+    nameEN:'Uhibon',nameJP:'ウヒボン',
+    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    stages:['sketch','procreate','tools'],
+    stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
+    entryEN:`What happens to things when we forget about them? They're still here. And even if they're not, the memory of them is.
+
+What happens when we forget that too?
+
+We forget for a reason. If we didn't, we would start to notice things that aren't supposed to be there.
+
+Uhibon doesn't remember who or what he is. He only knows that the memory of him is somewhere… waiting to be found.`,
+    entryJP:`物を忘れたとき、それはどうなるのだろう。まだここにある。たとえなくなっていても、その記憶は残っている。
+
+その記憶さえ、忘れてしまったらどうなるのだろう。
+
+人は、理由があって忘れている。もし忘れなければ、本来あるはずのないものに気づいてしまう。
+
+ウヒボンは、自分が何者なのか思い出せない。
+ただ、自分の記憶がどこかにあることだけは分かっている――見つかるのを待っている。`
   }
   // Add characters here
 ];
@@ -453,7 +454,9 @@ const ILLUSTRATIONS = [
   {num:'003',file:'003.JPG',titleEN:'Two Poopika',titleJP:'プピカが二匹'},
   {num:'004',file:'004.JPG',titleEN:'Jacki and October',titleJP:'ジャッキーとオクトーバー'},
   {num:'005',file:'005.JPG',titleEN:'Takachika Sees a Gorogui',titleJP:'タカチカ、ゴログイを見る'},
-  {num:'006',file:'006.JPG',titleEN:'Mister Happy Saves Jinguru',titleJP:'ミスター・ハッピー、ジングルを救う'}
+  {num:'006',file:'006.JPG',titleEN:'Mister Happy Saves Jinguru',titleJP:'ミスター・ハッピー、ジングルを救う'},
+  {num:'007',file:'007.JPG',titleEN:'Snack Time',titleJP:'おやつの時間'},
+  {num:'008',file:'008.JPG',titleEN:'Be Careful What You Hope For',titleJP:'望むものには気をつけろ'}
   // Add illustrations here
 ];
 
@@ -511,6 +514,7 @@ function openIllus(idx){
 }
 function closeIllus(){illusLightbox.classList.remove('open');document.body.style.overflow='';}
 document.getElementById('illus-lb-backdrop').addEventListener('click',closeIllus);
+document.getElementById('illus-lb-backdrop').addEventListener('touchend',function(e){e.preventDefault();closeIllus();},{passive:false});
 document.getElementById('illus-lb-close').addEventListener('click',closeIllus);
 
 const modal=document.getElementById('char-modal');
