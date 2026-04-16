@@ -99,12 +99,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .illus-lb-close{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,transform .15s;line-height:1;z-index:2;-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
 .illus-lb-close:hover{background:var(--moss);color:#fff;transform:rotate(90deg);}
 
-/* CHARACTER MODAL */
 .char-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;}
 .char-modal.open{display:flex;}
 .modal-backdrop{position:absolute;inset:0;background:rgba(8,6,4,.94);backdrop-filter:blur(10px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .modal-panel{position:relative;z-index:1;width:min(94vw,820px);max-height:92vh;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:var(--shadow);animation:modalIn .3s ease;}
-
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(16px);}to{opacity:1;transform:scale(1) translateY(0);}}
 .modal-viewer{position:relative;background:var(--bg);overflow:hidden;min-height:420px;}
 .viewer-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:32px;opacity:0;transition:opacity 1.2s ease;}
@@ -159,12 +157,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="langBtn active" id="btnJP" type="button">日本語</button>
     </div>
   </div>
+
   <div class="section-div"><span id="section-label">登場人物</span></div>
   <div class="char-grid" id="char-grid"></div>
-  <div class="section-div" style="margin-top:48px"><span id="illus-label">カラスキーより</span></div>
+
+  <div class="section-div" style="margin-top:48px"><span id="illus-label">イラスト</span></div>
   <div class="illus-scroll-wrap">
     <div class="illus-scroll" id="illus-scroll"></div>
   </div>
+
+  <div class="section-div" style="margin-top:48px"><span id="prints-label">プリント</span></div>
+  <div class="illus-scroll-wrap">
+    <div class="illus-scroll" id="prints-scroll"></div>
+  </div>
+
   <div class="footer"><span>Karasuki</span> &nbsp;·&nbsp; Nothing is truly gone. Only forgotten.</div>
 </div>
 
@@ -450,26 +456,30 @@ Uhibon doesn't remember who or what he is. He only knows that the memory of him 
 ];
 
 const ILLUSTRATIONS = [
-  {num:'001', file:'001.JPG', titleEN:'The Karasuki Tree',    titleJP:'カラスキーの木'},
-  {num:'002', file:'002.JPG', titleEN:'Jamariko and a Booha', titleJP:'ジャマリコとブーハー'}
+  {num:'001',file:'001.JPG',titleEN:'The Karasuki Tree',   titleJP:'カラスキーの木'},
+  {num:'002',file:'002.JPG',titleEN:'Jamariko and a Booha',titleJP:'ジャマリコとブーハー'}
   // Add illustrations here
 ];
 
 const PRINTS = [
-  {num:'001', file:'001.JPG', titleEN:'The Karasuki Tree',         titleJP:'カラスキーの木'},
-  {num:'002', file:'002.JPG', titleEN:'Jamariko and a Booha',      titleJP:'ジャマリコとブーハー'},
-  {num:'003', file:'003.JPG', titleEN:'Two Poopika',               titleJP:'プピカが二匹'},
-  {num:'004', file:'004.JPG', titleEN:'Jacki and October',         titleJP:'ジャッキーとオクトーバー'},
-  {num:'005', file:'005.JPG', titleEN:'Takachika Sees a Gorogui',  titleJP:'タカチカ、ゴログイを見る'},
-  {num:'006', file:'006.JPG', titleEN:'Mister Happy Saves Jinguru',titleJP:'ミスター・ハッピー、ジングルを救う'},
-  {num:'007', file:'007.JPG', titleEN:'Snack Time',                titleJP:'おやつの時間'},
-  {num:'008', file:'008.JPG', titleEN:'Be Careful What You Hope For',titleJP:'望むものには気をつけろ'}
+  {num:'001',file:'001.JPG',titleEN:'The Karasuki Tree',          titleJP:'カラスキーの木'},
+  {num:'002',file:'002.JPG',titleEN:'Jamariko and a Booha',       titleJP:'ジャマリコとブーハー'},
+  {num:'003',file:'003.JPG',titleEN:'Two Poopika',                titleJP:'プピカが二匹'},
+  {num:'004',file:'004.JPG',titleEN:'Jacki and October',          titleJP:'ジャッキーとオクトーバー'},
+  {num:'005',file:'005.JPG',titleEN:'Takachika Sees a Gorogui',   titleJP:'タカチカ、ゴログイを見る'},
+  {num:'006',file:'006.JPG',titleEN:'Mister Happy Saves Jinguru', titleJP:'ミスター・ハッピー、ジングルを救う'},
+  {num:'007',file:'007.JPG',titleEN:'Snack Time',                 titleJP:'おやつの時間'},
+  {num:'008',file:'008.JPG',titleEN:'Be Careful What You Hope For',titleJP:'望むものには気をつけろ'}
   // Add prints here
-];  
+];
 
 let currentLang='jp',currentChar=null,currentStage=0,autoTimer=null;
+// track which folder the open lightbox image came from
+let currentLbFolder='illustrations';
+
 function isJP(){return currentLang==='jp';}
 
+// ── CHARACTERS ──
 function buildGrid(){
   const grid=document.getElementById('char-grid');
   grid.innerHTML='';
@@ -486,6 +496,7 @@ function buildGrid(){
   });
 }
 
+// ── ILLUSTRATIONS ──
 function buildIllus(){
   const scroll=document.getElementById('illus-scroll');
   scroll.innerHTML='';
@@ -497,21 +508,41 @@ function buildIllus(){
         <div class="illus-num">${ill.num}</div>
         <div class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</div>
       </div>`;
-    card.addEventListener('click',()=>openIllus(i));
+    card.addEventListener('click',()=>openIllus(i,'illustrations',ILLUSTRATIONS));
     scroll.appendChild(card);
   });
-  document.getElementById('illus-label').textContent=isJP()?'カラスキーより':'From Karasuki';
+  document.getElementById('illus-label').textContent=isJP()?'イラスト':'Illustrations';
 }
 
+// ── PRINTS ──
+function buildPrints(){
+  const scroll=document.getElementById('prints-scroll');
+  scroll.innerHTML='';
+  PRINTS.forEach((ill,i)=>{
+    const card=document.createElement('div');
+    card.className='illus-card';
+    card.innerHTML=`<img class="illus-img" src="assets/zukan/prints/${ill.file}" alt="${isJP()?ill.titleJP:ill.titleEN}" loading="lazy"/>
+      <div class="illus-caption">
+        <div class="illus-num">${ill.num}</div>
+        <div class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</div>
+      </div>`;
+    card.addEventListener('click',()=>openIllus(i,'prints',PRINTS));
+    scroll.appendChild(card);
+  });
+  document.getElementById('prints-label').textContent=isJP()?'プリント':'Prints';
+}
+
+// ── LIGHTBOX (shared) ──
 const illusLightbox=document.getElementById('illus-lightbox');
 const illusLbImg=document.getElementById('illus-lb-img');
 const illusLbNum=document.getElementById('illus-lb-num');
 const illusLbTitle=document.getElementById('illus-lb-title');
 const illusLbHint=document.getElementById('illus-lb-hint');
 
-function openIllus(idx){
-  const ill=ILLUSTRATIONS[idx];
-  illusLbImg.src=`assets/zukan/illustrations/${ill.file}`;
+function openIllus(idx,folder,arr){
+  const ill=arr[idx];
+  currentLbFolder=folder;
+  illusLbImg.src=`assets/zukan/${folder}/${ill.file}`;
   illusLbImg.alt=isJP()?ill.titleJP:ill.titleEN;
   illusLbNum.textContent=ill.num;
   illusLbTitle.textContent=isJP()?ill.titleJP:ill.titleEN;
@@ -524,6 +555,7 @@ document.getElementById('illus-lb-backdrop').addEventListener('click',closeIllus
 document.getElementById('illus-lb-backdrop').addEventListener('touchend',function(e){e.preventDefault();closeIllus();},{passive:false});
 document.getElementById('illus-lb-close').addEventListener('click',closeIllus);
 
+// ── CHARACTER MODAL ──
 const modal=document.getElementById('char-modal');
 const vSketch=document.getElementById('viewer-sketch');
 const vProcreate=document.getElementById('viewer-procreate');
@@ -589,6 +621,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
+// ── LANG ──
 function setLang(lang){
   currentLang=lang;
   const jp=lang==='jp';
@@ -600,7 +633,9 @@ function setLang(lang){
     ?'カラスキーで出会ったものたちの記録。<br>見たものは、あなたを見ている。'
     :'A record of what was found in Karasuki.<br>What you see — sees you.';
   document.getElementById('section-label').textContent=jp?'登場人物':'Characters';
-  buildGrid();buildIllus();
+  buildGrid();
+  buildIllus();
+  buildPrints();
   if(modal.classList.contains('open')&&currentChar!==null){
     const c=CHARACTERS[currentChar];
     modalName.textContent=jp?c.nameJP:c.nameEN;
