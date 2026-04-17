@@ -89,13 +89,13 @@
     }
 
     /* ── GRID ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      width: 100%;
-      max-width: 900px;
-    }
+   .grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 24px;
+   width: 100%;
+   max-width: 900px;
+ }
 
     /* ── TILE ── */
     .tile {
@@ -115,6 +115,21 @@
       text-decoration: none;
     }
 
+.grid-bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 24px;
+}
+
+.grid-bottom .tile {
+  width: calc((900px - 48px) / 3);
+  max-width: calc((100vw - 48px - 32px) / 3);
+  aspect-ratio: 1 / 1;
+}
+
+    
     .tile:nth-child(1) { animation-delay: 0.5s; }
     .tile:nth-child(2) { animation-delay: 0.65s; }
     .tile:nth-child(3) { animation-delay: 0.8s; }
@@ -211,9 +226,12 @@
     <a class="tile" href="curricula.html">
       <img src="assets/img/curricula.png" alt="Curricula" />
     </a>
+   </div>
+  <div class="grid-bottom">
     <a class="tile" href="bryan.html">
       <img src="assets/img/bryan-tile.png" alt="Bryan Harper" />
     </a>
+  </div>
   </div>
 </div>
 
