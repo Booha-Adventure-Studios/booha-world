@@ -1,0 +1,588 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="description" content="Bryan Harper — native English teacher from Columbus, Ohio. US Air Force veteran, school founder, app developer, maker, and novelist based in Tomisato, Chiba, Japan.">
+<meta name="author" content="Bryan Harper">
+<title>Bryan Harper — Teacher, Maker, Developer</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Bryan Harper",
+  "url": "https://booha-adventure-studios.github.io/booha-world/bryan.html",
+  "image": "https://booha-adventure-studios.github.io/booha-world/assets/img/bryan.png",
+  "jobTitle": "English Teacher, Developer, Maker",
+  "nationality": "American",
+  "birthPlace": {
+    "@type": "Place",
+    "name": "Columbus, Ohio, USA"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "富里市",
+    "addressRegion": "千葉県",
+    "addressCountry": "JP"
+  },
+  "worksFor": {
+    "@type": "EducationalOrganization",
+    "name": "Bryan's English School",
+    "alternateName": "ブライアン英会話教室",
+    "url": "https://www.bryanharper.tokyo"
+  },
+  "description": "Bryan Harper is a native English teacher from Columbus, Ohio. US Air Force veteran stationed at Yokota Air Base. Founder of Bryan's English School in Tomisato, Chiba. Developer of the Booha Adventure English learning platform. Maker, illustrator, and novelist.",
+  "knowsLanguage": ["en", "ja"],
+  "sameAs": [
+    "https://www.bryanharper.tokyo",
+    "https://www.instagram.com/bryans.english.school/",
+    "https://www.facebook.com/Bryansenglishschool/",
+    "https://booha-adventure-studios.github.io/booha-world/"
+  ],
+  "alumniOf": {
+    "@type": "Organization",
+    "name": "United States Air Force"
+  },
+  "hasOccupation": [
+    {
+      "@type": "Occupation",
+      "name": "English Teacher",
+      "occupationLocation": {
+        "@type": "Country",
+        "name": "Japan"
+      }
+    },
+    {
+      "@type": "Occupation",
+      "name": "Software Developer"
+    },
+    {
+      "@type": "Occupation",
+      "name": "Author"
+    }
+  ]
+}
+</script>
+<link rel="icon" type="image/png" href="assets/img/bryan.png">
+<link href="https://fonts.googleapis.com/css2?family=Notable&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #1c1a17;
+    --bg2: #232018;
+    --surface: #2a2720;
+    --moss: #7a9e6e;
+    --moss-dim: #4e6645;
+    --gold: #c8a84b;
+    --text: #e8e0d0;
+    --text-dim: #a09880;
+    --text-muted: #6a6255;
+    --border: #3a3528;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(28,26,23,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .site-header a {
+    font-family: 'Notable', sans-serif;
+    font-size: 1rem;
+    color: var(--moss);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .site-header a:hover { color: var(--text); }
+
+  .header-links {
+    display: flex;
+    gap: 2rem;
+  }
+  .header-links a {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    letter-spacing: 0.03em;
+  }
+  .header-links a:hover { color: var(--moss); }
+
+  /* ── HERO ── */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem 4rem;
+    gap: 5rem;
+  }
+
+  .hero-text { }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name {
+    font-family: 'Notable', sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    padding: 0.3rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface);
+  }
+
+  .tag.green {
+    border-color: var(--moss-dim);
+    color: var(--moss);
+    background: rgba(122,158,110,0.08);
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--moss);
+    color: #1c1a17;
+  }
+  .btn-primary:hover { background: #8fb880; }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: transparent;
+  }
+  .btn-secondary:hover { border-color: var(--moss-dim); color: var(--moss); }
+
+  /* ── PHOTO ── */
+  .hero-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .photo-frame {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+  }
+
+  .photo-frame::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 1px solid var(--moss-dim);
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+
+  .photo-frame::after {
+    content: '';
+    position: absolute;
+    inset: -24px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    opacity: 0.3;
+  }
+
+  .photo-frame img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    filter: sepia(0.15) contrast(1.05);
+  }
+
+  .photo-caption {
+    position: absolute;
+    bottom: -2.5rem;
+    right: 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+
+  /* ── BIO ── */
+  .bio {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .bio p {
+    font-family: 'Spectral', serif;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    color: var(--text);
+    margin-bottom: 1.75rem;
+  }
+
+  .bio p:first-of-type::first-letter {
+    font-size: 3.5rem;
+    font-family: 'Notable', sans-serif;
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.1em;
+    margin-top: 0.1em;
+    color: var(--moss);
+  }
+
+  .bio-closing {
+    margin-top: 3rem;
+    padding: 2rem;
+    border-left: 2px solid var(--moss-dim);
+    background: var(--surface);
+  }
+
+  .bio-closing p {
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .bio-closing p::first-letter { all: unset; }
+
+  /* ── WORK GRID ── */
+  .work {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem 5rem;
+  }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  .work-card {
+    background: var(--bg2);
+    padding: 2.5rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: block;
+  }
+
+  .work-card:hover { background: var(--surface); }
+
+  .work-card-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1rem;
+  }
+
+  .work-card-title {
+    font-family: 'Notable', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .work-card-desc {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .work-card-arrow {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--moss-dim);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .work-card:hover .work-card-arrow {
+    color: var(--moss);
+    transform: translateX(4px);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 2;
+  }
+
+  footer a {
+    color: var(--moss-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--moss); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 3rem 1.5rem 3rem;
+      min-height: auto;
+    }
+
+    .hero-photo { order: -1; }
+
+    .photo-frame {
+      width: 260px;
+    }
+
+    .work-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .site-header { padding: 1rem 1.5rem; }
+    .header-links { gap: 1rem; }
+    .bio { padding: 3rem 1.5rem; }
+    .work { padding: 3rem 1.5rem; }
+  }
+
+  /* ── FADE IN ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-text > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-eyebrow { animation-delay: 0.1s; }
+  .hero-name { animation-delay: 0.2s; }
+  .hero-title { animation-delay: 0.3s; }
+  .hero-tags { animation-delay: 0.4s; }
+  .hero-links { animation-delay: 0.5s; }
+  .hero-photo { animation: fadeUp 0.8s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="./index.html">Booha World</a>
+  <nav class="header-links">
+    <a href="https://www.bryanharper.tokyo">School</a>
+    <a href="./workshop.html">Workshop</a>
+    <a href="./zukan.html">Zukan</a>
+    <a href="./adventure.html">Adventure</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Columbus, Ohio → Yokota → Tomisato, Chiba</p>
+      <h1 class="hero-name">Bryan Harper</h1>
+      <p class="hero-title">Teacher. Developer. Maker. Novelist.</p>
+      <div class="hero-tags">
+        <span class="tag green">Native English Teacher</span>
+        <span class="tag green">15+ Years in Japan</span>
+        <span class="tag">US Air Force Veteran</span>
+        <span class="tag">School Founder</span>
+        <span class="tag">App Developer</span>
+        <span class="tag">Woodworker</span>
+        <span class="tag">Illustrator</span>
+      </div>
+      <div class="hero-links">
+        <a href="https://www.bryanharper.tokyo" class="btn btn-primary">Visit the School</a>
+        <a href="./workshop.html" class="btn btn-secondary">See the Work</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-frame">
+        <img src="assets/img/bryan.png" alt="Bryan Harper — English teacher and maker based in Tomisato, Chiba, Japan" width="380" height="380"/>
+      </div>
+      <span class="photo-caption">Tomisato, Chiba, Japan</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="bio">
+    <div class="section-label">About</div>
+
+    <p>Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United States Air Force, stationed at Yokota Air Base, where he met his wife and later came back and put down roots.</p>
+
+    <p>When his Air Force days ended, instead of continuing to drive a rescue truck, he threw himself into teaching — workshops, elementary ALT work, international schools, private lessons — trying every setting he could find to understand why so many students study English for years and still can't hold a conversation. That question became an obsession, and eventually a school.</p>
+
+    <p>Bryan's English School opened in Tomisato, Chiba with one principle: talk. No textbooks. Small groups. Real conversation from the first lesson. When that wasn't enough, he built the Booha Adventure — a complete English learning platform coded from scratch, with original game worlds, illustrated characters, and weekly rotating content. Over 15,000 lines of vanilla JavaScript. Over 1,000 hours. Built alone.</p>
+
+    <p>Teaching is one of many things Bryan makes. He builds furniture, runs workshops, illustrates characters, and designs card games. The through-line is the same everywhere: make the thing you want to exist. Connect it to people who want to make things too.</p>
+
+    <div class="bio-closing">
+      <p>Karasuki is where forgotten things go. It's the world he built for his students, his characters, and the novel he's writing. Make of that what you will.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="work">
+    <div class="section-label">What Bryan Makes</div>
+    <div class="work-grid">
+      <a href="https://www.bryanharper.tokyo" class="work-card">
+        <p class="work-card-label">Since 2018</p>
+        <h2 class="work-card-title">Bryan's English School</h2>
+        <p class="work-card-desc">Conversation-first English lessons in Tomisato, Chiba. Small groups, no textbooks, native teacher. 15+ years experience.</p>
+        <span class="work-card-arrow">Visit →</span>
+      </a>
+      <a href="./adventure.html" class="work-card">
+        <p class="work-card-label">Built from Scratch</p>
+        <h2 class="work-card-title">Booha Adventure</h2>
+        <p class="work-card-desc">A private PWA English learning platform. 15,000+ lines of vanilla JS. Original worlds, 9 mini-games, three curriculum tracks.</p>
+        <span class="work-card-arrow">Explore →</span>
+      </a>
+      <a href="./zukan.html" class="work-card">
+        <p class="work-card-label">Field Guide + Novel</p>
+        <h2 class="work-card-title">Karasuki</h2>
+        <p class="work-card-desc">A world where forgotten things go. Eight original illustrated characters. Bilingual. The basis of Bryan's novel in progress.</p>
+        <span class="work-card-arrow">Enter →</span>
+      </a>
+      <a href="./workshop.html" class="work-card">
+        <p class="work-card-label">15 Projects</p>
+        <h2 class="work-card-title">Bryan's Workshop</h2>
+        <p class="work-card-desc">Woodworking, crafts, handmade objects. A portfolio of things built because they needed to exist.</p>
+        <span class="work-card-arrow">View →</span>
+      </a>
+      <a href="./cards.html" class="work-card">
+        <p class="work-card-label">Original Design</p>
+        <h2 class="work-card-title">Booha Cards</h2>
+        <p class="work-card-desc">Illustrated English learning card decks designed for classroom use. Made for teachers, built by one.</p>
+        <span class="work-card-arrow">See the decks →</span>
+      </a>
+      <a href="./curricula.html" class="work-card">
+        <p class="work-card-label">Three Tracks</p>
+        <h2 class="work-card-title">Curriculum</h2>
+        <p class="work-card-desc">Pre-Boo, Boo-riculum, Boo-Continuum. Beginner to advanced. Built around speaking, not studying.</p>
+        <span class="work-card-arrow">Learn more →</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>
+    <a href="https://www.bryanharper.tokyo">ブライアン英会話教室 / Bryan's English School</a><br>
+    〒286-0212 千葉県富里市七栄35-21 &nbsp;|&nbsp; 
+    <a href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a><br>
+    <a href="https://www.instagram.com/bryans.english.school/">Instagram</a> &nbsp;·&nbsp;
+    <a href="https://www.facebook.com/Bryansenglishschool/">Facebook</a> &nbsp;·&nbsp;
+    <a href="./index.html">Booha World</a>
+  </p>
+</footer>
+
+</body>
+</html>
