@@ -130,8 +130,7 @@
 }
 
 .grid-bottom .tile {
-  width: calc((900px - 48px) / 3);
-  max-width: calc((100vw - 48px - 32px) / 3);
+  width: calc((100% - 48px) / 3);
   aspect-ratio: 1 / 1;
   animation-delay: 1.4s;
 }
@@ -157,6 +156,11 @@
       filter: brightness(0.88);
     }
 
+.grid-bottom .tile img {
+  object-fit: contain;
+  object-position: center;
+}
+    
     /* Subtle inner glow on each tile */
     .tile::after {
       content: '';
