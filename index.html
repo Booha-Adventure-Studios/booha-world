@@ -119,20 +119,19 @@
       text-decoration: none;
     }
 
-.grid-bottom {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 900px;
-  margin-top: 24px;
-  position: relative;
-  z-index: 1;
+.bryan-tile {
+  grid-column: 2;
 }
 
-.grid-bottom .tile {
-  width: calc((100% - 48px) / 3);
-  aspect-ratio: 1 / 1;
-  animation-delay: 1.4s;
+.bryan-tile img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+@media (max-width: 640px) {
+  .bryan-tile {
+    grid-column: auto;
+  }
 }
     
     .tile:nth-child(1) { animation-delay: 0.5s; }
@@ -156,10 +155,6 @@
       filter: brightness(0.88);
     }
 
-.grid-bottom .tile img {
-  object-fit: contain;
-  object-position: center;
-}
     
     /* Subtle inner glow on each tile */
     .tile::after {
@@ -217,7 +212,7 @@
 <div class="page">
   <h1 class="title">The Booha World</h1>
 
-  <div class="grid">
+   <div class="grid">
     <a class="tile" href="adventure.html">
       <img src="assets/img/adventure.png" alt="Booha Adventure" />
     </a>
@@ -236,13 +231,10 @@
     <a class="tile" href="curricula.html">
       <img src="assets/img/curricula.png" alt="Curricula" />
     </a>
-   </div>
-  <div class="grid-bottom">
-    <a class="tile" href="bryan.html">
+    <a class="tile bryan-tile" href="bryan.html">
       <img src="assets/img/bryan-sketch.png" alt="Bryan Harper" />
     </a>
- </div>
-</div>
+  </div>
 
 <audio id="bg-audio" src="assets/audio/booha-world-index.mp3" preload="auto"></audio>
 
