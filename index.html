@@ -197,17 +197,15 @@
   .title {
     margin-bottom: 40px;
   }
-  .notes-tile {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: 50%;
-  }
-  .bryan-tile {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: 50%;
+}
+@media (max-width: 360px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 }
+
+    
 @media (max-width: 360px) {
   .grid {
     grid-template-columns: 1fr 1fr;
@@ -243,7 +241,7 @@
     <a class="tile" href="curricula.html">
       <img src="assets/img/curricula.png" alt="Curricula" />
     </a>
-     <a class="tile notes-tile" href="notes.html">
+     <a class="tile" href="notes.html">
       <img src="assets/img/notes.png" alt="Notes" />
     </a>
     <a class="tile bryan-tile" href="bryan.html">
