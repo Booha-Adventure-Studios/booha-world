@@ -187,7 +187,7 @@
       box-shadow: inset 0 0 40px rgba(255, 210, 80, 0.14);
     }
 
-   /* ── MOBILE ── */
+  /* ── MOBILE ── */
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -196,6 +196,11 @@
   }
   .title {
     margin-bottom: 40px;
+  }
+  .notes-tile {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 50%;
   }
   .bryan-tile {
     grid-column: 1 / -1;
@@ -238,7 +243,7 @@
     <a class="tile" href="curricula.html">
       <img src="assets/img/curricula.png" alt="Curricula" />
     </a>
-     <a class="tile" href="notes.html">
+     <a class="tile notes-tile" href="notes.html">
       <img src="assets/img/notes.png" alt="Notes" />
     </a>
     <a class="tile bryan-tile" href="bryan.html">
