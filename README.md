@@ -1,5 +1,4 @@
 # Booha World
-
 A hand-built creative and educational universe by Bryan Harper — native English teacher, 
 maker, and developer based in Tomisato, Chiba, Japan.
 
@@ -9,7 +8,6 @@ School: [bryanharper.tokyo](https://www.bryanharper.tokyo)
 ---
 
 ## What This Is
-
 Booha World is the public-facing hub for Bryan's English School and its connected creative 
 projects. Built entirely in vanilla HTML, CSS, and JavaScript — no frameworks, no libraries, 
 no build tools. Every line written by hand.
@@ -25,21 +23,21 @@ no build tools. Every line written by hand.
 | `school.html` | Lesson pricing and learning system |
 | `curricula.html` | Three curriculum tracks with interactive design |
 | `cards.html` | Booha Cards product page |
-| `workshop.html` | 15-project maker portfolio with lightbox gallery |
+| `workshop.html` | project maker portfolio with lightbox gallery |
 | `zukan.html` | Karasuki field guide — 8 original illustrated characters |
 | `bryan.html` | About Bryan Harper |
+| `notes.html` | Notes by Bryan Harper — teaching thoughts, language observations, and ideas. Posts loaded dynamically from modular JS files. |
 
 ---
 
 ## The Booha Adventure
-
 The Booha Adventure is a private PWA-based English learning platform built exclusively 
 for Bryan's English School students. It is not open source, but it is referenced here 
 as the core product this site supports.
 
 **Technical highlights:**
 - ~50,000+ lines of vanilla JavaScript
-- Built solo over 1,000+ hours
+- Built solo
 - No framework, no backend, no external APIs
 - Hosted on GitHub Pages
 - PWA with service worker, offline support, and installable on iOS/Android/desktop
@@ -53,8 +51,16 @@ as the core product this site supports.
 
 ---
 
-## Karasuki
+## Notes
+A minimal blog engine built in vanilla JS. Posts are modular — each entry is a separate 
+JS file imported into notes.html. No CMS, no database, no dependencies. Add a new post 
+by dropping a file into `/posts/` and importing it.
 
+Current posts: arriving-at-zero, dead-words, so-so-culture.
+
+---
+
+## Karasuki
 Karasuki is where forgotten things go.
 
 A fictional world that lives across three formats:
@@ -68,14 +74,12 @@ Kara Ageha, Uhibon
 ---
 
 ## Bryan's Workshop
-
-A portfolio of 15 handmade projects — woodworking, crafts, and original making work. 
+A portfolio of handmade projects — woodworking, crafts, and original making work. 
 Bilingual English and Japanese. Featured on Facebook, Hometalk, and LIMIA.
 
 ---
 
 ## Design System
-
 - **Fonts:** Notable (titles), Spectral (serif body), DM Sans (UI), Noto Sans JP / Noto Serif JP
 - **Colors:** Warm dark charcoal backgrounds, moss green Karasuki accent
 - **Approach:** Mobile-first, touch-optimized, no dependencies
@@ -83,21 +87,21 @@ Bilingual English and Japanese. Featured on Facebook, Hometalk, and LIMIA.
 ---
 
 ## About Bryan Harper
-
 Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United 
 States Air Force, stationed at Yokota Air Base. After leaving the Air Force he threw 
 himself into teaching — ALT work, international schools, private lessons — before 
 opening Bryan's English School in Tomisato, Chiba in 2018.
 
-He has 15+ years of English teaching experience in Japan and builds everything himself: 
-the school, the app, the cards, the characters, the furniture, and the world.
+He has 15+ years of English teaching experience in Japan and teaches all ages — children 
+to adults — with small groups, no textbooks, and conversation from the first lesson. 
+He builds everything himself: the school, the app, the cards, the characters, the 
+furniture, and the world.
 
 → [Full profile](https://booha-adventure-studios.github.io/booha-world/bryan.html)
 
 ---
 
 ## Contact
-
 - Site: [bryanharper.tokyo](https://www.bryanharper.tokyo)
 - Email: bryans.english@gmail.com
 - Instagram: [@bryans.english.school](https://www.instagram.com/bryans.english.school/)
