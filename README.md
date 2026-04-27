@@ -24,7 +24,7 @@ no build tools. Every line written by hand.
 | `curricula.html` | Three curriculum tracks with interactive design |
 | `cards.html` | Booha Cards product page |
 | `workshop.html` | project maker portfolio with lightbox gallery |
-| `zukan.html` | Karasuki field guide — 8 original illustrated characters |
+| `zukan.html` | Karasuki field guide — original illustrated characters |
 | `bryan.html` | About Bryan Harper |
 | `notes.html` | Notes by Bryan Harper — teaching thoughts, language observations, and ideas. Posts loaded dynamically from modular JS files. |
 
