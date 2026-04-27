@@ -16,9 +16,9 @@ This is where honne and tatemae become a classroom problem. Japanese social life
 
 Some kids find a way around it. I think the school environment helps. Maybe English itself helps, a language with no inherited social script attached to it here. Whatever the reason, some students drop the performance and just talk. Those are the best lessons.
 
-The ones who watch English content do this more naturally. The ones whose parents are not monitoring what they watch in English say genuinely surprising things. Six and seven year olds quoting things I was not expecting. No full opinions or jokes yet, but the input is clearly landing. I think those will follow.
+The ones who watch English content do this more naturally. The ones whose parents are not monitoring what they watch in English say genuinely surprising things. I hear 6-7 evryday.... no full opinions or jokes yet, but the input is clearly landing. I hope those will follow.
 
-Kids have real experiences. Real frustrations, real friendships, real social lives that are occasionally brutal in the way school social lives are. ESL as it exists gives them almost no tools to express any of that. So when they land on "fuck you," I get it. At least that one arrived with some feeling attached.
+Kids have real experiences, frustrations, friendships, and social lives that are occasionally brutal in the way school social lives are. ESL as it exists gives them almost no tools to express any of that. So when they land on "fuck you," I get it. At least that one arrived with some feeling attached.
 
 "I don't like Haruka. Fuck you."
 
