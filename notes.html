@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Notes by Bryan Harper. Teaching thoughts, language observations, and ideas from Tomisato, Chiba.">
+  <meta name="description" content="Output — teaching thoughts, language observations, and ideas by Bryan Harper. Native English teacher in Tomisato, Chiba, Japan.">
   <meta name="author" content="Bryan Harper">
-  <title>Notes | Booha World</title>
+  <title>Output | Booha World</title>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "Notes — Bryan Harper",
+  "name": "Output — Bryan Harper",
   "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
   "description": "Teaching thoughts, language observations, and ideas by Bryan Harper — native English teacher based in Tomisato, Chiba, Japan.",
   "inLanguage": "en",
@@ -29,49 +29,51 @@
       "@type": "BlogPosting",
       "headline": "Arriving at Zero",
       "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
-      "author": {
-        "@type": "Person",
-        "name": "Bryan Harper"
-      }
+      "author": { "@type": "Person", "name": "Bryan Harper" }
     },
     {
       "@type": "BlogPosting",
       "headline": "Dead Words",
       "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
-      "author": {
-        "@type": "Person",
-        "name": "Bryan Harper"
-      }
+      "author": { "@type": "Person", "name": "Bryan Harper" }
     },
     {
       "@type": "BlogPosting",
       "headline": "So-So Culture",
       "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
-      "author": {
-        "@type": "Person",
-        "name": "Bryan Harper"
-      }
+      "author": { "@type": "Person", "name": "Bryan Harper" }
     },
     {
       "@type": "BlogPosting",
       "headline": "Leech Sites",
       "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
-      "author": {
-        "@type": "Person",
-        "name": "Bryan Harper"
-      }
-     },
+      "author": { "@type": "Person", "name": "Bryan Harper" }
+    },
     {
       "@type": "BlogPosting",
       "headline": "Karasuki",
       "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
-      "author": {
-        "@type": "Person",
-        "name": "Bryan Harper"
-      }
+      "author": { "@type": "Person", "name": "Bryan Harper" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Baby Soldier Flies",
+      "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
+      "author": { "@type": "Person", "name": "Bryan Harper" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Why Are You Tired?",
+      "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
+      "author": { "@type": "Person", "name": "Bryan Harper" }
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "The Middle Finger is Here",
+      "url": "https://booha-adventure-studios.github.io/booha-world/notes.html",
+      "author": { "@type": "Person", "name": "Bryan Harper" }
     }
-  ]
-
+  ],
   "isPartOf": {
     "@type": "WebSite",
     "name": "Booha World",
@@ -80,8 +82,6 @@
   "mainEntityOfPage": "https://booha-adventure-studios.github.io/booha-world/notes.html"
 }
 </script>
-
-  
 
   <link href="https://fonts.googleapis.com/css2?family=Notable&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
 
@@ -95,13 +95,10 @@
     :root {
       --bg: #1a1614;
       --surface: #211d1a;
-      --surface-hover: #272220;
       --text: #f0e8d8;
       --text-muted: #9a8f82;
       --text-dim: #5a5148;
       --accent: #ffe066;
-      --accent-dim: rgba(255, 224, 102, 0.08);
-      --accent-glow: rgba(255, 224, 102, 0.15);
       --border: rgba(255, 255, 255, 0.05);
       --border-hover: rgba(255, 224, 102, 0.2);
     }
@@ -114,7 +111,6 @@
       color: var(--text);
     }
 
-    /* ── ORB CANVAS ── */
     #orb-canvas {
       position: fixed;
       inset: 0;
@@ -124,7 +120,6 @@
       z-index: 0;
     }
 
-    /* ── LAYOUT ── */
     .page {
       position: relative;
       z-index: 1;
@@ -137,32 +132,29 @@
     /* ── HEADER ── */
     .header {
       display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 64px;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding-bottom: 2rem;
+      margin-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       opacity: 0;
       transform: translateY(-12px);
       animation: fadeDown 1s ease forwards 0.3s;
     }
 
-    .header-icon {
-      font-size: 2rem;
-      line-height: 1;
-      filter: drop-shadow(0 0 12px rgba(255, 224, 102, 0.4));
-    }
-
     .header-text {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 6px;
     }
 
     .header-title {
       font-family: 'Notable', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-size: clamp(2rem, 5vw, 3rem);
       color: #f5ecd7;
-      letter-spacing: 0.06em;
-      text-shadow: 0 0 30px rgba(255, 220, 100, 0.2);
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 40px rgba(255, 220, 100, 0.2);
     }
 
     .header-sub {
@@ -173,24 +165,32 @@
       letter-spacing: 0.03em;
     }
 
-    .back-link {
-      margin-left: auto;
-      font-family: 'Crimson Pro', serif;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-      text-decoration: none;
-      letter-spacing: 0.08em;
+    .back-btn {
+      margin-top: 6px;
+      flex-shrink: 0;
+      font-family: 'Notable', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      transition: color 0.2s;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 9px 18px;
+      transition: color 0.25s, border-color 0.25s, box-shadow 0.25s;
     }
 
-    .back-link:hover { color: var(--accent); }
+    .back-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(255, 224, 102, 0.15);
+    }
 
     @keyframes fadeDown {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── POST CARDS ── */
+    /* ── POSTS ── */
     .posts {
       display: flex;
       flex-direction: column;
@@ -217,7 +217,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── POST HEADER (clickable) ── */
     .post-header {
       display: flex;
       align-items: center;
@@ -275,7 +274,6 @@
       box-shadow: 0 0 12px rgba(255, 224, 102, 0.2);
     }
 
-    /* ── POST BODY ── */
     .post-body {
       max-height: 0;
       overflow: hidden;
@@ -304,14 +302,12 @@
       margin-top: 1.6rem;
     }
 
-    /* ── DIVIDER ── */
     .post-divider {
       height: 1px;
       background: linear-gradient(to right, transparent, var(--border), transparent);
       margin: 2px 0;
     }
 
-    /* ── EMPTY STATE ── */
     .empty {
       font-family: 'Crimson Pro', serif;
       font-style: italic;
@@ -321,12 +317,11 @@
       font-size: 1.1rem;
     }
 
-    /* ── MOBILE ── */
     @media (max-width: 600px) {
       .page { padding: 40px 16px 80px; }
       .post-header { padding: 22px 20px; }
       .post-body-inner { padding: 0 20px 28px; }
-      .back-link { display: none; }
+      .back-btn { font-size: 0.62rem; padding: 7px 13px; }
     }
   </style>
 </head>
@@ -337,12 +332,11 @@
 <div class="page">
 
   <header class="header">
-    
     <div class="header-text">
-      <div class="header-title">Notes</div>
+      <div class="header-title">Output</div>
       <div class="header-sub">Bryan Harper &nbsp;&bull;&nbsp; Tomisato, Chiba</div>
     </div>
-    <a class="back-link" href="index.html">Booha World</a>
+    <a class="back-btn" href="index.html">Booha World</a>
   </header>
 
   <div class="posts" id="posts-container">
@@ -353,7 +347,6 @@
 
 <script type="module">
 
-  // ── POSTS: add new entries here ──
   import post1 from './posts/arriving-at-zero.js';
   import post2 from './posts/dead-words.js';
   import post3 from './posts/so-so-culture.js';
@@ -362,10 +355,9 @@
   import post6 from './posts/baby-soldier-flies.js';
   import post7 from './posts/why-are-you-tired.js';
   import post8 from './posts/the-middle-finger-is-here.js';
-  
+
   const POSTS = [post1, post2, post3, post4, post5, post6, post7, post8];
 
-  // ── RENDER ──
   function getPreview(content) {
     const first = content.trim().split('\n')[0];
     return first.length > 100 ? first.slice(0, 100) + '...' : first;
@@ -407,7 +399,6 @@
 
       card.querySelector('.post-header').addEventListener('click', () => {
         const isOpen = card.classList.contains('open');
-        // close all others
         document.querySelectorAll('.post-card.open').forEach(c => c.classList.remove('open'));
         if (!isOpen) card.classList.add('open');
       });
@@ -424,7 +415,6 @@
   }
 
   renderPosts();
-
 
   // ── ORBS ──
   const canvas = document.getElementById('orb-canvas');
