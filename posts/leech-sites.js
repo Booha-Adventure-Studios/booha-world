@@ -4,7 +4,7 @@ export default {
   slug: "leech-sites",
   content: `I learned something the hard way about "Top English School" websites.
 
-Last year, five different companies contacted me, all saying the same kind of thing: you have been selected, top school in Chiba, best new style, strong trial program, things that honestly matched what I do. There was a sixth, but nobody in the company could speak English, and this was a large site recommending English schools, so I declined that one.
+Last year, five different companies contacted me, all saying the same kind of thing: you have been selected, top school in Chiba, best new style, strong trial program, things that honestly matched what I do. There was a sixth, but nobody in the company could speak English, and this was a large site recommending English schools. How could they possibly recommned a school? I declined that one.
 
 The other five sent the same request, and they wanted me to put their "Top Schools" page at the top of my homepage, right at the top. I did not think much of it at the time, it felt like recognition, no money involved, and I felt noticed. I even tried reaching out to the other schools on each list and made friends with one.
 
