@@ -6,7 +6,7 @@ export default {
 
 So, my school has a process. Before any student starts, I meet with the student first. For kids, the parent and the kid first. I explain how the school works, they explain what they're looking for, and we figure out together if it's a good fit. After that meeting, I decide whether to offer a trial period: eight lessons at half price. That time is for evaluation. I'm watching how the student engages, how the family communicates, whether the structure is going to work. It's a great system. It's how I protect the quality of what I'm doing.
 
-A family contacted me recently. Two siblings, elementary school age. The mom wanted them in the same class. Yeah, I don't usually teach siblings together, but I told her I'd see how it went during the trial. The meeting got rescheduled last minute. Fine. Nice family. We moved forward.
+A family contacted me recently. Two siblings, elementary school age. The mom wanted them in the same class. I don't usually teach siblings together, but I told her we can talk about it a the meeting. The meeting got rescheduled last minute. Fine. Nice family. We moved forward.
 
 Then the pattern started.
 
