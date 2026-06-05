@@ -33,7 +33,7 @@
     "Weekly rotating vocabulary, sentences, and speaking questions",
     "Mini-games built around weekly English content",
     "Hands-free listen-and-repeat audio stream",
-    "Speech recognition with iOS fallback",
+    "Tap-based listening games (no microphone needed)",
     "Offline support via service worker",
     "PIN-based student login",
     "No ads, no AI, no external APIs",
@@ -157,19 +157,7 @@ body::before {
 .back  .dot { background: var(--yellow); }
 .world .dot { background: var(--moss); }
 
-.lang-pill {
-  display: flex; background: var(--bg);
-  border: 1px solid var(--border2); border-radius: 999px; padding: 3px; gap: 2px;
-  flex-shrink: 0;
-}
-.langBtn {
-  padding: 7px 18px; border-radius: 999px; border: none;
-  background: transparent; color: var(--muted);
-  font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: all .18s ease; letter-spacing: .3px;
-}
-.langBtn.active { background: var(--card); color: var(--ivory); box-shadow: 0 2px 8px rgba(0,0,0,.3); }
-
+  
 /* ── HERO ── */
 .hero {
   text-align: center;
@@ -363,13 +351,17 @@ body::before {
   justify-content: center;
   margin: 20px 0 28px;
 }
+  
 .lang-pill {
   display: flex;
   background: var(--surface);
   border: 1px solid var(--border2);
   border-radius: 999px;
   padding: 3px;
+  gap: 2px;
+  flex-shrink: 0;
 }
+  
 .langBtn {
   padding: 7px 24px;
   border-radius: 999px;
@@ -503,7 +495,7 @@ body::before {
           <tr><td>1 PIN</td><td class="price">¥500</td></tr>
           <tr><td>10 PINs</td><td class="price">¥5,000</td></tr>
           <tr><td>20 PINs</td><td class="price">¥9,000</td></tr>
-          <tr><td>50 PINs</td><td class="price">¥50,000</td></tr>
+          <tr><td>50 PINs</td><td class="price">¥20,000</td></tr>
         </table>
       </div></div></div>
     </div>
@@ -623,7 +615,7 @@ body::before {
           <tr><td>1 PIN</td><td class="price">¥500</td></tr>
           <tr><td>10 PIN</td><td class="price">¥5,000</td></tr>
           <tr><td>20 PIN</td><td class="price">¥9,000</td></tr>
-          <tr><td>50 PIN</td><td class="price">¥50,000</td></tr>
+          <tr><td>50 PIN</td><td class="price">¥20,000</td></tr>
         </table>
       </div></div></div>
     </div>
