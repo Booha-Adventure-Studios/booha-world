@@ -26,7 +26,7 @@ no build tools. Every line written by hand.
 | `workshop.html` | project maker portfolio with lightbox gallery |
 | `zukan.html` | Karasuki field guide — original illustrated characters |
 | `bryan.html` | About Bryan Harper |
-| `notes.html` | Notes by Bryan Harper — teaching thoughts, language observations, and ideas. Posts loaded dynamically from modular JS files. |
+| `notes.html` | Archived writing section. Preserved in the repository but no longer linked from the public Booha World navigation. |
 
 ---
 
@@ -51,10 +51,10 @@ as the core product this site supports.
 
 ---
 
-## Notes
-A minimal blog engine built in vanilla JS. Posts are modular — each entry is a separate 
-JS file imported into notes.html. No CMS, no database, no dependencies. Add a new post 
-by dropping a file into `/posts/` and importing it.
+## Archived Notes
+The former Notes/Output section has been retired from the public Booha World navigation.
+Its page and modular post files remain in the repository as an archive, and the page is
+marked not to be indexed by search engines.
 
 Current posts: arriving-at-zero, dead-words, so-so-culture.
 
