@@ -19,8 +19,8 @@ no build tools. Every line written by hand.
 | Page | Description |
 |------|-------------|
 | `index.html` | Landing page with animated floating orbs and audio |
-| `adventure.html` | Booha Adventure app — pricing and curriculum overview |
-| `school.html` | Lesson pricing and learning system |
+| `adventure.html` | Booha Adventure app — curricula, Output preparation, English Juku, and PIN pricing |
+| `school.html` | Output and English Juku class formats, lesson pricing, and learning system |
 | `curricula.html` | Three curriculum tracks with interactive design |
 | `cards.html` | Booha Cards product page |
 | `workshop.html` | project maker portfolio with lightbox gallery |
@@ -45,6 +45,8 @@ as the core product this site supports.
 - Custom save system with weekly reset (Monday midnight Tokyo time)
 - Speech recognition engine with iOS fallback path
 - 9 mini-games across 3 curriculum tracks (Pre-Boo, Boo-riculum, Boo-Continuum)
+- The same weekly content supports two class formats: flipped Output lessons and English Juku
+- English Juku uses a gated 90-minute group test with timed phases, no retries, and results shown at the end
 - 30-room canvas navigation engine (1536×1024 world canvas) in two worlds and growing
 - Bilingual EN/JP throughout
 - Licensed to other schools
@@ -93,9 +95,11 @@ himself into teaching — ALT work, international schools, private lessons — b
 opening Bryan's English School in Tomisato, Chiba in 2018.
 
 He has 15+ years of English teaching experience in Japan and teaches all ages — children 
-to adults — with small groups, no textbooks, and conversation from the first lesson. 
-He builds everything himself: the school, the app, the cards, the characters, the 
-furniture, and the world.
+to adults. The school now offers two formats connected by the same weekly Booha Adventure
+content: a flipped Output Class built around home preparation and conversation, and a
+90-minute English Juku class built around a paced weekly check with no homework. He builds
+everything himself: the school, the app, the cards, the characters, the furniture, and
+the world.
 
 → [Full profile](https://booha-adventure-studios.github.io/booha-world/bryan.html)
 

@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="Booha Adventure — a custom-built English learning PWA created by Bryan Harper for Bryan's English School in Tomisato, Chiba. Mini-games, original worlds, and weekly content for all levels.">
+<meta name="description" content="Booha Adventure — the weekly English learning world behind Bryan's English School's flipped Output Class and 90-minute English Juku class in Tomisato, Chiba.">
 <meta name="author" content="Bryan Harper">
 <title>Booha Adventure — ブーハー・アドベンチャー </title>
   
@@ -26,11 +26,13 @@
     "nationality": "American",
     "knowsLanguage": ["en", "ja"]
   },
-  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Features original game worlds, mini-games across three curriculum tracks, and weekly rotating content. Exclusive to Bryan's English School students in Tomisato, Chiba, Japan. Available for licensing by other schools.",
+  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Its weekly content supports two class formats: a flipped Output Class and a locked, paced 90-minute English Juku weekly check.",
   "inLanguage": ["en", "ja"],
   "featureList": [
     "Three curriculum tracks: Pre-Boo, Boo-riculum, Boo-Continuum",
     "Weekly rotating vocabulary, sentences, and speaking questions",
+    "Two class formats: Output Class and English Juku",
+    "Timed English Juku checks with results shown at the end",
     "Mini-games built around weekly English content",
     "Hands-free listen-and-repeat audio stream",
     "Tap-based listening games (no microphone needed)",
@@ -455,7 +457,7 @@ body::before {
         <br><br>
         Play a game and travel to the Karasuki tree. Remember—most trees are doorways to something.
         <br><br>
-        You'll find your Adventure Profile page in Karasuki. Only you can see it. No one else—not even me—can see your progress or scores. You're in charge of your motivation and your output.
+        You'll find your regular Adventure Profile page in Karasuki. Its local progress stays on your device. English Juku is separate: its weekly check shows section scores and weak points only after the 90-minute session ends.
 
         <br><br><span class="lead">Curriculum guide</span>
         <br><br>
@@ -467,7 +469,7 @@ body::before {
         </table>
 
         <br>
-        I built this app for my output-based school. Output is the language you produce—not what you read aloud or memorize, but what you actually use to communicate. Most students use Boo-riculum. All curricula overlap, so they can be combined. They loop and build practical conversational English without locking you into a fixed level. Your level is based on how much you use the language.
+        I first built this app for my output-based school. It now connects two classes that use the same weekly English in opposite ways. The Output Class previews at home and uses the content in conversation. English Juku puts the week under a clock: a locked 90-minute check with no retries or instant feedback. Most students use Boo-riculum. All curricula overlap, so they can be combined without locking students into a fixed level.
         <br><br>
         Each curriculum shows three weeks of study decks at a time: this week, last week, and next week. Each week includes 15 vocabulary words, 15 sentences, and 15 questions, all with full audio and Japanese translations, plus a hands-free stream for listening and repeating.
         <br><br>
@@ -503,14 +505,15 @@ body::before {
     <div class="item">
       <button class="acc-btn" type="button" aria-expanded="false">
         <div class="acc-label">
-          <div class="acc-num">03 — Homework</div>
-          <div class="acc-title">Homework and Preparation</div>
-          <div class="acc-sub">Prepare at home so class time is speaking time.</div>
+          <div class="acc-num">03 — Classes</div>
+          <div class="acc-title">Output Preparation and English Juku</div>
+          <div class="acc-sub">The same weekly content, used in opposite ways.</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
-        We do not write during lessons. Writing happens at home so class time can be used for speaking and real communication. Every student keeps a diary. Each week, write the weekly vocabulary in <strong>English and Japanese</strong> and bring it to class.
+        <span class="lead">Output Class — prepare at home, speak in class</span>
+        Output students preview the week's 15 vocabulary words, sentences, and questions at home. They do not need to memorize them; they need to arrive familiar with them. Bring a device and English notebook. Write at least the weekly vocabulary in <strong>English and Japanese</strong>. A diary is strongly encouraged.
         <br><br>
         <div class="level-block"><div class="level-title">Preschool — under 5 minutes</div><ul><li>Practice writing their name</li><li>Trace the alphabet</li><li>Listen to the question audio</li></ul></div>
         <div class="level-block"><div class="level-title">Grades 1–3 — 5 to 10 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Listen to the Study Deck audio</li><li>Review the sentence cards</li><li>Practice answering 1 to 2 speaking questions out loud</li></ul></div>
@@ -518,6 +521,8 @@ body::before {
         <div class="level-block"><div class="level-title">Junior High — 10 to 15 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocabulary, sentences, questions)</li><li>Say the weekly answers out loud</li><li>Keep a weekly English diary (4 to 5 sentences)</li></ul></div>
         <div class="level-block"><div class="level-title">High School — 12 to 20 minutes</div><ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions</li><li>Say answers out loud. Fluency over perfection.</li><li>Keep an English diary (5 to 8 sentences, including opinions)</li><li>Use the Game Deck when possible</li></ul></div>
         <div class="level-block"><div class="level-title">Adults</div><ul><li>Come prepared. The goal is to move away from scripts and into real communication.</li><li>Common habits that slow progress: speaking English with Japanese logic, wanting perfect lines instead of real conversations, filling every answer with vague words like enjoy, famous, so-so, or busy, and having little curiosity about English-speaking culture.</li><li>Adults improve fastest when they talk about what they actually think, not just where they went and what they ate.</li></ul></div>
+        <br><span class="lead">English Juku — a 90-minute weekly check</span>
+        English Juku has no homework. Bring a device, notebook, and pencil. Pre-Boo begins at 17:00 and Boo-riculum at 19:00, Tokyo time. The app controls the pace from the scheduled start: dictation, reading aloud, sentence order, vocabulary and meaning, and mixed reading, translation, and writing checks. There are no retries or instant right-or-wrong messages. Scores, weak points, and the student's own before-and-after predictions appear together at the end.
       </div></div></div>
     </div>
 
@@ -575,7 +580,7 @@ body::before {
         <br><br>
         ゲームを1つやって、カラスキの木まで進んでみてください。覚えておいてください——多くの木は、どこかにつながる扉です。
         <br><br>
-        カラスキの中には「Adventure Profile」があります。これは自分にしか見えません。他の誰にも——私にも——進捗やスコアは見えません。やるかどうかは自分次第。
+        カラスキの中には通常の「Adventure Profile」があり、その進捗は端末内に保存されます。英語塾クラスは別の仕組みで、90分間のチェックが終わったあとに、セクションごとのスコアと弱点をまとめて表示します。
 
         <br><br><span class="lead">カリキュラムガイド</span>
         <br><br>
@@ -587,7 +592,7 @@ body::before {
         </table>
 
         <br>
-        このアプリは、私のアウトプット中心の英語教室のために作りました。アウトプットとは、読むことや暗記ではなく、「実際に使う英語」です。多くの生徒はBoo-riculumを使っています。カリキュラム同士は重なっているので、組み合わせて使えます。同じ英語を形を変えて繰り返す仕組みで、気づいたら話せるようになっています。レベルで区切りません。どれだけ使ったかが、そのまま力になります。
+        このアプリは、もともとアウトプット中心の英語教室のために作りました。今は、同じ週の英語を正反対の方法で使う2つのクラスをつないでいます。アウトプットクラスは家で内容を見て、教室で会話に使います。英語塾クラスは、その週の内容を90分間、時間とルールのあるテストで確かめます。多くの生徒はBoo-riculumを使っています。カリキュラム同士は重なっているので、固定レベルに縛られず組み合わせて使えます。
         <br><br>
         各カリキュラムでは、「今週・先週・来週」の3週間分のスタディデッキを見ることができます。毎週、単語15個・文15個・質問15個。すべて音声と日本語付きです。ハンズフリーで聞いてリピートするストリームもあります。
         <br><br>
@@ -623,14 +628,15 @@ body::before {
     <div class="item">
       <button class="acc-btn" type="button" aria-expanded="false">
         <div class="acc-label">
-          <div class="acc-num">03 — 宿題</div>
-          <div class="acc-title">宿題と準備</div>
-          <div class="acc-sub">家で準備して、授業は話す時間にする。</div>
+          <div class="acc-num">03 — クラス</div>
+          <div class="acc-title">アウトプットの準備と英語塾</div>
+          <div class="acc-sub">同じ週の内容を、正反対の方法で使います。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
-        授業中に書く時間はとりません。書くのは家でやってきてください。授業はスピーキングとコミュニケーションの時間にします。全員、ダイアリーを続けてください。その週の単語を<strong>英語と日本語</strong>で書いて、学校に持ってきてください。
+        <span class="lead">アウトプットクラス — 家で準備して、教室で話す</span>
+        その週の15個の単語・文・質問を家で確認します。暗記する必要はありません。「見たことがある」「聞いたことがある」状態で来ることが準備です。デバイスと英語ノートを持参し、最低でも週の単語を<strong>英語と日本語</strong>で書いてください。英語日記も強くおすすめします。
         <br><br>
         <div class="level-block"><div class="level-title">未就学（幼児）— 5分以内</div><ul><li>名前を書く練習をする</li><li>アルファベットをなぞる</li><li>質問の音声を聞く</li></ul></div>
         <div class="level-block"><div class="level-title">小1〜小3 — 5〜10分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキの音声を聞く</li><li>文カードを見直す</li><li>質問を1〜2個、声に出して答える練習をする</li></ul></div>
@@ -638,6 +644,8 @@ body::before {
         <div class="level-block"><div class="level-title">中学生 — 10〜15分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキ（単語・文・質問）を復習する</li><li>週の答えを声に出す</li><li>英語日記を書く（週に4〜5文）</li></ul></div>
         <div class="level-block"><div class="level-title">高校生 — 12〜20分</div><ul><li>週の単語を書く（英語と日本語）</li><li>文と質問を復習する</li><li>答えを声に出す。完璧じゃなくていい、流暢さを意識して。</li><li>英語日記を書く（週に5〜8文。自分の意見も入れてみて）</li><li>できればゲームデッキも使う</li></ul></div>
         <div class="level-block"><div class="level-title">大人</div><ul><li>準備して来てください。台本を読むのではなく、本当に話す練習をしましょう。</li><li>伸びにくい人によくあるパターン：日本語の発想のまま英語を話す。完璧な言い方を探しすぎる。「楽しかった」「有名な」「まあまあ」「忙しい」ばかりで答える。英語圏の文化にあまり興味がない。</li><li>「どこへ行った・何を食べた」より「何を感じた・どう思った」を話せるようになると、ぐっと伸びます。</li></ul></div>
+        <br><span class="lead">英語塾クラス — 90分間の週ごとのチェック</span>
+        宿題はありません。デバイス、ノート、鉛筆を持参してください。東京時間17:00はPre-Boo、19:00はBoo-riculumです。開始時刻からアプリが全員のペースを管理し、ディクテーション、音読、文の並べ替え、単語と意味、読解・翻訳・ライティングを組み合わせて確認します。再挑戦や途中の正誤表示はありません。最後にスコア、弱点、テスト前後の自己予想をまとめて表示します。
       </div></div></div>
     </div>
 

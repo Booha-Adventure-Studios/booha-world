@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="Bryan's English School — lesson prices and learning system. Small group English conversation lessons in Tomisato, Chiba. Native English teacher with 15+ years experience in Japan.">
+<meta name="description" content="Bryan's English School in Tomisato, Chiba offers two Booha Adventure class formats: a flipped Output Class and a 90-minute weekly English Juku check.">
 <meta name="author" content="Bryan Harper">
 <title>Lesson Prices &amp; Learning System — Bryan's English School | ブライアン英会話教室</title>
   
@@ -15,7 +15,7 @@
   "name": "Bryan's English School",
   "alternateName": "ブライアン英会話教室",
   "url": "https://www.bryanharper.tokyo",
-  "description": "Conversation-first English school in Tomisato, Chiba. All ages welcome — children to adults. Small group lessons, no textbooks, native American teacher with 15+ years experience. Exclusive student learning app: Booha Adventure.",
+  "description": "English school in Tomisato, Chiba with two Booha Adventure class formats: a flipped, conversation-first Output Class and a 90-minute English Juku class built around a timed weekly check.",
   "founder": {
     "@type": "Person",
     "name": "Bryan Harper",
@@ -66,7 +66,7 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "Kindergarten English Lesson",
+          "name": "Kindergarten Output Class",
           "description": "Small group English conversation for kindergarten students age 5–6. Max 2 students. 25 minutes. No textbooks — conversation first."
         }
       },
@@ -74,7 +74,7 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "Elementary & Junior High English Lesson",
+          "name": "Elementary & Junior High Output Class",
           "description": "Small group English conversation for elementary and junior high students. Max 4 students. 50 minutes. No textbooks — conversation first."
         }
       },
@@ -82,8 +82,18 @@
         "@type": "Offer",
         "itemOffered": {
           "@type": "Course",
-          "name": "High School & Adult English Lesson",
+          "name": "High School & Adult Output Class",
           "description": "Small group English conversation for high school students and adults. Max 3 students. 50 minutes. No textbooks — conversation first."
+        }
+      },
+      {
+        "@type": "Offer",
+        "price": "13000",
+        "priceCurrency": "JPY",
+        "itemOffered": {
+          "@type": "Course",
+          "name": "English Juku — Booha Juku",
+          "description": "A locked 90-minute weekly class using the same Booha Adventure content in a timed, paced test format. No homework. Pre-Boo meets at 17:00 and Boo-riculum meets at 19:00, Tokyo time."
         }
       },
       {
@@ -96,8 +106,8 @@
       },
       {
         "@type": "Offer",
-        "name": "Trial Period — 初回体験",
-        "description": "First 8 lessons at half price. Experience the Booha Adventure app and conversation-first method before committing. Unused lessons refunded.",
+        "name": "Output Class Trial Period — アウトプットクラス初回体験",
+        "description": "The first 8 Output Class lessons are offered as a two-month trial. Experience the Booha Adventure app and conversation-first method before committing. Unused lessons are refunded.",
         "eligibleQuantity": {
           "@type": "QuantitativeValue",
           "value": 8
@@ -484,6 +494,14 @@ body::before {
 }
 .panel-body p { margin-bottom: 10px; }
 .panel-body p:last-child { margin-bottom: 0; }
+.panel-body h3 {
+  margin: 18px 0 8px;
+  color: var(--ivory);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+.jp .panel-body h3 { font-family: 'Noto Sans JP', sans-serif; }
 .panel-body strong { color: var(--ivory); font-weight: 600; }
 .panel-body em { color: var(--muted); font-style: italic; }
 
@@ -629,7 +647,7 @@ body::before {
   </div>
 
   <div class="intro-card fade-up">
-    <p id="intro-text">ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。</p>
+    <p id="intro-text">ブライアン英会話教室には、同じBooha Adventureの週ごとの内容を使う2つのクラスがあります。家で準備して教室で話すアウトプットクラスと、90分間のテストでその週の理解度を確かめる英語塾クラスです。</p>
   </div>
 
   <!-- PRICING -->
@@ -641,31 +659,35 @@ body::before {
         <div class="acc-stripe"></div>
         <div class="acc-label">
           <div class="acc-tag" data-en="01 — Pricing" data-jp="01 — 料金">01 — 料金</div>
-          <div class="acc-title" data-en="Group Lesson Prices" data-jp="グループレッスン料金">グループレッスン料金</div>
-          <div class="acc-sub" data-en="Small classes, real output, separated by age." data-jp="少人数・アウトプット重視・年齢別クラス">少人数・アウトプット重視・年齢別クラス</div>
+          <div class="acc-title" data-en="Output and Juku Class Prices" data-jp="アウトプット・英語塾クラス料金">アウトプット・英語塾クラス料金</div>
+          <div class="acc-sub" data-en="Two class formats connected by the same weekly Booha content." data-jp="同じ週のBoohaコンテンツを使う、2つの学び方。">同じ週のBoohaコンテンツを使う、2つの学び方。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
         <div class="lang-jp">
-          <p>グループレッスンではBooha Adventureを使用します。ただ聞くだけでなく、話す・質問する・反応することを中心に進めます。年齢ごとにクラスを分け、少人数で行います。</p>
+          <p><strong>アウトプットクラス</strong>は反転型レッスンです。自宅でその週の単語・文・質問を確認し、教室では話す・質問する・反応することを中心に進めます。暗記ではなく、授業前に英語を「見たことがある」状態にすることが準備です。</p>
+          <p><strong>英語塾クラス（Booha Juku）</strong>は、同じ週の内容を使う90分間のテストクラスです。全員が同じペースで進み、途中の正誤表示や再挑戦はありません。結果と弱点は最後にまとめて確認します。宿題はありません。</p>
           <p><strong>体験を始める前に、全員面談への参加が必要です。</strong></p>
           <ul class="price-list">
-            <li><span class="pl-label">幼稚園（5〜6歳）/ 25分・最大2名</span><span class="pl-price">月 ¥4,000</span></li>
-            <li><span class="pl-label">小学生〜中学生 / 50分・最大4名</span><span class="pl-price">月 ¥7,500</span></li>
-            <li><span class="pl-label">高校生〜大人 / 50分・最大3名</span><span class="pl-price">月 ¥7,500</span></li>
-            <li><span class="pl-label">追加プラン：週2回（月8レッスン）</span><span class="pl-price">月 ¥15,000</span></li>
+            <li><span class="pl-label">アウトプット：幼稚園（5〜6歳）/ 25分・最大2名</span><span class="pl-price">月 ¥4,000</span></li>
+            <li><span class="pl-label">アウトプット：小学生〜中学生 / 50分・最大4名</span><span class="pl-price">月 ¥7,500</span></li>
+            <li><span class="pl-label">アウトプット：高校生〜大人 / 50分・最大3名</span><span class="pl-price">月 ¥7,500</span></li>
+            <li><span class="pl-label">アウトプット追加プラン：週2回（月8レッスン）</span><span class="pl-price">月 ¥15,000</span></li>
+            <li><span class="pl-label">英語塾クラス / 90分・週1回（17:00 Pre-Boo / 19:00 Boo-riculum）</span><span class="pl-price">月 ¥13,000</span></li>
           </ul>
           <div class="callout">Booha Adventureは月謝に含まれています。退会後も利用を続ける場合は、月額PINが必要です。他のスクール向けのライセンス提供も行っています。</div>
         </div>
         <div class="lang-en" style="display:none">
-          <p>Group lessons use the Booha Adventure app. Students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.</p>
+          <p><strong>The Output Class</strong> is flipped. Students preview the week's vocabulary, sentences, and questions at home, then use class time to speak, ask, answer, and react. Preparation means making the English familiar, not memorizing it.</p>
+          <p><strong>English Juku (Booha Juku)</strong> uses the same weekly content in a 90-minute test class. Everyone moves together, with no retries or instant right-or-wrong feedback. Results and weak points appear together at the end. There is no homework.</p>
           <p><strong>All students must attend a meeting before starting a trial period.</strong></p>
           <ul class="price-list">
-            <li><span class="pl-label">Kindergarten (age 5–6) / 25 min, max 2 students</span><span class="pl-price">¥4,000 / month</span></li>
-            <li><span class="pl-label">Elementary – Junior High / 50 min, max 4 students</span><span class="pl-price">¥7,500 / month</span></li>
-            <li><span class="pl-label">High School – Adults / 50 min, max 3 students</span><span class="pl-price">¥7,500 / month</span></li>
-            <li><span class="pl-label">Extra Plan: Group twice per week (8 lessons)</span><span class="pl-price">¥15,000 / month</span></li>
+            <li><span class="pl-label">Output: Kindergarten (age 5–6) / 25 min, max 2 students</span><span class="pl-price">¥4,000 / month</span></li>
+            <li><span class="pl-label">Output: Elementary – Junior High / 50 min, max 4 students</span><span class="pl-price">¥7,500 / month</span></li>
+            <li><span class="pl-label">Output: High School – Adults / 50 min, max 3 students</span><span class="pl-price">¥7,500 / month</span></li>
+            <li><span class="pl-label">Output Extra Plan: twice per week (8 lessons)</span><span class="pl-price">¥15,000 / month</span></li>
+            <li><span class="pl-label">English Juku / 90 min, once per week (17:00 Pre-Boo / 19:00 Boo-riculum)</span><span class="pl-price">¥13,000 / month</span></li>
           </ul>
           <div class="callout">The Booha Adventure is included in monthly tuition. If a student leaves, continued access requires a monthly PIN. Licensing is also available for other schools.</div>
         </div>
@@ -747,23 +769,27 @@ body::before {
         <div class="acc-stripe"></div>
         <div class="acc-label">
           <div class="acc-tag" data-en="04 — System" data-jp="04 — 仕組み">04 — 仕組み</div>
-          <div class="acc-title" data-en="How Lessons Work" data-jp="レッスンの仕組み">レッスンの仕組み</div>
-          <div class="acc-sub" data-en="Prepare at home. Speak in class." data-jp="家で準備して、教室で話す。">家で準備して、教室で話す。</div>
+          <div class="acc-title" data-en="How the Two Classes Work" data-jp="2つのクラスの仕組み">2つのクラスの仕組み</div>
+          <div class="acc-sub" data-en="Prepare and speak, or test the week in class." data-jp="家で準備して話す。教室で90分間確かめる。">家で準備して話す。教室で90分間確かめる。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
         <div class="lang-jp">
-          <p>ブライアン英会話教室は反転型レッスンです。生徒は自宅でBooha Adventureを開き、その週の単語・文・質問を確認してから来ます。</p>
-          <p>レッスンでは、その週の内容を使ってアウトプットを行います。質問に答える、自分のことを話す、やり取りする、文を作るといった活動を中心に進めます。</p>
-          <p><strong>毎回デバイス（スマホ・タブレット）が必要です。</strong></p>
-          <p>すべての生徒は英語ノートを使います。最低でも週ごとの単語を英語と日本語で書き、教室に持ってきてください。</p>
+          <h3>アウトプットクラス</h3>
+          <p>自宅でBooha Adventureを開き、その週の15個の単語・文・質問を確認してから来ます。暗記する必要はありません。教室では、自分のことを話す、質問に答える、反応する、文を作るといったアウトプットを中心に進めます。</p>
+          <p>毎回デバイス（スマホ・タブレット）と英語ノートが必要です。最低でも週ごとの単語を英語と日本語で書き、教室に持ってきてください。英語日記も強くおすすめします。</p>
+          <h3>英語塾クラス</h3>
+          <p>教室に来たらすぐにテストを始め、90分間、その週の内容に取り組みます。ディクテーション、音読、文の並べ替え、単語と意味、読解・翻訳・ライティングを組み合わせ、結果は最後にまとめて表示します。</p>
+          <p>ノート、鉛筆、デバイスを持参してください。宿題はありません。</p>
         </div>
         <div class="lang-en" style="display:none">
-          <p>Bryan's English School uses a flipped system. Students open the Booha Adventure at home and review that week's vocabulary, sentences, and questions before class.</p>
-          <p>In lessons, we use the weekly content to focus on output: talking about themselves, asking and answering, reacting, and building sentences.</p>
-          <p><strong>A device (phone or tablet) is required every lesson.</strong></p>
-          <p>All students keep a personal English notebook. Write at least the weekly vocabulary in English and Japanese and bring it to class.</p>
+          <h3>Output Class</h3>
+          <p>Students open Booha Adventure at home and review the week's 15 vocabulary words, sentences, and questions. They do not need to memorize them; the goal is familiarity. Class time centers on spontaneous output, questions, reactions, flashcards, and building real answers.</p>
+          <p>Bring a device (phone or tablet) and an English notebook every week. Write at least the weekly vocabulary in English and Japanese. A short English diary is strongly encouraged.</p>
+          <h3>English Juku</h3>
+          <p>Testing starts as soon as class begins and continues for the full 90 minutes. Dictation, reading aloud, sentence order, vocabulary and meaning, and mixed reading, translation, and writing checks all use the same weekly content. Results appear together at the end.</p>
+          <p>Bring a notebook, pencil, and device. There is no homework.</p>
         </div>
       </div></div></div>
     </div>
@@ -807,19 +833,19 @@ body::before {
         <div class="acc-stripe"></div>
         <div class="acc-label">
           <div class="acc-tag" data-en="06 — Trial" data-jp="06 — 体験">06 — 体験</div>
-          <div class="acc-title" data-en="First 8 Lessons and Refunds" data-jp="最初の8回レッスンと返金について">最初の8回レッスンと返金について</div>
-          <div class="acc-sub" data-en="A real trial period with flexible scheduling." data-jp="本当の体験期間。日程は柔軟に対応します。">本当の体験期間。日程は柔軟に対応します。</div>
+          <div class="acc-title" data-en="Output Class: First 8 Lessons and Refunds" data-jp="アウトプットクラス：最初の8回と返金">アウトプットクラス：最初の8回と返金</div>
+          <div class="acc-sub" data-en="A two-month Output Class trial with flexible scheduling." data-jp="アウトプットクラスを2ヶ月かけて体験できます。">アウトプットクラスを2ヶ月かけて体験できます。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="acc-panel"><div class="acc-panel-inner"><div class="panel-body">
         <div class="lang-jp">
-          <p>1回の体験だけでは、その教室が合っているかどうかは分かりません。そのため、<strong>最初の8回は4,000円（2ヶ月分）</strong>でご案内しています。</p>
+          <p>1回の体験だけでは、アウトプットクラスが合っているかどうかは分かりません。そのため、<strong>最初の8回は4,000円（2ヶ月分）</strong>でご案内しています。</p>
           <p>この期間中に合わないと感じた場合は、<strong>未消化分のレッスン料金を返金します。</strong></p>
           <div class="callout">体験期間中も、参加・準備・家庭での学習が求められます。<strong>準備して、話す姿勢で来てください。</strong></div>
         </div>
         <div class="lang-en" style="display:none">
-          <p>One free lesson is not enough to understand if a school is the right fit. For this reason, the <strong>first 8 lessons are offered at ¥4,000 for two months.</strong></p>
+          <p>One free lesson is not enough to understand whether the Output Class is the right fit. For this reason, the <strong>first 8 Output Class lessons are offered at ¥4,000 for two months.</strong></p>
           <p>If during this time you feel it is not the right fit, <strong>I refund the remaining unused lessons.</strong></p>
           <div class="callout">Students are still expected to participate, prepare, and study at home during the trial. <strong>Come prepared and be ready to speak.</strong></div>
         </div>
@@ -886,8 +912,8 @@ body::before {
     titleJP: '学習システムとレッスン料金',
     subEN:   "Bryan's English School · Booha Adventure",
     subJP:   'ブライアン英会話教室（Booha Adventure）',
-    introEN: "Bryan's English School uses the Booha Adventure app in a flipped, output-focused system. This page gives you a clear view of lesson prices, how the system works, and what to expect.",
-    introJP: 'ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。',
+    introEN: "Bryan's English School has two class formats built from the same weekly Booha Adventure content: a flipped Output Class that prepares at home and speaks in class, and a 90-minute English Juku class that tests the week's understanding.",
+    introJP: 'ブライアン英会話教室には、同じBooha Adventureの週ごとの内容を使う2つのクラスがあります。家で準備して教室で話すアウトプットクラスと、90分間のテストでその週の理解度を確かめる英語塾クラスです。',
     div1EN: 'Pricing', div1JP: '料金',
     div2EN: 'How It Works', div2JP: '仕組み',
     div3EN: 'Testing', div3JP: 'テスト',
