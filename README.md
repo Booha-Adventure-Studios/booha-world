@@ -30,25 +30,28 @@ no build tools. Every line written by hand.
 
 ---
 
-## The Booha Adventure
-The Booha Adventure is a private PWA-based English learning platform built exclusively 
+## Booha Adventure
+Booha Adventure is a private PWA-based English learning platform built exclusively 
 for Bryan's English School students. It is not open source, but it is referenced here 
 as the core product this site supports.
 
 **Technical highlights:**
 - ~50,000+ lines of vanilla JavaScript
 - Built solo
-- No framework, no backend, no external APIs
+- No frontend framework; a small private sync layer supports PIN login and cross-device profiles
 - Hosted on GitHub Pages
 - PWA with service worker, offline support, and installable on iOS/Android/desktop
 - PIN-based auth system connected to Wix CMS via URL hash tokens
-- Custom save system with weekly reset (Monday midnight Tokyo time)
+- Cross-device profiles for name, curriculum, weekly progress, completed games, unlocked characters, daily-check scores, and English Juku results
+- Daily checks of about 5 weekly questions; designed to take 1–2 minutes and save only the score
+- Custom weekly content system with a Monday midnight reset (Tokyo time)
 - Speech recognition engine with iOS fallback path
 - 9 mini-games across 3 curriculum tracks (Pre-Boo, Boo-riculum, Boo-Continuum)
 - The same weekly content supports two class formats: flipped Output lessons and English Juku
 - English Juku uses a gated 90-minute group test with timed phases, no retries, and results shown at the end
 - 30-room canvas navigation engine (1536×1024 world canvas) in two worlds and growing
 - Bilingual EN/JP throughout
+- No ads, recommendation feed, generative AI, or advertising profiles
 - Licensed to other schools
 
 ---

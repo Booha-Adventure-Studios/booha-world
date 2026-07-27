@@ -26,7 +26,7 @@
     "nationality": "American",
     "knowsLanguage": ["en", "ja"]
   },
-  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Its weekly content supports two class formats: a flipped Output Class and a locked, paced 90-minute English Juku weekly check.",
+  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Weekly content, short daily checks, and cross-device student profiles support a flipped Output Class and a locked, paced 90-minute English Juku weekly check.",
   "inLanguage": ["en", "ja"],
   "featureList": [
     "Three curriculum tracks: Pre-Boo, Boo-riculum, Boo-Continuum",
@@ -38,7 +38,9 @@
     "Tap-based listening games (no microphone needed)",
     "Offline support via service worker",
     "PIN-based student login",
-    "No ads, no AI, no external APIs",
+    "Cross-device student profiles and learning progress",
+    "Short daily checks that save the score only",
+    "No ads, recommendation feed, generative AI, or advertising profiles",
     "Bilingual English and Japanese throughout",
     "Installable on iOS, Android, and desktop"
   ],
@@ -440,24 +442,24 @@ body::before {
       <button class="acc-btn" type="button" aria-expanded="false">
         <div class="acc-label">
           <div class="acc-num">01 — Welcome</div>
-          <div class="acc-title">The Booha Adventure</div>
+          <div class="acc-title">Booha Adventure</div>
           <div class="acc-sub">A world. English is the entry room.</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
 
-        <span class="lead">This is The Booha Adventure, and it connects to the world of my novel Karasuki.</span>
+        <span class="lead">This is Booha Adventure, and it connects to the world of my novel Karasuki.</span>
 
         Once you enter, you can review, listen, and practice all the weekly content without going any further. There are three curricula to choose from.
         <br><br>
-        This app isn't connected to AI or any external API. Everything is local. Everything you read, see, and hear lives inside the app. From the study deck page, you can even chat with Uhibon. He knows everything about the app—and nothing about anything else. LOL.
+        Booha Adventure has no ads, suggested videos, recommendation feed, or generative AI. It is designed for learning, not for monetizing attention or building advertising profiles. From the Study Deck, you can even chat with Uhibon. He knows everything about the app—and nothing about anything else. LOL.
         <br><br>
         I designed this app to be explored and to get lost in. The further you go, the more you find. Click the maze and you'll see the Booha Ghost flying around. One of them will meet you at the start and guide you to this week's games. Each curriculum has its own set of 9 games and its own theme. The more you play, the more unlocks in Karasuki. That's all I'm going to say.
         <br><br>
         Play a game and travel to the Karasuki tree. Remember—most trees are doorways to something.
         <br><br>
-        You'll find your regular Adventure Profile page in Karasuki. Its local progress stays on your device. English Juku is separate: its weekly check shows section scores and weak points only after the 90-minute session ends.
+        You'll find your Adventure Profile in Karasuki. Log in on another device and the profile comes with you: name, curriculum, weekly progress, completed games, unlocked characters, daily-check scores, and English Juku results. A PIN can be active on only one device at a time.
 
         <br><br><span class="lead">Curriculum guide</span>
         <br><br>
@@ -473,10 +475,12 @@ body::before {
         <br><br>
         Each curriculum shows three weeks of study decks at a time: this week, last week, and next week. Each week includes 15 vocabulary words, 15 sentences, and 15 questions, all with full audio and Japanese translations, plus a hands-free stream for listening and repeating.
         <br><br>
-        Nothing is recorded outside your device. Your data belongs to you.
+        The daily check draws about five questions from the week's words, sentences, and questions. It takes 1–2 minutes, saves only the score, and is a small lesson every student should complete each day—not homework to submit.
+        <br><br>
+        The app records only the learning information needed to continue the experience. There is no teacher dashboard for following student activity. If a student needs help, they show me the app on their device. Student information is never sold, used for advertising, or used to push content.
 
         <div class="note moss"><strong>Your Booha login:</strong><br>
-        Your PIN works on one device at a time. If someone logs in with your name and PIN while you're already logged in, your session ends automatically. Keep your PIN private. If you're logged out, just log in again and continue.</div>
+        Your PIN works on one device at a time. If you log in on a different device, the earlier session ends and your profile continues on the new device. Keep your PIN private.</div>
 
       </div></div></div>
     </div>
@@ -491,7 +495,7 @@ body::before {
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
-        The Booha Adventure was built for my school and is included with lessons. Other schools are welcome to use it. I offer a two-week free trial.
+        Booha Adventure was built for my school and is included with lessons. Other schools are welcome to use it. PIN licensing helps support the cost of maintaining and improving the app without advertising or selling student information. I offer a two-week free trial.
         <table class="pin-table">
           <tr><th>PINs</th><th class="price">Price</th></tr>
           <tr><td>1 PIN</td><td class="price">¥500</td></tr>
@@ -570,17 +574,17 @@ body::before {
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
 
-        <span class="lead">ここは「The Booha Adventure」です。私の小説『カラスキー』の世界ともつながっています。</span>
+        <span class="lead">ここは「Booha Adventure」です。私の小説『カラスキー』の世界ともつながっています。</span>
 
         中に入ると、奥へ進まなくても、毎週のコンテンツをここで見て、聞いて、練習できます。カリキュラムは3つあります。
         <br><br>
-        このアプリはAIや外部APIとはつながっていません。すべてローカルで動いています。ここで見て、聞いて、使うものは全部このアプリの中にあります。スタディデッキのページではUhibonと話すこともできます。彼はこのアプリのことは全部知っていますが、それ以外は何も知りません。wwww
+        Booha Adventureには、広告、おすすめ動画、レコメンド機能、生成AIはありません。注意を引き続けて収益化したり、広告用のプロフィールを作ったりするためではなく、学ぶためにつくったアプリです。スタディデッキではUhibonと話すこともできます。彼はこのアプリのことは全部知っていますが、それ以外は何も知りません。wwww
         <br><br>
         このアプリは、探して、迷うために作りました。進めば進むほど、いろいろ見つかります。迷路をクリックすると、ブーハーゴーストが飛んでいます。そのうちの1体がスタートで出迎えて、今週のゲームへ案内してくれます。各カリキュラムには、それぞれ9つのゲームとテーマがあります。プレイするほど、カラスキの中でいろいろ解放されていきます。ここではそれ以上は言いません。
         <br><br>
         ゲームを1つやって、カラスキの木まで進んでみてください。覚えておいてください——多くの木は、どこかにつながる扉です。
         <br><br>
-        カラスキの中には通常の「Adventure Profile」があり、その進捗は端末内に保存されます。英語塾クラスは別の仕組みで、90分間のチェックが終わったあとに、セクションごとのスコアと弱点をまとめて表示します。
+        カラスキの中には「Adventure Profile」があります。別の端末でログインしても、名前、カリキュラム、毎週の進捗、クリアしたゲーム、解放したキャラクター、デイリーチェックのスコア、英語塾の結果まで、そのまま引き継がれます。PINを同時に使えるのは1台だけです。
 
         <br><br><span class="lead">カリキュラムガイド</span>
         <br><br>
@@ -596,10 +600,12 @@ body::before {
         <br><br>
         各カリキュラムでは、「今週・先週・来週」の3週間分のスタディデッキを見ることができます。毎週、単語15個・文15個・質問15個。すべて音声と日本語付きです。ハンズフリーで聞いてリピートするストリームもあります。
         <br><br>
-        データは端末の外には出ません。あなたのデータは、あなたのものです。
+        デイリーチェックは、その週の単語・文・質問から出される約5問の小さなレッスンです。1〜2分で終わり、記録されるのはスコアだけ。提出する宿題ではなく、すべての生徒に毎日取り組んでほしいアプリの学習です。
+        <br><br>
+        アプリが記録するのは、学習を続けるために必要な情報だけです。先生が生徒の利用状況を一覧で追跡する管理画面はありません。助けが必要なときは、生徒本人が端末の画面を見せてくれます。生徒の情報を販売したり、広告に使ったり、コンテンツを押しつけるために使ったりすることはありません。
 
         <div class="note moss"><strong>ログインについて：</strong><br>
-        PINは1台の端末でのみ使えます。すでにログインしている状態で、別の端末から同じ名前とPINでログインすると、今のセッションは自動的に終了します。PINは他の人に教えないでください。ログアウトした場合は、もう一度ログインすれば続きから再開できます。</div>
+        PINを同時に使えるのは1台だけです。別の端末でログインすると、それまでのセッションは終了し、プロフィールは新しい端末に引き継がれます。PINは他の人に教えないでください。</div>
 
       </div></div></div>
     </div>
@@ -614,7 +620,7 @@ body::before {
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
-        ブーハー・アドベンチャーは私の教室のために作ったシステムで、レッスンに含まれています。他のスクールの方もご利用いただけます。2週間の無料トライアルをご用意しています。
+        ブーハー・アドベンチャーは私の教室のために作ったシステムで、レッスンに含まれています。他のスクールの方もご利用いただけます。PINライセンスの料金は、広告や生徒情報の販売に頼らず、アプリを維持・改善していくために使います。2週間の無料トライアルをご用意しています。
         <table class="pin-table">
           <tr><th>PIN数</th><th class="price">料金</th></tr>
           <tr><td>1 PIN</td><td class="price">¥500</td></tr>
