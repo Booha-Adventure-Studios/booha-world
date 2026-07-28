@@ -4,9 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="The Karasuki Field Guide — meet the creatures of Karasuki, a world where forgotten things go. Original illustrated characters by Bryan Harper, bilingual English and Japanese.">
+<meta name="description" content="The Karasuki Field Guide. Meet the creatures of Karasuki, a world where forgotten things go. Original illustrated characters by Bryan Harper, bilingual English and Japanese.">
 <meta name="author" content="Bryan Harper">
-<title>Zukan — Karasuki | カラスキ図鑑</title>
+<title>Zukan | Karasuki | カラスキ図鑑</title>
   
 <script type="application/ld+json">
 {
@@ -23,7 +23,7 @@
     "nationality": "American",
     "knowsLanguage": ["en", "ja"]
   },
-  "description": "The Karasuki Field Guide. Original illustrated characters inhabiting Karasuki — a world where forgotten things go. Created by Bryan Harper, native English teacher and artist based in Tomisato, Chiba, Japan.",
+  "description": "The Karasuki Field Guide. Original illustrated characters inhabiting Karasuki, a world where forgotten things go. Created by Bryan Harper, native English teacher and artist based in Tomisato, Chiba, Japan.",
   "inLanguage": ["en", "ja"],
   "genre": ["illustrated fiction", "character design", "bilingual"],
   "about": {
@@ -89,18 +89,25 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .langBtn.active{background:var(--card2);color:var(--ivory);box-shadow:0 2px 10px rgba(0,0,0,.5);}
 
 .section-div{display:flex;align-items:center;gap:12px;margin:40px 0 24px;}
-.section-div span{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
-.section-div::after{content:'';flex:1;height:1px;background:var(--border);}
+.section-div span{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);white-space:nowrap;order:1;}
+.section-div::after{content:'';flex:1;height:1px;background:var(--border);order:2;}
+.rail-controls{display:flex;gap:6px;order:3;}
+.rail-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:var(--surface);color:var(--dim);font:600 18px/1 'DM Sans',sans-serif;cursor:pointer;display:grid;place-items:center;transition:color .15s,border-color .15s,background .15s,transform .15s;}
+.rail-btn:hover,.rail-btn:focus-visible{color:var(--ivory);border-color:rgba(106,152,96,.45);background:var(--card2);transform:translateY(-1px);outline:none;}
 
-.char-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-.char-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;position:relative;aspect-ratio:3/4;display:flex;align-items:flex-end;}
+.char-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:14px;}
+.char-tile{grid-column:span 2;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;position:relative;aspect-ratio:3/4;display:flex;align-items:flex-end;text-align:left;font:inherit;color:inherit;padding:0;-webkit-appearance:none;appearance:none;}
+.char-grid .char-tile:nth-last-child(3):nth-child(4n+1){grid-column:2 / span 2;}
+.char-grid .char-tile:nth-last-child(2):nth-child(4n+1){grid-column:3 / span 2;}
+.char-grid .char-tile:last-child:nth-child(4n+1){grid-column:4 / span 2;}
 .char-tile:hover{transform:translateY(-4px);border-color:rgba(106,152,96,.3);box-shadow:0 12px 40px rgba(0,0,0,.6),0 0 24px rgba(106,152,96,.08);}
+.char-tile:focus-visible{outline:2px solid var(--moss);outline-offset:3px;border-color:rgba(106,152,96,.55);}
 .char-tile-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12px 12px 40px;transition:transform .4s ease;}
 .char-tile:hover .char-tile-img{transform:scale(1.04);}
 .char-tile-label{position:relative;z-index:1;width:100%;padding:10px 12px;background:linear-gradient(to top,rgba(20,18,16,.95) 0%,transparent 100%);}
-.char-tile-name{font-family:'Spectral',Georgia,serif;font-weight:600;font-size:13px;color:var(--ivory);line-height:1.2;}
+.char-tile-name{display:block;font-family:'Spectral',Georgia,serif;font-weight:600;font-size:13px;color:var(--ivory);line-height:1.2;}
 .jp .char-tile-name{font-family:'Noto Serif JP',serif;font-size:12px;}
-.char-tile-sub{font-size:10px;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
+.char-tile-sub{display:block;font-size:10px;color:var(--muted);letter-spacing:.5px;margin-top:2px;}
 .char-tile::after{content:'';position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:rgba(106,152,96,.85);opacity:0;transition:opacity .2s ease;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");background-size:14px;background-repeat:no-repeat;background-position:center;}
 .char-tile:hover::after{opacity:1;}
 
@@ -110,16 +117,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .illus-scroll-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
 .illus-scroll{display:flex;gap:16px;overflow-x:auto;padding:8px 20px 20px;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .illus-scroll::-webkit-scrollbar{display:none;}
-.illus-card{flex-shrink:0;width:260px;scroll-snap-align:start;border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;}
+.illus-card{flex-shrink:0;width:260px;scroll-snap-align:start;border:0;border-radius:var(--r);overflow:hidden;position:relative;cursor:pointer;transition:transform .3s ease,box-shadow .3s ease;padding:0;background:var(--surface);text-align:left;color:inherit;font:inherit;-webkit-appearance:none;appearance:none;}
 .illus-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.6);}
+.illus-card:focus-visible{outline:2px solid var(--moss);outline-offset:3px;transform:translateY(-2px);}
 .illus-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
-.illus-caption{position:absolute;bottom:0;left:0;right:0;padding:32px 16px 14px;background:linear-gradient(to top,rgba(8,6,4,.92) 0%,transparent 100%);transform:translateY(4px);opacity:0;transition:opacity .3s ease,transform .3s ease;}
-.illus-card:hover .illus-caption{opacity:1;transform:translateY(0);}
-.illus-num{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--moss);margin-bottom:3px;}
-.illus-title{font-family:'Spectral',Georgia,serif;font-size:14px;font-weight:600;color:var(--ivory);line-height:1.3;}
+.illus-caption{position:absolute;bottom:0;left:0;right:0;padding:36px 16px 14px;background:linear-gradient(to top,rgba(8,6,4,.94) 0%,rgba(8,6,4,.48) 55%,transparent 100%);opacity:.84;transition:opacity .3s ease;}
+.illus-card:hover .illus-caption,.illus-card:focus-visible .illus-caption{opacity:1;}
+.illus-num{display:block;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--moss);margin-bottom:3px;}
+.illus-title{display:block;font-family:'Spectral',Georgia,serif;font-size:14px;font-weight:600;color:var(--ivory);line-height:1.3;}
 .jp .illus-title{font-family:'Noto Serif JP',serif;font-size:13px;}
-.illus-card::after{content:'⤢';position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(106,152,96,.85);color:#fff;font-size:14px;display:grid;place-items:center;opacity:0;transition:opacity .2s ease;}
-.illus-card:hover::after{opacity:1;}
+.illus-card::after{content:'⤢';position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(106,152,96,.85);color:#fff;font-size:14px;display:grid;place-items:center;opacity:.55;transition:opacity .2s ease;}
+.illus-card:hover::after,.illus-card:focus-visible::after{opacity:1;}
 
 .illus-lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .illus-lightbox.open{display:flex;}
@@ -138,14 +146,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .char-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;}
 .char-modal.open{display:flex;}
 .modal-backdrop{position:absolute;inset:0;background:rgba(8,6,4,.94);backdrop-filter:blur(10px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
-.modal-panel{position:relative;z-index:1;width:min(94vw,820px);max-height:92vh;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:var(--shadow);animation:modalIn .3s ease;}
+.modal-panel{position:relative;z-index:1;width:min(94vw,940px);max-height:92vh;background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden;display:grid;grid-template-columns:44% 56%;box-shadow:var(--shadow);animation:modalIn .3s ease;}
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(16px);}to{opacity:1;transform:scale(1) translateY(0);}}
 .modal-viewer{position:relative;background:var(--bg);overflow:hidden;min-height:420px;}
 .viewer-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:32px;opacity:0;transition:opacity 1.2s ease;}
 .viewer-img.visible{opacity:1;}
-.stage-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:2;}
-.stage-dot{width:8px;height:8px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;transition:background .2s ease,border-color .2s ease,transform .2s ease;padding:0;}
-.stage-dot.active{background:var(--moss);border-color:var(--moss);transform:scale(1.3);}
+.stage-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:2;padding:3px;border:1px solid var(--border2);border-radius:999px;background:rgba(20,18,16,.78);backdrop-filter:blur(6px);}
+.stage-dot{min-width:58px;padding:6px 11px;border-radius:999px;border:0;background:transparent;color:var(--dim);font:600 10px/1 'DM Sans',sans-serif;letter-spacing:.4px;cursor:pointer;transition:background .2s ease,color .2s ease;}
+.stage-dot:hover,.stage-dot:focus-visible{color:var(--ivory);outline:none;}
+.stage-dot.active{background:var(--moss);color:#fff;}
 .stage-label{position:absolute;top:14px;left:14px;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--moss);background:rgba(20,18,16,.7);padding:4px 8px;border-radius:4px;backdrop-filter:blur(4px);z-index:2;}
 .modal-text{position:relative;padding:36px 32px;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;border-left:1px solid var(--border);}
 .modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--card);color:var(--muted);font-size:18px;cursor:pointer;display:grid;place-items:center;transition:background .15s,color .15s,transform .15s;z-index:20;line-height:1;-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-appearance:none;appearance:none;}
@@ -156,7 +165,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .modal-char-name-sub{font-size:12px;color:var(--muted);margin-bottom:28px;letter-spacing:.5px;}
 .jp .modal-char-name-sub{font-family:'Noto Sans JP',sans-serif;font-size:11px;}
 .modal-divider{width:32px;height:1px;background:var(--moss);margin-bottom:24px;opacity:.6;}
-.modal-entry{font-family:'Spectral',Georgia,serif;font-size:15px;color:#c8c0b0;line-height:2;letter-spacing:.01em;}
+.modal-entry{font-family:'Spectral',Georgia,serif;font-size:16px;color:#c8c0b0;line-height:1.85;letter-spacing:.01em;max-width:42ch;}
 .jp .modal-entry{font-family:'Noto Serif JP',serif;font-size:13.5px;line-height:2.2;}
 .modal-entry em{color:var(--bone);font-style:italic;}
 
@@ -164,13 +173,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .footer span{color:var(--moss);font-style:normal;}
 
 @media(max-width:640px){
-  .char-grid{grid-template-columns:repeat(2,1fr);}
+  .char-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .char-grid .char-tile{grid-column:span 2;}
+  .char-grid .char-tile:nth-last-child(3):nth-child(4n+1),.char-grid .char-tile:nth-last-child(2):nth-child(4n+1),.char-grid .char-tile:last-child:nth-child(4n+1){grid-column:span 2;}
+  .char-grid .char-tile:last-child:nth-child(odd){grid-column:2 / span 2;}
   .modal-panel{grid-template-columns:1fr;grid-template-rows:auto 1fr;max-height:92vh;overflow:hidden;}
   .modal-viewer{min-height:0;height:36vh;flex-shrink:0;}
   .modal-text{padding:56px 18px 32px;border-left:none;border-top:1px solid var(--border);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;justify-content:flex-start;flex:1;min-height:0;}
   .modal-char-name-sub{margin-bottom:16px;}
   .modal-close{top:max(10px,env(safe-area-inset-top));right:10px;}
   .illus-card{width:200px;}
+  .modal-entry{font-size:14.5px;line-height:2.05;max-width:none;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:opacity .3s ease!important;}}
 </style>
@@ -194,15 +207,27 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     </div>
   </div>
 
-  <div class="section-div"><span id="section-label">登場人物</span></div>
+  <div class="section-div"><span id="section-label">登場人物 · 011</span></div>
   <div class="char-grid" id="char-grid"></div>
 
-  <div class="section-div" style="margin-top:48px"><span id="illus-label">イラスト</span></div>
+  <div class="section-div" style="margin-top:48px">
+    <span id="illus-label">イラスト · 012</span>
+    <div class="rail-controls" aria-label="Illustration navigation">
+      <button class="rail-btn" type="button" data-scroll-target="illus-scroll" data-scroll-direction="-1" aria-label="Previous illustrations">‹</button>
+      <button class="rail-btn" type="button" data-scroll-target="illus-scroll" data-scroll-direction="1" aria-label="Next illustrations">›</button>
+    </div>
+  </div>
   <div class="illus-scroll-wrap">
     <div class="illus-scroll" id="illus-scroll"></div>
   </div>
 
-  <div class="section-div" style="margin-top:48px"><span id="prints-label">プリント</span></div>
+  <div class="section-div" style="margin-top:48px">
+    <span id="prints-label">プリント · 012</span>
+    <div class="rail-controls" aria-label="Print navigation">
+      <button class="rail-btn" type="button" data-scroll-target="prints-scroll" data-scroll-direction="-1" aria-label="Previous prints">‹</button>
+      <button class="rail-btn" type="button" data-scroll-target="prints-scroll" data-scroll-direction="1" aria-label="Next prints">›</button>
+    </div>
+  </div>
   <div class="illus-scroll-wrap">
     <div class="illus-scroll" id="prints-scroll"></div>
   </div>
@@ -218,7 +243,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="illus-lb-caption">
       <div class="illus-lb-num" id="illus-lb-num"></div>
       <div class="illus-lb-title" id="illus-lb-title"></div>
-      <div class="illus-lb-hint" id="illus-lb-hint">— tap anywhere to close —</div>
+      <div class="illus-lb-hint" id="illus-lb-hint">Tap outside the image to close</div>
     </div>
   </div>
 </div>
@@ -232,9 +257,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <img class="viewer-img" id="viewer-procreate" src="" alt=""/>
       <img class="viewer-img" id="viewer-tools" src="" alt=""/>
       <div class="stage-dots" id="stage-dots">
-        <button class="stage-dot active" data-stage="0" aria-label="Sketch"></button>
-        <button class="stage-dot" data-stage="1" aria-label="Color"></button>
-        <button class="stage-dot" data-stage="2" aria-label="Real"></button>
+        <button class="stage-dot active" data-stage="0" aria-label="Sketch">Sketch</button>
+        <button class="stage-dot" data-stage="1" aria-label="Color">Color</button>
+        <button class="stage-dot" data-stage="2" aria-label="Real">Real</button>
       </div>
     </div>
     <div class="modal-text">
@@ -253,280 +278,150 @@ const CHARACTERS = [
   {
     id:'takachika',num:'001',
     nameEN:'Takachika Green',nameJP:'グリーン・タカチカ',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`Have you ever wondered if something lives in the shadows? If there's nothing there, why are we afraid to look?
+    entryEN:`Takachika Green is a boy who wants to see, not any particular thing, but anything the world has quietly agreed to keep out of view. He knows something is there, waiting behind the shadows. He goes to school and rubs his eyes when he is tired, the way most children do, but the wish beneath all of this is older than he can remember. He has repeated it so many times that it no longer feels like wanting. It feels like waiting.
 
-Takachika Green wanted to see something. Anything. It started as a quiet wish he repeated to himself, every day.
+Perception is a door that opens from both sides. Looking is one half of it, and being looked back at is the other. Most people stop at the threshold without meaning to and grow up calling that safety. Takachika did not stop. He is not fearless. He is simply unwilling to look away.`,
+    entryJP:`グリーン・タカチカは、何かを見たい少年だ。特別な何かではなく、世界がそっと見ないことにしてきたもの、それを見たいと思っている。影の奥に何かがいて、待っているのを、彼は知っている。学校へ行き、疲れれば目をこする。ほかの子どもと同じだ。それでも、その奥にある願いは、彼が覚えているよりも古い。あまりに何度もくり返してきたので、それはもう、願うことではなくなっている。待つことに近い。
 
-But the things we've decided not to see… still want to be seen.
-
-If you wish hard enough, you might get your chance. But once you see them—
-
-they see you.
-
-He got what he wanted.`,
-    entryJP:`影の中に、何かいると思ったことはある？
-何もいないなら、どうして見るのが怖いんだろう。
-
-タカチカ・グリーンは、何かを見たかった。
-本当に、何でもよかった。
-それは、毎日心の中でくり返していた、小さな願いだった。
-
-でも、見ないことにしたものも――
-見てほしいと思っている。
-
-強く願えば、チャンスが来るかもしれない。
-でも、一度見てしまったら――
-
-向こうも、こっちを見る。
-
-彼は、願いをかなえた。`
+見るということは、両側から開く扉だ。見ることが半分で、見返されることがもう半分。多くの人は、そのつもりもないまま入り口で立ち止まり、それを安全と呼びながら大人になる。タカチカは、立ち止まらなかった。こわくないわけではない。ただ、目をそらそうとしないだけだ。`
   },
   {
     id:'mister-happy',num:'002',
     nameEN:'Mister Happy',nameJP:'ミスター・ハッピー',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`They say never judge a book by its cover. But isn't that exactly what we use it for?
+    entryEN:`Mister Happy is not a clown, though almost everyone decides he is before he can say otherwise. He belongs to a traveling people who are all born with features like his. They cross the seen and unseen parts of the world, looking for anyone who has run out of happiness, and Mister Happy carries the lost ones home.
 
-We're told not to assume. Not to decide who someone is just by how they look.
+People have laughed at him, dressed as him, built frightening stories around his smile, and taught their children to fear a face he did nothing to earn. He has never answered any of it unkindly. He has never lied or spoken badly of a single person, including those we might think deserved it. He still travels, and he still believes that somewhere ahead, someone will be glad to see him coming.`,
+    entryJP:`ミスター・ハッピーはピエロではない。それでも、ほとんどの人は、本人が何か言う前にピエロだと決めてしまう。彼は、みな同じような顔で生まれてくる、旅する一族の者だ。彼らは世界の見える場所と見えない場所を渡り歩き、幸せを使い果たしたものを探している。ミスター・ハッピーは、そうして見つけた迷子たちを、家へ連れて帰る。
 
-Mister Happy lives in Karasuki. He looks like a clown — but that doesn't mean he is one. He isn't wearing makeup. That's just how he looks.
-
-He knows a lot about this place. And he seems… nice.
-
-At least, that's what I assume.`,
-    entryJP:`「人を見た目で判断するな」とよく言う。
-でも、見た目ってそのためにあるんじゃないのか。
-
-決めつけるな、とも言われる。
-見た目だけで、その人がどんな人か決めるなと。
-
-ミスター・ハッピーはカラスキーに住んでいる。
-見た目はまるでピエロだけど、ピエロとは限らない。メイクではなく、それがそのままの顔だ。
-
-この場所のことをよく知っている。
-そして……やさしそうに見える。
-
-少なくとも、そう思っている。`
+人々は彼を笑い、彼のまねをして着飾り、その笑顔を怖い話に仕立て、子どもたちにまで、彼が何もしていないその顔を怖がるよう教えた。ミスター・ハッピーは、そのどれにも意地悪で返したことがない。うそをついたことも、誰かの悪口を言ったこともない。悪口を言われて当然だと思えるような相手にさえ、言わなかった。今も旅を続けている。そして、この先のどこかで、自分を見て喜んでくれる人がいると、今も信じている。`
   },
   {
     id:'pugoo',num:'003',
     nameEN:'Pugoo',nameJP:'パグー',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`A room feels different when a cat is sleeping in it.
-Like nothing else wants to move.
+    entryEN:`Pugoo is a fat, contented cat who has never once moved with purpose. He is epically lazy, but a room changes when he sleeps in it. The shadows draw back toward the walls, small noises grow careful, and things that prefer to arrive unseen tend to choose a different room entirely.
 
-Some things need silence.
-A place where no one is looking.
-That's when they start to appear.
+People like to say he is guarding the place, but cats offer no opinions about anything, so how would we even know? He may be a protector, or he may only be a cat who dislikes being disturbed and happens to be very good at it. His purr settles whatever is nearby, and his hiss can clear a room of visitors who were never invited. Whether he understands his own effect is impossible to say. One thing is certain: he closes his eyes before anyone can finish asking.`,
+    entryJP:`パグーは、太った、満ち足りた猫だ。目的を持って動いたことは、一度もない。とんでもなく怠け者だ。それでも、彼が眠っている部屋は、感じが変わる。影は壁のほうへ引いていき、小さな音は用心深くなり、誰にも気づかれずに現れたいものは、たいてい別の部屋を選ぶ。
 
-But Pugoo doesn't seem to mind.
-His purr keeps things calm.
-His hiss sends them away.`,
-    entryJP:`猫が寝ている部屋って、
-やけに静かだと思ったことはある？
-まるで、何も動こうとしていないみたいに。
-
-ああいうものは、静けさを好む。
-誰も見ていない場所で。
-そういう時に、現れはじめる。
-
-でも、パグーは気にしていない。
-喉を鳴らすと、場が落ち着く。
-そして、ひと鳴きで――それを帰らせる。`
+パグーが部屋を守っているのだ、と言う人もいる。でも、猫は何についても意見を言わない。だとしたら、どうして分かるだろう。彼は守り手なのかもしれないし、ただ邪魔されるのが嫌いで、それがたまたまとても上手なだけの猫かもしれない。のどを鳴らせば、近くのものは落ち着く。ひと声うなれば、招いてもいない訪問者たちを部屋から追い出せる。自分の力を分かっているのかは、誰にも言えない。ひとつだけ確かなのは、質問を言い終える前に、彼が目を閉じてしまうことだ。`
   },
   {
     id:'columbus',num:'004',
     nameEN:'Columbus',nameJP:'コロンバス',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`Have you ever wondered why dogs like some people right away? Even the ones no one else seems to notice.
+    entryEN:`Columbus is the happiest dog in the world and possibly the least impressed by anything that ought to frighten him. Dogs notice things that people cannot see. Columbus notices them more often than most and decides at once that they have come to play. Nothing is too strange for him to chase.
 
-Dogs don't really like people. They like what's underneath.
+Throw something and he may run the wrong way, return with a different thing, and start a game no one agreed to play. He forgets things faster than he experiences them and greets the same person twice in one afternoon as though years have passed. People believe dark things fear dogs. Perhaps some do, but the things Columbus meets mostly seem to find him exhausting and prefer the quiet of rooms where nobody is trying quite so hard to be their friend.`,
+    entryJP:`コロンバスは、世界でいちばん幸せな犬だ。そして、こわがるべきものを前にしても、たぶん世界でいちばん動じない。犬は、人には見えないものに気づく。コロンバスは、ほかのどんな犬よりもよく気づき、そのうえで、遊びに来てくれたのだとすぐに思いこむ。追いかけられないほど奇妙なものは、何もない。
 
-Columbus is the happiest dog you'll ever meet. Nothing bothers him. Nothing scares him.
-
-Some people think the shadows fear dogs.
-
-They don't.
-
-They just find them… annoying.`,
-    entryJP:`犬が、どうして初めて会う人に
-すぐ懐くのか考えたことはある？
-誰も気づかないようなものにも、
-反応しているみたいに。
-
-犬は、人が好きなんじゃない。
-もっと深いところを、見ている。
-
-コロンバスは、見たことがないくらい
-幸せな犬だ。
-何も気にしない。
-何も怖がらない。
-
-影は犬を怖がる、と思っている人もいる。
-
-でも、違う。
-
-ただ――少し、うるさいだけだ。`
+何かを投げれば、反対の方向へ走り、別の物をくわえて戻り、誰も約束していない遊びを始めてしまう。彼は、物事を経験するより早く忘れる。同じ人に一日のうちで二度会っても、何年ぶりかのようにあいさつする。暗いものは犬を怖がる、と人は信じている。中にはそういうものもいるだろう。でも、コロンバスの出会うものたちは、たいてい彼を疲れる相手だと思っているらしい。そして、誰かがこれほど必死に友だちになろうとしてこない、静かな部屋のほうを好むのだ。`
   },
   {
     id:'tom-katsu',num:'005',
     nameEN:'Tom Katsu',nameJP:'トム・カツ',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`Have you ever tried to keep a balloon from popping? Even when everyone is trying to break it.
+    entryEN:`Tom Katsu is a small pig from long ago who once lived in a circus, back before the place had a proper name. Balloons were tied to the smallest pigs, and people paid to throw darts at them. The crowd laughed each time a balloon burst and laughed harder when a dart hit a pig.
 
-Tom Katsu remembers a place like that. Before the circus even had a name.
+Tom barely noticed the darts. He was too glad to have a balloon of his own to worry about the rest, and he never understood why it had to be taken from him at the end of each day. He never learned what the circus intended for him afterward because Mister Happy found him before he could find out. Now a new balloon is tied to Tom every morning, and no one is permitted to throw anything at it. He has not stopped smiling since.`,
+    entryJP:`トム・カツは、ずっと昔の小さなブタだ。かつてサーカスにいた。まだその場所に、ちゃんとした名前もなかった頃のこと。いちばん小さなブタたちの体に風船がくくりつけられ、人々はお金を払って、そこへダーツを投げた。風船が割れるたびに客は笑い、ダーツがブタに当たると、もっと笑った。
 
-They tied balloons to him and let people throw darts.
-
-People laughed. The balloons always popped.
-
-But Tom never wanted anything else. He just wanted to keep it.
-
-Mister Happy brought him to Karasuki. Now he gets a new balloon every day.
-
-And he's always smiling.`,
-    entryJP:`風船って、守ろうとしても
-すぐ割れてしまうと思ったことはある？
-みんなが割ろうとしていても。
-
-トム・カツは、そんな場所を覚えている。
-まだサーカスに名前もなかった頃のこと。
-
-体に風船をつけられて、
-人にダーツを投げられていた。
-
-人は笑っていた。
-風船はいつも割れていた。
-
-でもトムは、
-それを持っていたかっただけだった。
-
-ミスター・ハッピーが、彼をカラスキーに連れてきた。
-今では、毎日新しい風船をもらえる。
-
-そして、いつも笑っている。`
+トムは、ダーツをほとんど気にしなかった。自分の風船を持てたことがうれしくて、ほかのことを気にする余裕がなかった。どうして毎日、一日の終わりにそれを取り上げられるのか、彼には分からなかった。そのあと自分がどうなるはずだったのか、トムは知らずにすんだ。知る前に、ミスター・ハッピーが見つけたからだ。今では毎朝、トムに新しい風船がくくりつけられる。そして、そこへ何かを投げることは、誰にも許されない。あの日から、トムはずっと笑ったままだ。`
   },
   {
     id:'amekuro',num:'006',
     nameEN:'Amekuro',nameJP:'アメクロ',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`The older we get, the more we start to feel it — maybe we shouldn't be eating so many sweets. They're not good for us. But then again… what is.
+    entryEN:`An Amekuro eats sweets and nothing else, and it will speak to absolutely anyone in pursuit of them. It greets strangers like lifelong friends and keeps talking long after everyone else has run dry. Sweets are the one subject that holds its whole attention.
 
-Amekuro only eat sweets, and if you see one, it will ask you for some. They don't like to hear no.
+Carry candy and it will ask for some. Tell it you have already eaten the candy and it will keep asking, because it does not accept that a thing can be gone simply because it has been swallowed. To an Amekuro, eaten and uneaten are the same, and both belong to it. Refusal is the only thing it truly dislikes. Fortunately, it enjoys the sound of its own voice even more than it enjoys a straight answer, which is often what saves you.`,
+    entryJP:`アメクロは、甘いものしか食べない。そして、それを求めるためなら、本当に誰にでも話しかける。知らない相手にも昔からの友だちのようにあいさつし、ほかの人が話すことをなくしても、ずっとしゃべり続ける。アメクロの心をまるごとつかむ話題は、甘いものだけだ。
 
-If you have sweets, it wants them. If you've already eaten them, it still wants them.
-
-To an Amekuro, there's no difference.`,
-    entryJP:`大人になるにつれて、甘いものは食べすぎないほうがいいと、なんとなく感じてくる。体に良くない。でも……良いものなんて、どれだけあるだろう。
-
-アメクロは甘いものしか食べない。もし出会ったら、きっと分けてほしいと聞いてくる。
-断られるのは、好きじゃない。
-
-持っているなら、それを欲しがる。もう食べてしまっていても、欲しがる。
-
-アメクロにとって、その違いはない。`
+お菓子を持っていれば、分けてほしいと頼んでくる。もう食べてしまったと言っても、頼むのをやめない。飲みこまれただけで、そのものがなくなったとは、認めないからだ。アメクロにとって、食べたものと食べていないものは同じで、どちらも自分のものだ。本当に嫌いなのは、断られることだけだ。幸い、まっすぐな答えよりも、自分の声を聞くほうがもっと好きらしい。それが、たいていあなたを助けてくれる。`
   },
   {
     id:'kara-ageha',num:'007',
     nameEN:'Kara Ageha',nameJP:'カラ・アゲハ',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`Do you know how many eggs a hen can lay? It's over 500. Kara Ageha's dream was to keep just one egg.
+    entryEN:`Kara Ageha is a hen who laid more than eight hundred eggs and was never allowed to keep one. All she had ever wanted was a single egg of her own. The farm took each one as it came, and when she could no longer lay, it made arrangements to take her as well. Mister Happy reached her first.
 
-She laid over 800, and never got to keep a single one.
+In Karasuki, he gave her a small pouch and filled it with smooth, egg-shaped stones that he had painted with cute designs. She carries them everywhere, and Mister Happy counts them often. She knows, without being told, that they are not the eggs she lost, but she keeps them anyway. That choice, made every day, is what turns a handful of stones into something that is finally hers.`,
+    entryJP:`カラ・アゲハは、八百個以上の卵を産んだめんどりだ。そのうちの一つも、持たせてもらえなかった。彼女がずっと欲しかったのは、自分の卵がたった一つだけだった。農場は、産まれる卵を次々と取っていった。やがて卵を産めなくなると、今度は彼女を連れていく手配を始めた。その前に、ミスター・ハッピーがたどり着いた。
 
-Soon, she couldn't lay any more. But before the farm found out, Mister Happy brought her to Karasuki.
-
-He gave her a fanny pack and fills it with egg-shaped rocks for her to keep.
-
-She's just as happy now.`,
-    entryJP:`めんどりがどれくらい卵を産むか、知っている？
-500個以上にもなる。
-カラ・アゲハの夢は、たったひとつでいい、自分の卵を持つことだった。
-
-800個以上産んでも、一つも手元に残ることはなかった。
-
-やがて、卵は産めなくなった。でも農場に知られる前に、ミスター・ハッピーが彼女をカラスキーに連れてきた。
-
-ポーチをもらい、卵の形をした石を飾って持たせてくれる。
-
-今でも、彼女は変わらず幸せそうだ。`
+カラスキーで、彼は小さなポーチを渡し、卵の形をしたなめらかな石を入れた。かわいい模様を描いた石だ。カラ・アゲハはそれをどこへでも持ち歩き、ミスター・ハッピーは、その数をよく数えてやる。失った卵と同じものではないと、彼女は言われなくても分かっている。それでも、大切に持ち続ける。毎日くり返されるその選びが、ひとにぎりの石を、ようやく彼女のものと呼べる何かに変えていく。`
   },
   {
     id:'uhibon',num:'008',
     nameEN:'Uhibon',nameJP:'ウヒボン',
-    nameSubEN:'Karasuki — Book One',nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`What happens to things when we forget about them? They're still here. And even if they're not, the memory of them is.
+    entryEN:`Uhibon does not know what he is, and he cannot name the place he came from or the person he might once have been. He carries only the sense that an answer exists somewhere beyond one of Karasuki's countless doors. He wanders and gathers small things that might belong to him. Most doors lead nowhere, but a few feel familiar enough to ache.
 
-What happens when we forget that too?
+He has one certainty, and it is a sound. October Moriyama named him for his laugh, the uh-hi-hi-hi of it, and he keeps that laugh even when he keeps nothing else. It is not much from which to build a self, but for now it is enough to keep him searching.`,
+    entryJP:`ウヒボンは、自分が何なのか分からない。どこから来たのかも、以前は誰だったのかも、名前にできない。ただ、答えがどこかにあるという感覚だけを抱えている。カラスキーにある、数えきれない扉のどれか、その向こうに。彼は歩き回り、自分のものかもしれない小さなものを集める。ほとんどの扉は、どこにもつながっていない。それでも、いくつかは、胸が痛くなるほど懐かしい。
 
-We forget for a reason. If we didn't, we would start to notice things that aren't supposed to be there.
-
-Uhibon doesn't remember who or what he is. He only knows that the memory of him is somewhere… waiting to be found.`,
-    entryJP:`物を忘れたとき、それはどうなるのだろう。まだここにある。たとえなくなっていても、その記憶は残っている。
-
-その記憶さえ、忘れてしまったらどうなるのだろう。
-
-人は、理由があって忘れている。もし忘れなければ、本来あるはずのないものに気づいてしまう。
-
-ウヒボンは、自分が何者なのか思い出せない。
-ただ、自分の記憶がどこかにあることだけは分かっている――見つかるのを待っている。`
+確かなものが、ひとつだけある。それは音だ。森山オクトーバーは、彼の笑い声から名前をつけた。あの「ウヒヒヒ」から。ほかの何も残らなくても、彼はその笑いだけは手放さない。そこから自分を組み立てるには、あまりに少ない。それでも今は、探し続けるには十分だ。`
   },
-
-{
+  {
     id:'jacki',
     num:'009',
     nameEN:'Jacki',
     nameJP:'ジャッキー',
-    nameSubEN:'Karasuki — Book One',
-    nameSubJP:'カラスキー — 第一巻',
+    nameSubEN:'Karasuki · Book One',
+    nameSubJP:'カラスキー・第一巻',
     stages:['sketch','procreate','tools'],
     stageLabelEN:['Sketch','Color','Real'],
     stageLabelJP:['スケッチ','カラー','リアル'],
-    entryEN:`They say if you see something strange, you probably didn't, and that your mind fills in the blanks and smooths things out so it makes sense.
+    entryEN:`The mind dislikes a shape it cannot place. It fills the gaps, softens the edges, and turns the unfamiliar into something it can live beside and accept. That may be why Jacki appears as a tall figure with a large pumpkin for a head. It is an easy shape to accept, and most people stop wondering once they have accepted it.
 
-Jacki is easy to describe: a big pumpkin head with a face, something familiar enough to accept without thinking too much about it.
+He arrives rarely and never by accident. October Moriyama met him when she was small and calls him a friend, though neither of them will explain what the word covers between them. Once he has gone, remembering exactly what you saw becomes strangely hard. The pumpkin stays, while the rest thins out the way a dream does, leaving you certain only that he let you see as much as he wanted you to.`,
+    entryJP:`心は、うまく置きどころの分からない形を嫌う。すきまをうめ、角をやわらげ、見慣れないものを、そばに置いて受け入れられる何かに変えてしまう。ジャッキーが、大きなカボチャを頭に乗せた背の高い姿に見えるのは、そのせいかもしれない。それは受け入れやすい形で、多くの人は一度受け入れると、それ以上考えるのをやめる。
 
-At least, that's what it looks like.
+彼が現れることはめったになく、偶然に来ることもない。森山オクトーバーは幼いころに彼と出会い、友だちだと言う。ただし、その言葉が二人の間で何を指しているのか、どちらも説明しない。彼が去ってしまうと、何を見たのかを正しく思い出すのは、不思議なほど難しくなる。カボチャだけが残り、あとは夢のように薄れていく。ただ、彼が見せたいと思っただけのものを見せてくれた、それだけが確かに残る。`
+  },
+  {
+    id:'sumiyo',num:'010',
+    nameEN:'Sumiyo Horaguchi',nameJP:'洞口すみよ',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
+    stages:['sketch','procreate','tools'],
+    stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
+    entryEN:`Long ago, a lonely woman lived in the mountains. She took in travelers and gave sweets to passing children because she wanted their company more than she wanted to be left in peace. People told stories about her afterward, and each telling made her a little stranger, a little crueler, and a little less like a person. The woman is gone. Sumiyo is what the stories left behind.
 
-He doesn't show up often, and when he does, it never feels like an accident.
+See her and she sees you. While she is watched, she cannot come closer, and she cannot cross a threshold unless she has been invited across it. She can follow you anywhere, though. If she gets inside, she stays, drawing the warmth out of a house so slowly that no one notices until it is cold. Her smile is almost the smile of somebody's grandmother, and it is the almost that matters.`,
+    entryJP:`昔、山の中に、孤独な女が住んでいた。旅人を泊め、通りかかる子どもたちに甘いものをあげた。そっとしておかれることよりも、誰かがそばにいることを望んだからだ。のちに、人々は彼女の話を語った。語られるたびに、彼女は少しずつ奇妙に、少しずつ残酷に、そして少しずつ人ではないものになっていった。その女は、もういない。すみよは、話が残していったものだ。
 
-Most people never see things they can't explain, and some think they did, but aren't sure anymore.
+彼女を見れば、彼女もこちらを見る。見られている間は、近づくことができない。招き入れられなければ、敷居をまたぐこともできない。それでも、どこまでも後をついてくることはできる。ひとたび中に入れば、すみよは居座り、家からぬくもりを吸い出していく。あまりにゆっくりなので、冷えきるまで誰も気づかない。その笑顔は、誰かのおばあさんの笑顔に、ほとんど近い。そして、その「ほとんど」こそが問題なのだ。`
+  },
+  {
+    id:'jubei',num:'011',
+    nameEN:'Jubei Tsukigase',nameJP:'月ヶ瀬寿兵衛',
+    nameSubEN:'Karasuki · Book One',nameSubJP:'カラスキー・第一巻',
+    stages:['sketch','procreate','tools'],
+    stageLabelEN:['Sketch','Color','Real'],stageLabelJP:['スケッチ','カラー','リアル'],
+    entryEN:`Jubei Tsukigase was a farmer who believed that work came before everything, and he lived exactly as though that were true. He worked while his children were small. He worked while they grew and left. He worked while his wife grew old and quiet. By the time he set down his tools, the house behind him was empty, and no one had been waiting in it for a long while.
 
-October met him when she was younger, and somehow they are friends now, though it's hard to say what that really means.
+He stopped sleeping and kept working. When he finally understood how much of his life had passed on the other side of the field from him, the regret had nowhere to go, so it turned to anger. The anger did not stay inside him. Something hard began to grow beneath his skin. Each day, he looked a little less like a tired man and a little more like an oni.`,
+    entryJP:`月ヶ瀬寿兵衛は、何よりも仕事が先だと信じる農夫だった。そして、それが本当であるかのように、その通りに生きた。子どもたちが小さいうちも、働いた。子どもたちが育って家を出るあいだも、働いた。妻が年老いて、口数を減らしていくあいだも、働いた。ようやく道具を置いたとき、うしろの家は空っぽで、そこで誰かが待っていた時期は、とうに過ぎていた。
 
-If you see him, he's already been there longer than you think, and when you look away, it becomes difficult to say what you actually saw, or whether he let you see him at all.`,
-    entryJP:`変なものを見た気がしても、きっと見間違いだと言われます。人の頭は足りない部分を勝手に埋めて、ちゃんと意味が通るように整えてしまうものだからです。
-
-ジャッキーは説明しやすい見た目をしています。大きなかぼちゃの頭に、顔のようなものがある姿で、あまり深く考えなくても受け入れてしまえるような見た目です。
-
-少なくとも、そう見えます。
-
-彼が現れることはあまりなく、現れたとしても偶然とは思えません。
-
-ほとんどの人は、説明できないものを見ることはありませんし、見た気がしても確信は持てません。
-
-オクトーバーは幼い頃に彼と出会い、今では友だちのような関係ですが、それがどういうものなのかははっきりしません。
-
-もし彼を見かけたとしても、気づく前からそこにいたように感じられ、目を離したあとには、自分が何を見たのか、あるいは本当に見せてもらえたのかどうかさえ、よく分からなくなります。`
-  }  
-  
+寿兵衛は眠ることをやめ、それでも働き続けた。畑の向こう側で、自分の人生がどれほど過ぎてしまったのか、ようやく分かったとき、後悔は行き場をなくし、怒りに変わった。その怒りは、彼の中にとどまらなかった。皮ふの下で、かたい何かが育ちはじめた。日ごとに、彼は疲れた男の姿から少し遠ざかり、鬼の姿へ少し近づいていった。`
+  }
   
   // Add characters here
 ];
@@ -542,7 +437,8 @@ const ILLUSTRATIONS = [
   {num:'008',file:'008.JPG',titleEN:'Be Careful What You Hope For',titleJP:'望むものには気をつけろ'},
   {num:'009',file:'009.JPG',titleEN:'Run!',titleJP:'走れ！'},
   {num:'010',file:'010.JPG',titleEN:'Alone',titleJP:'ひとり'},
-  {num:'011',file:'011.JPG',titleEN:'We',titleJP:'われら'}
+  {num:'011',file:'011.JPG',titleEN:'We',titleJP:'われら'},
+  {num:'012',file:'012.jpg',titleEN:'Commandeered',titleJP:'強奪'}
   // Add illustrations here
 ];
 
@@ -557,7 +453,8 @@ const PRINTS = [
   {num:'008',file:'008.JPG',titleEN:'Be Careful What You Hope For',titleJP:'望むものには気をつけろ'},
   {num:'009',file:'009.JPG',titleEN:'Run!',titleJP:'走れ！'},
   {num:'010',file:'010.JPG',titleEN:'Alone',titleJP:'ひとり'},
-  {num:'011',file:'011.JPG',titleEN:'We',titleJP:'われら'}
+  {num:'011',file:'011.JPG',titleEN:'We',titleJP:'われら'},
+  {num:'012',file:'012.JPG',titleEN:'Commandeered',titleJP:'強奪'}
   // Add prints here
 ];
 
@@ -572,13 +469,15 @@ function buildGrid(){
   const grid=document.getElementById('char-grid');
   grid.innerHTML='';
   CHARACTERS.forEach((c,i)=>{
-    const tile=document.createElement('div');
+    const tile=document.createElement('button');
     tile.className='char-tile';
+    tile.type='button';
+    tile.setAttribute('aria-label',`${c.num} ${isJP()?c.nameJP:c.nameEN}`);
     tile.innerHTML=`<img class="char-tile-img" src="assets/zukan/${c.id}/sketch.png" alt="${isJP()?c.nameJP:c.nameEN}" loading="lazy"/>
-      <div class="char-tile-label">
-        <div class="char-tile-name">${isJP()?c.nameJP:c.nameEN}</div>
-        <div class="char-tile-sub">${c.num}</div>
-      </div>`;
+      <span class="char-tile-label">
+        <span class="char-tile-name">${isJP()?c.nameJP:c.nameEN}</span>
+        <span class="char-tile-sub">${c.num}</span>
+      </span>`;
     tile.addEventListener('click',()=>openChar(i));
     grid.appendChild(tile);
   });
@@ -589,17 +488,19 @@ function buildIllus(){
   const scroll=document.getElementById('illus-scroll');
   scroll.innerHTML='';
   ILLUSTRATIONS.forEach((ill,i)=>{
-    const card=document.createElement('div');
+    const card=document.createElement('button');
     card.className='illus-card';
+    card.type='button';
+    card.setAttribute('aria-label',`${ill.num} ${isJP()?ill.titleJP:ill.titleEN}`);
     card.innerHTML=`<img class="illus-img" src="assets/zukan/illustrations/${ill.file}" alt="${isJP()?ill.titleJP:ill.titleEN}" loading="lazy"/>
-      <div class="illus-caption">
-        <div class="illus-num">${ill.num}</div>
-        <div class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</div>
-      </div>`;
+      <span class="illus-caption">
+        <span class="illus-num">${ill.num}</span>
+        <span class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</span>
+      </span>`;
     card.addEventListener('click',()=>openIllus(i,'illustrations',ILLUSTRATIONS));
     scroll.appendChild(card);
   });
-  document.getElementById('illus-label').textContent=isJP()?'イラスト':'Illustrations';
+  document.getElementById('illus-label').textContent=`${isJP()?'イラスト':'Illustrations'} · ${String(ILLUSTRATIONS.length).padStart(3,'0')}`;
 }
 
 // ── PRINTS ──
@@ -607,18 +508,28 @@ function buildPrints(){
   const scroll=document.getElementById('prints-scroll');
   scroll.innerHTML='';
   PRINTS.forEach((ill,i)=>{
-    const card=document.createElement('div');
+    const card=document.createElement('button');
     card.className='illus-card';
+    card.type='button';
+    card.setAttribute('aria-label',`${ill.num} ${isJP()?ill.titleJP:ill.titleEN}`);
     card.innerHTML=`<img class="illus-img" src="assets/zukan/prints/${ill.file}" alt="${isJP()?ill.titleJP:ill.titleEN}" loading="lazy"/>
-      <div class="illus-caption">
-        <div class="illus-num">${ill.num}</div>
-        <div class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</div>
-      </div>`;
+      <span class="illus-caption">
+        <span class="illus-num">${ill.num}</span>
+        <span class="illus-title">${isJP()?ill.titleJP:ill.titleEN}</span>
+      </span>`;
     card.addEventListener('click',()=>openIllus(i,'prints',PRINTS));
     scroll.appendChild(card);
   });
-  document.getElementById('prints-label').textContent=isJP()?'プリント':'Prints';
+  document.getElementById('prints-label').textContent=`${isJP()?'プリント':'Prints'} · ${String(PRINTS.length).padStart(3,'0')}`;
 }
+
+document.querySelectorAll('.rail-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const rail=document.getElementById(btn.dataset.scrollTarget);
+    const direction=Number(btn.dataset.scrollDirection);
+    rail.scrollBy({left:direction*Math.max(220,rail.clientWidth*.78),behavior:'smooth'});
+  });
+});
 
 // ── LIGHTBOX (shared) ──
 const illusLightbox=document.getElementById('illus-lightbox');
@@ -634,7 +545,7 @@ function openIllus(idx,folder,arr){
   illusLbImg.alt=isJP()?ill.titleJP:ill.titleEN;
   illusLbNum.textContent=ill.num;
   illusLbTitle.textContent=isJP()?ill.titleJP:ill.titleEN;
-  illusLbHint.textContent=isJP()?'— どこかをタップして閉じる —':'— tap anywhere to close —';
+  illusLbHint.textContent=isJP()?'画像の外側をタップして閉じる':'Tap outside the image to close';
   illusLightbox.classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -679,18 +590,25 @@ function setStage(n){
   currentStage=n;
   const c=CHARACTERS[currentChar];
   VIEWERS.forEach((v,i)=>v.classList.toggle('visible',i===n));
-  stageDots.forEach((d,i)=>d.classList.toggle('active',i===n));
+  stageDots.forEach((d,i)=>{
+    d.classList.toggle('active',i===n);
+    d.textContent=(isJP()?c.stageLabelJP:c.stageLabelEN)[i];
+  });
   stageLabel.textContent=(isJP()?c.stageLabelJP:c.stageLabelEN)[n];
 }
 
 function nextStage(){const c=CHARACTERS[currentChar];setStage((currentStage+1)%c.stages.length);}
-function startAuto(){clearInterval(autoTimer);autoTimer=setInterval(nextStage,4000);}
+function startAuto(){
+  clearInterval(autoTimer);
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  autoTimer=setInterval(nextStage,4000);
+}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';clearInterval(autoTimer);}
 
 document.getElementById('stage-dots').addEventListener('click',e=>{
   const dot=e.target.closest('.stage-dot');
   if(!dot)return;
-  clearInterval(autoTimer);setStage(parseInt(dot.dataset.stage));startAuto();
+  clearInterval(autoTimer);setStage(parseInt(dot.dataset.stage));
 });
 document.getElementById('modal-close').addEventListener('click',closeModal);
 document.getElementById('modal-backdrop').addEventListener('click',closeModal);
@@ -700,12 +618,11 @@ document.addEventListener('keydown',e=>{
   if(illusLightbox.classList.contains('open')){if(e.key==='Escape')closeIllus();return;}
   if(!modal.classList.contains('open'))return;
   if(e.key==='Escape')closeModal();
-  if(e.key==='ArrowRight'){clearInterval(autoTimer);nextStage();startAuto();}
+  if(e.key==='ArrowRight'){clearInterval(autoTimer);nextStage();}
   if(e.key==='ArrowLeft'){
     clearInterval(autoTimer);
     const c=CHARACTERS[currentChar];
     setStage((currentStage-1+c.stages.length)%c.stages.length);
-    startAuto();
   }
 });
 
@@ -719,8 +636,8 @@ function setLang(lang){
   document.getElementById('root').classList.toggle('jp',jp);
   document.getElementById('hero-sub').innerHTML=jp
     ?'カラスキーで出会ったものたちの記録。<br>見たものは、あなたを見ている。'
-    :'A record of what was found in Karasuki.<br>What you see — sees you.';
-  document.getElementById('section-label').textContent=jp?'登場人物':'Characters';
+    :'A record of what was found in Karasuki.<br>What you see looks back.';
+  document.getElementById('section-label').textContent=`${jp?'登場人物':'Characters'} · ${String(CHARACTERS.length).padStart(3,'0')}`;
   buildGrid();
   buildIllus();
   buildPrints();
@@ -732,7 +649,7 @@ function setLang(lang){
     stageLabel.textContent=(jp?c.stageLabelJP:c.stageLabelEN)[currentStage];
   }
   if(illusLightbox.classList.contains('open')){
-    illusLbHint.textContent=jp?'— どこかをタップして閉じる —':'— tap anywhere to close —';
+    illusLbHint.textContent=jp?'画像の外側をタップして閉じる':'Tap outside the image to close';
   }
 }
 
