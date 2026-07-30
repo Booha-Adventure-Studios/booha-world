@@ -133,14 +133,23 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .jp .taxonomy-intro{font-family:'Noto Serif JP',serif;font-size:13px;line-height:2;}
 .taxon-shelf{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(34,30,26,.98),rgba(24,22,20,.98));border:1px solid var(--border2);border-radius:calc(var(--r) + 4px);box-shadow:0 20px 54px rgba(0,0,0,.38);}
 .taxon-shelf::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 12% 0%,rgba(106,152,96,.10),transparent 34%),radial-gradient(circle at 88% 100%,rgba(112,112,160,.10),transparent 38%);pointer-events:none;}
-.taxon-head{position:relative;padding:26px 28px 24px;border-bottom:1px solid var(--border);}
-.taxon-kicker{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--moss);margin-bottom:7px;}
-.taxon-title{font-family:'Spectral',Georgia,serif;font-size:clamp(25px,4vw,34px);font-weight:700;color:var(--ivory);line-height:1.15;margin-bottom:18px;}
+.taxon-head{position:relative;border-bottom:1px solid var(--border);}
+.taxon-toggle{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:26px 28px 24px;border:0;background:transparent;color:inherit;text-align:left;font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;}
+.taxon-toggle:focus-visible{outline:2px solid var(--moss);outline-offset:-4px;}
+.taxon-toggle-copy{display:block;min-width:0;}
+.taxon-chevron{width:34px;height:34px;border:1px solid var(--border2);border-radius:50%;display:grid;place-items:center;color:var(--moss);font:400 22px/1 'DM Sans',sans-serif;transition:transform .25s ease,background .2s ease,color .2s ease;}
+.taxon-toggle:hover .taxon-chevron{background:rgba(106,152,96,.12);color:var(--ivory);}
+.taxon-toggle[aria-expanded="true"] .taxon-chevron{transform:rotate(45deg);background:rgba(106,152,96,.10);}
+.taxon-kicker{display:block;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--moss);margin-bottom:7px;}
+.taxon-title{display:block;font-family:'Spectral',Georgia,serif;font-size:clamp(25px,4vw,34px);font-weight:700;color:var(--ivory);line-height:1.15;margin-bottom:18px;}
 .jp .taxon-title{font-family:'Noto Serif JP',serif;font-size:clamp(22px,3.6vw,30px);}
 .taxon-mode{display:grid;grid-template-columns:minmax(112px,auto) 1fr;gap:18px;align-items:baseline;}
 .taxon-rank{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
 .taxon-mode-copy{font-family:'Spectral',Georgia,serif;font-size:16px;color:var(--bone);}
 .jp .taxon-mode-copy{font-family:'Noto Serif JP',serif;font-size:13.5px;}
+.taxon-body{animation:taxonBodyIn .28s ease;}
+.taxon-body[hidden]{display:none;}
+@keyframes taxonBodyIn{from{opacity:0;transform:translateY(-5px);}to{opacity:1;transform:translateY(0);}}
 .taxon-description{position:relative;padding:22px 28px 0;max-width:760px;font-family:'Spectral',Georgia,serif;font-size:15px;line-height:1.85;color:#b9af9f;}
 .jp .taxon-description{font-family:'Noto Serif JP',serif;font-size:13px;line-height:2;}
 .taxon-members{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 28px 26px;}
@@ -149,7 +158,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .taxon-visual::before{content:'';position:absolute;inset:11%;border-radius:50%;filter:blur(20px);opacity:.72;z-index:-1;}
 .taxon-visual.nulvane::before{background:radial-gradient(circle,rgba(216,207,192,.26) 0%,rgba(106,152,96,.14) 36%,transparent 72%);animation:taxonGlow 9s ease-in-out infinite;}
 .taxon-visual.mouhitome::before{background:radial-gradient(circle,rgba(136,153,170,.34) 0%,rgba(112,112,160,.14) 40%,transparent 73%);animation:taxonGlow 11s ease-in-out infinite reverse;}
-.taxon-sprite{width:100%;height:100%;object-fit:contain;display:block;will-change:transform,filter,opacity;}
+.taxon-sprite{width:78%;height:78%;max-width:360px;max-height:360px;object-fit:contain;display:block;will-change:transform,filter,opacity;}
 .taxon-visual.nulvane .taxon-sprite{animation:nulvaneDrift 11s ease-in-out infinite;filter:drop-shadow(0 0 16px rgba(216,207,192,.12));}
 .taxon-visual.mouhitome .taxon-sprite{animation:mouhitomePhase 10s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(136,153,170,.16));}
 @keyframes taxonGlow{0%,100%{opacity:.5;transform:scale(.92);}50%{opacity:.82;transform:scale(1.06);}}
@@ -226,7 +235,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .modal-close{top:max(10px,env(safe-area-inset-top));right:10px;}
   .illus-card{width:200px;}
   .modal-entry{font-size:14.5px;line-height:2.05;max-width:none;}
-  .taxon-head{padding:22px 20px 20px;}
+  .taxon-toggle{padding:22px 20px 20px;gap:14px;}
+  .taxon-chevron{width:30px;height:30px;font-size:19px;}
   .taxon-mode{grid-template-columns:1fr;gap:5px;}
   .taxon-description{padding:20px 20px 0;}
   .taxon-members{grid-template-columns:1fr;padding:20px;gap:16px;}
@@ -562,7 +572,7 @@ const TAXONOMY = [
         sprite:'nulvane.png',
         forgettingEN:'A Person Who Never Happened',
         forgettingJP:'存在しなかった人',
-        entryEN:`A Nulvane wears a person who never happened at all—an armature standing in for a life that never arrived. It remains still and empty, doing nothing wrong because it was never given anything to do.`,
+        entryEN:`A Nulvane wears a person who never happened at all, an armature standing in for a life that never arrived. It remains still and empty, doing nothing wrong because it was never given anything to do.`,
         entryJP:`ヌルヴェインがまとうのは、最初から存在しなかった人だ。生まれることのなかった人生の代わりに立つ骨組みであり、静かで、空っぽで、何もしない。するべきことを、一度も与えられなかったからだ。`
       },
       {
@@ -572,7 +582,7 @@ const TAXONOMY = [
         sprite:'mouhitome.png',
         forgettingEN:'A Moment That Never Happened',
         forgettingJP:'起こらなかった瞬間',
-        entryEN:`A Mouhitome wears a person who truly existed, borrowing them to complete a moment that did not. The unspoken word is spoken. The withheld hand reaches. Every action arrives at full strength, but never where it belonged—always at the wrong door.`,
+        entryEN:`A Mouhitome wears a person who truly existed, borrowing them to complete a moment that did not. The unspoken word is spoken. The withheld hand reaches. Every action arrives at full strength, but never where it belonged. Always at the wrong door.`,
         entryJP:`モウヒトメがまとうのは、確かに存在した人だ。その人を借りて、起こらなかった一瞬を実行する。言われなかった言葉が口にされ、伸ばされなかった手が伸びる。すべては完全な力で行われるが、あるべき場所には届かない。いつも、違う扉へ向かう。`
       }
     ]
@@ -580,6 +590,7 @@ const TAXONOMY = [
   // Add genera here
 ];
 
+const openTaxa=new Set();
 let currentLang='jp',currentChar=null,currentStage=0,autoTimer=null;
 // track which folder the open lightbox image came from
 let currentLbFolder='illustrations';
@@ -658,6 +669,7 @@ function buildTaxonomy(){
     const shelf=document.createElement('section');
     shelf.className='taxon-shelf';
     shelf.setAttribute('aria-labelledby',`taxon-${genus.id}-title`);
+    const isOpen=openTaxa.has(genus.id);
     const members=genus.members.map(member=>`
       <article class="taxon-member">
         <div class="taxon-visual ${member.id}">
@@ -674,19 +686,37 @@ function buildTaxonomy(){
       </article>`).join('');
     shelf.innerHTML=`
       <header class="taxon-head">
-        <div class="taxon-kicker">${jp?'属':'Genus'} ${genus.num}</div>
-        <h2 class="taxon-title" id="taxon-${genus.id}-title">${jp?genus.genusJP:genus.genusEN}</h2>
-        <div class="taxon-mode">
-          <span class="taxon-rank">${jp?'存続様式':'Mode of persistence'}</span>
-          <span class="taxon-mode-copy">${jp?genus.modeJP:genus.modeEN}</span>
-        </div>
+        <button class="taxon-toggle" type="button" data-taxon-id="${genus.id}" aria-expanded="${isOpen}" aria-controls="taxon-${genus.id}-body">
+          <span class="taxon-toggle-copy">
+            <span class="taxon-kicker">${jp?'属':'Genus'} ${genus.num}</span>
+            <span class="taxon-title" id="taxon-${genus.id}-title" role="heading" aria-level="2">${jp?genus.genusJP:genus.genusEN}</span>
+            <span class="taxon-mode">
+              <span class="taxon-rank">${jp?'存続様式':'Mode of persistence'}</span>
+              <span class="taxon-mode-copy">${jp?genus.modeJP:genus.modeEN}</span>
+            </span>
+          </span>
+          <span class="taxon-chevron" aria-hidden="true">+</span>
+        </button>
       </header>
-      <p class="taxon-description">${jp?genus.descriptionJP:genus.descriptionEN}</p>
-      <div class="taxon-members">${members}</div>
-      <p class="taxon-coda">${jp?genus.codaJP:genus.codaEN}</p>`;
+      <div class="taxon-body" id="taxon-${genus.id}-body"${isOpen?'':' hidden'}>
+        <p class="taxon-description">${jp?genus.descriptionJP:genus.descriptionEN}</p>
+        <div class="taxon-members">${members}</div>
+        <p class="taxon-coda">${jp?genus.codaJP:genus.codaEN}</p>
+      </div>`;
     root.appendChild(shelf);
   });
 }
+
+document.getElementById('taxonomy-root').addEventListener('click',e=>{
+  const toggle=e.target.closest('.taxon-toggle');
+  if(!toggle)return;
+  const id=toggle.dataset.taxonId;
+  const body=document.getElementById(`taxon-${id}-body`);
+  const willOpen=toggle.getAttribute('aria-expanded')!=='true';
+  toggle.setAttribute('aria-expanded',String(willOpen));
+  body.hidden=!willOpen;
+  if(willOpen)openTaxa.add(id);else openTaxa.delete(id);
+});
 
 document.querySelectorAll('.rail-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
