@@ -129,6 +129,46 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .illus-card::after{content:'⤢';position:absolute;top:10px;right:10px;width:28px;height:28px;border-radius:50%;background:rgba(106,152,96,.85);color:#fff;font-size:14px;display:grid;place-items:center;opacity:.55;transition:opacity .2s ease;}
 .illus-card:hover::after,.illus-card:focus-visible::after{opacity:1;}
 
+.taxonomy-intro{max-width:660px;margin:-4px 0 22px;font-family:'Spectral',Georgia,serif;font-size:15px;line-height:1.85;color:var(--dim);}
+.jp .taxonomy-intro{font-family:'Noto Serif JP',serif;font-size:13px;line-height:2;}
+.taxon-shelf{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(34,30,26,.98),rgba(24,22,20,.98));border:1px solid var(--border2);border-radius:calc(var(--r) + 4px);box-shadow:0 20px 54px rgba(0,0,0,.38);}
+.taxon-shelf::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 12% 0%,rgba(106,152,96,.10),transparent 34%),radial-gradient(circle at 88% 100%,rgba(112,112,160,.10),transparent 38%);pointer-events:none;}
+.taxon-head{position:relative;padding:26px 28px 24px;border-bottom:1px solid var(--border);}
+.taxon-kicker{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--moss);margin-bottom:7px;}
+.taxon-title{font-family:'Spectral',Georgia,serif;font-size:clamp(25px,4vw,34px);font-weight:700;color:var(--ivory);line-height:1.15;margin-bottom:18px;}
+.taxon-rank{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.taxon-mode-copy{font-family:'Spectral',Georgia,serif;font-size:16px;color:var(--bone);}
+.jp .taxon-mode-copy{font-family:'Noto Serif JP',serif;font-size:13.5px;}
+.taxon-description{position:relative;padding:22px 28px 0;max-width:760px;font-family:'Spectral',Georgia,serif;font-size:15px;line-height:1.85;color:#b9af9f;}
+.jp .taxon-description{font-family:'Noto Serif JP',serif;font-size:13px;line-height:2;}
+.taxon-members{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:24px 28px 26px;}
+.taxon-member{min-width:0;overflow:hidden;background:rgba(20,18,16,.82);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow2);}
+.taxon-visual{position:relative;isolation:isolate;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden;background:#0c0b0a;}
+.taxon-visual::before{content:'';position:absolute;inset:11%;border-radius:50%;filter:blur(20px);opacity:.72;z-index:-1;}
+.taxon-visual.nulvane::before{background:radial-gradient(circle,rgba(216,207,192,.26) 0%,rgba(106,152,96,.14) 36%,transparent 72%);animation:taxonGlow 9s ease-in-out infinite;}
+.taxon-visual.mouhitome::before{background:radial-gradient(circle,rgba(136,153,170,.34) 0%,rgba(112,112,160,.14) 40%,transparent 73%);animation:taxonGlow 11s ease-in-out infinite reverse;}
+.taxon-sprite{width:100%;height:100%;object-fit:contain;display:block;will-change:transform,filter,opacity;}
+.taxon-visual.nulvane .taxon-sprite{animation:nulvaneDrift 11s ease-in-out infinite;filter:drop-shadow(0 0 16px rgba(216,207,192,.12));}
+.taxon-visual.mouhitome .taxon-sprite{animation:mouhitomePhase 10s ease-in-out infinite;filter:drop-shadow(0 0 20px rgba(136,153,170,.16));}
+@keyframes taxonGlow{0%,100%{opacity:.5;transform:scale(.92);}50%{opacity:.82;transform:scale(1.06);}}
+@keyframes nulvaneDrift{0%,100%{transform:translate3d(0,5px,0) scale(1.01);}50%{transform:translate3d(0,-5px,0) scale(1.025);}}
+@keyframes mouhitomePhase{
+  0%,39%,47%,100%{transform:translate3d(0,2px,0) scale(1.015);opacity:.92;filter:blur(0) drop-shadow(0 0 20px rgba(136,153,170,.16));}
+  42%{transform:translate3d(-4px,-1px,0) scale(1.025);opacity:.62;filter:blur(2px) drop-shadow(7px 0 16px rgba(112,112,160,.22));}
+  44%{transform:translate3d(5px,1px,0) scale(1.01);opacity:.82;filter:blur(.7px) drop-shadow(-6px 0 18px rgba(136,153,170,.20));}
+}
+.taxon-member-copy{padding:20px 20px 22px;}
+.taxon-member-name{font-family:'Spectral',Georgia,serif;font-size:21px;font-weight:700;color:var(--ivory);line-height:1.15;margin-bottom:15px;}
+.jp .taxon-member-name{font-family:'Noto Serif JP',serif;font-size:18px;}
+.taxon-type{padding-top:13px;border-top:1px solid var(--border);margin-bottom:15px;}
+.taxon-type-label{display:block;font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--moss);margin-bottom:5px;}
+.taxon-type-value{display:block;font-family:'Spectral',Georgia,serif;font-size:16px;font-weight:600;color:var(--bone);line-height:1.35;}
+.jp .taxon-type-value{font-family:'Noto Serif JP',serif;font-size:13.5px;}
+.taxon-member-entry{font-family:'Spectral',Georgia,serif;font-size:13.5px;line-height:1.8;color:#aa9f90;}
+.jp .taxon-member-entry{font-family:'Noto Serif JP',serif;font-size:12px;line-height:1.95;}
+.taxon-coda{position:relative;margin:0 28px 28px;padding:16px 18px;border-left:2px solid var(--moss);background:rgba(106,152,96,.055);font-family:'Spectral',Georgia,serif;font-size:15px;font-style:italic;color:var(--bone);}
+.jp .taxon-coda{font-family:'Noto Serif JP',serif;font-size:13px;font-style:normal;}
+
 .illus-lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .illus-lightbox.open{display:flex;}
 .illus-lb-backdrop{position:absolute;inset:0;background:rgba(6,4,2,.96);backdrop-filter:blur(12px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -184,6 +224,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .modal-close{top:max(10px,env(safe-area-inset-top));right:10px;}
   .illus-card{width:200px;}
   .modal-entry{font-size:14.5px;line-height:2.05;max-width:none;}
+  .taxon-head{padding:22px 20px 20px;}
+  .taxon-mode{grid-template-columns:1fr;gap:5px;}
+  .taxon-description{padding:20px 20px 0;}
+  .taxon-members{grid-template-columns:1fr;padding:20px;gap:16px;}
+  .taxon-visual{aspect-ratio:16/11;}
+  .taxon-coda{margin:0 20px 22px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:opacity .3s ease!important;}}
 </style>
@@ -231,6 +277,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="illus-scroll-wrap">
     <div class="illus-scroll" id="prints-scroll"></div>
   </div>
+
+  <div class="section-div" style="margin-top:48px">
+    <span id="taxonomy-label">系統 · 001</span>
+  </div>
+  <p class="taxonomy-intro" id="taxonomy-intro"></p>
+  <div id="taxonomy-root"></div>
 
   <div class="footer"><span>Karasuki</span> &nbsp;·&nbsp; Nothing is truly gone. Only forgotten.</div>
 </div>
@@ -488,6 +540,44 @@ const PRINTS = [
   // Add prints here
 ];
 
+const TAXONOMY = [
+  {
+    id:'wearers',
+    num:'001',
+    genusEN:'The Wearers',
+    genusJP:'纏うもの',
+    modeEN:'They persist by wearing a person.',
+    modeJP:'人を身にまとって存続する。',
+    descriptionEN:`The Wearers are a genus of Karasuki creatures that persist by wearing a person. The two known members are distinguished by what failed to happen.`,
+    descriptionJP:`「纏うもの」は、人を身にまとって存続するカラスキーの一属である。確認されている二種は、「何が起こらなかったのか」によって分かれる。`,
+    codaEN:`One is a structure with the person missing. The other is a person with the moment missing.`,
+    codaJP:`一方は、人を欠いた形。もう一方は、瞬間を欠いた人。`,
+    members:[
+      {
+        id:'nulvane',
+        nameEN:'Nulvane',
+        nameJP:'ヌルヴェイン',
+        sprite:'nulvane.png',
+        forgettingEN:'A Person Who Never Happened',
+        forgettingJP:'存在しなかった人',
+        entryEN:`A Nulvane wears a person who never happened at all—an armature standing in for a life that never arrived. It remains still and empty, doing nothing wrong because it was never given anything to do.`,
+        entryJP:`ヌルヴェインがまとうのは、最初から存在しなかった人だ。生まれることのなかった人生の代わりに立つ骨組みであり、静かで、空っぽで、何もしない。するべきことを、一度も与えられなかったからだ。`
+      },
+      {
+        id:'mouhitome',
+        nameEN:'Mouhitome',
+        nameJP:'モウヒトメ',
+        sprite:'mouhitome.png',
+        forgettingEN:'A Moment That Never Happened',
+        forgettingJP:'起こらなかった瞬間',
+        entryEN:`A Mouhitome wears a person who truly existed, borrowing them to complete a moment that did not. The unspoken word is spoken. The withheld hand reaches. Every action arrives at full strength, but never where it belonged—always at the wrong door.`,
+        entryJP:`モウヒトメがまとうのは、確かに存在した人だ。その人を借りて、起こらなかった一瞬を実行する。言われなかった言葉が口にされ、伸ばされなかった手が伸びる。すべては完全な力で行われるが、あるべき場所には届かない。いつも、違う扉へ向かう。`
+      }
+    ]
+  }
+  // Add genera here
+];
+
 let currentLang='jp',currentChar=null,currentStage=0,autoTimer=null;
 // track which folder the open lightbox image came from
 let currentLbFolder='illustrations';
@@ -551,6 +641,49 @@ function buildPrints(){
     scroll.appendChild(card);
   });
   document.getElementById('prints-label').textContent=`${isJP()?'プリント':'Prints'} · ${String(PRINTS.length).padStart(3,'0')}`;
+}
+
+// ── TAXONOMY ──
+function buildTaxonomy(){
+  const root=document.getElementById('taxonomy-root');
+  const jp=isJP();
+  document.getElementById('taxonomy-label').textContent=`${jp?'系統':'Taxonomy'} · ${String(TAXONOMY.length).padStart(3,'0')}`;
+  document.getElementById('taxonomy-intro').textContent=jp
+    ?'カラスキーの生きものは、姿ではなく、消えずに残る方法と、それを生んだ忘れられ方によって分類される。'
+    :'Karasuki’s creatures are classified not by appearance, but by how they persist—and by the kind of forgetting that created them.';
+  root.innerHTML='';
+  TAXONOMY.forEach(genus=>{
+    const shelf=document.createElement('section');
+    shelf.className='taxon-shelf';
+    shelf.setAttribute('aria-labelledby',`taxon-${genus.id}-title`);
+    const members=genus.members.map(member=>`
+      <article class="taxon-member">
+        <div class="taxon-visual ${member.id}">
+          <img class="taxon-sprite" src="assets/zukan/taxonomy/${member.sprite}" alt="${jp?member.nameJP:member.nameEN}" loading="lazy"/>
+        </div>
+        <div class="taxon-member-copy">
+          <h3 class="taxon-member-name">${jp?member.nameJP:member.nameEN}</h3>
+          <div class="taxon-type">
+            <span class="taxon-type-label">${jp?'忘却型':'Forgetting type'}</span>
+            <span class="taxon-type-value">${jp?member.forgettingJP:member.forgettingEN}</span>
+          </div>
+          <p class="taxon-member-entry">${jp?member.entryJP:member.entryEN}</p>
+        </div>
+      </article>`).join('');
+    shelf.innerHTML=`
+      <header class="taxon-head">
+        <div class="taxon-kicker">${jp?'属':'Genus'} ${genus.num}</div>
+        <h2 class="taxon-title" id="taxon-${genus.id}-title">${jp?genus.genusJP:genus.genusEN}</h2>
+        <div class="taxon-mode">
+          <span class="taxon-rank">${jp?'存続様式':'Mode of persistence'}</span>
+          <span class="taxon-mode-copy">${jp?genus.modeJP:genus.modeEN}</span>
+        </div>
+      </header>
+      <p class="taxon-description">${jp?genus.descriptionJP:genus.descriptionEN}</p>
+      <div class="taxon-members">${members}</div>
+      <p class="taxon-coda">${jp?genus.codaJP:genus.codaEN}</p>`;
+    root.appendChild(shelf);
+  });
 }
 
 document.querySelectorAll('.rail-btn').forEach(btn=>{
@@ -671,6 +804,7 @@ function setLang(lang){
   buildGrid();
   buildIllus();
   buildPrints();
+  buildTaxonomy();
   if(modal.classList.contains('open')&&currentChar!==null){
     const c=CHARACTERS[currentChar];
     modalName.textContent=jp?c.nameJP:c.nameEN;
