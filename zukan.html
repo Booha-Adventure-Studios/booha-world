@@ -189,10 +189,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .taxon-member-copy{padding:20px 20px 22px;}
 .taxon-member-name{font-family:'Spectral',Georgia,serif;font-size:21px;font-weight:700;color:var(--ivory);line-height:1.15;margin-bottom:15px;}
 .jp .taxon-member-name{font-family:'Noto Serif JP',serif;font-size:18px;}
-.taxon-type{padding-top:13px;border-top:1px solid var(--border);margin-bottom:15px;}
-.taxon-type-label{display:block;font-size:8.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--moss);margin-bottom:5px;}
-.taxon-type-value{display:block;font-family:'Spectral',Georgia,serif;font-size:16px;font-weight:600;color:var(--bone);line-height:1.35;}
-.jp .taxon-type-value{font-family:'Noto Serif JP',serif;font-size:13.5px;}
 .taxon-member-entry{font-family:'Spectral',Georgia,serif;font-size:13.5px;line-height:1.8;color:#aa9f90;white-space:pre-line;}
 .jp .taxon-member-entry{font-family:'Noto Serif JP',serif;font-size:12px;line-height:1.95;}
 .taxon-coda{position:relative;margin:0 28px 28px;padding:16px 18px;border-left:2px solid var(--moss);background:rgba(106,152,96,.055);font-family:'Spectral',Georgia,serif;font-size:15px;font-style:italic;color:var(--bone);}
@@ -578,8 +574,8 @@ const TAXONOMY = [
     genusJP:'まとうもの',
     modeEN:'They persist by wearing a person.',
     modeJP:'人を身にまとって存続する。',
-    descriptionEN:`The Wearers are a genus of Karasuki creatures that persist by wearing a person. The two known members are distinguished by what failed to happen.`,
-    descriptionJP:`「まとうもの」は、人を身にまとって存続するカラスキーの一属である。確認されている二種は、「何が起こらなかったのか」によって分かれる。`,
+    descriptionEN:`The Wearers are a genus of Karasuki creatures that persist by wearing a person. They have no body of their own, and no self beneath the borrowed one. What they wear was always someone else, and that someone is the thing the forgetting misplaced. Remove the worn person and nothing is left behind. The two known members are distinguished by what failed to happen.`,
+    descriptionJP:`「まとうもの」は、人を身にまとって存続するカラスキーの一属である。自らの体を持たず、まとった人の下に、自己と呼べるものもない。まとうのは、いつも他人だ。その他人こそが、忘却が取りこぼしたものである。まとった人を取り去れば、あとには何も残らない。確認されている二種は、「何が起こらなかったのか」によって分かれる。`,
     codaEN:`One is a structure with the person missing. The other is a person with the moment missing.`,
     codaJP:`一方は、人を欠いた形。もう一方は、瞬間を欠いた人。`,
     members:[
@@ -588,20 +584,16 @@ const TAXONOMY = [
         nameEN:'Nulvane',
         nameJP:'ヌルヴェイン',
         sprite:'nulvane.png',
-        forgettingEN:'A Person Who Never Happened',
-        forgettingJP:'存在しなかった人',
-        entryEN:`A Nulvane wears a person who never happened at all, an armature standing in for a life that never arrived. It remains empty, but never still, flickering with the lives it never had, flashing through everything it could have been at once.`,
-        entryJP:`ヌルヴェインがまとうのは、最初から存在しなかった人だ。生まれることのなかった人生の代わりに立つ骨組みであり、空っぽでありながら、決してじっとしてはいない。ありえたかもしれない無数の命が、その内で一度に明滅している。`
+        entryEN:`A Nulvane wears the thoughts or ideas of a person who never happened at all. What it appears as is an armature, the bare frame of a life that was drafted and never arrived, a body kept ready for someone who was never born into it. Nothing was ever hung on the frame. The person it wears is not late. The person it wears is one who was forgotten or never arrived at all.\n\nIt fills with these thoughts and ideas, and it is never still. Inside the frame the lives it might have had flicker all at once, every road not taken lit and swirling together, none of them real enough to hold. Within the Wearers it is the emptier of the two, and the more crowded for being empty. A Nulvane is not haunted by a person. It is haunted by all the persons it could have been.`,
+        entryJP:`ヌルヴェインがまとうのは、最初から存在しなかった人の思考や着想だ。それが現れるのは骨組みとして、生まれてくることのなかった人生の枠であり、誰かのために用意されたまま、その誰かが一度も入らなかった体だ。枠に、何かがかけられたことはない。まとった人は、遅れているのではない。忘れられたか、あるいは最初から来なかった人なのだ。\n\nその思考や着想で満ちながら、決してじっとしてはいない。枠の内では、ありえたかもしれない無数の命が一度に明滅し、選ばれなかったすべての道が灯り、渦を巻いて混じり合い、どれもつかめるほどには確かでない。まとうものの中では、より空虚な方であり、空虚であるがゆえに、より混み合っている。ヌルヴェインに取り憑いているのは、一人の人ではない。なりえたかもしれない、すべての人だ。`
       },
       {
         id:'mouhitome',
         nameEN:'Mouhitome',
         nameJP:'モウヒトメ',
         sprite:'mouhitome.png',
-        forgettingEN:'A Moment That Never Happened',
-        forgettingJP:'起こらなかった瞬間',
-        entryEN:`A Mouhitome wears a person who truly existed, borrowing them to complete a moment that did not. The unspoken word is spoken. The withheld hand reaches. Every action arrives at full strength, but never where it belonged. Always at the wrong door.`,
-        entryJP:`モウヒトメがまとうのは、確かに存在した人だ。その人を借りて、起こらなかった一瞬を実行する。言われなかった言葉が口にされ、伸ばされなかった手が伸びる。すべては完全な力で行われるが、あるべき場所には届かない。いつも、違う扉へ向かう。`
+        entryEN:`A Mouhitome wears a person who truly existed, borrowing them to carry out a moment that did not. The word that was swallowed is finally spoken. The action that was held back happens. Every gesture the moment never got is performed now, at full strength, in full daylight.\n\nNone of it arrives where it belonged. The words land on the wrong person, the actions find the wrong year, the moment is enacted always at the wrong door. Within the Wearers it is the fuller of the two, and the more dangerous for being full. It carries no will of its own and wants nothing, so nothing it does can be laid at its feet. It is only a moment that never happened, wearing a person who did, arriving too late and in the wrong place, forever.`,
+        entryJP:`モウヒトメがまとうのは、確かに存在した人だ。その人を借りて、起こらなかった一瞬を果たす。飲み込まれた言葉が、ついに口にされる。抑えられていた行いが、起こる。その一瞬が得られなかったしぐさのすべてが、いま、完全な力で、白日の下で行われる。\n\nそのどれもが、あるべき場所には届かない。言葉は違う人に落ち、行いは違う年にたどり着き、その一瞬はいつも、違う扉の前で演じられる。まとうものの中では、より満ちた方であり、満ちているがゆえに、より危うい。自らの意志を持たず、何も望まないため、その行いを咎めることは誰にもできない。それはただ、起こらなかった一瞬が、確かに存在した人をまとって、いつまでも遅れて、違う場所へと現れているだけだ。`
       }
     ]
   },
@@ -612,8 +604,8 @@ const TAXONOMY = [
     genusJP:'片づけるもの',
     modeEN:'They persist by keeping a room presentable.',
     modeJP:'その場を体裁よく保つことで存続する。',
-    descriptionEN:`The Tidiers are a genus of Karasuki creatures that persist by keeping a room presentable. What they clear away is never furniture. It is feeling, true and fully remembered, that the room has decided it would rather not hold. A Tidier does not erase the feeling and does not argue with it. It removes only the place where the feeling was allowed to sit. The two known members work by opposite methods.`,
-    descriptionJP:`片づけるものは、その場を体裁よく保つことで存続するカラスキーの一属である。彼らが片づけるのは、物ではない。確かに感じられ、はっきりと覚えられているのに、その場がもう抱えたくないと決めた気持ちだ。片づけるものは、その気持ちを消しはしないし、否定もしない。ただ、その気持ちが居ていい場所だけを、その場から取り除く。確認されている二種は、正反対のやり方でそれを行う。`,
+    descriptionEN:`The Tidiers are a genus of Karasuki creatures that persist by keeping a room presentable. They appear to clear away true and meaningful feelings when the room has decided it would rather not hold them. A Tidier does not erase the feeling and does not argue with it. It removes only the place where the feeling was allowed to sit. The two known members work by opposite methods.`,
+    descriptionJP:`「片づけるもの」は、その場を体裁よく保つことで存続するカラスキーの一属である。その場が、もう抱えたくないと決めたとき、彼らは確かで意味のある気持ちを片づけるように見える。片づけるものは、その気持ちを消しはしないし、否定もしない。ただ、その気持ちが居ていい場所だけを、その場から取り除く。確認されている二種は、正反対のやり方でそれを行う。`,
     codaEN:`One is a room emptied of the feeling. The other is a room filled until the feeling cannot be seen.`,
     codaJP:`一方は、気持ちを空にされた部屋。もう一方は、気持ちが見えなくなるまで満たされた部屋。`,
     members:[
@@ -623,10 +615,8 @@ const TAXONOMY = [
         nameJP:'ショウガナイ',
         sprite:'shoganai.png',
         atmosphere:'smoke',
-        forgettingEN:'The Room Emptied',
-        forgettingJP:'空にされた部屋',
-        entryEN:`A Shoganai empties the room. It takes what should have been spoken and leaves silence where it stood, and the quiet that follows is mistaken for peace. Nothing has been forgotten. There is simply nowhere left to put it.`,
-        entryJP:`ショウガナイは、その場を空にする。語られるべきだったものを受け取り、あったはずの場所に沈黙を残す。そのあとの静けさは、平穏と取り違えられる。何も忘れられてはいない。ただ、それを置く場所が、もうどこにもない。`
+        entryEN:`A Shoganai empties the room. Some things truly cannot be helped, and to say so can be a gift, a permission to set down a weight that no action will lift. When the words are meant that way, no Shoganai comes. It arrives only when the same words are used to make another person's pain stop inconveniencing the room, when anger is filed away as complaining and grief is treated as bad manners.\n\nIt takes whatever the room has decided should no longer be spoken, and it leaves silence standing where the feeling stood. Nothing is forgotten. The person still knows exactly what happened. There is simply nowhere left to put it. Afterward the room is calm, but there is no peace. The Shoganai follows the one who was silenced, and they carry it with them forever.`,
+        entryJP:`ショウガナイは、その場を空にする。本当に、どうしようもないことはある。そう口にすることが、贈り物になることもある。どんな行いでも下ろせない重荷を、下ろしてもいいという許しに。その意味で言われたとき、ショウガナイは来ない。同じ言葉が、誰かの痛みをその場の邪魔にならないよう黙らせるために使われたとき、怒りが不満として片づけられ、悲しみが行儀の悪さとして扱われたとき、それは現れる。\n\nその場が、もう口にすべきでないと決めたものを、ショウガナイはすべて受け取り、気持ちのあった場所に沈黙を残す。忘れられたものは、何もない。本人は、何があったのかをそのまま覚えている。ただ、それを置く場所だけが、どこにもない。そのあと、部屋は静かになる。だが、そこに安らぎはない。ショウガナイは黙らされた者につきまとい、その者は、それをどこへでも、いつまでも連れて歩くことになる。`
       },
       {
         id:'polly',
@@ -634,10 +624,8 @@ const TAXONOMY = [
         nameJP:'ポリー',
         sprite:'polly.png',
         atmosphere:'hearts',
-        forgettingEN:'The Room Flooded',
-        forgettingJP:'満たされた部屋',
-        entryEN:`A Polly is the smiling warden of a pleasant room. They arrive not to comfort, but to police, using a blinding, aggressive brightness to outlaw the wound rather than tend it. A Polly materializes wherever grief is treated as a social breach, where a soul in pain is ordered to smile, and where raw sorrow is met not with quiet companionship, but with a demanding eviction notice. To them, your heartbreak is merely an untidy inconvenience, something to be swept out of sight so the atmosphere remains undisturbed.`,
-        entryJP:`「ポリー」とは、心地よい空間を守る、笑顔の看守だ。彼らは慰めるためではなく、取り締まるために現れる。傷の手当てをする代わりに、目を眩ませるような攻撃的な明るさで、傷つくことそのものを禁止するのだ。\n\n深い悲しみがマナー違反として扱われる場所、痛みに震える魂が笑顔を強要される場所、そしてむき出しの悲しみが、静かな寄り添いではなく「即刻立ち退け」という要求に直面する場所、ポリーはそこに現れる。彼らにとってあなたの失意は、単なる見苦しい不都合にすぎない。空間の空気を乱さないために、視界から掃き出すべきものなのだ。`
+        entryEN:`A Polly floods the room. Hope is real and comfort is real, and to sit beside a suffering person and say gently that it will not always hurt this much is a kindness. When the brightness is meant that way, no Polly comes. It arrives only when brightness is used to forbid the wound instead of tend it, when grief is treated as a social breach and a person in pain is told to smile.\n\nIt does not want anyone healed. It wants them to put on a fake smile. The sorrow is not taken. The person feels it exactly as before. Only the permission to show it is swept out of sight, so the room can stay pleasant. Afterward the room is cheerful. A Polly does not follow the grieving. It stays at the shoulder of the one who smiled over them, for as long as the smile is kept. It is the cheer of a painted face.`,
+        entryJP:`ポリーは、その場を満たす。希望は本物だ。慰めもまた本物だ。苦しんでいる人のそばに座り、この痛みがいつまでも続くわけではないと、そっと告げること。それは優しさだ。その意味で明るさが向けられたとき、ポリーは来ない。明るさが、傷を手当てするためではなく禁じるために使われたとき、悲しみが社交上の非礼として扱われ、痛む人が笑うよう命じられたとき、それは現れる。\n\nポリーは、誰かが癒えることを望まない。偽りの笑みを浮かべることを望む。悲しみは持っていかれない。本人は、以前とまったく同じように、それを感じ続ける。ただ、それを見せる許しだけが、その場が心地よくあり続けるために、視界から掃き出される。そのあと、部屋は明るくなる。ポリーは、悲しむ者にはつきまとわない。悲しむ者のそばで笑みを浮かべた者の肩に、その笑みが保たれるかぎり寄り添い続ける。それは、描かれた顔の明るさだ。`
       }
     ]
   }
@@ -732,10 +720,6 @@ function buildTaxonomy(){
         </div>
         <div class="taxon-member-copy">
           <h3 class="taxon-member-name">${jp?member.nameJP:member.nameEN}</h3>
-          <div class="taxon-type">
-            <span class="taxon-type-label">${jp?'忘却型':'Forgetting type'}</span>
-            <span class="taxon-type-value">${jp?member.forgettingJP:member.forgettingEN}</span>
-          </div>
           <p class="taxon-member-entry">${jp?member.entryJP:member.entryEN}</p>
         </div>
       </article>`).join('');
