@@ -704,8 +704,8 @@ function buildTaxonomy(){
   const jp=isJP();
   document.getElementById('taxonomy-label').textContent=`${jp?'系統':'Taxonomy'} · ${String(TAXONOMY.length).padStart(3,'0')}`;
   document.getElementById('taxonomy-intro').textContent=jp
-    ?'カラスキーの生きものは、姿ではなく、消えずに残る方法と、それを生んだ忘れられ方によって分類される。'
-    :'Karasuki’s creatures are classified not by appearance, but by how they persist, and by the kind of forgetting that created them.';
+    ?'カラスキーの生きものは、姿ではなく、消えずに残る方法によって分類される。'
+    :'Karasuki’s creatures are classified not by appearance, but by how they persist.';
   root.innerHTML='';
   TAXONOMY.forEach(genus=>{
     const shelf=document.createElement('section');
