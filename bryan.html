@@ -158,6 +158,41 @@
   }
   .header-links a:hover { color: var(--moss); }
 
+  /* ── LANGUAGE TOGGLE ── */
+  .lang-pill-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 -1.5rem;
+  }
+
+  .lang-pill {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px;
+  }
+
+  .langBtn {
+    padding: 7px 24px;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    cursor: pointer;
+    transition: all .18s ease;
+  }
+
+  .langBtn.active {
+    background: var(--bg2);
+    color: var(--text);
+    box-shadow: 0 2px 10px rgba(0,0,0,.45);
+  }
+
   /* ── HERO ── */
   .hero {
     display: grid;
@@ -357,6 +392,34 @@
 
   .bio-closing p::first-letter { all: unset; }
 
+  .jp {
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .jp .hero-eyebrow,
+  .jp .tag,
+  .jp .section-label,
+  .jp .work-card-label,
+  .jp .work-card-arrow,
+  .jp .photo-caption {
+    letter-spacing: .06em;
+  }
+
+  .jp .hero-title,
+  .jp .bio p,
+  .jp .bio-closing p,
+  .jp .work-card-title {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: normal;
+  }
+
+  .jp .hero-title { font-size: 1.25rem; line-height: 1.7; }
+  .jp .bio p { font-size: 1.05rem; line-height: 2; }
+  .jp .bio p:first-of-type::first-letter { all: unset; }
+  .jp .bio-closing p { font-size: 1rem; line-height: 2; }
+  .jp .work-card-title { font-size: 1.05rem; line-height: 1.5; }
+  .jp .work-card-desc { line-height: 1.85; }
+
   /* ── WORK GRID ── */
   .work {
     max-width: 1100px;
@@ -493,105 +556,112 @@
   .hero-photo { animation: fadeUp 0.8s 0.3s ease both; }
 </style>
 </head>
-<body>
+<body id="root">
 
 <header class="site-header">
   <a href="./index.html">Booha World</a>
   <nav class="header-links">
-    <a href="https://www.bryanharper.tokyo">School</a>
-    <a href="./workshop.html">Workshop</a>
-    <a href="./zukan.html">Zukan</a>
-    <a href="./adventure.html">Adventure</a>
+    <a href="https://www.bryanharper.tokyo" data-en="School" data-jp="英会話教室">School</a>
+    <a href="./workshop.html" data-en="Workshop" data-jp="ワークショップ">Workshop</a>
+    <a href="./zukan.html" data-en="Zukan" data-jp="図鑑">Zukan</a>
+    <a href="./adventure.html" data-en="Adventure" data-jp="アドベンチャー">Adventure</a>
   </nav>
 </header>
 
 <main>
 
+  <div class="lang-pill-wrap">
+    <div class="lang-pill" role="group" aria-label="Language">
+      <button class="langBtn active" id="btnEN" type="button">English</button>
+      <button class="langBtn" id="btnJP" type="button">日本語</button>
+    </div>
+  </div>
+
   <section class="hero">
     <div class="hero-text">
-      <p class="hero-eyebrow">Columbus, Ohio → USAF → Yokota → Tomisato, Chiba</p>
+      <p class="hero-eyebrow" data-en="Columbus, Ohio → USAF → Yokota → Tomisato, Chiba" data-jp="オハイオ州コロンバス → 米空軍 → 横田 → 千葉県富里市">Columbus, Ohio → USAF → Yokota → Tomisato, Chiba</p>
       <h1 class="hero-name">Bryan Harper</h1>
-      <p class="hero-title">Teacher. Developer. Maker. Novelist.</p>
+      <p class="hero-title" data-en="Teacher. Developer. Maker. Novelist." data-jp="英語講師。開発者。ものづくり。小説家。">Teacher. Developer. Maker. Novelist.</p>
       <div class="hero-tags">
-        <span class="tag green">Native English Teacher</span>
-        <span class="tag green">15+ Years in Japan</span>
-        <span class="tag">US Air Force Veteran</span>
-        <span class="tag">School Founder</span>
-        <span class="tag">App Developer</span>
-        <span class="tag">Woodworker</span>
-        <span class="tag">Illustrator</span>
+        <span class="tag green" data-en="Native English Teacher" data-jp="ネイティブ英語講師">Native English Teacher</span>
+        <span class="tag green" data-en="15+ Years in Japan" data-jp="日本在住15年以上">15+ Years in Japan</span>
+        <span class="tag" data-en="US Air Force Veteran" data-jp="米空軍退役軍人">US Air Force Veteran</span>
+        <span class="tag" data-en="School Founder" data-jp="英会話教室代表">School Founder</span>
+        <span class="tag" data-en="App Developer" data-jp="アプリ開発者">App Developer</span>
+        <span class="tag" data-en="Woodworker" data-jp="木工作家">Woodworker</span>
+        <span class="tag" data-en="Illustrator" data-jp="イラストレーター">Illustrator</span>
       </div>
       <div class="hero-links">
-        <a href="https://www.bryanharper.tokyo" class="btn btn-primary">Visit the School</a>
-        <a href="./workshop.html" class="btn btn-secondary">See the Work</a>
+        <a href="https://www.bryanharper.tokyo" class="btn btn-primary" data-en="Visit the School" data-jp="英会話教室を見る">Visit the School</a>
+        <a href="./workshop.html" class="btn btn-secondary" data-en="See the Work" data-jp="作品を見る">See the Work</a>
       </div>
     </div>
     <div class="hero-photo">
       <div class="photo-frame">
         <img src="assets/img/bryan.png" alt="Bryan Harper — English teacher and maker based in Tomisato, Chiba, Japan" width="380" height="380"/>
       </div>
-      <span class="photo-caption">Tomisato, Chiba, Japan</span>
+      <span class="photo-caption" data-en="Tomisato, Chiba, Japan" data-jp="千葉県富里市">Tomisato, Chiba, Japan</span>
     </div>
   </section>
 
   <div class="divider"></div>
 
   <section class="bio">
-    <div class="section-label">About</div>
+    <div class="section-label" data-en="About" data-jp="プロフィール">About</div>
 
-    <p>Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United States Air Force, stationed at Yokota Air Base, where he met his wife and later came back and put down roots.</p>
+    <p data-en="Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United States Air Force, stationed at Yokota Air Base, where he met his wife and later came back and put down roots." data-jp="ブライアン・ハーパーはアメリカ・オハイオ州コロンバス出身。米空軍の消防士として横田基地に赴任した際に日本へ来て、そこで妻と出会い、その後ふたたび日本へ戻って根を下ろしました。">Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United States Air Force, stationed at Yokota Air Base, where he met his wife and later came back and put down roots.</p>
 
-    <p>When his Air Force days ended, instead of continuing to drive a rescue truck, he threw himself into teaching — workshops, elementary ALT work, international schools, private lessons — trying every setting he could find to understand why so many students study English for years and still can't hold a conversation. That question became an obsession, and eventually a school.</p>
+    <p data-en="When his Air Force days ended, instead of continuing to drive a rescue truck, he threw himself into teaching — workshops, elementary ALT work, international schools, private lessons — trying every setting he could find to understand why so many students study English for years and still can't hold a conversation. That question became an obsession, and eventually a school." data-jp="空軍を離れたあと、レスキュー車を運転し続ける代わりに、ブライアンは教えることに没頭しました。ワークショップ、小学校でのALT、インターナショナルスクール、個人レッスン——あらゆる場で教えながら、なぜ多くの人が何年も英語を学んでも会話ができないのかを考え続けました。その問いはやがて彼の原動力となり、英会話教室へとつながりました。">When his Air Force days ended, instead of continuing to drive a rescue truck, he threw himself into teaching — workshops, elementary ALT work, international schools, private lessons — trying every setting he could find to understand why so many students study English for years and still can't hold a conversation. That question became an obsession, and eventually a school.</p>
 
-    <p>Bryan's English School opened in Tomisato, Chiba around one principle: students need to use English, not just recognize it. That became the flipped Output Class—prepare at home, then speak in a small group—and eventually Booha Adventure, a complete weekly learning platform coded from scratch. The same content now also powers English Juku, a separate 90-minute class where students test the entire week under a shared clock and see their results at the end.</p>
+    <p data-en="Bryan's English School opened in Tomisato, Chiba around one principle: students need to use English, not just recognize it. That became the flipped Output Class—prepare at home, then speak in a small group—and eventually Booha Adventure, a complete weekly learning platform coded from scratch. The same content now also powers English Juku, a separate 90-minute class where students test the entire week under a shared clock and see their results at the end." data-jp="千葉県富里市にあるブライアン英会話教室は、「英語は知識として認識するだけでなく、実際に使うもの」という考えを軸につくられました。それが、自宅で準備してから少人数で話す反転型のアウトプットクラスになり、やがてゼロから開発した週ごとの学習プラットフォーム、Booha Adventureへと発展しました。同じ教材は現在、90分の時間内で一週間分をテストし、最後に結果を確認する英語塾クラスにも使われています。">Bryan's English School opened in Tomisato, Chiba around one principle: students need to use English, not just recognize it. That became the flipped Output Class—prepare at home, then speak in a small group—and eventually Booha Adventure, a complete weekly learning platform coded from scratch. The same content now also powers English Juku, a separate 90-minute class where students test the entire week under a shared clock and see their results at the end.</p>
 
-    <p>Teaching is one of many things Bryan makes. He builds furniture, runs workshops, illustrates characters, and designs card games. The through-line is the same everywhere: make the thing you want to exist. Connect it to people who want to make things too.</p>
+    <p data-en="Teaching is one of many things Bryan makes. He builds furniture, runs workshops, illustrates characters, and designs card games. The through-line is the same everywhere: make the thing you want to exist. Connect it to people who want to make things too." data-jp="教えることは、ブライアンがつくるものの一つにすぎません。家具をつくり、ワークショップを開き、キャラクターを描き、カードゲームをデザインします。どの活動にも通じるのは、「あってほしいものをつくる。そして、同じようにつくりたい人とつながる」ということです。">Teaching is one of many things Bryan makes. He builds furniture, runs workshops, illustrates characters, and designs card games. The through-line is the same everywhere: make the thing you want to exist. Connect it to people who want to make things too.</p>
 
     <div class="bio-closing">
-      <p>Karasuki is where forgotten things go. It's the world he built for his students, his characters, and the novel he's writing. Make of that what you will.</p>
+      <p data-en="Karasuki is where forgotten things go. It's the world he built for his students, his characters, and the novel he's writing. Make of that what you will." data-jp="カラスキーは、忘れられたものが行く場所。生徒のために、キャラクターのために、そしていま書いている小説のためにブライアンがつくった世界です。どう受け取るかは、あなた次第。">Karasuki is where forgotten things go. It's the world he built for his students, his characters, and the novel he's writing. Make of that what you will.</p>
     </div>
   </section>
 
   <div class="divider"></div>
 
   <section class="work">
-    <div class="section-label">What Bryan Makes</div>
+    <div class="section-label" data-en="What Bryan Makes" data-jp="ブライアンがつくるもの">What Bryan Makes</div>
     <div class="work-grid">
       <a href="https://www.bryanharper.tokyo" class="work-card">
-        <p class="work-card-label">Since 2018</p>
+        <p class="work-card-label" data-en="Since 2018" data-jp="2018年から">Since 2018</p>
         <h2 class="work-card-title">Bryan's English School</h2>
-        <p class="work-card-desc">Two Booha-connected class formats in Tomisato, Chiba: a flipped Output Class and a 90-minute English Juku weekly check.</p>
-        <span class="work-card-arrow">Visit →</span>
+        <p class="work-card-desc" data-en="Two Booha-connected class formats in Tomisato, Chiba: a flipped Output Class and a 90-minute English Juku weekly check." data-jp="千葉県富里市で、Boohaとつながる2つのクラスを開講。自宅準備型のアウトプットクラスと、90分間で週の内容を確認する英語塾クラスです。">Two Booha-connected class formats in Tomisato, Chiba: a flipped Output Class and a 90-minute English Juku weekly check.</p>
+        <span class="work-card-arrow" data-en="Visit →" data-jp="見る →">Visit →</span>
       </a>
       <a href="./adventure.html" class="work-card">
-        <p class="work-card-label">Built from Scratch</p>
+        <p class="work-card-label" data-en="Built from Scratch" data-jp="ゼロから開発">Built from Scratch</p>
         <h2 class="work-card-title">Booha Adventure</h2>
-        <p class="work-card-desc">A private PWA English learning platform. 50,000+ lines of vanilla JS. Original worlds and characters, 9 mini-games, unlockable games, three curriculum tracks.</p>
-        <span class="work-card-arrow">Explore →</span>
+        <p class="work-card-desc" data-en="A private PWA English learning platform. 50,000+ lines of vanilla JS. Original worlds and characters, 9 mini-games, unlockable games, three curriculum tracks." data-jp="プライベートPWA英語学習プラットフォーム。バニラJavaScript 50,000行以上で開発。オリジナルの世界とキャラクター、9つのミニゲーム、アンロック式ゲーム、3つのカリキュラムを収録。">A private PWA English learning platform. 50,000+ lines of vanilla JS. Original worlds and characters, 9 mini-games, unlockable games, three curriculum tracks.</p>
+        <span class="work-card-arrow" data-en="Explore →" data-jp="探検する →">Explore →</span>
       </a>
       <a href="./zukan.html" class="work-card">
-        <p class="work-card-label">Field Guide + Novel</p>
+        <p class="work-card-label" data-en="Field Guide + Novel" data-jp="図鑑と小説">Field Guide + Novel</p>
         <h2 class="work-card-title">Karasuki</h2>
-        <p class="work-card-desc">A world where forgotten things go. Original illustrated characters. Bilingual. The basis of Bryan's novel in progress.</p>
-        <span class="work-card-arrow">Enter →</span>
+        <p class="work-card-desc" data-en="A world where forgotten things go. Original illustrated characters. Bilingual. The basis of Bryan's novel in progress." data-jp="忘れられたものが行く世界。オリジナルのイラストキャラクターが暮らすバイリンガルの物語で、執筆中の小説の土台にもなっています。">A world where forgotten things go. Original illustrated characters. Bilingual. The basis of Bryan's novel in progress.</p>
+        <span class="work-card-arrow" data-en="Enter →" data-jp="入る →">Enter →</span>
       </a>
       <a href="./workshop.html" class="work-card">
-        <p class="work-card-label">15 Projects</p>
+        <p class="work-card-label" data-en="15 Projects" data-jp="15のプロジェクト">15 Projects</p>
         <h2 class="work-card-title">Bryan's Workshop</h2>
-        <p class="work-card-desc">Woodworking, crafts, handmade objects. A portfolio of things built because they needed to exist.</p>
-        <span class="work-card-arrow">View →</span>
+        <p class="work-card-desc" data-en="Woodworking, crafts, handmade objects. A portfolio of things built because they needed to exist." data-jp="木工、クラフト、手づくりのものたち。「必要だったから」つくられた作品のポートフォリオ。">Woodworking, crafts, handmade objects. A portfolio of things built because they needed to exist.</p>
+        <span class="work-card-arrow" data-en="View →" data-jp="見る →">View →</span>
       </a>
       <a href="./cards.html" class="work-card">
-        <p class="work-card-label">Original Design</p>
+        <p class="work-card-label" data-en="Original Design" data-jp="オリジナルデザイン">Original Design</p>
         <h2 class="work-card-title">Booha Cards</h2>
-        <p class="work-card-desc">Illustrated English learning card decks designed for classroom use. Made for teachers, built by one.</p>
-        <span class="work-card-arrow">See the decks →</span>
+        <p class="work-card-desc" data-en="Illustrated English learning card decks designed for classroom use. Made for teachers, built by one." data-jp="教室で使うためにデザインした、イラスト付き英語学習カードデッキ。先生のために、一人の先生がつくりました。">Illustrated English learning card decks designed for classroom use. Made for teachers, built by one.</p>
+        <span class="work-card-arrow" data-en="See the decks →" data-jp="デッキを見る →">See the decks →</span>
       </a>
       <a href="./curricula.html" class="work-card">
-        <p class="work-card-label">Three Tracks</p>
+        <p class="work-card-label" data-en="Three Tracks" data-jp="3つのコース">Three Tracks</p>
         <h2 class="work-card-title">Curriculum</h2>
-        <p class="work-card-desc">Pre-Boo, Boo-riculum, Boo-Continuum. The same weekly content supports home-prepared conversation in Output and timed assessment in English Juku.</p>
-        <span class="work-card-arrow">Learn more →</span>
+        <p class="work-card-desc" data-en="Pre-Boo, Boo-riculum, Boo-Continuum. The same weekly content supports home-prepared conversation in Output and timed assessment in English Juku." data-jp="Pre-Boo、Boo-riculum、Boo-Continuum。週ごとの同じ内容が、アウトプットクラスでの自宅準備型の会話と、英語塾での時間制テストの両方を支えます。">Pre-Boo, Boo-riculum, Boo-Continuum. The same weekly content supports home-prepared conversation in Output and timed assessment in English Juku.</p>
+        <span class="work-card-arrow" data-en="Learn more →" data-jp="詳しく見る →">Learn more →</span>
       </a>
     </div>
   </section>
@@ -608,6 +678,28 @@
     <a href="./index.html">Booha World</a>
   </p>
 </footer>
+
+<script>
+  (() => {
+    const btnEN = document.getElementById('btnEN');
+    const btnJP = document.getElementById('btnJP');
+    const root = document.getElementById('root');
+
+    function setLang(lang) {
+      const isJP = lang === 'jp';
+      btnEN.classList.toggle('active', !isJP);
+      btnJP.classList.toggle('active', isJP);
+      document.documentElement.lang = isJP ? 'ja' : 'en';
+      root.classList.toggle('jp', isJP);
+      document.querySelectorAll('[data-en][data-jp]').forEach(el => {
+        el.textContent = el.dataset[isJP ? 'jp' : 'en'];
+      });
+    }
+
+    btnEN.addEventListener('click', () => setLang('en'));
+    btnJP.addEventListener('click', () => setLang('jp'));
+  })();
+</script>
 
 </body>
 </html>
