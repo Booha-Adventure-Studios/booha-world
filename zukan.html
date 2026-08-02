@@ -194,6 +194,40 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .taxon-coda{position:relative;margin:0 28px 28px;padding:16px 18px;border-left:2px solid var(--moss);background:rgba(106,152,96,.055);font-family:'Spectral',Georgia,serif;font-size:15px;font-style:italic;color:var(--bone);}
 .jp .taxon-coda{font-family:'Noto Serif JP',serif;font-size:13px;font-style:normal;}
 
+/* ── THE SEEN AND THE UNSEEN ── */
+.sightings-intro{max-width:660px;margin:-4px 0 22px;font-family:'Spectral',Georgia,serif;font-size:15px;line-height:1.85;color:var(--dim);}
+.jp .sightings-intro{font-family:'Noto Serif JP',serif;font-size:13px;line-height:2;}
+.sightings-reader{position:relative;overflow:hidden;border:1px solid rgba(109,145,126,.28);border-radius:calc(var(--r) + 4px);background:linear-gradient(145deg,#18211f 0%,#151816 56%,#1d1915 100%);box-shadow:0 20px 54px rgba(0,0,0,.42);}
+.sightings-reader::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 8% 8%,rgba(110,160,132,.16),transparent 32%),radial-gradient(circle at 100% 100%,rgba(203,144,85,.10),transparent 38%);}
+.sightings-record{position:relative;padding:clamp(26px,5vw,46px);min-height:540px;animation:sightingIn .34s ease;}
+@keyframes sightingIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.sighting-mark{display:flex;align-items:center;gap:10px;margin-bottom:24px;color:#a7c7ad;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.sighting-mark::before{content:'';width:24px;height:1px;background:#80ad88;}
+.jp .sighting-mark{font-family:'Noto Sans JP',sans-serif;font-size:10px;letter-spacing:.12em;}
+.sighting-copy{max-width:690px;margin:0 auto;}
+.sighting-copy p{font-family:'Spectral',Georgia,serif;font-size:clamp(16px,2.4vw,18px);line-height:1.95;color:#e5dfd0;margin:0 0 1.35em;}
+.jp .sighting-copy p{font-family:'Noto Serif JP',serif;font-size:clamp(14px,2.1vw,16px);line-height:2.15;}
+.sighting-copy p:last-child{margin-bottom:0;}
+.sighting-plate{position:relative;isolation:isolate;max-width:680px;margin:30px auto 0;padding:10px;background:#20302b;border:1px solid rgba(184,205,177,.28);box-shadow:0 18px 38px rgba(0,0,0,.42),inset 0 0 0 1px rgba(9,15,13,.4);}
+.sighting-plate::before{content:'';position:absolute;inset:10px;z-index:1;pointer-events:none;border:1px solid rgba(231,223,194,.25);}
+.sighting-plate::after{content:'';position:absolute;inset:10px;z-index:1;pointer-events:none;background:linear-gradient(145deg,rgba(51,98,84,.46),rgba(18,31,31,.18) 54%,rgba(171,117,65,.28));mix-blend-mode:color;}
+.sighting-plate img{display:block;width:100%;aspect-ratio:1;object-fit:cover;filter:grayscale(1) sepia(.48) hue-rotate(112deg) saturate(.78) contrast(1.14) brightness(.82);}
+.sighting-plate figcaption{position:relative;z-index:2;padding:10px 4px 1px;color:#a7c7ad;font-size:9px;font-weight:700;letter-spacing:2.2px;text-transform:uppercase;}
+.jp .sighting-plate figcaption{font-family:'Noto Sans JP',sans-serif;font-size:10px;letter-spacing:.08em;}
+.sighting-controls{position:relative;display:flex;justify-content:space-between;gap:12px;margin:34px auto 0;max-width:690px;padding-top:20px;border-top:1px solid rgba(184,205,177,.18);}
+.sighting-nav{min-height:38px;padding:8px 13px;border:1px solid rgba(184,205,177,.24);border-radius:999px;background:rgba(8,14,12,.34);color:#b8d3bb;font:600 11px/1.2 'DM Sans',sans-serif;letter-spacing:.8px;cursor:pointer;transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;}
+.sighting-nav:hover,.sighting-nav:focus-visible{background:rgba(106,152,96,.2);border-color:rgba(165,205,164,.56);color:#fff;transform:translateY(-1px);outline:none;}
+.sighting-nav[hidden]{visibility:hidden;}
+.jp .sighting-nav{font-family:'Noto Sans JP',sans-serif;font-size:11px;letter-spacing:.04em;}
+.sighting-open{display:grid;place-items:center;min-height:540px;text-align:center;padding:46px 26px;}
+.sighting-open-inner{max-width:520px;}
+.sighting-open-symbol{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 23px;border:1px solid rgba(184,205,177,.34);border-radius:50%;color:#a7c7ad;font:400 26px/1 'Spectral',Georgia,serif;}
+.sighting-open h3{font-family:'Spectral',Georgia,serif;font-size:clamp(24px,4vw,34px);font-weight:600;color:var(--ivory);line-height:1.25;margin-bottom:16px;}
+.jp .sighting-open h3{font-family:'Noto Serif JP',serif;font-size:clamp(21px,3.6vw,29px);}
+.sighting-open p{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.9;color:#c3ccbd;}
+.jp .sighting-open p{font-family:'Noto Serif JP',serif;font-size:14px;line-height:2.1;}
+.sighting-start{margin-top:27px;}
+
 .illus-lightbox{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:20px;}
 .illus-lightbox.open{display:flex;}
 .illus-lb-backdrop{position:absolute;inset:0;background:rgba(6,4,2,.96);backdrop-filter:blur(12px);cursor:pointer;-webkit-tap-highlight-color:transparent;}
@@ -256,6 +290,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   .taxon-members{grid-template-columns:1fr;padding:20px;gap:16px;}
   .taxon-visual{aspect-ratio:16/11;}
   .taxon-coda{margin:0 20px 22px;}
+  .sightings-record{padding:28px 20px;min-height:0;}
+  .sighting-open{min-height:390px;}
+  .sighting-plate{margin-top:25px;padding:7px;}
+  .sighting-plate::before,.sighting-plate::after{inset:7px;}
+  .sighting-controls{margin-top:28px;}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:opacity .3s ease!important;}}
 </style>
@@ -309,6 +348,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   </div>
   <p class="taxonomy-intro" id="taxonomy-intro"></p>
   <div id="taxonomy-root"></div>
+
+  <div class="section-div" style="margin-top:48px">
+    <span id="sightings-label">見えたものと、見えないもの</span>
+  </div>
+  <p class="sightings-intro" id="sightings-intro"></p>
+  <section class="sightings-reader" id="sightings-root" aria-live="polite"></section>
 
   <div class="footer"><span>Karasuki</span> &nbsp;·&nbsp; Nothing is truly gone. Only forgotten.</div>
 </div>
@@ -632,8 +677,177 @@ const TAXONOMY = [
   // Add genera here
 ];
 
+const SIGHTINGS = [
+  {
+    image:'001.JPG',
+    imageBefore:true,
+    textEN:`There is a door most people walk past without seeing. Saying you want to see and actually wanting to see are not the same thing. Most people cannot cross the line between them.
+
+I think the door knows the difference. I think it decides.
+
+I stopped and looked. Now I can see. I did not know it would see me too.
+
+Now I keep a record of the things I see, and the ones that will not leave me alone. Welcome to Karasuki.`,
+    textJP:`ほとんどの人が気づかずに通り過ぎる扉がある。見たいと言うことと、本当に見たいと思うことは同じではない。多くの人は、その境目を越えられない。
+
+あの扉には、その違いがわかるのだと思う。入る人を選んでいるのかもしれない。
+
+私は立ち止まって、見た。そうしたら、見えるようになった。あちらも私を見ているとは知らなかった。
+
+今は、見たものと、私を放っておかないものを書き残している。カラスキーへようこそ。`
+  },
+  {
+    image:'002.JPG',
+    imageBefore:true,
+    textEN:`There was a boy in a candy field today. He stood very still, like a statue, looking at something I could not see.
+
+I walked over and asked what he was looking for. He said he did not know yet, but he would know when it looked back.
+
+I told him that was a strange thing to want. He said wanting it was the only part he was sure of.
+
+He did not tell me his name, and I did not ask. Kids in here are always looking for something. Most of them find it. That is the part nobody warns them about.`,
+    textJP:`今日は、お菓子の野原に男の子がいた。何も見えないものを見つめて、像みたいにじっと立っていた。
+
+近づいて、何を探しているのか聞いた。男の子は、まだわからないけど、向こうから見返してきたらわかる、と言った。
+
+そんなものを見つけたがるなんて変だ、と言った。男の子は、見つけたいと思っていることだけは確かだ、と言った。
+
+名前は聞かなかった。あの中にいる子どもたちは、いつも何かを探している。たいていは見つける。でも、その先のことは誰も教えてくれない。`
+  },
+  {
+    image:'003.JPG',
+    textEN:`I went back to the candy field, but the boy was gone. I stayed anyway. I wanted to see what he had been looking for, and I figured the best way to find it was to touch something I probably should not.
+
+So I picked a piece of candy from a stalk. It was heavier than I imagined. Heavy and dry.
+
+Nothing happened for a second. Then something came out of the tall stalks. It was about the size of a cat, covered in dark green feathers, with cute little antlers. It walked upright, waddling like a penguin.
+
+It came at me like it knew me. Somehow, it spoke from behind its feathers. It asked if I had any candy. That was strange, because I was holding a piece I had just picked. I offered it to the thing, and it snatched it. A huge mouth opened, full of teeth, running the whole width of its body. It ate the candy, and then asked if I had any candy.
+
+I told it I had just given it candy. It asked where the candy went. I said, “You ate it.” It only looked up at me, so I picked another piece and handed it over.
+
+We went in a circle like that for a while. Then I noticed more of them coming out of the stalks and closing in around the field. I tossed the last piece behind the one in front of me and jogged away. They rushed after it with their mouths open.
+
+Then they came after me, so I ran.
+
+I wonder if they are dangerous. The first one was calm while I was handing it candy, but its little friends felt like they were boxing me in. I hope that boy is all right. Whatever he was looking for, it was not this.`,
+    textJP:`またお菓子の野原へ行った。でも男の子はいなかった。それでも残った。あの子が探していたものを見たかったし、見つけるには、たぶん触らないほうがいいものに触るしかないと思った。
+
+茎から、お菓子をひとつ取った。思ったより重かった。重くて、乾いていた。
+
+少しの間、何も起きなかった。それから背の高い茎の間から、何かが出てきた。猫くらいの大きさで、濃い緑の羽におおわれ、小さくてかわいい角が生えていた。ペンギンみたいに、よちよち二本足で歩いていた。
+
+そいつは、私を知っているみたいに近づいてきた。羽の奥から話しているように聞こえた。お菓子を持っているか、と聞かれた。さっき取ったお菓子を手に持っていたので、それは変だった。差し出すと、そいつは奪い取った。体の横幅いっぱいに、大きな口が開いた。中は歯だらけだった。お菓子を食べると、また、お菓子を持っているか、と聞いた。
+
+さっきあげたばかりだと言うと、お菓子はどこへ行ったのか、と聞いた。食べたでしょ、と答えた。そいつは私を見上げるだけだったので、もうひとつ取って渡した。
+
+しばらく、そんなことを繰り返した。そのあと、茎の間から同じようなものが何匹も出てきて、野原のまわりを囲み始めたことに気づいた。最後のお菓子を、目の前にいた一匹の後ろへ投げて、ゆっくり離れた。そいつらは口を開けて、お菓子に飛びついた。
+
+そのあと、今度は私のほうへ来たので、走った。
+
+あれは危ないのだろうか。最初の一匹は、お菓子を渡している間は落ち着いていた。でも、仲間たちは私を追いつめているように感じた。あの男の子が無事だといい。あの子が探していたのは、きっとこれじゃない。`
+  },
+  {
+    image:'004.jpg',
+    textEN:`I went in during the morning, but inside it was dusk. There is no sun in there. When you look up, the sky is more like a tunnel than a sky: a long one, with its own morning and dusk that do not match the time you walked in.
+
+There were new colors this time, and new sounds. The colors moved like fireflies, drifting and glowing, but I could never get close to one. Every time I reached for one, it was already somewhere else. Maybe it was not a bug at all. Maybe it was only a light that floats and moves and does not want to be held.
+
+Even at dusk it was too dark to follow the trails. My phone still does not work in there, but the flashlight does. That is the one thing in there that has ever gone the way I expected. When I shined it on the candy, the candy moved, just slightly. I kept the light moving after that, and kept away from it. I did not want to meet another green, feather-covered, big-mouthed penguin thing.
+
+One of the new sounds was a voice, or a lot of voices, saying the same thing over and over: “Booha.” It came from the treetops and moved fast, jumping around up there in what sounded like different voices taking turns. Far away, behind the trees, I saw lights sweeping around like spotlights. The Booha sound was heading that way, so I followed it.
+
+The closer I got, the dimmer the spotlights became. By the time I reached them, there were no lights at all. Just tents. Real big ones, everywhere behind an old wooden fence. It was quiet too. The openings on the tents in front were wide open. That was all I could see without getting closer.
+
+I will come back when it is bright out. The open tents can wait.`,
+    textJP:`朝に入ったのに、中は夕方だった。あの中に太陽はない。空を見上げると、空というより長いトンネルみたいだ。入った時間とは関係なく、あの中だけの朝と夕方がある。
+
+今回は、見たことのない色と音があった。色はホタルみたいに、ふわふわ光りながら動いていた。でも、ひとつにも近づけなかった。手を伸ばすたびに、もう別の場所にあった。虫ではないのかもしれない。ただ浮かんで動いて、つかまれたくない光なのかもしれない。
+
+夕方は、道をたどるには暗すぎた。スマホは今も使えない。でも懐中電灯は使える。あの中で、思った通りに動いたのは今のところそれだけだ。お菓子に光を当てると、お菓子が少しだけ動いた。そのあとから、光は動かし続けて、お菓子には近づかないようにした。緑の羽で、大きな口の、ペンギンみたいなものには、もう会いたくなかった。
+
+新しい音のひとつは、声だった。ひとつの声か、たくさんの声かわからない。「ブーハ」と何度も言っていた。木の上から聞こえ、違う声が交代しているみたいに、上のほうを速く移動していた。遠くの木の向こうに、サーチライトみたいな光が見えた。ブーハという声はそちらへ向かっていたので、ついて行った。
+
+近づくほど、光は暗くなった。着いたときには、もう光はなかった。あったのはテントだけ。古い木の柵の向こうに、大きなテントがたくさん並んでいた。そこも静かだった。手前のテントは、入口が大きく開いていた。近づかずに見えたのは、そこまでだった。
+
+明るいときに、また来る。開いたテントは、待っていてくれる。`
+  },
+  {
+    image:'005.jpg',
+    textEN:`I went back to look at the tents in daylight. I waited a few days because it stayed dark in there for a while, and I still do not know how time works in there.
+
+From now on, I will carry my big flashlight in my bag. The paths never look the same when I come back. The way to the tents goes through a place where the trees close overhead, and it gets dark even when the sky is bright.
+
+Before I saw the tents, something happened that I cannot explain. I will just tell you what happened, and you can decide what it means.
+
+The first time, I thought I had dropped something behind me. It felt like something fell from my bag onto the ground right at my back. I turned around, but there was nothing on the path. Just trees. I kept walking, and it happened again, heavier this time. It felt like I had dropped the whole bag. I turned around faster, fast enough that I should have caught whatever was following me, but there was still nothing. Only the trees on the path behind me were a little closer together than I remembered. It looked like something very tall was standing very still exactly where I was not looking. Maybe it was only shadows. It was a little dark.
+
+I did a test, like an idiot. I turned back around, counted slowly to five in my head, and heard it again: something moving. A definite step. I jumped around to look, and there was nothing. Just the trees.
+
+Here is what I worked out, and it only makes sense if something really was following me. If I walk forward without turning around, and hold the flashlight very steady, it moves when I do not look at it. As long as my eyes are on it, or on where I think it is, it does not move at all. The moment I face forward, it takes a step.
+
+So the whole way to the tents, I walked backward, watching the path behind me. It was the only place it could be, if I was right about any of this. I could not watch it and leave at the same time.
+
+The big flashlight started to go orange near where I thought I would find the tents, but there were no tents. Going back was the real problem. I could not work out how to keep facing the thing and still move toward the way out. I tried a slow backward U-turn, thinking it would follow me around and I would end up facing it again. All I did was put my back to it. The second it was behind me, I heard it moving. A close shuffling sound.
+
+So I stopped thinking and ran as fast as I could straight past where it was. I bumped into it.
+
+I am on my iPad now, writing this. I am starting to think I should have walked backward all the way out of Karasuki. I think I brought the feeling back with me. I think that is how it gets closer.
+
+It is silly. When you finish reading this, do not check behind you. There is nothing there. There is always nothing there. That is the worst part.`,
+    textJP:`明るいうちにテントを見に戻った。しばらくあの中が暗かったので、数日待った。時間がどうなっているのかは、今もわからない。
+
+これからは、大きい懐中電灯をバッグに入れて行く。戻るたびに道の見え方が違う。テントへ行く道は、木が頭の上で重なる場所を通る。空が明るくても、そこだけは少し暗い。
+
+テントが見える前に、説明できないことが起きた。起きたことだけ書く。どういう意味かは、読んだ人が決めていい。
+
+最初は、後ろに何か落としたのだと思った。バッグから何かが、背中のすぐ後ろの地面に落ちたように感じた。振り返った。でも道には何もなかった。木だけだった。歩き続けると、また起きた。今度はもっと重かった。バッグごと落としたみたいだった。今度は、何かがついて来ているなら見えるくらい速く振り返った。でも、やっぱり何もなかった。ただ、後ろの道にある木が、覚えているより少し近くに並んでいた。見ていない場所に、とても背の高い何かが、ぴたりと立っているように見えた。影だったのかもしれない。少し暗かった。
+
+ばかなことをした。もう一度前を向いて、頭の中でゆっくり五まで数えた。また音がした。何かが動く音。はっきりした一歩。すぐに振り返った。でも、何もなかった。木だけだった。
+
+考えたことがある。本当に何かが私について来ていたなら、これで説明がつく。前を向いて歩き、振り返らず、懐中電灯をなるべく動かさなければ、そいつは私が見ていないときに動く。目で見ている間、または、いると思う場所を見ている間は、まったく動かない。前を向いた瞬間に、一歩近づく。
+
+だからテントまでの道は、ずっと後ろ向きに歩いた。私の考えが正しいなら、そいつがいるのは後ろの道だけだった。見ながら、出口へ向かうことはできなかった。
+
+テントがあると思った場所の近くで、大きい懐中電灯の光がオレンジ色になり始めた。でも、テントはなかった。戻るほうが本当の問題だった。そいつを見続けながら、出口のほうへ進む方法がわからなかった。ゆっくり後ろ向きにUターンして、そいつも回って、また向かい合えると思った。でも、私がしたのは背中を向けることだけだった。そいつが後ろに来た瞬間、動く音がした。近くで、足を引きずるような音だった。
+
+それ以上考えず、そいつがいた場所を通り過ぎるように、できるだけ速く走った。ぶつかった。
+
+今はiPadでこれを書いている。カラスキーから出るまで、ずっと後ろ向きに歩けばよかったのかもしれない。あの感じを、こっちへ連れて帰ってしまった気がする。あれは、そうやって近づくのかもしれない。
+
+ばかばかしい話だ。これを読み終えても、後ろを見ないで。そこには何もない。いつだって、何もない。それがいちばん嫌なところだ。`
+  },
+  {
+    image:'006.JPG',
+    textEN:`The Karasuki tree was not there for a few days. I thought that was it. I thought my time in there was over, and the only way in was gone, the way things in there seem to go. Then today it was back, standing where it always stands as if it had never left, and I went in.
+
+It was bright too. Brighter than I have ever seen it in there. I still could not tell you where I was going or where I had been. The paths are everywhere. Some loop back onto each other, and some run into parts of the forest that stay pitch black even on a day this bright. I was trying to keep track of which was which when I lost my bag.
+
+A bear took it. A gigantic bear with antlers. I know that sounds made up, but it was a huge bear. I had the bag over one shoulder, and out of nowhere the whole thing was snatched off me. I did what you would do when you see a huge bear: I started screaming at it. The bear looked at me and shooed me away with one paw, a lazy little wave, like I was a fly.
+
+Then it opened my bag and went through it like a person. It worked the zippers, checked the pockets one at a time, and took things out to turn them over. It found my sketchbook and opened that too. It looked at the pages the way you flip through a book that is not yours, just to see what is inside. Then it kept going through the rest.
+
+So my bag is gone. It took the whole thing into the trees. I am home now, writing this up, and I just got to the part where I tell you I will be more careful next time. Then I realized the flashlight was in the bag. The big one. The one I swore I would carry from now on.
+
+I carried it exactly once, into the brightest day I have had in there. Now it is somewhere in the dark with a bear that apparently can read.`,
+    textJP:`カラスキーの木が、数日間なくなっていた。これで終わりだと思った。あの中にいた時間は終わりで、唯一の入口も、あの中のいろいろなものと同じように消えたのだと思った。
+
+でも今日、木は戻っていた。ずっとそこにあったみたいに、いつもの場所に立っていた。だから中に入った。
+
+中は明るかった。今までで一番明るかった。それでも、自分がどこへ向かっているのか、どこを通ってきたのかはわからない。道はあちこちにある。つながって元に戻る道もあるし、こんなに明るい日でも真っ暗な森のほうへ続く道もある。どれがどれか覚えようとしていたとき、バッグをなくした。
+
+クマに取られた。角の生えた、ものすごく大きいクマだった。作り話みたいに聞こえると思う。でも、本当に大きかった。バッグを片方の肩にかけていたら、急に全部持っていかれた。大きなクマを見たらするように、私は叫び始めた。クマは私を見ると、片方の前足で、しっしと追い払った。ハエでも追うみたいな、だるそうな小さな動きだった。
+
+それからクマは、バッグを開けて、人みたいに中を調べ始めた。ファスナーを動かし、ポケットをひとつずつ見て、物を出しては裏返した。スケッチブックを見つけると、それも開いた。人の本を勝手にめくって、中に何があるか見るみたいに、ページを見ていた。それから、ほかの物も調べ続けた。
+
+だからバッグはなくなった。クマはバッグごと木の中へ持って行った。今は家でこれを書いている。次はもっと気をつけよう、と書こうとしたところで、懐中電灯がバッグの中に入っていたことに気づいた。大きいほうだ。これからは持って行く、と決めたあれだ。
+
+あの中で一番明るい日に、一度だけ持って行った。今は暗いところのどこかにある。どうやら字が読めるクマと一緒に。`
+  }
+];
+
 const openTaxa=new Set();
-let currentLang='jp',currentChar=null,currentStage=0,autoTimer=null;
+let currentLang='jp',currentChar=null,currentStage=0,autoTimer=null,sightingIndex=0;
 // track which folder the open lightbox image came from
 let currentLbFolder='illustrations';
 
@@ -757,6 +971,64 @@ document.getElementById('taxonomy-root').addEventListener('click',e=>{
   if(willOpen)openTaxa.add(id);else openTaxa.delete(id);
 });
 
+// ── THE SEEN AND THE UNSEEN ──
+function sightingParagraphs(text){
+  return text.split('\n\n').map(paragraph=>`<p>${paragraph}</p>`).join('');
+}
+
+function sightingPlate(sighting,jp){
+  const caption=jp?'記憶をもとに描いた絵':'Drawn from memory';
+  const alt=jp?'カラスキーで見たものを描いた絵':'A drawing made after a sighting in Karasuki';
+  return `<figure class="sighting-plate">
+    <img src="assets/seen_unseen/${sighting.image}" alt="${alt}" loading="lazy"/>
+    <figcaption>${caption}</figcaption>
+  </figure>`;
+}
+
+function buildSightings(){
+  const root=document.getElementById('sightings-root');
+  const jp=isJP();
+  document.getElementById('sightings-label').textContent=jp?'見えたものと、見えないもの':'The Seen and the Unseen';
+  document.getElementById('sightings-intro').textContent=jp
+    ?'カラスキーに入る道を見つけた、名前のない誰かの記録。あそこでは写真も動画も使えない。絵は、見たものを覚えているうちに描かれた。'
+    :'A continuing record by someone who found a way into Karasuki. Photos and videos do not work there. The drawings were made while the sightings could still be remembered.';
+
+  if(sightingIndex===SIGHTINGS.length){
+    root.innerHTML=`<article class="sighting-open">
+      <div class="sighting-open-inner">
+        <div class="sighting-open-symbol" aria-hidden="true">◇</div>
+        <h3>${jp?'この先の記録は、まだない。':'No further sightings have been recorded.'}</h3>
+        <p>${jp?'記録は続いている。':'The account remains open.'}</p>
+        <button class="sighting-nav sighting-start" type="button" data-sighting-action="start">${jp?'最初の記録へ戻る':'Return to the first record'}</button>
+      </div>
+    </article>`;
+    return;
+  }
+
+  const sighting=SIGHTINGS[sightingIndex];
+  const text=sightingParagraphs(jp?sighting.textJP:sighting.textEN);
+  const plate=sightingPlate(sighting,jp);
+  root.innerHTML=`<article class="sightings-record">
+    <div class="sighting-mark">${jp?'目撃記録':'Sighting'}</div>
+    <div class="sighting-copy">${sighting.imageBefore?plate:''}${text}${sighting.imageBefore?'':plate}</div>
+    <nav class="sighting-controls" aria-label="${jp?'目撃記録の移動':'Sighting navigation'}">
+      <button class="sighting-nav" type="button" data-sighting-action="previous"${sightingIndex===0?' hidden':''}>${jp?'← 前の記録':'← Earlier sighting'}</button>
+      <button class="sighting-nav" type="button" data-sighting-action="next">${jp?'次の記録 →':'Later sighting →'}</button>
+    </nav>
+  </article>`;
+}
+
+document.getElementById('sightings-root').addEventListener('click',e=>{
+  const button=e.target.closest('[data-sighting-action]');
+  if(!button)return;
+  const action=button.dataset.sightingAction;
+  if(action==='previous'&&sightingIndex>0)sightingIndex--;
+  if(action==='next'&&sightingIndex<SIGHTINGS.length)sightingIndex++;
+  if(action==='start')sightingIndex=0;
+  buildSightings();
+  document.getElementById('sightings-root').scrollIntoView({behavior:'smooth',block:'start'});
+});
+
 document.querySelectorAll('.rail-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const rail=document.getElementById(btn.dataset.scrollTarget);
@@ -876,6 +1148,7 @@ function setLang(lang){
   buildIllus();
   buildPrints();
   buildTaxonomy();
+  buildSightings();
   if(modal.classList.contains('open')&&currentChar!==null){
     const c=CHARACTERS[currentChar];
     modalName.textContent=jp?c.nameJP:c.nameEN;
