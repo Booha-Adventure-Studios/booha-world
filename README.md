@@ -42,13 +42,13 @@ as the core product this site supports.
 - Hosted on GitHub Pages
 - PWA with service worker, offline support, and installable on iOS/Android/desktop
 - PIN-based auth system connected to Wix CMS via URL hash tokens
-- Cross-device profiles for name, curriculum, weekly progress, completed games, unlocked characters, daily-check scores, and English Juku results
-- Daily checks of about 5 weekly questions; designed to take 1–2 minutes and save only the score
+- Two account views: Adventure Log for Daily Check-ins, study/game progress, and approved Juku reports; My Adventure for stars, completed adventures, curriculum progress, and achievements
+- Daily Check-ins review current vocabulary, sentences, and questions in about 3–4 minutes; profiles retain first-attempt and best results
 - Custom weekly content system with a Monday midnight reset (Tokyo time)
 - Speech recognition engine with iOS fallback path
 - 9 mini-games across 3 curriculum tracks (Pre-Boo, Boo-riculum, Boo-Continuum)
 - The same weekly content supports two class formats: flipped Output lessons and English Juku
-- English Juku uses a gated 90-minute group test with timed phases, no retries, and results shown at the end
+- English Juku lets prepared students practise and demonstrate the week's English independently; teacher-reviewed oral reading and open answers are included in approved weekly reports, while games never affect results
 - 30-room canvas navigation engine (1536×1024 world canvas) in two worlds and growing
 - Bilingual EN/JP throughout
 - No ads, recommendation feed, generative AI, or advertising profiles
@@ -99,8 +99,8 @@ opening Bryan's English School in Tomisato, Chiba in 2018.
 
 He has 15+ years of English teaching experience in Japan and teaches all ages — children 
 to adults. The school now offers two formats connected by the same weekly Booha Adventure
-content: a flipped Output Class built around home preparation and conversation, and a
-90-minute English Juku class built around a paced weekly check with no homework. He builds
+content: a flipped Output Lesson built around home preparation and conversation, and a
+structured English Juku lesson for independent practice and demonstration. Juku has no additional written notebook homework, but students review Booha Adventure at home. He builds
 everything himself: the school, the app, the cards, the characters, the furniture, and
 the world.
 

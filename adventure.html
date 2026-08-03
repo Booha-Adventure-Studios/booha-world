@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="Booha Adventure — the weekly English learning world behind Bryan's English School's flipped Output Class and 90-minute English Juku class in Tomisato, Chiba.">
+<meta name="description" content="Booha Adventure — the installable weekly English-learning world behind Bryan's English School's Output Lesson and English Juku pathways in Tomisato, Chiba.">
 <meta name="author" content="Bryan Harper">
 <title>Booha Adventure — ブーハー・アドベンチャー </title>
   
@@ -26,20 +26,20 @@
     "nationality": "American",
     "knowsLanguage": ["en", "ja"]
   },
-  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Weekly content, short daily checks, and cross-device student profiles support a flipped Output Class and a locked, paced 90-minute English Juku weekly check.",
+  "description": "A private PWA-based English learning platform built from scratch by Bryan Harper. Weekly content, Daily Check-ins, and cross-device student profiles support a speaking-focused Output Lesson and structured English Juku.",
   "inLanguage": ["en", "ja"],
   "featureList": [
     "Three curriculum tracks: Pre-Boo, Boo-riculum, Boo-Continuum",
     "Weekly rotating vocabulary, sentences, and speaking questions",
     "Two class formats: Output Class and English Juku",
-    "Timed English Juku checks with results shown at the end",
+    "English Juku practice, demonstration, and teacher-approved weekly reports",
     "Mini-games built around weekly English content",
     "Hands-free listen-and-repeat audio stream",
     "Tap-based listening games (no microphone needed)",
     "Offline support via service worker",
     "PIN-based student login",
     "Cross-device student profiles and learning progress",
-    "Short daily checks that save the score only",
+    "Daily Check-ins with first-attempt and best-result records",
     "No ads, recommendation feed, generative AI, or advertising profiles",
     "Bilingual English and Japanese throughout",
     "Installable on iOS, Android, and desktop"
@@ -459,7 +459,7 @@ body::before {
         <br><br>
         Play a game and travel to the Karasuki tree. Remember—most trees are doorways to something.
         <br><br>
-        You'll find your Adventure Profile in Karasuki. Log in on another device and the profile comes with you: name, curriculum, weekly progress, completed games, unlocked characters, daily-check scores, and English Juku results. A PIN can be active on only one device at a time.
+        Your account has two profiles for the same journey. <strong>Adventure Log</strong> in the Study Deck area is your learning record: Daily Check-ins, weekly study and game progress, and approved English Juku reports. <strong>My Adventure</strong> in Karasuki is your adventure record: stars, completed adventures, curriculum progress, achievements, and your wider Booha Adventure journey. Progress can sync to the devices you use. A PIN can be active on only one device at a time.
 
         <br><br><span class="lead">Curriculum guide</span>
         <br><br>
@@ -467,15 +467,15 @@ body::before {
           <tr><th>Curriculum</th><th>Approximate level</th></tr>
           <tr><td>Pre-Boo</td><td>EIKEN Grades 5–4</td></tr>
           <tr><td>Boo-riculum</td><td>EIKEN Grade 3 through Grade 2</td></tr>
-          <tr><td>Boo-Continuum</td><td>EIKEN Pre-1 through Grade 1 / TOEIC L&amp;R 750+ target</td></tr>
+          <tr><td>Boo-Continuum</td><td>EIKEN Pre-1 through Grade 1 · Advanced Communication</td></tr>
         </table>
 
         <br>
-        I first built this app for my output-based school. It now connects two classes that use the same weekly English in opposite ways. The Output Class previews at home and uses the content in conversation. English Juku puts the week under a clock: a locked 90-minute check with no retries or instant feedback. Most students use Boo-riculum. All curricula overlap, so they can be combined without locking students into a fixed level.
+        I first built this app for my output-based school. It now connects two lesson pathways that use the same weekly English in different ways. Output Lesson students prepare at home, complete their weekly vocabulary notebook work, and bring a small conversation topic so class time can focus on speaking. English Juku students also review Booha Adventure at home, then use the Juku engine in class to practise and demonstrate their independent understanding. These are not “strong” and “weak” classes; families choose the lesson style that best fits their child.
         <br><br>
         Each curriculum shows three weeks of study decks at a time: this week, last week, and next week. Each week includes 15 vocabulary words, 15 sentences, and 15 questions, all with full audio and Japanese translations, plus a hands-free stream for listening and repeating.
         <br><br>
-        The daily check draws about five questions from the week's words, sentences, and questions. It takes 1–2 minutes, saves only the score, and is a small lesson every student should complete each day—not homework to submit.
+        <strong>Daily Check-ins</strong> are a short preparation routine for all students. They take about 3–4 minutes and review vocabulary, sentences, and questions from the current curriculum. Students can retake a check-in to practise; their profile records the first attempt and best result.
         <br><br>
         The app records only the learning information needed to continue the experience. There is no teacher dashboard for following student activity. If a student needs help, they show me the app on their device. Student information is never sold, used for advertising, or used to push content.
 
@@ -517,7 +517,7 @@ body::before {
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
         <span class="lead">Output Class — prepare at home, speak in class</span>
-        Output students preview the week's 15 vocabulary words, sentences, and questions at home. They do not need to memorize them; they need to arrive familiar with them. Bring a device and English notebook. Write at least the weekly vocabulary in <strong>English and Japanese</strong>. A diary is strongly encouraged.
+        Output students preview the week's 15 vocabulary words, sentences, and questions at home. They do not need to memorize them; they need to arrive familiar with them. Bring a device and English notebook. Write at least the weekly vocabulary in <strong>English and Japanese</strong>, and prepare a small conversation topic. Daily Check-ins support this weekly preparation. A diary is strongly encouraged.
         <br><br>
         <div class="level-block"><div class="level-title">Preschool — under 5 minutes</div><ul><li>Practice writing their name</li><li>Trace the alphabet</li><li>Listen to the question audio</li></ul></div>
         <div class="level-block"><div class="level-title">Grades 1–3 — 5 to 10 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Listen to the Study Deck audio</li><li>Review the sentence cards</li><li>Practice answering 1 to 2 speaking questions out loud</li></ul></div>
@@ -525,8 +525,8 @@ body::before {
         <div class="level-block"><div class="level-title">Junior High — 10 to 15 minutes</div><ul><li>Write the weekly vocabulary (English + Japanese)</li><li>Review the Study Deck (vocabulary, sentences, questions)</li><li>Say the weekly answers out loud</li><li>Keep a weekly English diary (4 to 5 sentences)</li></ul></div>
         <div class="level-block"><div class="level-title">High School — 12 to 20 minutes</div><ul><li>Write weekly vocabulary (English + Japanese)</li><li>Review sentences and questions</li><li>Say answers out loud. Fluency over perfection.</li><li>Keep an English diary (5 to 8 sentences, including opinions)</li><li>Use the Game Deck when possible</li></ul></div>
         <div class="level-block"><div class="level-title">Adults</div><ul><li>Come prepared. The goal is to move away from scripts and into real communication.</li><li>Common habits that slow progress: speaking English with Japanese logic, wanting perfect lines instead of real conversations, filling every answer with vague words like enjoy, famous, so-so, or busy, and having little curiosity about English-speaking culture.</li><li>Adults improve fastest when they talk about what they actually think, not just where they went and what they ate.</li></ul></div>
-        <br><span class="lead">English Juku — a 90-minute weekly check</span>
-        English Juku has no homework, trial, or makeup lessons. Bring a device, notebook, and pencil. Pre-Boo meets Saturday at 17:00 and Boo-riculum at 19:00, Tokyo time. The app controls the pace from the scheduled start: dictation, reading aloud, sentence order, vocabulary and meaning, and mixed reading, translation, and writing checks. There are no retries or instant right-or-wrong messages. Scores, weak points, and the student's own before-and-after predictions appear together at the end.
+        <br><span class="lead">English Juku — structured independent practice and demonstration</span>
+        English Juku has no additional written notebook homework, but students review the week's Booha Adventure content at home before class. Pre-Boo meets Saturday at 17:00 and Boo-riculum at 19:00, Tokyo time. In class, students use the Juku engine to practise and demonstrate their understanding through dictation, oral reading, sentence building, vocabulary, comprehension, translation, and spelling; Boo-riculum Juku also includes short writing. Games never affect a Juku result. The teacher reviews oral reading and open answers before approving each student's weekly report.
       </div></div></div>
     </div>
 
@@ -584,7 +584,7 @@ body::before {
         <br><br>
         ゲームを1つやって、カラスキの木まで進んでみてください。覚えておいてください——多くの木は、どこかにつながる扉です。
         <br><br>
-        カラスキの中には「Adventure Profile」があります。別の端末でログインしても、名前、カリキュラム、毎週の進捗、クリアしたゲーム、解放したキャラクター、デイリーチェックのスコア、英語塾の結果まで、そのまま引き継がれます。PINを同時に使えるのは1台だけです。
+        同じアカウントには、ひとつの旅の違う部分を示す2つのプロフィールがあります。スタディデッキの<strong>Adventure Log</strong>は、デイリーチェック、週ごとの学習・ゲーム進捗、承認済み英語塾レポートの学習記録です。Karasukiの<strong>My Adventure</strong>は、スター、完了したアドベンチャー、カリキュラム進捗、実績、Booha Adventure全体の冒険記録です。進捗は使う端末に同期できます。PINを同時に使えるのは1台だけです。
 
         <br><br><span class="lead">カリキュラムガイド</span>
         <br><br>
@@ -592,15 +592,15 @@ body::before {
           <tr><th>カリキュラム</th><th>レベルの目安</th></tr>
           <tr><td>Pre-Boo</td><td>英検5級〜4級程度</td></tr>
           <tr><td>Boo-riculum</td><td>英検3級〜2級程度</td></tr>
-          <tr><td>Boo-Continuum</td><td>英検準1級〜1級程度 / TOEIC L&amp;R 750点以上を目指す内容</td></tr>
+          <tr><td>Boo-Continuum</td><td>英検準1級〜1級程度・高度なコミュニケーション</td></tr>
         </table>
 
         <br>
-        このアプリは、もともとアウトプット中心の英語教室のために作りました。今は、同じ週の英語を正反対の方法で使う2つのクラスをつないでいます。アウトプットクラスは家で内容を見て、教室で会話に使います。英語塾クラスは、その週の内容を90分間、時間とルールのあるテストで確かめます。多くの生徒はBoo-riculumを使っています。カリキュラム同士は重なっているので、固定レベルに縛られず組み合わせて使えます。
+        このアプリは、もともとアウトプット中心の英語教室のために作りました。今は、同じ週の英語を違う方法で使う2つの学び方をつないでいます。アウトプットクラスでは、家で準備し、週の単語ノートを完成させ、短い会話の話題を用意して、教室では話すことに集中します。英語塾では、家でBooha Adventureを復習してから、教室でJukuエンジンを使い、自分の理解を練習・実証します。これは「強い」「弱い」クラスではありません。家庭が子どもに合う学び方を選びます。
         <br><br>
         各カリキュラムでは、「今週・先週・来週」の3週間分のスタディデッキを見ることができます。毎週、単語15個・文15個・質問15個。すべて音声と日本語付きです。ハンズフリーで聞いてリピートするストリームもあります。
         <br><br>
-        デイリーチェックは、その週の単語・文・質問から出される約5問の小さなレッスンです。1〜2分で終わり、記録されるのはスコアだけ。提出する宿題ではなく、すべての生徒に毎日取り組んでほしいアプリの学習です。
+        <strong>デイリーチェック</strong>は、すべての生徒のための短い準備ルーティンです。その週の単語・文・質問を3〜4分で復習します。再挑戦して練習でき、プロフィールには最初の結果とベストの結果が記録されます。
         <br><br>
         アプリが記録するのは、学習を続けるために必要な情報だけです。先生が生徒の利用状況を一覧で追跡する管理画面はありません。助けが必要なときは、生徒本人が端末の画面を見せてくれます。生徒の情報を販売したり、広告に使ったり、コンテンツを押しつけるために使ったりすることはありません。
 
@@ -642,7 +642,7 @@ body::before {
       </button>
       <div class="panel"><div class="panel-inner"><div class="panel-body">
         <span class="lead">アウトプットクラス — 家で準備して、教室で話す</span>
-        その週の15個の単語・文・質問を家で確認します。暗記する必要はありません。「見たことがある」「聞いたことがある」状態で来ることが準備です。デバイスと英語ノートを持参し、最低でも週の単語を<strong>英語と日本語</strong>で書いてください。英語日記も強くおすすめします。
+        その週の15個の単語・文・質問を家で確認します。暗記する必要はありません。「見たことがある」「聞いたことがある」状態で来ることが準備です。デバイスと英語ノートを持参し、最低でも週の単語を<strong>英語と日本語</strong>で書き、短い会話の話題を準備してください。デイリーチェックも、週の準備を支えます。英語日記も強くおすすめします。
         <br><br>
         <div class="level-block"><div class="level-title">未就学（幼児）— 5分以内</div><ul><li>名前を書く練習をする</li><li>アルファベットをなぞる</li><li>質問の音声を聞く</li></ul></div>
         <div class="level-block"><div class="level-title">小1〜小3 — 5〜10分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキの音声を聞く</li><li>文カードを見直す</li><li>質問を1〜2個、声に出して答える練習をする</li></ul></div>
@@ -650,8 +650,8 @@ body::before {
         <div class="level-block"><div class="level-title">中学生 — 10〜15分</div><ul><li>週の単語を書く（英語と日本語）</li><li>スタディデッキ（単語・文・質問）を復習する</li><li>週の答えを声に出す</li><li>英語日記を書く（週に4〜5文）</li></ul></div>
         <div class="level-block"><div class="level-title">高校生 — 12〜20分</div><ul><li>週の単語を書く（英語と日本語）</li><li>文と質問を復習する</li><li>答えを声に出す。完璧じゃなくていい、流暢さを意識して。</li><li>英語日記を書く（週に5〜8文。自分の意見も入れてみて）</li><li>できればゲームデッキも使う</li></ul></div>
         <div class="level-block"><div class="level-title">大人</div><ul><li>準備して来てください。台本を読むのではなく、本当に話す練習をしましょう。</li><li>伸びにくい人によくあるパターン：日本語の発想のまま英語を話す。完璧な言い方を探しすぎる。「楽しかった」「有名な」「まあまあ」「忙しい」ばかりで答える。英語圏の文化にあまり興味がない。</li><li>「どこへ行った・何を食べた」より「何を感じた・どう思った」を話せるようになると、ぐっと伸びます。</li></ul></div>
-        <br><span class="lead">英語塾クラス — 90分間の週ごとのチェック</span>
-        宿題・トライアル・振替レッスンはありません。デバイス、ノート、鉛筆を持参してください。土曜日17:00はPre-Boo、19:00はBoo-riculumです。開始時刻からアプリが全員のペースを管理し、ディクテーション、音読、文の並べ替え、単語と意味、読解・翻訳・ライティングを組み合わせて確認します。再挑戦や途中の正誤表示はありません。最後にスコア、弱点、テスト前後の自己予想をまとめて表示します。
+        <br><span class="lead">英語塾クラス — 自分の力で練習・実証する構造化レッスン</span>
+        追加のノート宿題はありませんが、授業前にその週のBooha Adventureの内容を復習します。土曜日17:00はPre-Boo、19:00はBoo-riculumです。教室ではJukuエンジンを使い、ディクテーション、音読、文作り、語彙、読解、翻訳、スペリングを通して理解を練習・実証します。Boo-riculum Jukuには短いライティングもあります。ゲームは英語塾の結果に影響しません。先生が音読と自由回答を確認してから、毎週のレポートを承認します。
       </div></div></div>
     </div>
 
