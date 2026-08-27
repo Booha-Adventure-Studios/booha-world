@@ -80,11 +80,15 @@
   }
   .topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px;}
   .brand{display:flex; align-items:center; gap:10px; font-family:'Shippori Mincho',serif; font-size:1.15rem; white-space:nowrap;}
+  .brand .jpPrimary{font-size:1em;}
+  .brand .enSecondary{font-family:'Zen Kaku Gothic New',sans-serif; font-size:.62em; color:var(--muted); margin-left:-4px;}
   .brand img{width:30px; height:30px;}
   .enterBtn{
     background:var(--gold); color:#241705; padding:9px 20px; border-radius:999px;
     font-weight:700; text-decoration:none; white-space:nowrap; font-family:'Zen Kaku Gothic New',sans-serif;
   }
+  .enterBtn .jpPrimary{display:block; line-height:1;}
+  .enterBtn .enSecondary{display:block; font-size:.68em; font-weight:500; line-height:1; margin-top:2px;}
   @media(max-width:600px){
     .topbar .wrap{padding:10px 16px; gap:10px;}
     .brand{gap:8px; font-size:.98rem; min-width:0; overflow:hidden; text-overflow:ellipsis;}
@@ -105,7 +109,8 @@
     padding:10px 18px; border-radius:10px 10px 0 0; font:600 .82rem 'Zen Kaku Gothic New',sans-serif;
     letter-spacing:.04em; text-transform:uppercase; cursor:pointer; border-bottom:none;
   }
-  .tabbtn .jpTab{display:block; font-size:.78em; font-weight:500; margin-top:2px; letter-spacing:0; text-transform:none;}
+  .tabbtn .jpTab{display:block; font-size:1em; font-weight:700; margin-top:0; letter-spacing:0; text-transform:none;}
+  .tabbtn .enTab{display:block; font-size:.72em; font-weight:500; margin-top:2px; letter-spacing:.04em; text-transform:uppercase; opacity:.78;}
   .tabbtn.active{ color:#1a1206; background:var(--tabcolor,var(--gold)); border-color:var(--tabcolor,var(--gold)); }
   @media(max-width:600px){
     .tabbar{top:49px; flex-wrap:wrap; overflow-x:visible; gap:8px 6px;}
@@ -118,22 +123,31 @@
   .hero-banner{width:100%; max-width:640px; margin:0 auto 28px; border-radius:16px; overflow:hidden;
     box-shadow:0 24px 50px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);}
   .hero-banner img{width:100%; display:block;}
-  .eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+  .eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold);
     border:1px solid var(--line); padding:6px 16px; border-radius:999px; margin-bottom:20px;}
+  .eyebrow .jpPrimary,.eyebrow .enSecondary{display:block;}
+  .eyebrow .jpPrimary{font-weight:700;}
+  .eyebrow .enSecondary{font-size:.78em; letter-spacing:.12em; margin-top:2px;}
   .hero h1{font-size:clamp(2rem,5.6vw,3.3rem); margin:6px 0 4px;}
   .hero .jpTitle{font-size:clamp(.95rem,2.4vw,1.15rem); color:var(--muted); margin:0 0 20px;}
   .hero p.tagline{max-width:540px; margin:0 auto 8px; color:var(--ink); font-size:1.05rem; line-height:1.7;}
-  .hero p.tagline.jp{color:var(--muted); font-size:.92rem; margin-bottom:26px;}
+  .hero p.tagline.jp{color:var(--ink); font-size:1.05rem; margin-bottom:8px;}
+  .hero p.tagline.en{color:var(--muted); font-size:.92rem; margin-bottom:26px;}
   .badges{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
   .badge{font-size:.76rem; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px;}
+  .badge-jp{display:block; color:var(--ink); font-weight:700;}
+  .badge-en{display:block; font-size:.78em; margin-top:2px;}
+  @media(max-width:600px){ .hero h1{font-size:clamp(1.65rem,7.2vw,2rem);} }
 
   /* ---------- tab panels ---------- */
   .panel{display:none; border-top:1px solid var(--line);}
   .panel.active{display:block;}
-  .panelIntro{padding:44px 0 8px; text-align:center;}
+  .panelIntro{display:flex; flex-direction:column; padding:44px 0 8px; text-align:center;}
   .panelIntro .kicker{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--pcolor); font-weight:700;}
-  .panelIntro p{max-width:640px; margin:14px auto 0; color:var(--ink); line-height:1.75;}
-  .panelIntro p.jp{color:var(--muted); font-size:.92rem;}
+  .panelIntro .kicker .jpPrimary,.panelIntro .kicker .enSecondary{display:block;}
+  .panelIntro .kicker .enSecondary{font-size:.8em; letter-spacing:.12em; margin-top:2px;}
+  .panelIntro p{max-width:640px; margin:14px auto 0; color:var(--muted); font-size:.92rem; line-height:1.75; order:2;}
+  .panelIntro p.jp{color:var(--ink); font-size:1rem; order:1;}
 
   /* ---------- content blocks ---------- */
   .block{padding:52px 0;}
@@ -143,11 +157,13 @@
     .block-inner.reverse{direction:rtl;}
     .block-inner.reverse > *{direction:ltr;}
   }
-  .block-tag{font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--bcolor,var(--gold)); font-weight:700; margin-bottom:8px;}
-  .block h2{font-size:clamp(1.4rem,3vw,1.9rem); margin:0 0 4px;}
-  .block .jpHead{color:var(--muted); font-size:.95rem; margin:0 0 14px;}
-  .block p.copy{color:var(--ink); line-height:1.75; max-width:52ch;}
-  .block p.copy.jp{color:var(--muted); font-size:.9rem; margin-top:10px; line-height:2;}
+  .block-inner > div:first-child{display:flex; flex-direction:column;}
+  .block-tag{font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--bcolor,var(--gold)); font-weight:700; margin-bottom:8px; order:0;}
+  .block-tag .enSecondary{font-size:.82em; letter-spacing:.08em; margin-left:7px;}
+  .block h2{font-size:clamp(1.25rem,2.6vw,1.65rem); color:var(--muted); margin:0 0 4px; order:2;}
+  .block .jpHead{color:var(--ink); font-size:1.08rem; margin:0 0 8px; order:1;}
+  .block p.copy{color:var(--muted); font-size:.92rem; line-height:1.75; max-width:52ch; order:4;}
+  .block p.copy.jp{color:var(--ink); font-size:1rem; margin-top:10px; line-height:2; order:3;}
 
   /* single UI-screenshot frame */
   .shotFrame{
@@ -200,12 +216,15 @@
 
   /* ---------- footer cta ---------- */
   .footerCta{padding:70px 0 40px; text-align:center; border-top:1px solid var(--line);}
-  .footerCta h2{font-size:clamp(1.5rem,3.6vw,2.1rem); margin:0 0 8px;}
-  .footerCta p.jp{color:var(--muted); margin-bottom:22px;}
+  .footerCta h2{font-size:clamp(1.5rem,3.6vw,2.1rem); margin:0 0 22px;}
+  .footerCta h2 .jpPrimary,.footerCta h2 .enSecondary{display:block;}
+  .footerCta h2 .enSecondary{font-size:.48em; letter-spacing:.03em; margin-top:6px;}
   .btnPrimary{
     display:inline-block; background:var(--gold); color:#241705; font-weight:700; text-decoration:none;
-    padding:14px 30px; border:0; border-radius:999px; font:700 1rem 'Zen Kaku Gothic New',sans-serif; cursor:pointer;
+    padding:12px 28px; border:0; border-radius:999px; font:700 1rem 'Zen Kaku Gothic New',sans-serif; cursor:pointer;
   }
+  .btnPrimary .nextJp{display:block; font-size:1em;}
+  .btnPrimary .nextEn{display:block; font-size:.68em; font-weight:500; margin-top:3px;}
   footer.site{border-top:1px solid var(--line); padding:30px 0 44px; color:var(--muted); font-size:.82rem;}
   footer.site .wrap{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;}
   footer.site a{text-decoration:none;}
@@ -216,6 +235,8 @@
     background:rgba(233,182,74,.08); color:var(--ink); font-weight:700;
     letter-spacing:.02em; transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
   }
+  .footerBtn .enSecondary{font-size:.72em; margin-left:2px;}
+  .footerBtn .jpPrimary,.footerBtn .enSecondary{display:inline;}
   .footerBtn::after{content:'↗'; font-size:.95em; line-height:1;}
   .footerBtn:hover,
   .footerBtn:focus-visible{background:var(--gold); border-color:var(--gold); color:#241705; transform:translateY(-1px);}
@@ -230,30 +251,30 @@
 
 <header class="topbar">
   <div class="wrap">
-    <div class="brand"><img src="assets/tour/mascot-ghost-real.jpg" alt="Booha" loading="lazy"> The Booha Adventure</div>
-    <a class="enterBtn" href="https://www.bryanharper.tokyo/enter-booha">Enter Booha</a>
+    <div class="brand"><img src="assets/tour/mascot-ghost-real.jpg" alt="Booha" loading="lazy"><span class="jpPrimary">ブーハー・アドベンチャー</span><span class="enSecondary">The Booha Adventure</span></div>
+    <a class="enterBtn" href="https://www.bryanharper.tokyo/enter-booha"><span class="jpPrimary">ブーハーに入る</span><span class="enSecondary">Enter Booha</span></a>
   </div>
 </header>
 
 <nav class="tabbar" id="tabbar" aria-label="Tour sections" role="tablist">
-  <button class="tabbtn active" id="tab-world" type="button" role="tab" aria-selected="true" aria-controls="panel-world" tabindex="0" data-tab="world" style="--tabcolor:var(--c-hub)">The World<span class="jpTab">世界</span></button>
-  <button class="tabbtn" id="tab-curriculum" type="button" role="tab" aria-selected="false" aria-controls="panel-curriculum" tabindex="-1" data-tab="curriculum" style="--tabcolor:var(--c-curriculum)">The Curriculum<span class="jpTab">カリキュラム</span></button>
-  <button class="tabbtn" id="tab-profile" type="button" role="tab" aria-selected="false" aria-controls="panel-profile" tabindex="-1" data-tab="profile" style="--tabcolor:var(--c-profile)">Your Profile<span class="jpTab">プロフィール</span></button>
-  <button class="tabbtn" id="tab-arcade" type="button" role="tab" aria-selected="false" aria-controls="panel-arcade" tabindex="-1" data-tab="arcade" style="--tabcolor:var(--c-arcade)">Arcade<span class="jpTab">アーケード</span></button>
+  <button class="tabbtn active" id="tab-world" type="button" role="tab" aria-selected="true" aria-controls="panel-world" tabindex="0" data-tab="world" style="--tabcolor:var(--c-hub)"><span class="jpTab">世界</span><span class="enTab">The World</span></button>
+  <button class="tabbtn" id="tab-curriculum" type="button" role="tab" aria-selected="false" aria-controls="panel-curriculum" tabindex="-1" data-tab="curriculum" style="--tabcolor:var(--c-curriculum)"><span class="jpTab">カリキュラム</span><span class="enTab">The Curriculum</span></button>
+  <button class="tabbtn" id="tab-profile" type="button" role="tab" aria-selected="false" aria-controls="panel-profile" tabindex="-1" data-tab="profile" style="--tabcolor:var(--c-profile)"><span class="jpTab">プロフィール</span><span class="enTab">Your Profile</span></button>
+  <button class="tabbtn" id="tab-arcade" type="button" role="tab" aria-selected="false" aria-controls="panel-arcade" tabindex="-1" data-tab="arcade" style="--tabcolor:var(--c-arcade)"><span class="jpTab">アーケード</span><span class="enTab">Arcade</span></button>
 </nav>
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">Bryan's English School, exclusive</span>
+    <span class="eyebrow"><span class="jpPrimary">ブライアン英会話教室・生徒専用</span><span class="enSecondary">Bryan's English School, exclusive</span></span>
     <div class="hero-banner"><img src="assets/tour/hero-banner.jpg" alt="Welcome to the Booha Adventure"></div>
-    <h1>The Booha Adventure</h1>
-    <p class="jpTitle">ブーハー・アドベンチャー</p>
-    <p class="tagline">A whole English school living inside one small ghost. This page is a guided tour of what's actually in there, built from real screens, not a highlight reel.</p>
+    <h1>ブーハー・アドベンチャー</h1>
+    <p class="jpTitle">The Booha Adventure</p>
     <p class="tagline jp"><ruby>一匹<rt>いっぴき</rt></ruby>の <ruby>小<rt>ちい</rt></ruby>さなおばけの <ruby>中<rt>なか</rt></ruby>に、<ruby>英語<rt>えいご</rt></ruby>の <ruby>学校<rt>がっこう</rt></ruby>が まるごと <ruby>入<rt>はい</rt></ruby>っています。</p>
+    <p class="tagline en">A whole English school living inside one small ghost. This page is a guided tour of what's actually in there, built from real screens, not a highlight reel.</p>
     <div class="badges">
-      <span class="badge">No ads, ever</span>
-      <span class="badge">No recommendation feed</span>
-      <span class="badge">No generative AI inside</span>
+      <span class="badge"><span class="badge-jp">広告なし</span><span class="badge-en">No ads, ever</span></span>
+      <span class="badge"><span class="badge-jp">おすすめフィードなし</span><span class="badge-en">No recommendation feed</span></span>
+      <span class="badge"><span class="badge-jp">生成AIなし</span><span class="badge-en">No generative AI inside</span></span>
     </div>
   </div>
 </section>
@@ -261,7 +282,7 @@
 <!-- ================= THE WORLD ================= -->
 <div class="panel active" id="panel-world" role="tabpanel" aria-labelledby="tab-world" aria-hidden="false" tabindex="-1" style="--pcolor:var(--c-hub)">
   <div class="panelIntro">
-    <div class="kicker">The World</div>
+    <div class="kicker"><span class="jpPrimary">世界</span><span class="enSecondary">The World</span></div>
     <p>Everything below is real, straight from the app: the maze that reveals one week at a time, the worlds beyond it, and a few of the wanderers who turn up along the way. Most of the thirty-six are still left for a student to actually find.</p>
     <p class="jp"><ruby>下<rt>した</rt></ruby>にあるものは <ruby>全<rt>すべ</rt></ruby>て <ruby>本物<rt>ほんもの</rt></ruby>です。<ruby>迷路<rt>めいろ</rt></ruby>、その <ruby>先<rt>さき</rt></ruby>の <ruby>世界<rt>せかい</rt></ruby>、そして <ruby>何人<rt>なんにん</rt></ruby>かの <ruby>旅人<rt>たびびと</rt></ruby>たち。ほとんどは まだ <ruby>見<rt>み</rt></ruby>つかっていません。</p>
   </div>
@@ -269,7 +290,7 @@
   <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">The Hub</div>
+        <div class="block-tag">ハブ<span class="enSecondary">The Hub</span></div>
         <h2>The Hub: last week, this week, next week</h2>
         <p class="jpHead">ハブ、<ruby>先週<rt>せんしゅう</rt></ruby>・<ruby>今週<rt>こんしゅう</rt></ruby>・<ruby>来週<rt>らいしゅう</rt></ruby></p>
         <p class="copy">Every visit starts here: a short Daily Check ritual, then a look at only three weeks of the school year at a time, so nobody has to stare down fifty weeks of content at once.</p>
@@ -286,7 +307,7 @@
   <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">The Maze</div>
+        <div class="block-tag">迷路<span class="enSecondary">The Maze</span></div>
         <h2>The Maze: one path per week</h2>
         <p class="jpHead"><ruby>迷路<rt>めいろ</rt></ruby>、<ruby>週<rt>しゅう</rt></ruby>ごとに <ruby>一本<rt>いっぽん</rt></ruby>の <ruby>道<rt>みち</rt></ruby></p>
         <p class="copy">The Maze is a separate weekly route, not a reward for clearing Blitz. One path at a time is available across the school-year map, so you can see where the adventure goes next.</p>
@@ -302,7 +323,7 @@
   <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Beyond the Maze</div>
+        <div class="block-tag">迷路の先<span class="enSecondary">Beyond the Maze</span></div>
         <h2>Karasuki, the world where forgotten things go</h2>
         <p class="jpHead">カラスキ、<ruby>忘<rt>わす</rt></ruby>れられたものが <ruby>行<rt>い</rt></ruby>く <ruby>世界<rt>せかい</rt></ruby></p>
         <p class="copy">Step off the maze into a room by room world under a shifting day and night sky. Complete a maze game and wanderers start turning up, some just passing through, some waiting to be found for the very first time.</p>
@@ -318,7 +339,7 @@
   <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Beyond the Maze</div>
+        <div class="block-tag">迷路の先<span class="enSecondary">Beyond the Maze</span></div>
         <h2>Karasuki has its own companions, too</h2>
         <p class="jpHead">カラスキにも、<ruby>独自<rt>どくじ</rt></ruby>の <ruby>仲間<rt>なかま</rt></ruby>がいます</p>
         <p class="copy">Wander long enough and something might join you on the path. Each one has its own name, its own habits, and its own reason for showing up.</p>
@@ -334,7 +355,7 @@
   <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">The Reading World</div>
+        <div class="block-tag">読む世界<span class="enSecondary">The Reading World</span></div>
         <h2>Utsuroba: six drifters, one memory each</h2>
         <p class="jpHead">うつろば、<ruby>六人<rt>ろくにん</rt></ruby>の <ruby>漂流者<rt>ひょうりゅうしゃ</rt></ruby>と <ruby>記憶<rt>きおく</rt></ruby></p>
         <p class="copy">Each of the six drifters is stuck between memories, and each holds one story told entirely in English: read it, solve it, give it back. Utsuroba has three tiers for experiencing those memories: Starter Memory, Case Memory, and Deep Memory. To find them, you’ll need to explore.</p>
@@ -351,7 +372,7 @@
   <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">The Spooky Area</div>
+        <div class="block-tag">不気味なエリア<span class="enSecondary">The Spooky Area</span></div>
         <h2>Muenba: a tense, spooky area</h2>
         <p class="jpHead">むえんば、<ruby>緊張感<rt>きんちょうかん</rt></ruby>のある <ruby>不気味<rt>ぶきみ</rt></ruby>なエリア</p>
         <p class="copy">Muenba is a separate spooky area with fifteen fog-filled rooms and something hiding in each one. It is built for tension and careful movement, with the same three reading tiers too: Starter Memory, Case Memory, and Deep Memory.</p>
@@ -368,7 +389,7 @@
   <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Collecting</div>
+        <div class="block-tag">コレクション<span class="enSecondary">Collecting</span></div>
         <h2>Wanderers, waiting to be found</h2>
         <p class="jpHead"><ruby>見<rt>み</rt></ruby>つけられるのを <ruby>待<rt>ま</rt></ruby>つ <ruby>旅<rt>たび</rt></ruby>する <ruby>仲間<rt>なかま</rt></ruby></p>
         <p class="copy">Wanderers turn up when you complete a maze game. Some turn up often, and some take weeks. Every collection section starts out with thirty-six to find. The list grows, and it sits right alongside the bonus arcade games you can unlock.</p>
@@ -384,7 +405,7 @@
 <!-- ================= THE CURRICULUM ================= -->
 <div class="panel" id="panel-curriculum" role="tabpanel" aria-labelledby="tab-curriculum" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-curriculum)">
   <div class="panelIntro">
-    <div class="kicker">The Curriculum</div>
+    <div class="kicker"><span class="jpPrimary">カリキュラム</span><span class="enSecondary">The Curriculum</span></div>
     <p>Underneath the story is a real, graded English curriculum with its own daily rhythm: a short ritual, a flashcard deck, three fast warm up rounds, and three tracks that share one vocabulary spine.</p>
     <p class="jp"><ruby>物語<rt>ものがたり</rt></ruby>の <ruby>下<rt>した</rt></ruby>には、<ruby>本格的<rt>ほんかくてき</rt></ruby>な <ruby>英語<rt>えいご</rt></ruby>カリキュラムがあります。<ruby>毎日<rt>まいにち</rt></ruby>の <ruby>儀式<rt>ぎしき</rt></ruby>から <ruby>三<rt>みっ</rt></ruby>つのコースまで。</p>
   </div>
@@ -392,7 +413,7 @@
   <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Vocabulary</div>
+        <div class="block-tag">単語<span class="enSecondary">Vocabulary</span></div>
         <h2>Weekly flashcards, out loud</h2>
         <p class="jpHead"><ruby>週<rt>しゅう</rt></ruby>ごとの <ruby>単語<rt>たんご</rt></ruby>カード、<ruby>声<rt>こえ</rt></ruby>に <ruby>出<rt>だ</rt></ruby>して</p>
         <p class="copy">Every week brings 15 new words, sentences, and questions, plus a hands-free stream. Tap to flip, tap to hear each card, or let the stream play while you listen, in whichever curriculum track fits.</p>
@@ -409,7 +430,7 @@
   <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Warm Up</div>
+        <div class="block-tag">準備運動<span class="enSecondary">Warm Up</span></div>
         <h2>Blitz: three rounds in the hub</h2>
         <p class="jpHead">ブリッツ、ハブでの <ruby>三<rt>みっ</rt></ruby>つのラウンド</p>
         <p class="copy">Words, sentences, and questions arrive as three fast rounds, picked per curriculum track from the hub itself. Blitz is a warm-up for the week, not a key to the Maze, so students can see what they know before they head into the wider adventure.</p>
@@ -422,7 +443,7 @@
   <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Three Tracks</div>
+        <div class="block-tag">3つのコース<span class="enSecondary">Three Tracks</span></div>
         <h2>Same nine games, three depths</h2>
         <p class="jpHead"><ruby>同<rt>おな</rt></ruby>じ <ruby>九<rt>きゅう</rt></ruby>つのゲームを、<ruby>三<rt>みっ</rt></ruby>つの レベルで</p>
         <p class="copy">Pre-Boo, Boo-riculum, and Boo-Continuum each open to the same nine game types, at their own reading level and their own color set, so siblings at different levels are still playing side by side.</p>
@@ -439,7 +460,7 @@
   <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">A Closer Look</div>
+        <div class="block-tag">もっと詳しく<span class="enSecondary">A Closer Look</span></div>
         <h2>What the nine games actually look like</h2>
         <p class="jpHead"><ruby>九<rt>きゅう</rt></ruby>つのゲームの <ruby>中身<rt>なかみ</rt></ruby></p>
         <p class="copy">Matching, spelling, building sentences, timed rounds against the clock: vocabulary and sentences and questions, each rebuilt three separate ways across the three tracks.</p>
@@ -462,7 +483,7 @@
   <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Copy Practice</div>
+        <div class="block-tag">書き写し練習<span class="enSecondary">Copy Practice</span></div>
         <h2>The Homework Tree</h2>
         <p class="jpHead"><ruby>宿題<rt>しゅくだい</rt></ruby>の <ruby>木<rt>き</rt></ruby></p>
         <p class="copy">A separate copy-practice tree: last week, this week, or next week, in whichever of the three curriculum tracks fits.</p>
@@ -479,7 +500,7 @@
 <!-- ================= YOUR PROFILE ================= -->
 <div class="panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-profile)">
   <div class="panelIntro">
-    <div class="kicker">Your Profile</div>
+    <div class="kicker"><span class="jpPrimary">プロフィール</span><span class="enSecondary">Your Profile</span></div>
     <p>Four pages keep track of everything a student does, each themed to its own part of the world instead of sharing one generic dashboard.</p>
     <p class="jp"><ruby>四<rt>よっ</rt></ruby>つのページが、<ruby>取<rt>と</rt></ruby>り <ruby>組<rt>く</rt></ruby>んだことを <ruby>記録<rt>きろく</rt></ruby>します。それぞれ <ruby>世界<rt>せかい</rt></ruby>ごとの <ruby>色<rt>いろ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
   </div>
@@ -487,7 +508,7 @@
   <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Profile One</div>
+        <div class="block-tag">プロフィール 1<span class="enSecondary">Profile One</span></div>
         <h2>The Adventure Log</h2>
         <p class="jpHead"><ruby>冒険<rt>ぼうけん</rt></ruby>ログ</p>
         <p class="copy">The main profile: this week's progress across all nine games and three Blitz rounds, a running streak, and a full month calendar of every day played.</p>
@@ -499,7 +520,7 @@
   <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Profile One, continued</div>
+        <div class="block-tag">プロフィール 1・続き<span class="enSecondary">Profile One, continued</span></div>
         <h2>This week, game by game</h2>
         <p class="jpHead"><ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>記録<rt>きろく</rt></ruby>、ゲームごとに</p>
         <p class="copy">A daily check-in streak underneath, and every one of the three curriculum tracks lined up below it, ready to open.</p>
@@ -512,7 +533,7 @@
   <div class="block" style="--bcolor:#9b8ad1; background:radial-gradient(1000px 420px at 8% -8%, rgba(155,138,209,0.16), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Profile Two</div>
+        <div class="block-tag">プロフィール 2<span class="enSecondary">Profile Two</span></div>
         <h2>My Adventure</h2>
         <p class="jpHead">マイ・アドベンチャー</p>
         <p class="copy">Bonus arcade games unlock here week to week, and the same 36-tile wanderer board lives here too, tracking who's actually been met.</p>
@@ -525,7 +546,7 @@
   <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Profile Three</div>
+        <div class="block-tag">プロフィール 3<span class="enSecondary">Profile Three</span></div>
         <h2>Utsuroba's Memory Archive</h2>
         <p class="jpHead">うつろばの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>保管場所<rt>ほかんばしょ</rt></ruby></p>
         <p class="copy">A quiet room for what stayed. Restored memories collect here, at whichever reading level was chosen for that case.</p>
@@ -538,7 +559,7 @@
   <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Profile Four</div>
+        <div class="block-tag">プロフィール 4<span class="enSecondary">Profile Four</span></div>
         <h2>Muenba's Ghost Ledger</h2>
         <p class="jpHead">むえんばの <ruby>幽霊<rt>ゆうれい</rt></ruby><ruby>台帳<rt>だいちょう</rt></ruby></p>
         <p class="copy">A record of who's still hiding, energy collected along the way, and every case cracked so far.</p>
@@ -552,7 +573,7 @@
 <!-- ================= ARCADE ================= -->
 <div class="panel" id="panel-arcade" role="tabpanel" aria-labelledby="tab-arcade" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-arcade)">
   <div class="panelIntro">
-    <div class="kicker">Arcade</div>
+    <div class="kicker"><span class="jpPrimary">アーケード</span><span class="enSecondary">Arcade</span></div>
     <p>Pure reward, none of it graded, all of it earned.</p>
     <p class="jp"><ruby>成績<rt>せいせき</rt></ruby>には <ruby>関係<rt>かんけい</rt></ruby>のない、ただの ごほうび。</p>
   </div>
@@ -560,7 +581,7 @@
   <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Physics</div>
+        <div class="block-tag">物理<span class="enSecondary">Physics</span></div>
         <h2>Feed Booha</h2>
         <p class="jpHead"><ruby>物理<rt>ぶつり</rt></ruby>で <ruby>飛<rt>と</rt></ruby>ばして、キャンディを</p>
         <p class="copy">Cut, swing, and bounce candy across fans and pads until it lands in Booha's mouth. Fifty levels, each with its own star rating.</p>
@@ -573,7 +594,7 @@
   <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Arcade Shooter</div>
+        <div class="block-tag">シューティング<span class="enSecondary">Arcade Shooter</span></div>
         <h2>Booha Invaders</h2>
         <p class="jpHead">よこから <ruby>撃<rt>う</rt></ruby>ち<ruby>込<rt>こ</rt></ruby>む アーケードシューティング</p>
         <p class="copy">Waves, skill pacing, and a three phase boss fight against Dotty at the end of it.</p>
@@ -586,7 +607,7 @@
   <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Stack and Clear</div>
+        <div class="block-tag">積んで消す<span class="enSecondary">Stack and Clear</span></div>
         <h2>Booha Blocks</h2>
         <p class="jpHead"><ruby>積<rt>つ</rt></ruby>んで <ruby>消<rt>け</rt></ruby>す、ブロックゲーム</p>
         <p class="copy">A familiar falling block game, wearing Booha's own color set.</p>
@@ -599,7 +620,7 @@
   <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
-        <div class="block-tag">Slingshot Physics</div>
+        <div class="block-tag">スリングショット物理<span class="enSecondary">Slingshot Physics</span></div>
         <h2>Booha Destruction</h2>
         <p class="jpHead">ブーハー・デストラクション</p>
         <p class="copy">Pull back and let go: a slingshot puzzle across chapters and rounds, with a growing roster of unlockable Booha looks along the way.</p>
@@ -612,7 +633,7 @@
   <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
     <div class="wrap block-inner">
       <div>
-        <div class="block-tag">Two Player</div>
+        <div class="block-tag">2人対戦<span class="enSecondary">Two Player</span></div>
         <h2>Mister Happy's House</h2>
         <p class="jpHead">二人で <ruby>対戦<rt>たいせん</rt></ruby>する、ミスター・ハッピーズハウス</p>
         <p class="copy">A small house full of side games and a head to head showdown for two players on one device.</p>
@@ -632,9 +653,8 @@
 
 <section class="footerCta">
   <div class="wrap">
-    <h2>Do you want to see the next page?</h2>
-    <p class="jp"><ruby>次<rt>つぎ</rt></ruby>のページを <ruby>見<rt>み</rt></ruby>てみますか？</p>
-    <button class="btnPrimary" id="nextTabBtn" type="button">Next page: The Curriculum</button>
+    <h2><span class="jpPrimary"><ruby>次<rt>つぎ</rt></ruby>のページを <ruby>見<rt>み</rt></ruby>てみますか？</span><span class="enSecondary">Do you want to see the next page?</span></h2>
+    <button class="btnPrimary" id="nextTabBtn" type="button"><span class="nextJp">次のページ: カリキュラム</span><span class="nextEn">Next page: The Curriculum</span></button>
   </div>
 </section>
 
@@ -649,8 +669,8 @@
     <div>
       <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Elsewhere</div>
       <nav class="footerNav" aria-label="Other Booha destinations">
-        <a class="footerBtn" href="https://www.bryanharper.tokyo">Main site</a>
-        <a class="footerBtn" href="https://booha-adventure-studios.github.io/booha-world/">Booha World</a>
+        <a class="footerBtn" href="https://www.bryanharper.tokyo"><span class="jpPrimary">公式サイト</span><span class="enSecondary">Main site</span></a>
+        <a class="footerBtn" href="https://booha-adventure-studios.github.io/booha-world/"><span class="jpPrimary">ブーハーワールド</span><span class="enSecondary">Booha World</span></a>
       </nav>
     </div>
   </div>
@@ -662,12 +682,18 @@
   const panels = document.querySelectorAll('.panel');
   const validTabs = new Set(tabButtons.map(btn => btn.dataset.tab));
   const nextTabBtn = document.getElementById('nextTabBtn');
-  const tabLabels = new Map(tabButtons.map(btn => [btn.dataset.tab, btn.querySelector('.jpTab') ? btn.firstChild.textContent.trim() : btn.textContent.trim()]));
+  const nextTabJp = document.querySelector('#nextTabBtn .nextJp');
+  const nextTabEn = document.querySelector('#nextTabBtn .nextEn');
+  const tabLabels = new Map(tabButtons.map(btn => [btn.dataset.tab, {
+    jp: btn.querySelector('.jpTab').textContent.trim(),
+    en: btn.querySelector('.enTab').textContent.trim()
+  }]));
 
   function updateNextButton(activeTab){
     const currentIndex = tabButtons.findIndex(btn => btn.dataset.tab === activeTab);
     const nextTab = tabButtons[(currentIndex + 1) % tabButtons.length].dataset.tab;
-    nextTabBtn.textContent = 'Next page: ' + tabLabels.get(nextTab);
+    nextTabJp.textContent = '次のページ: ' + tabLabels.get(nextTab).jp;
+    nextTabEn.textContent = 'Next page: ' + tabLabels.get(nextTab).en;
   }
 
   function tabFromHash(){
