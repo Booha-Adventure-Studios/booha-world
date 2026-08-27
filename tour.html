@@ -85,6 +85,12 @@
     background:var(--gold); color:#241705; padding:9px 20px; border-radius:999px;
     font-weight:700; text-decoration:none; white-space:nowrap; font-family:'Zen Kaku Gothic New',sans-serif;
   }
+  @media(max-width:600px){
+    .topbar .wrap{padding:10px 16px; gap:10px;}
+    .brand{gap:8px; font-size:.98rem; min-width:0; overflow:hidden; text-overflow:ellipsis;}
+    .brand img{width:28px; height:28px; flex:0 0 28px;}
+    .enterBtn{padding:9px 14px; font-size:.85rem;}
+  }
 
   /* ---------- tab bar ---------- */
   .tabbar{
@@ -200,7 +206,21 @@
   footer.site{border-top:1px solid var(--line); padding:30px 0 44px; color:var(--muted); font-size:.82rem;}
   footer.site .wrap{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;}
   footer.site a{text-decoration:none;}
-  footer.site a:hover{color:var(--gold);}
+  .footerNav{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
+  .footerBtn{
+    display:inline-flex; align-items:center; gap:8px; min-height:42px;
+    padding:9px 15px; border:1px solid rgba(233,182,74,.48); border-radius:999px;
+    background:rgba(233,182,74,.08); color:var(--ink); font-weight:700;
+    letter-spacing:.02em; transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .footerBtn::after{content:'↗'; font-size:.95em; line-height:1;}
+  .footerBtn:hover,
+  .footerBtn:focus-visible{background:var(--gold); border-color:var(--gold); color:#241705; transform:translateY(-1px);}
+  .footerBtn:focus-visible{outline:3px solid rgba(233,182,74,.42); outline-offset:3px;}
+  @media(max-width:600px){
+    footer.site .wrap{display:grid; grid-template-columns:1fr; gap:28px;}
+    .footerNav{margin-top:14px;}
+  }
 </style>
 </head>
 <body>
@@ -625,8 +645,10 @@
     </div>
     <div>
       <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Elsewhere</div>
-      <div><a href="https://www.bryanharper.tokyo">Main site</a></div>
-      <div><a href="https://booha-adventure-studios.github.io/booha-world/">Booha World</a></div>
+      <nav class="footerNav" aria-label="Other Booha destinations">
+        <a class="footerBtn" href="https://www.bryanharper.tokyo">Main site</a>
+        <a class="footerBtn" href="https://booha-adventure-studios.github.io/booha-world/">Booha World</a>
+      </nav>
     </div>
   </div>
 </footer>
