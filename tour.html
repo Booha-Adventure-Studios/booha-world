@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Booha Adventure, A Guided Tour</title>
+<meta name="description" content="A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, the daily curriculum, four profile pages, and the arcade, built from real screens and real art.">
+<meta name="author" content="Bryan Harper">
+<link rel="icon" type="image/jpeg" href="assets/tour/mascot-ghost-real.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": "The Booha Adventure — A Guided Tour",
+  "url": "https://booha-adventure-studios.github.io/booha-world/tour.html",
+  "author": {
+    "@type": "Person",
+    "name": "Bryan Harper",
+    "url": "https://booha-adventure-studios.github.io/booha-world/bryan.html"
+  },
+  "description": "A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, the daily curriculum, four profile pages, and the arcade, built from real screens and real art.",
+  "inLanguage": ["en", "ja"],
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Booha World",
+    "url": "https://booha-adventure-studios.github.io/booha-world/"
+  },
+  "mainEntityOfPage": "https://booha-adventure-studios.github.io/booha-world/tour.html"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0806;
+    --ink:#f4efe6;
+    --muted:#b9ad9a;
+    --gold:#e9b64a;
+    --line:rgba(233,182,74,0.22);
+    --maxw:1120px;
+
+    /* per-world accent colors, sampled from the real app's own palettes */
+    --c-hub:#e9b64a;
+    --c-karasuki:#7fae5a;
+    --c-utsuroba:#b28cd6;
+    --c-muenba:#6fa683;
+    --c-curriculum:#e0a23a;
+    --c-profile:#caa662;
+    --c-arcade:#e0698a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Zen Kaku Gothic New', system-ui, -apple-system, "Hiragino Sans", sans-serif;
+  }
+  h1,h2,h3,.display{
+    font-family:'Shippori Mincho', serif;
+    font-weight:600;
+    letter-spacing:.01em;
+  }
+  ruby rt{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:.5em;
+    color:var(--muted);
+    user-select:none;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:60;
+    background:rgba(10,8,6,0.9); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Shippori Mincho',serif; font-size:1.15rem; white-space:nowrap;}
+  .brand img{width:30px; height:30px;}
+  .enterBtn{
+    background:var(--gold); color:#241705; padding:9px 20px; border-radius:999px;
+    font-weight:700; text-decoration:none; white-space:nowrap; font-family:'Zen Kaku Gothic New',sans-serif;
+  }
+
+  /* ---------- tab bar ---------- */
+  .tabbar{
+    display:flex; gap:6px; overflow-x:auto; padding:14px 24px 0;
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .tabbtn{
+    flex:0 0 auto; background:transparent; border:1px solid var(--line); color:var(--muted);
+    padding:10px 18px; border-radius:10px 10px 0 0; font:600 .82rem 'Zen Kaku Gothic New',sans-serif;
+    letter-spacing:.04em; text-transform:uppercase; cursor:pointer; border-bottom:none;
+  }
+  .tabbtn .jpTab{display:block; font-size:.78em; font-weight:500; margin-top:2px; letter-spacing:0; text-transform:none;}
+  .tabbtn.active{ color:#1a1206; background:var(--tabcolor,var(--gold)); border-color:var(--tabcolor,var(--gold)); }
+  @media(max-width:600px){
+    .tabbar{flex-wrap:wrap; overflow-x:visible; gap:8px 6px;}
+    .tabbtn{flex:1 1 calc(50% - 6px); padding:9px 8px;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 40px; text-align:center; position:relative; overflow:hidden;
+    background:radial-gradient(60vw 50vh at 50% 0%, rgba(233,182,74,0.14), transparent 65%);}
+  .hero-banner{width:100%; max-width:640px; margin:0 auto 28px; border-radius:16px; overflow:hidden;
+    box-shadow:0 24px 50px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);}
+  .hero-banner img{width:100%; display:block;}
+  .eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+    border:1px solid var(--line); padding:6px 16px; border-radius:999px; margin-bottom:20px;}
+  .hero h1{font-size:clamp(2rem,5.6vw,3.3rem); margin:6px 0 4px;}
+  .hero .jpTitle{font-size:clamp(.95rem,2.4vw,1.15rem); color:var(--muted); margin:0 0 20px;}
+  .hero p.tagline{max-width:540px; margin:0 auto 8px; color:var(--ink); font-size:1.05rem; line-height:1.7;}
+  .hero p.tagline.jp{color:var(--muted); font-size:.92rem; margin-bottom:26px;}
+  .badges{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
+  .badge{font-size:.76rem; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px;}
+
+  /* ---------- tab panels ---------- */
+  .panel{display:none; border-top:1px solid var(--line);}
+  .panel.active{display:block;}
+  .panelIntro{padding:44px 0 8px; text-align:center;}
+  .panelIntro .kicker{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--pcolor); font-weight:700;}
+  .panelIntro p{max-width:640px; margin:14px auto 0; color:var(--ink); line-height:1.75;}
+  .panelIntro p.jp{color:var(--muted); font-size:.92rem;}
+
+  /* ---------- content blocks ---------- */
+  .block{padding:52px 0;}
+  .block-inner{display:grid; grid-template-columns:1fr; gap:32px; align-items:center;}
+  @media(min-width:880px){
+    .block-inner{grid-template-columns:1fr 1.1fr; gap:48px;}
+    .block-inner.reverse{direction:rtl;}
+    .block-inner.reverse > *{direction:ltr;}
+  }
+  .block-tag{font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--bcolor,var(--gold)); font-weight:700; margin-bottom:8px;}
+  .block h2{font-size:clamp(1.4rem,3vw,1.9rem); margin:0 0 4px;}
+  .block .jpHead{color:var(--muted); font-size:.95rem; margin:0 0 14px;}
+  .block p.copy{color:var(--ink); line-height:1.75; max-width:52ch;}
+  .block p.copy.jp{color:var(--muted); font-size:.9rem; margin-top:10px; line-height:2;}
+
+  /* single UI-screenshot frame */
+  .shotFrame{
+    border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
+    transform:rotate(-0.6deg); background:#0d0b09; display:flex; align-items:center; justify-content:center;
+  }
+  .shotFrame img{width:100%; display:block; max-height:460px; object-fit:contain; object-position:center;}
+
+  /* fanned photo stack, for environment art */
+  .imgStack{position:relative; height:300px; display:flex; align-items:center; justify-content:center;}
+  .imgStack__item{
+    position:absolute; width:60%; max-width:270px; border-radius:16px; overflow:hidden;
+    box-shadow:0 16px 36px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
+    transform:rotate(var(--r,0deg)) translate(var(--x,0),var(--y,0));
+  }
+  .imgStack__item img{aspect-ratio:1/1; object-fit:cover; width:100%;}
+  .imgStack__item:nth-child(1){--r:-8deg; --x:-44%; --y:6%; z-index:1;}
+  .imgStack__item:nth-child(2){--r:4deg; --x:8%; --y:-8%; z-index:3;}
+  .imgStack__item:nth-child(3){--r:12deg; --x:42%; --y:8%; z-index:2;}
+  @media(max-width:879px){
+    .imgStack{height:auto; display:flex; gap:12px; overflow-x:auto; padding:6px 4px 16px; scroll-snap-type:x mandatory;}
+    .imgStack__item{position:static; width:64vw; max-width:220px; flex:0 0 auto; transform:none !important; scroll-snap-align:center;}
+  }
+
+  /* two-up screenshot pair */
+  .shotPair{display:flex; gap:14px;}
+  @media(max-width:879px){ .shotPair{flex-direction:column;} }
+  .shotPair .shotFrame{flex:1; transform:rotate(0deg); height:320px;}
+  .shotPair .shotFrame img{max-height:none; height:100%;}
+  @media(max-width:600px){ .shotPair .shotFrame{height:260px;} }
+
+  /* three-up screenshot row, for the three curriculum tracks */
+  .shotTrio{display:flex; gap:12px;}
+  @media(max-width:879px){ .shotTrio{flex-direction:column;} }
+  .shotTrio .shotFrame{flex:1; transform:rotate(0deg); height:230px;}
+  .shotTrio .shotFrame img{max-height:none; height:100%;}
+  @media(max-width:600px){ .shotTrio .shotFrame{height:210px;} }
+
+  /* nine-up thumbnail grid, real gameplay screens */
+  .gameGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .gameGrid .shotFrame{transform:rotate(0deg); border-radius:10px;}
+  .gameGrid img{aspect-ratio:6/5; object-fit:cover; object-position:top; max-height:none;}
+  @media(max-width:600px){
+    .gameGrid{grid-template-columns:repeat(2,1fr); gap:12px;}
+  }
+
+  /* small text-only character roll (names, no art, per the no-sprite rule) */
+  .nameRoll{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
+  .nameChip{border:1px solid var(--line); color:var(--muted); font-size:.8rem; padding:6px 12px; border-radius:999px;}
+
+  /* ---------- footer cta ---------- */
+  .footerCta{padding:70px 0 40px; text-align:center; border-top:1px solid var(--line);}
+  .footerCta h2{font-size:clamp(1.5rem,3.6vw,2.1rem); margin:0 0 8px;}
+  .footerCta p.jp{color:var(--muted); margin-bottom:22px;}
+  .btnPrimary{
+    display:inline-block; background:var(--gold); color:#241705; font-weight:700; text-decoration:none;
+    padding:14px 30px; border-radius:999px; font-family:'Zen Kaku Gothic New',sans-serif;
+  }
+  footer.site{border-top:1px solid var(--line); padding:30px 0 44px; color:var(--muted); font-size:.82rem;}
+  footer.site .wrap{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;}
+  footer.site a{text-decoration:none;}
+  footer.site a:hover{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><img src="assets/tour/mascot-ghost-real.jpg" alt="Booha" loading="lazy"> The Booha Adventure</div>
+    <a class="enterBtn" href="https://booha-adventure-studios.github.io/the-booha-adventure/index.html">Enter Booha</a>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tabbtn active" data-tab="world" style="--tabcolor:var(--c-hub)">The World<span class="jpTab">世界</span></button>
+  <button class="tabbtn" data-tab="curriculum" style="--tabcolor:var(--c-curriculum)">The Curriculum<span class="jpTab">カリキュラム</span></button>
+  <button class="tabbtn" data-tab="profile" style="--tabcolor:var(--c-profile)">Your Profile<span class="jpTab">プロフィール</span></button>
+  <button class="tabbtn" data-tab="arcade" style="--tabcolor:var(--c-arcade)">Arcade<span class="jpTab">アーケード</span></button>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Bryan's English School, exclusive</span>
+    <div class="hero-banner"><img src="assets/tour/hero-banner.jpg" alt="Welcome to the Booha Adventure"></div>
+    <h1>The Booha Adventure</h1>
+    <p class="jpTitle">ブーハー・アドベンチャー</p>
+    <p class="tagline">A whole English school living inside one small ghost. This page is a guided tour of what's actually in there, built from real screens, not a highlight reel.</p>
+    <p class="tagline jp"><ruby>一匹<rt>いっぴき</rt></ruby>の <ruby>小<rt>ちい</rt></ruby>さなおばけの <ruby>中<rt>なか</rt></ruby>に、<ruby>英語<rt>えいご</rt></ruby>の <ruby>学校<rt>がっこう</rt></ruby>が まるごと <ruby>入<rt>はい</rt></ruby>っています。</p>
+    <div class="badges">
+      <span class="badge">No ads, ever</span>
+      <span class="badge">No recommendation feed</span>
+      <span class="badge">No generative AI inside</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE WORLD ================= -->
+<div class="panel active" id="panel-world" style="--pcolor:var(--c-hub)">
+  <div class="panelIntro">
+    <div class="kicker">The World</div>
+    <p>Everything below is real, straight from the app: the maze that opens one week at a time, the worlds beyond it, and a few of the wanderers who turn up along the way. Most of the thirty six are still left for a student to actually find.</p>
+    <p class="jp"><ruby>下<rt>した</rt></ruby>にあるものは <ruby>全<rt>すべ</rt></ruby>て <ruby>本物<rt>ほんもの</rt></ruby>です。<ruby>迷路<rt>めいろ</rt></ruby>、その <ruby>先<rt>さき</rt></ruby>の <ruby>世界<rt>せかい</rt></ruby>、そして <ruby>何人<rt>なんにん</rt></ruby>かの <ruby>旅人<rt>たびびと</rt></ruby>たち。ほとんどは まだ <ruby>見<rt>み</rt></ruby>つかっていません。</p>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">The Hub</div>
+        <h2>The Hub: last week, this week, next week</h2>
+        <p class="jpHead">ハブ、<ruby>先週<rt>せんしゅう</rt></ruby>・<ruby>今週<rt>こんしゅう</rt></ruby>・<ruby>来週<rt>らいしゅう</rt></ruby></p>
+        <p class="copy">Every visit starts here: a short Daily Check ritual, then a look at only three weeks of the school year at a time, so nobody has to stare down fifty weeks of content at once.</p>
+        <p class="copy jp"><ruby>毎回<rt>まいかい</rt></ruby>ここから <ruby>始<rt>はじ</rt></ruby>まります。デイリーチェックの <ruby>後<rt>あと</rt></ruby>、<ruby>三週間分<rt>さんしゅうかんぶん</rt></ruby>だけが <ruby>見<rt>み</rt></ruby>えています。</p>
+      </div>
+      <div class="shotTrio">
+        <div class="shotFrame"><img src="assets/tour/world-hub.jpg" alt="The hub screen, last week, this week, next week" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/ss-hub-dailycheck.jpg" alt="Daily Check, the ritual that starts every visit" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/ss-hub-dailycheck2.jpg" alt="Daily Check, choosing which class to check in for" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">The Maze</div>
+        <h2>The Maze: one path per week</h2>
+        <p class="jpHead"><ruby>迷路<rt>めいろ</rt></ruby>、<ruby>週<rt>しゅう</rt></ruby>ごとに <ruby>一本<rt>いっぽん</rt></ruby>の <ruby>道<rt>みち</rt></ruby></p>
+        <p class="copy">Clear the week's Blitz rounds from the hub and the maze opens: the map of the whole school year, one lit path at a time.</p>
+        <p class="copy jp"><ruby>週<rt>しゅう</rt></ruby>のブリッツを <ruby>終<rt>お</rt></ruby>えると <ruby>迷路<rt>めいろ</rt></ruby>が <ruby>開<rt>ひら</rt></ruby>きます。<ruby>一年分<rt>いちねんぶん</rt></ruby>の <ruby>地図<rt>ちず</rt></ruby>です。</p>
+      </div>
+      <div class="shotPair">
+        <div class="shotFrame"><img src="assets/tour/ss-maze-blitzgate.jpg" alt="Let's go to the Maze, the transition after Blitz" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/world-maze.jpg" alt="The maze map, real in-game screenshot" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Beyond the Maze</div>
+        <h2>Karasuki, the world where forgotten things go</h2>
+        <p class="jpHead">カラスキ、<ruby>忘<rt>わす</rt></ruby>れられたものが <ruby>行<rt>い</rt></ruby>く <ruby>世界<rt>せかい</rt></ruby></p>
+        <p class="copy">Step off the maze into a room by room world under a shifting day and night sky. Wander far enough and wandering ghosts start turning up, some just passing through, some waiting to be found for the very first time.</p>
+        <p class="copy jp"><ruby>迷路<rt>めいろ</rt></ruby>を <ruby>出<rt>で</rt></ruby>ると、<ruby>昼<rt>ひる</rt></ruby>と <ruby>夜<rt>よる</rt></ruby>が <ruby>入<rt>い</rt></ruby>れ<ruby>替<rt>か</rt></ruby>わる <ruby>世界<rt>せかい</rt></ruby>が <ruby>広<rt>ひろ</rt></ruby>がっています。</p>
+      </div>
+      <div class="shotPair">
+        <div class="shotFrame"><img src="assets/tour/karasuki-room-01.jpg" alt="Entering Karasuki" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/karasuki-room-02.jpg" alt="A lantern-lit grove in Karasuki" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Beyond the Maze</div>
+        <h2>Karasuki has its own companions, too</h2>
+        <p class="jpHead">カラスキにも、<ruby>独自<rt>どくじ</rt></ruby>の <ruby>仲間<rt>なかま</rt></ruby>がいます</p>
+        <p class="copy">Wander long enough and something might join you on the path. Each one has its own name, its own habits, and its own reason for showing up.</p>
+        <p class="copy jp"><ruby>十分<rt>じゅうぶん</rt></ruby>に <ruby>歩<rt>ある</rt></ruby>くと、<ruby>誰<rt>だれ</rt></ruby>かが <ruby>道<rt>みち</rt></ruby>で <ruby>合流<rt>ごうりゅう</rt></ruby>するかもしれません。</p>
+      </div>
+      <div class="shotPair">
+        <div class="shotFrame"><img src="assets/tour/karasuki-companion-01.jpg" alt="A companion met on the path in Karasuki" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/karasuki-companion-02.jpg" alt="Tanoshiika, one of Karasuki's companions, with its profile card" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">The Reading World</div>
+        <h2>Utsuroba: six drifters, one memory each</h2>
+        <p class="jpHead">うつろば、<ruby>六人<rt>ろくにん</rt></ruby>の <ruby>漂流者<rt>ひょうりゅうしゃ</rt></ruby>と <ruby>記憶<rt>きおく</rt></ruby></p>
+        <p class="copy">Each of the six drifters is stuck between memories, and each holds one story told entirely in English: read it, solve it, give it back.</p>
+        <p class="copy jp">それぞれが <ruby>記憶<rt>きおく</rt></ruby>の <ruby>途中<rt>とちゅう</rt></ruby>で <ruby>止<rt>と</rt></ruby>まっています。それぞれが <ruby>一<rt>ひと</rt></ruby>つの <ruby>物語<rt>ものがたり</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
+      </div>
+      <div class="imgStack">
+        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-01.jpg" alt="The gate into Utsuroba" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-02.jpg" alt="Meeting one of the six drifters" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-03.jpg" alt="Following a clue through Utsuroba" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">The Ghost Hunt</div>
+        <h2>Muenba: a ghost hunt with a pulse</h2>
+        <p class="jpHead">むえんば、<ruby>鼓動<rt>こどう</rt></ruby>する ゴーストハント</p>
+        <p class="copy">The same rooms, turned into hide and seek. A cast of hiding ghosts is listening for you. Sneak past, or get caught.</p>
+        <p class="copy jp"><ruby>同<rt>おな</rt></ruby>じ <ruby>部屋<rt>へや</rt></ruby>が、かくれんぼの <ruby>舞台<rt>ぶたい</rt></ruby>に <ruby>変<rt>か</rt></ruby>わります。<ruby>気<rt>き</rt></ruby>づかれずに <ruby>進<rt>すす</rt></ruby>めるでしょうか。</p>
+      </div>
+      <div class="imgStack">
+        <div class="imgStack__item"><img src="assets/tour/muenba-room-01.jpg" alt="Entering Muenba" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/muenba-room-02.jpg" alt="Something is hiding, seen from a distance" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/muenba-room-03.jpg" alt="A hunt target screen, find Twiddle" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Collecting</div>
+        <h2>Wandering companions, waiting to be found</h2>
+        <p class="jpHead"><ruby>見<rt>み</rt></ruby>つけられるのを <ruby>待<rt>ま</rt></ruby>つ <ruby>旅<rt>たび</rt></ruby>する <ruby>仲間<rt>なかま</rt></ruby></p>
+        <p class="copy">Thirty six wandering ghosts turn up across the map over the course of a year. Some are easy to spot, some take weeks. Nine found so far, out of thirty six, right alongside the bonus arcade games this same student has unlocked.</p>
+        <p class="copy jp"><ruby>地図<rt>ちず</rt></ruby>のあちこちに、36<ruby>体<rt>たい</rt></ruby>の <ruby>旅人<rt>たびびと</rt></ruby>ゴーストが <ruby>現<rt>あらわ</rt></ruby>れます。ここまでで 9<ruby>体<rt>たい</rt></ruby> <ruby>見<rt>み</rt></ruby>つけました。</p>
+      </div>
+      <div class="shotFrame">
+        <img src="assets/tour/ss-wanderergrid.jpg" alt="Bonus games unlocked and wanderers found tracker, 9 of 36" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= THE CURRICULUM ================= -->
+<div class="panel" id="panel-curriculum" style="--pcolor:var(--c-curriculum)">
+  <div class="panelIntro">
+    <div class="kicker">The Curriculum</div>
+    <p>Underneath the story is a real, graded English curriculum with its own daily rhythm: a short ritual, a flashcard deck, three fast warm up rounds, and three tracks that share one vocabulary spine.</p>
+    <p class="jp"><ruby>物語<rt>ものがたり</rt></ruby>の <ruby>下<rt>した</rt></ruby>には、<ruby>本格的<rt>ほんかくてき</rt></ruby>な <ruby>英語<rt>えいご</rt></ruby>カリキュラムがあります。<ruby>毎日<rt>まいにち</rt></ruby>の <ruby>儀式<rt>ぎしき</rt></ruby>から <ruby>三<rt>みっ</rt></ruby>つのコースまで。</p>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Vocabulary</div>
+        <h2>Weekly flashcards, out loud</h2>
+        <p class="jpHead"><ruby>週<rt>しゅう</rt></ruby>ごとの <ruby>単語<rt>たんご</rt></ruby>カード、<ruby>声<rt>こえ</rt></ruby>に <ruby>出<rt>だ</rt></ruby>して</p>
+        <p class="copy">Every week's words get their own audio flashcard deck, at three depths. Tap to flip, tap to hear it, move through at your own pace, in whichever curriculum track fits.</p>
+        <p class="copy jp">その <ruby>週<rt>しゅう</rt></ruby>の <ruby>単語<rt>たんご</rt></ruby>が、めくって <ruby>音声<rt>おんせい</rt></ruby>を <ruby>聞<rt>き</rt></ruby>けるカードになります。<ruby>三<rt>みっ</rt></ruby>つの レベルで。</p>
+      </div>
+      <div class="shotTrio">
+        <div class="shotFrame"><img src="assets/tour/ss-studydeck.jpg" alt="Pre-Boo weekly flashcard deck: Vocab, Sentences, Questions, Stream" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/ss-studydeck-booriculum.jpg" alt="Boo-riculum weekly flashcard deck" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/ss-studydeck-boocontinuum.jpg" alt="Boo-Continuum weekly flashcard deck" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Warm Up</div>
+        <h2>Blitz: three rounds before the maze</h2>
+        <p class="jpHead">ブリッツ、<ruby>迷路<rt>めいろ</rt></ruby>の <ruby>前<rt>まえ</rt></ruby>の <ruby>準備運動<rt>じゅんびうんどう</rt></ruby></p>
+        <p class="copy">Words, sentences, and questions, three fast rounds, picked per curriculum track from the hub itself. Clear all three and the week's stretch of maze unlocks. It's a small gate, and it's a real one.</p>
+        <p class="copy jp"><ruby>単語<rt>たんご</rt></ruby>・<ruby>文<rt>ぶん</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>の <ruby>三<rt>さん</rt></ruby>つのラウンド。すべて <ruby>終<rt>お</rt></ruby>えると <ruby>迷路<rt>めいろ</rt></ruby>が <ruby>開<rt>ひら</rt></ruby>きます。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-blitzpanel.jpg" alt="Blitz Games panel on the hub, three tracks, three rounds each" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Three Tracks</div>
+        <h2>Same nine games, three depths</h2>
+        <p class="jpHead"><ruby>同<rt>おな</rt></ruby>じ <ruby>九<rt>きゅう</rt></ruby>つのゲームを、<ruby>三<rt>みっ</rt></ruby>つの レベルで</p>
+        <p class="copy">Pre-Boo, Boo-riculum, and Boo-Continuum each open to the same nine game types, at their own reading level and their own color set, so siblings at different levels are still playing side by side.</p>
+        <p class="copy jp">プレブー、ブーリキュラム、ブーコンティニュアム。<ruby>同<rt>おな</rt></ruby>じ <ruby>九<rt>きゅう</rt></ruby>つのゲームを、それぞれの レベルで <ruby>遊<rt>あそ</rt></ruby>べます。</p>
+      </div>
+      <div class="shotTrio">
+        <div class="shotFrame"><img src="assets/tour/trio-preboo.jpg" alt="Pre-Boo, choose your game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/trio-booriculum.jpg" alt="Boo-riculum, select a game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/trio-boocontinuum.jpg" alt="Boo-Continuum, choose your challenge" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">A Closer Look</div>
+        <h2>What the nine games actually look like</h2>
+        <p class="jpHead"><ruby>九<rt>きゅう</rt></ruby>つのゲームの <ruby>中身<rt>なかみ</rt></ruby></p>
+        <p class="copy">Matching, spelling, building sentences, timed rounds against the clock: vocabulary and sentences and questions, each rebuilt three separate ways across the three tracks.</p>
+        <p class="copy jp">マッチング、スペル、<ruby>文<rt>ぶん</rt></ruby>づくり、タイムアタック。<ruby>単語<rt>たんご</rt></ruby>・<ruby>文<rt>ぶん</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>を、<ruby>三<rt>みっ</rt></ruby>つのやり <ruby>方<rt>かた</rt></ruby>で。</p>
+      </div>
+      <div class="gameGrid">
+        <div class="shotFrame"><img src="assets/tour/grid-01.jpg" alt="Vocabulary matching game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-02.jpg" alt="Sentence matching game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-03.jpg" alt="Listen and choose game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-04.jpg" alt="Spell the word game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-05.jpg" alt="Sentence building game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-06.jpg" alt="Reading choice game" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-07.jpg" alt="Speed vocabulary round" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-08.jpg" alt="Speed reading round" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/grid-09.jpg" alt="Question reading round" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Copy Practice</div>
+        <h2>The Homework Tree</h2>
+        <p class="jpHead"><ruby>宿題<rt>しゅくだい</rt></ruby>の <ruby>木<rt>き</rt></ruby></p>
+        <p class="copy">A separate copy-practice tree: last week, this week, or next week, in whichever of the three curriculum tracks fits.</p>
+        <p class="copy jp"><ruby>先週<rt>せんしゅう</rt></ruby>・<ruby>今週<rt>こんしゅう</rt></ruby>・<ruby>来週<rt>らいしゅう</rt></ruby>を <ruby>選<rt>えら</rt></ruby>んで、<ruby>書<rt>か</rt></ruby>き<ruby>写<rt>うつ</rt></ruby>し <ruby>練習<rt>れんしゅう</rt></ruby>をします。</p>
+      </div>
+      <div class="shotPair">
+        <div class="shotFrame"><img src="assets/tour/world-homework.jpg" alt="The Homework Tree entrance" loading="lazy"></div>
+        <div class="shotFrame"><img src="assets/tour/world-juku.jpg" alt="Choosing a week and a curriculum track" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= YOUR PROFILE ================= -->
+<div class="panel" id="panel-profile" style="--pcolor:var(--c-profile)">
+  <div class="panelIntro">
+    <div class="kicker">Your Profile</div>
+    <p>Four pages keep track of everything a student does, each themed to its own part of the world instead of sharing one generic dashboard.</p>
+    <p class="jp"><ruby>四<rt>よっ</rt></ruby>つのページが、<ruby>取<rt>と</rt></ruby>り <ruby>組<rt>く</rt></ruby>んだことを <ruby>記録<rt>きろく</rt></ruby>します。それぞれ <ruby>世界<rt>せかい</rt></ruby>ごとの <ruby>色<rt>いろ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Profile One</div>
+        <h2>The Adventure Log</h2>
+        <p class="jpHead"><ruby>冒険<rt>ぼうけん</rt></ruby>ログ</p>
+        <p class="copy">The main profile: this week's progress across all nine games and three Blitz rounds, a running streak, and a full month calendar of every day played.</p>
+        <p class="copy jp"><ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>進捗<rt>しんちょく</rt></ruby>と <ruby>連続記録<rt>れんぞくきろく</rt></ruby>、<ruby>遊<rt>あそ</rt></ruby>んだ <ruby>日<rt>ひ</rt></ruby>すべてのカレンダー。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-profile-header.jpg" alt="The Adventure Log profile, stars and streak" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Profile One, continued</div>
+        <h2>This week, game by game</h2>
+        <p class="jpHead"><ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>記録<rt>きろく</rt></ruby>、ゲームごとに</p>
+        <p class="copy">A daily check-in streak underneath, and every one of the three curriculum tracks lined up below it, ready to open.</p>
+        <p class="copy jp"><ruby>毎日<rt>まいにち</rt></ruby>チェックの <ruby>連続記録<rt>れんぞくきろく</rt></ruby>と、<ruby>三<rt>みっ</rt></ruby>つの コースが <ruby>並<rt>なら</rt></ruby>びます。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-profile-week.jpg" alt="Daily Check streak and weekly curriculum tabs" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:#9b8ad1; background:radial-gradient(1000px 420px at 8% -8%, rgba(155,138,209,0.16), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Profile Two</div>
+        <h2>My Adventure</h2>
+        <p class="jpHead">マイ・アドベンチャー</p>
+        <p class="copy">Bonus arcade games unlock here week to week, and the same 36 tile wanderer board lives here too, tracking who's actually been met.</p>
+        <p class="copy jp"><ruby>週替<rt>しゅうが</rt></ruby>わりの <ruby>特別<rt>とくべつ</rt></ruby>ゲームと、<ruby>旅人<rt>たびびと</rt></ruby>の <ruby>記録<rt>きろく</rt></ruby>。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-adventureprofile-header.jpg" alt="My Adventure profile, bonus games and wanderers found" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Profile Three</div>
+        <h2>Utsuroba's Memory Archive</h2>
+        <p class="jpHead">うつろばの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>保管場所<rt>ほかんばしょ</rt></ruby></p>
+        <p class="copy">A quiet room for what stayed. Restored memories collect here, at whichever reading level was chosen for that case.</p>
+        <p class="copy jp"><ruby>残<rt>のこ</rt></ruby>った <ruby>記憶<rt>きおく</rt></ruby>のための、<ruby>静<rt>しず</rt></ruby>かな <ruby>部屋<rt>へや</rt></ruby>。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-utsurobaprofile.jpg" alt="Utsuroba profile, Memory Archive, memories restored and rooms visited" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Profile Four</div>
+        <h2>Muenba's Ghost Ledger</h2>
+        <p class="jpHead">むえんばの <ruby>幽霊<rt>ゆうれい</rt></ruby><ruby>台帳<rt>だいちょう</rt></ruby></p>
+        <p class="copy">A record of who's still hiding, energy collected along the way, and every case cracked so far.</p>
+        <p class="copy jp">まだ <ruby>隠<rt>かく</rt></ruby>れている <ruby>相手<rt>あいて</rt></ruby>と、<ruby>集<rt>あつ</rt></ruby>めたエネルギーの <ruby>記録<rt>きろく</rt></ruby>。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/ss-muenbaprofile.jpg" alt="Muenba profile, Ghost Ledger, cases and rooms tracked" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ARCADE ================= -->
+<div class="panel" id="panel-arcade" style="--pcolor:var(--c-arcade)">
+  <div class="panelIntro">
+    <div class="kicker">Arcade</div>
+    <p>Pure reward, none of it graded, all of it earned.</p>
+    <p class="jp"><ruby>成績<rt>せいせき</rt></ruby>には <ruby>関係<rt>かんけい</rt></ruby>のない、ただの ごほうび。</p>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Physics</div>
+        <h2>Feed Booha</h2>
+        <p class="jpHead"><ruby>物理<rt>ぶつり</rt></ruby>で <ruby>飛<rt>と</rt></ruby>ばして、キャンディを</p>
+        <p class="copy">Cut, swing, and bounce candy across fans and pads until it lands in Booha's mouth. Fifty levels, each with its own star rating.</p>
+        <p class="copy jp">ファンや <ruby>バウンドパッド<rt></rt></ruby>を <ruby>使<rt>つか</rt></ruby>って、キャンディをブーハーの <ruby>口<rt>くち</rt></ruby>へ。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/game-feedbooha.jpg" alt="Feed Booha, real gameplay screen" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Arcade Shooter</div>
+        <h2>Booha Invaders</h2>
+        <p class="jpHead">よこから <ruby>撃<rt>う</rt></ruby>ち<ruby>込<rt>こ</rt></ruby>む アーケードシューティング</p>
+        <p class="copy">Waves, skill pacing, and a three phase boss fight against Dotty at the end of it.</p>
+        <p class="copy jp"><ruby>波状<rt>はじょう</rt></ruby>の <ruby>敵<rt>てき</rt></ruby>と、<ruby>最後<rt>さいご</rt></ruby>に <ruby>待<rt>ま</rt></ruby>ち <ruby>受<rt>う</rt></ruby>けるボス <ruby>戦<rt>せん</rt></ruby>。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/game-invaders.jpg" alt="Booha Invaders, real gameplay screen, wave 3" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Stack and Clear</div>
+        <h2>Booha Blocks</h2>
+        <p class="jpHead"><ruby>積<rt>つ</rt></ruby>んで <ruby>消<rt>け</rt></ruby>す、ブロックゲーム</p>
+        <p class="copy">A familiar falling block game, wearing Booha's own color set.</p>
+        <p class="copy jp">おなじみの <ruby>落<rt>お</rt></ruby>ちものパズルを、ブーハーの <ruby>色<rt>いろ</rt></ruby>で。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/game-blocks.jpg" alt="Booha Blocks, real gameplay screen" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">Slingshot Physics</div>
+        <h2>Booha Destruction</h2>
+        <p class="jpHead">ブーハー・デストラクション</p>
+        <p class="copy">Pull back and let go: a slingshot puzzle across chapters and rounds, with a growing roster of unlockable Booha looks along the way.</p>
+        <p class="copy jp">スリングショットで <ruby>狙<rt>ねら</rt></ruby>いを <ruby>定<rt>さだ</rt></ruby>め、<ruby>撃<rt>う</rt></ruby>ち <ruby>抜<rt>ぬ</rt></ruby>く パズルゲーム。</p>
+      </div>
+      <div class="shotFrame"><img src="assets/tour/game-destruction.jpg" alt="Booha Destruction, First Shot chapter one, training grounds" loading="lazy"></div>
+    </div>
+  </div>
+
+  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
+    <div class="wrap block-inner">
+      <div>
+        <div class="block-tag">Two Player</div>
+        <h2>Mister Happy's House</h2>
+        <p class="jpHead">二人で <ruby>対戦<rt>たいせん</rt></ruby>する、ミスター・ハッピーズハウス</p>
+        <p class="copy">A small house full of side games and a head to head showdown for two players on one device.</p>
+        <p class="copy jp">一つの <ruby>端末<rt>たんまつ</rt></ruby>で、二人で <ruby>対戦<rt>たいせん</rt></ruby>できるミニゲーム <ruby>集<rt>しゅう</rt></ruby>。</p>
+      </div>
+      <div>
+        <div class="shotFrame" style="margin-bottom:14px;"><img src="assets/tour/happyhouse-title.jpg" alt="Mister Happy's House, title card" loading="lazy"></div>
+        <div class="shotTrio">
+          <div class="shotFrame"><img src="assets/tour/happyhouse-room.jpg" alt="Inside Mister Happy's House, the two-player game room" loading="lazy"></div>
+          <div class="shotFrame"><img src="assets/tour/happyhouse-liarmachine.jpg" alt="The Liar Machine, a two player battle game" loading="lazy"></div>
+          <div class="shotFrame"><img src="assets/tour/happyhouse-snaptest.jpg" alt="Snap Test, a two player reflex battle" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="footerCta">
+  <div class="wrap">
+    <h2>Ready to go in.</h2>
+    <p class="jp"><ruby>準備<rt>じゅんび</rt></ruby>はいい。</p>
+    <a class="btnPrimary" href="https://booha-adventure-studios.github.io/the-booha-adventure/index.html">Enter Booha</a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Bryan's English School</div>
+      <div>Tomisato, Chiba 286-0221</div>
+      <div>0476-76-9896 (7 to 9 PM)</div>
+      <div><a href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a></div>
+    </div>
+    <div>
+      <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Elsewhere</div>
+      <div><a href="https://www.bryanharper.tokyo">Main site</a></div>
+      <div><a href="https://booha-adventure-studios.github.io/booha-world/">Booha World</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tabbar = document.getElementById('tabbar');
+  const panels = document.querySelectorAll('.panel');
+  tabbar.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tabbtn');
+    if (!btn) return;
+    tabbar.querySelectorAll('.tabbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const target = 'panel-' + btn.dataset.tab;
+    panels.forEach(p => p.classList.toggle('active', p.id === target));
+    window.scrollTo({ top: tabbar.offsetTop - 1, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
