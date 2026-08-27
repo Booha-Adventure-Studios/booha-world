@@ -170,22 +170,18 @@
     border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
     transform:rotate(-0.6deg); background:#0d0b09; display:flex; align-items:center; justify-content:center;
   }
-  .shotFrame img{width:100%; display:block; max-height:460px; object-fit:contain; object-position:center;}
+  .shotFrame img{width:100%; display:block; max-height:460px; object-fit:contain; object-position:center; cursor:zoom-in;}
 
   /* fanned photo stack, for environment art */
-  .imgStack{position:relative; height:300px; display:flex; align-items:center; justify-content:center;}
+  .imgStack{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:start;}
   .imgStack__item{
-    position:absolute; width:60%; max-width:270px; border-radius:16px; overflow:hidden;
+    position:static; width:auto; max-width:none; border-radius:16px; overflow:hidden;
     box-shadow:0 16px 36px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
-    transform:rotate(var(--r,0deg)) translate(var(--x,0),var(--y,0));
+    transform:none;
   }
   .imgStack__item img{aspect-ratio:1/1; object-fit:cover; width:100%;}
-  .imgStack__item:nth-child(1){--r:-8deg; --x:-44%; --y:6%; z-index:1;}
-  .imgStack__item:nth-child(2){--r:4deg; --x:8%; --y:-8%; z-index:3;}
-  .imgStack__item:nth-child(3){--r:12deg; --x:42%; --y:8%; z-index:2;}
   @media(max-width:879px){
-    .imgStack{height:auto; display:flex; gap:12px; overflow-x:auto; padding:6px 4px 16px; scroll-snap-type:x mandatory;}
-    .imgStack__item{position:static; width:64vw; max-width:220px; flex:0 0 auto; transform:none !important; scroll-snap-align:center;}
+    .imgStack{grid-template-columns:repeat(2,minmax(0,1fr)); padding:6px 4px 16px;}
   }
 
   /* two-up screenshot pair */
@@ -213,6 +209,20 @@
   /* small text-only character roll (names, no art, per the no-sprite rule) */
   .nameRoll{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
   .nameChip{border:1px solid var(--line); color:var(--muted); font-size:.8rem; padding:6px 12px; border-radius:999px;}
+
+  /* ---------- image viewer ---------- */
+  .shotFrame img,.imgStack__item img,.hero-banner img{cursor:zoom-in;}
+  .lightbox[hidden]{display:none;}
+  .lightbox{position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:24px;
+    background:rgba(4,3,2,.94); backdrop-filter:blur(12px);}
+  .lightbox figure{display:flex; flex-direction:column; align-items:center; gap:12px; max-width:94vw; max-height:90vh; margin:0;}
+  .lightbox img{max-width:94vw; max-height:78vh; width:auto; height:auto; object-fit:contain; border-radius:14px;
+    box-shadow:0 24px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.12); cursor:default;}
+  .lightbox figcaption{max-width:70ch; color:var(--ink); text-align:center; font-size:.9rem; line-height:1.5;}
+  .lightboxClose{position:absolute; top:14px; right:18px; width:44px; height:44px; border:1px solid var(--line);
+    border-radius:50%; background:rgba(10,8,6,.72); color:var(--ink); font-size:1.8rem; line-height:1; cursor:pointer;}
+  .lightboxClose:hover,.lightboxClose:focus-visible{background:var(--gold); border-color:var(--gold); color:#241705;}
+  body.lightbox-open{overflow:hidden;}
 
   /* ---------- footer cta ---------- */
   .footerCta{padding:70px 0 40px; text-align:center; border-top:1px solid var(--line);}
@@ -676,6 +686,14 @@
   </div>
 </footer>
 
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption" hidden>
+  <button class="lightboxClose" id="lightboxClose" type="button" aria-label="Close image viewer">×</button>
+  <figure>
+    <img id="lightboxImg" alt="">
+    <figcaption id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+
 <script>
   const tabbar = document.getElementById('tabbar');
   const tabButtons = [...tabbar.querySelectorAll('.tabbtn')];
@@ -684,6 +702,11 @@
   const nextTabBtn = document.getElementById('nextTabBtn');
   const nextTabJp = document.querySelector('#nextTabBtn .nextJp');
   const nextTabEn = document.querySelector('#nextTabBtn .nextEn');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const lightboxClose = document.getElementById('lightboxClose');
+  let lastImageTrigger = null;
   const tabLabels = new Map(tabButtons.map(btn => [btn.dataset.tab, {
     jp: btn.querySelector('.jpTab').textContent.trim(),
     en: btn.querySelector('.enTab').textContent.trim()
@@ -700,6 +723,43 @@
     const requested = decodeURIComponent(window.location.hash.slice(1));
     return validTabs.has(requested) ? requested : 'world';
   }
+
+  function openLightbox(image){
+    lastImageTrigger = image;
+    lightboxImg.src = image.currentSrc || image.src;
+    lightboxImg.alt = image.alt;
+    lightboxCaption.textContent = image.alt;
+    lightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    lightboxClose.focus();
+  }
+
+  function closeLightbox(){
+    lightbox.hidden = true;
+    document.body.classList.remove('lightbox-open');
+    lightboxImg.removeAttribute('src');
+    if (lastImageTrigger) lastImageTrigger.focus();
+  }
+
+  document.querySelectorAll('.shotFrame img, .imgStack__item img, .hero-banner img').forEach(image => {
+    image.tabIndex = 0;
+    image.setAttribute('role', 'button');
+    image.setAttribute('aria-label', 'Enlarge image: ' + image.alt);
+    image.addEventListener('click', () => openLightbox(image));
+    image.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      openLightbox(image);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+  });
 
   function activateTab(tabName, { updateHash = true, scroll = true } = {}){
     const activeButton = tabButtons.find(btn => btn.dataset.tab === tabName) || tabButtons[0];
@@ -723,7 +783,7 @@
       window.history.replaceState(null, '', '#' + activeTab);
     }
     if (scroll){
-      window.scrollTo({ top: tabbar.offsetTop - 1, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }
   }
 
@@ -737,6 +797,7 @@
     const activeTab = tabButtons.find(btn => btn.classList.contains('active')).dataset.tab;
     const currentIndex = tabButtons.findIndex(btn => btn.dataset.tab === activeTab);
     const nextTab = tabButtons[(currentIndex + 1) % tabButtons.length].dataset.tab;
+    nextTabBtn.blur();
     activateTab(nextTab);
   });
 
