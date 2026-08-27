@@ -337,7 +337,7 @@ function buildGrid() {
     const card = document.createElement('div');
     card.className = 'project-card';
     card.innerHTML = `
-      <img class="project-thumb" src="assets/workshop/${p.num}/1.png" alt="${name}" loading="lazy"/>
+      <img class="project-thumb" src="assets/workshop/${p.num}/1.webp" alt="${name}" loading="lazy"/>
       <div class="project-info">
         <div class="project-num">${p.num}</div>
         <div class="project-name">${name}</div>
@@ -373,7 +373,7 @@ function buildThumbs() {
   for (let i = 1; i <= p.photos; i++) {
     const t = document.createElement('img');
     t.className = 'lb-thumb' + (i-1 === currentPhoto ? ' active' : '');
-    t.src = `assets/workshop/${p.num}/${i}.png`;
+    t.src = `assets/workshop/${p.num}/${i}.webp`;
     t.loading = 'lazy';
     const idx = i - 1;
     t.addEventListener('click', () => setPhoto(idx));
@@ -385,7 +385,7 @@ function setPhoto(idx) {
   const p = PROJECTS[currentProject];
   currentPhoto = idx;
   lbImg.style.opacity = '0';
-  setTimeout(() => { lbImg.src = `assets/workshop/${p.num}/${idx+1}.png`; lbImg.style.opacity = '1'; }, 120);
+  setTimeout(() => { lbImg.src = `assets/workshop/${p.num}/${idx+1}.webp`; lbImg.style.opacity = '1'; }, 120);
   lbCounter.textContent = `${idx+1} / ${p.photos}`;
   lbThumbs.querySelectorAll('.lb-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
   const active = lbThumbs.children[idx];
