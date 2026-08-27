@@ -1,0 +1,6 @@
+# Scratch / working folders used during the WebP performance pass — not part of the site
+assets/_webp-preview/
+_to_delete/
+
+# macOS
+.DS_Store
