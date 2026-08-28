@@ -53,6 +53,7 @@
       --orb-4: #f0a0c8;
       --orb-5: #c8a0f0;
       --orb-6: #f0c8a0;
+      --accent: #ffd76a;
     }
 
     html, body {
@@ -137,6 +138,16 @@
   object-position: center bottom;
 }
 
+/* Per-tile accent colors, used by the hover glow/shimmer below */
+.tile-adventure  { --accent: #ffd76a; }
+.tile-cards      { --accent: #ff6fa8; }
+.tile-zukan      { --accent: #7fae5a; }
+.tile-workshop   { --accent: #d8703f; }
+.tile-school     { --accent: #6fc4d6; }
+.tile-curricula  { --accent: #5cb894; }
+.tile-tour       { --accent: #f0a94a; }
+.tile-bryan      { --accent: #8fa8c4; }
+
     .tile:nth-child(1) { animation-delay: 0.5s; }
     .tile:nth-child(2) { animation-delay: 0.65s; }
     .tile:nth-child(3) { animation-delay: 0.8s; }
@@ -168,14 +179,41 @@
       box-shadow: inset 0 0 30px rgba(255, 210, 80, 0.06);
       pointer-events: none;
       transition: box-shadow 0.4s ease;
+      z-index: 2;
+    }
+
+    /* Shimmer sweep, per-tile accent color */
+    .tile::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -60%;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.32), transparent);
+      transform: skewX(-18deg);
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .tile:hover::before {
+      opacity: 1;
+      animation: tileShimmer 0.85s ease forwards;
+    }
+
+    @keyframes tileShimmer {
+      from { left: -60%; }
+      to   { left: 130%; }
     }
 
     .tile:hover {
       transform: translateY(-6px) scale(1.02);
       box-shadow:
-        0 0 0 1px rgba(255,220,100,0.15),
+        0 0 0 1px color-mix(in srgb, var(--accent) 55%, transparent),
         0 8px 40px rgba(0,0,0,0.7),
-        0 0 60px rgba(255, 210, 80, 0.1);
+        0 0 60px color-mix(in srgb, var(--accent) 45%, transparent);
     }
 
     .tile:hover img {
@@ -184,7 +222,18 @@
     }
 
     .tile:hover::after {
-      box-shadow: inset 0 0 40px rgba(255, 210, 80, 0.14);
+      box-shadow: inset 0 0 40px color-mix(in srgb, var(--accent) 55%, transparent);
+    }
+
+    /* Click feedback, timed with the tile's sound */
+    .tile.tile-pulse {
+      animation: tilePulse 0.4s ease;
+    }
+    @keyframes tilePulse {
+      0%   { transform: translateY(-6px) scale(1.02); }
+      35%  { transform: translateY(-3px) scale(0.94); }
+      65%  { transform: translateY(-8px) scale(1.05); }
+      100% { transform: translateY(-6px) scale(1.02); }
     }
 
   /* ── MOBILE ── */
@@ -223,28 +272,28 @@
   <h1 class="title">The Booha World</h1>
 
    <div class="grid">
-    <a class="tile" href="adventure.html">
+    <a class="tile tile-adventure" href="adventure.html" data-sound="adventure">
       <img src="assets/img/adventure.webp" loading="lazy" alt="Booha Adventure" />
     </a>
-    <a class="tile" href="cards.html">
+    <a class="tile tile-cards" href="cards.html" data-sound="cards">
       <img src="assets/img/cards.webp" loading="lazy" alt="Booha Cards" />
     </a>
-    <a class="tile" href="zukan.html">
+    <a class="tile tile-zukan" href="zukan.html" data-sound="zukan">
       <img src="assets/img/zukan.webp" loading="lazy" alt="Zukan" />
     </a>
-    <a class="tile" href="workshop.html">
+    <a class="tile tile-workshop" href="workshop.html" data-sound="workshop">
       <img src="assets/img/workshop.webp" loading="lazy" alt="Bryan's Workshop" />
     </a>
-    <a class="tile" href="school.html">
+    <a class="tile tile-school" href="school.html" data-sound="school">
       <img src="assets/img/school.webp" loading="lazy" alt="Bryan's English School" />
     </a>
-    <a class="tile" href="curricula.html">
+    <a class="tile tile-curricula" href="curricula.html" data-sound="curricula">
       <img src="assets/img/curricula.webp" loading="lazy" alt="Curricula" />
     </a>
-    <a class="tile" href="tour.html">
+    <a class="tile tile-tour" href="tour.html" data-sound="tour">
       <img src="assets/img/tour.webp" loading="lazy" alt="The Booha Adventure, a guided tour" />
     </a>
-    <a class="tile bryan-tile" href="bryan.html">
+    <a class="tile bryan-tile tile-bryan" href="bryan.html" data-sound="bryan">
       <img src="assets/img/bryan-sketch.webp" loading="lazy" alt="Bryan Harper" />
     </a>
   </div>
@@ -291,6 +340,9 @@
       pulse: randomBetween(0, Math.PI * 2),
       pulseSpeed: randomBetween(0.008, 0.022),
       opacity: randomBetween(0.35, 0.75),
+      flickerSeed: randomBetween(0, 1000),
+      sparkBoost: 1,
+      sparkTimer: Math.floor(randomBetween(180, 480)),
     };
   }
 
@@ -304,9 +356,16 @@
 
   function drawOrb(o) {
     const pulse = Math.sin(o.pulse) * 0.4 + 1;
-    const r = o.baseR * pulse;
-    const colorStr = o.color.replace('VAL', o.opacity);
-    const glowStr = o.color.replace('VAL', o.opacity * 0.35);
+    const r = o.baseR * pulse * o.sparkBoost;
+
+    // embers cool as they rise: dim toward the top of the screen
+    const riseFade = Math.min(1, 0.25 + (o.y / H) * 0.85);
+    // gentle organic flicker on top of the steady pulse
+    const flicker = 0.82 + Math.sin(o.pulse * 3.3 + o.flickerSeed) * 0.12 + (Math.random() - 0.5) * 0.12;
+    const eff = Math.max(0, Math.min(1, o.opacity * riseFade * flicker * o.sparkBoost));
+
+    const colorStr = o.color.replace('VAL', eff);
+    const glowStr = o.color.replace('VAL', eff * 0.35);
 
     const grad = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, r * 2.5);
     grad.addColorStop(0, colorStr);
@@ -320,13 +379,25 @@
   }
 
   function tick() {
-    ctx.clearRect(0, 0, W, H);
+    // low-alpha fill instead of a full clear leaves a soft ember trail
+    ctx.fillStyle = 'rgba(26, 22, 20, 0.16)';
+    ctx.fillRect(0, 0, W, H);
 
     for (let i = 0; i < orbs.length; i++) {
       const o = orbs[i];
       o.y -= o.speed;
       o.x += o.drift;
       o.pulse += o.pulseSpeed;
+
+      // occasional bigger "spark pop", then decay back to normal size
+      if (o.sparkBoost > 1) {
+        o.sparkBoost = Math.max(1, o.sparkBoost - 0.03);
+      }
+      o.sparkTimer--;
+      if (o.sparkTimer <= 0) {
+        o.sparkBoost = randomBetween(1.6, 2.2);
+        o.sparkTimer = Math.floor(randomBetween(240, 600));
+      }
 
       // wrap around
       if (o.y < -20) {
@@ -367,6 +438,113 @@
   };
   document.addEventListener('click', fallback);
   document.addEventListener('touchstart', fallback);
+
+  // ── SFX: lazy WebAudio, no audio files ──
+  let actx = null;
+  function ensureCtx() {
+    if (!actx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      actx = new AC();
+    }
+    if (actx.state === 'suspended') actx.resume();
+    return actx;
+  }
+
+  function tone(freq, opts = {}) {
+    const ac = ensureCtx();
+    if (!ac) return;
+    const {
+      type = 'sine',
+      gain = 0.16,
+      dur = 0.15,
+      delay = 0,
+      detune = 0,
+      filterFreq = null,
+      slideTo = null,
+    } = opts;
+
+    const start = ac.currentTime + delay;
+
+    const osc = ac.createOscillator();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, start);
+    if (detune) osc.detune.setValueAtTime(detune, start);
+    if (slideTo) osc.frequency.linearRampToValueAtTime(slideTo, start + dur);
+
+    const g = ac.createGain();
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(gain, start + Math.min(0.015, dur * 0.3));
+    g.gain.exponentialRampToValueAtTime(0.0001, start + dur);
+
+    let node = osc;
+    if (filterFreq) {
+      const f = ac.createBiquadFilter();
+      f.type = 'lowpass';
+      f.frequency.setValueAtTime(filterFreq, start);
+      osc.connect(f);
+      node = f;
+    }
+    node.connect(g);
+    g.connect(ac.destination);
+
+    osc.start(start);
+    osc.stop(start + dur + 0.03);
+  }
+
+  // one small signature sound per tile, echoing that destination's mood
+  const TILE_SOUNDS = {
+    adventure: () => { // rising "let's go" two-note
+      tone(523, { type: 'triangle', dur: 0.11, gain: 0.16 });
+      tone(784, { type: 'triangle', dur: 0.2, gain: 0.18, delay: 0.09 });
+    },
+    cards: () => { // quick pluck arpeggio
+      tone(660, { type: 'square', dur: 0.07, gain: 0.09, filterFreq: 2200 });
+      tone(880, { type: 'square', dur: 0.07, gain: 0.09, filterFreq: 2200, delay: 0.055 });
+      tone(1175, { type: 'square', dur: 0.1, gain: 0.1, filterFreq: 2600, delay: 0.11 });
+    },
+    zukan: () => { // low wavering, faintly spooky
+      tone(196, { type: 'sine', dur: 0.55, gain: 0.13, detune: -9 });
+      tone(200, { type: 'sine', dur: 0.55, gain: 0.13, detune: 9, delay: 0.02 });
+    },
+    workshop: () => { // woody double-knock
+      tone(110, { type: 'square', dur: 0.06, gain: 0.15, filterFreq: 500 });
+      tone(98, { type: 'square', dur: 0.09, gain: 0.15, filterFreq: 450, delay: 0.1 });
+    },
+    school: () => { // bright bell
+      tone(1046, { type: 'sine', dur: 0.35, gain: 0.12 });
+      tone(2093, { type: 'sine', dur: 0.25, gain: 0.05 });
+    },
+    curricula: () => { // three-note climb
+      tone(440, { type: 'triangle', dur: 0.1, gain: 0.13 });
+      tone(554, { type: 'triangle', dur: 0.1, gain: 0.13, delay: 0.09 });
+      tone(659, { type: 'triangle', dur: 0.18, gain: 0.15, delay: 0.18 });
+    },
+    tour: () => { // quiet, warm single tone
+      tone(392, { type: 'sine', dur: 0.3, gain: 0.12 });
+    },
+    bryan: () => { // quiet, warm single tone, gentle upward slide
+      tone(330, { type: 'sine', dur: 0.32, gain: 0.12, slideTo: 349 });
+    },
+  };
+
+  // ── TILE CLICK: play the tile's sound, pulse it, then navigate ──
+  document.querySelectorAll('.tile').forEach((tile) => {
+    tile.addEventListener('click', (e) => {
+      // let modifier-clicks and middle-clicks behave normally (new tab, etc.)
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+      e.preventDefault();
+
+      const key = tile.dataset.sound;
+      if (TILE_SOUNDS[key]) {
+        try { TILE_SOUNDS[key](); } catch (err) { /* ignore audio errors */ }
+      }
+      tile.classList.add('tile-pulse');
+
+      const href = tile.getAttribute('href');
+      setTimeout(() => { window.location.href = href; }, 220);
+    });
+  });
 </script>
 
 </body>
