@@ -182,32 +182,6 @@
       z-index: 2;
     }
 
-    /* Shimmer sweep, per-tile accent color */
-    .tile::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -60%;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(115deg, transparent, rgba(255,255,255,0.32), transparent);
-      transform: skewX(-18deg);
-      pointer-events: none;
-      z-index: 3;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .tile:hover::before {
-      opacity: 1;
-      animation: tileShimmer 0.85s ease forwards;
-    }
-
-    @keyframes tileShimmer {
-      from { left: -60%; }
-      to   { left: 130%; }
-    }
-
     .tile:hover {
       transform: translateY(-6px) scale(1.02);
       box-shadow:
@@ -379,9 +353,7 @@
   }
 
   function tick() {
-    // low-alpha fill instead of a full clear leaves a soft ember trail
-    ctx.fillStyle = 'rgba(26, 22, 20, 0.16)';
-    ctx.fillRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
 
     for (let i = 0; i < orbs.length; i++) {
       const o = orbs[i];
