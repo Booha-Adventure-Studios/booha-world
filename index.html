@@ -210,6 +210,123 @@
       100% { transform: translateY(-6px) scale(1.02); }
     }
 
+    /* ── WELCOME OVERLAY ── */
+    .welcome-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255, 210, 100, 0.12), transparent 60%),
+        rgba(10, 8, 7, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      text-align: center;
+      transition: opacity 0.6s ease;
+    }
+
+    .welcome-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .welcome-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(22px, 4.5vw, 40px);
+      max-width: 560px;
+      width: 100%;
+      animation: welcomeFloat 4.5s ease-in-out infinite;
+    }
+
+    @keyframes welcomeFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-8px); }
+    }
+
+    .welcome-title {
+      font-family: 'Notable', sans-serif;
+      font-size: clamp(1.5rem, 6vw, 2.75rem);
+      color: #f5ecd7;
+      letter-spacing: 0.05em;
+      line-height: 1.35;
+      text-shadow: 0 0 40px rgba(255, 210, 80, 0.35);
+    }
+
+    .welcome-furigana {
+      display: block;
+      margin-top: 12px;
+      font-size: clamp(0.7rem, 2.2vw, 0.95rem);
+      letter-spacing: 0.16em;
+      font-weight: 400;
+      color: rgba(245, 236, 215, 0.55);
+    }
+
+    .welcome-enter {
+      font-family: inherit;
+      font-size: clamp(1rem, 3vw, 1.15rem);
+      letter-spacing: 0.1em;
+      color: #1a1614;
+      background: linear-gradient(160deg, #ffe89a, #ffd76a);
+      border: none;
+      border-radius: 999px;
+      padding: 0.9em 2.6em;
+      cursor: pointer;
+      box-shadow:
+        0 0 0 1px rgba(255, 220, 130, 0.5),
+        0 0 26px rgba(255, 210, 80, 0.4),
+        0 6px 24px rgba(0, 0, 0, 0.5);
+      animation: welcomeGlow 2.2s ease-in-out infinite;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .welcome-enter:hover,
+    .welcome-enter:focus-visible {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow:
+        0 0 0 1px rgba(255, 220, 130, 0.7),
+        0 0 46px rgba(255, 210, 80, 0.65),
+        0 8px 30px rgba(0, 0, 0, 0.55);
+    }
+
+    @keyframes welcomeGlow {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(255,220,130,0.5), 0 0 24px rgba(255,210,80,0.35), 0 6px 24px rgba(0,0,0,0.5); }
+      50%      { box-shadow: 0 0 0 1px rgba(255,220,130,0.6), 0 0 42px rgba(255,210,80,0.6),  0 6px 24px rgba(0,0,0,0.5); }
+    }
+
+    /* ── SOUND TOGGLE (shown when the overlay is skipped, or if autoplay is blocked) ── */
+    .sound-toggle {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 40;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(26, 22, 20, 0.75);
+      color: #f5ecd7;
+      font-size: 1.1rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(255, 210, 80, 0.15), 0 4px 16px rgba(0,0,0,0.4);
+      transition: box-shadow 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+    }
+
+    .sound-toggle.visible { display: flex; }
+
+    .sound-toggle:hover { transform: scale(1.08); }
+
+    .sound-toggle.playing {
+      box-shadow: 0 0 24px rgba(255, 210, 80, 0.4), 0 4px 16px rgba(0,0,0,0.4);
+    }
+
   /* ── MOBILE ── */
 @media (max-width: 640px) {
   .grid {
@@ -241,6 +358,18 @@
 <body>
 
 <canvas id="orb-canvas"></canvas>
+
+<div id="welcome-overlay" class="welcome-overlay">
+  <div class="welcome-card">
+    <h2 class="welcome-title">
+      Welcome to the Booha World
+      <span class="welcome-furigana">ウェルカム トゥ ザ ブーハ ワールド</span>
+    </h2>
+    <button id="welcome-enter-btn" class="welcome-enter" type="button">Enter</button>
+  </div>
+</div>
+
+<button id="sound-toggle" class="sound-toggle" type="button" aria-label="Play background music" title="Play background music">♪</button>
 
 <div class="page">
   <h1 class="title">The Booha World</h1>
@@ -389,27 +518,9 @@
   tick();
   window.addEventListener('resize', () => { resize(); initOrbs(); });
 
-  // ── AUDIO: play once on load ──
+  // ── AUDIO: background music, gated behind the welcome overlay (see bottom of script) ──
   const audio = document.getElementById('bg-audio');
   audio.volume = 0.55;
-
-  // Try autoplay; fall back to first interaction
-  const tryPlay = () => {
-    audio.play().catch(() => {});
-  };
-
-  window.addEventListener('load', () => {
-    setTimeout(tryPlay, 800);
-  });
-
-  // fallback: first click/touch anywhere
-  const fallback = () => {
-    tryPlay();
-    document.removeEventListener('click', fallback);
-    document.removeEventListener('touchstart', fallback);
-  };
-  document.addEventListener('click', fallback);
-  document.addEventListener('touchstart', fallback);
 
   // ── SFX: lazy WebAudio, no audio files ──
   let actx = null;
@@ -516,6 +627,63 @@
       const href = tile.getAttribute('href');
       setTimeout(() => { window.location.href = href; }, 220);
     });
+  });
+
+  // ── WELCOME GATE: one dedicated "Enter" gesture starts the BGM, ──
+  // ── so it never races a tile's own click sound. ──
+  const ENTERED_KEY = 'boohaWorldEntered';
+  const overlay = document.getElementById('welcome-overlay');
+  const enterBtn = document.getElementById('welcome-enter-btn');
+  const soundToggle = document.getElementById('sound-toggle');
+
+  function hasEnteredBefore() {
+    try { return sessionStorage.getItem(ENTERED_KEY) === '1'; } catch (err) { return false; }
+  }
+  function markEntered() {
+    try { sessionStorage.setItem(ENTERED_KEY, '1'); } catch (err) { /* private mode, etc. */ }
+  }
+
+  function startBGM() {
+    soundToggle.classList.add('visible');
+    audio.play().then(() => {
+      soundToggle.classList.add('playing');
+      soundToggle.setAttribute('aria-label', 'Mute background music');
+    }).catch(() => {
+      soundToggle.classList.remove('playing');
+      soundToggle.setAttribute('aria-label', 'Play background music');
+    });
+  }
+
+  function hideOverlay() {
+    overlay.classList.add('hidden');
+    setTimeout(() => { overlay.style.display = 'none'; }, 650);
+  }
+
+  if (hasEnteredBefore()) {
+    // returning to the menu from another page within this browser session —
+    // skip the gate; try a quiet autoplay, and leave the sound toggle as a
+    // manual fallback since the browser may block audio without a fresh gesture
+    overlay.style.display = 'none';
+    window.addEventListener('load', () => {
+      setTimeout(startBGM, 400);
+    });
+  } else {
+    enterBtn.addEventListener('click', () => {
+      markEntered();
+      ensureCtx(); // warm the WebAudio context on this same gesture, so the first tile click has zero latency
+      startBGM();
+      hideOverlay();
+    });
+  }
+
+  soundToggle.addEventListener('click', () => {
+    if (audio.paused) {
+      startBGM();
+    } else {
+      audio.pause();
+      soundToggle.classList.remove('playing');
+      soundToggle.setAttribute('aria-label', 'Play background music');
+    }
   });
 </script>
 
