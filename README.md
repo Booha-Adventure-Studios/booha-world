@@ -1,5 +1,6 @@
 # Booha World
-A hand-built creative and educational universe by Bryan Harper — native English teacher, 
+
+A hand-built creative and educational universe by Bryan Harper — native English teacher,
 maker, and developer based in Tomisato, Chiba, Japan.
 
 Live site: [booha-adventure-studios.github.io/booha-world](https://booha-adventure-studios.github.io/booha-world/)  
@@ -8,9 +9,13 @@ School: [bryanharper.tokyo](https://www.bryanharper.tokyo)
 ---
 
 ## What This Is
-Booha World is the public-facing hub for Bryan's English School and its connected creative 
-projects. Built entirely in vanilla HTML, CSS, and JavaScript — no frameworks, no libraries, 
-no build tools. Every line written by hand.
+
+Booha World is the public-facing website for Bryan's English School and its connected
+creative projects. This repository is a static site built with hand-written HTML, CSS,
+and JavaScript. It has no frontend framework, bundler, or build step.
+
+The student-facing Booha Adventure app is maintained in a separate repository:
+[The Booha Adventure](https://github.com/Booha-Adventure-Studios/the-booha-adventure).
 
 ---
 
@@ -19,56 +24,58 @@ no build tools. Every line written by hand.
 | Page | Description |
 |------|-------------|
 | `index.html` | Landing page with animated floating orbs and audio |
-| `adventure.html` | Booha Adventure app — curricula, Output preparation, English Juku, and PIN pricing |
+| `adventure.html` | Public overview of Booha Adventure, its curricula, class formats, and access |
+| `tour.html` | Guided tour of the app's profiles, worlds, games, and progress systems |
+| `how-to.html` | Parent installation and usage guide, shared by direct link or QR code; intentionally not in public navigation |
 | `school.html` | Output and English Juku class formats, lesson pricing, and learning system |
 | `curricula.html` | Three curriculum tracks with interactive design |
 | `cards.html` | Booha Cards product page |
-| `workshop.html` | project maker portfolio with lightbox gallery |
+| `workshop.html` | Project maker portfolio with lightbox gallery |
 | `zukan.html` | Karasuki field guide — original illustrated characters |
 | `bryan.html` | About Bryan Harper |
-| `notes.html` | Archived writing section. Preserved in the repository but no longer linked from the public Booha World navigation. |
+| `notes.html` | Archived writing section, preserved but no longer linked from public navigation |
 
 ---
 
 ## Booha Adventure
-Booha Adventure is a private PWA-based English learning platform built exclusively 
-for Bryan's English School students. It is not open source, but it is referenced here 
-as the core product this site supports.
 
-**Technical highlights:**
-- ~50,000+ lines of vanilla JavaScript
-- Built solo
-- No frontend framework; a small private sync layer supports PIN login and cross-device profiles
-- Hosted on GitHub Pages
-- PWA with service worker, offline support, and installable on iOS/Android/desktop
-- PIN-based auth system connected to Wix CMS via URL hash tokens
-- Two account views: Adventure Log for Daily Check-ins, study/game progress, and approved Juku reports; My Adventure for stars, completed adventures, curriculum progress, and achievements
-- Daily Check-ins review current vocabulary, sentences, and questions in about 3–4 minutes; profiles retain first-attempt and best results
-- Custom weekly content system with a Monday midnight reset (Tokyo time)
-- Speech recognition engine with iOS fallback path
-- 9 mini-games across 3 curriculum tracks (Pre-Boo, Boo-riculum, Boo-Continuum)
-- The same weekly content supports two class formats: flipped Output lessons and English Juku
-- English Juku lets prepared students practise and demonstrate the week's English independently; teacher-reviewed oral reading and open answers are included in approved weekly reports, while games never affect results
-- 30-room canvas navigation engine (1536×1024 world canvas) in two worlds and growing
-- Bilingual EN/JP throughout
+Booha Adventure is a PIN-protected, installable PWA for Bryan's English School students.
+This repository contains the public overview and tour; the app source, curriculum data,
+game systems, and progress systems live in the separate repository linked above.
+
+Key features:
+
+- Installable PWA with service-worker support for iOS, Android, and desktop
+- Authorized PIN access and saved learning progress
+- Three curriculum tracks: Pre-Boo, Boo-riculum, and Boo-Continuum
+- Weekly study decks with vocabulary, sentences, questions, audio, and Japanese support
+- Daily Check-ins that take about 3–4 minutes and record first and best results
+- Three Blitz rounds with nine game types, plus explororable game worlds and collections
+- Adventure Log, My Adventure, and world-specific profile pages for progress and achievements
+- The same weekly content supports flipped Output lessons and English Juku
+- Bilingual English/Japanese learning throughout
 - No ads, recommendation feed, generative AI, or advertising profiles
-- Licensed to other schools
+- PIN licensing is available to other schools
+
+Original content, artwork, and software remain the property of Bryan Harper. Public
+repository visibility does not grant permission to reuse them.
 
 ---
 
 ## Archived Notes
-The former Notes/Output section has been retired from the public Booha World navigation.
-Its page and modular post files remain in the repository as an archive, and the page is
-marked not to be indexed by search engines.
 
-Current posts: arriving-at-zero, dead-words, so-so-culture.
+The former Notes/Output section has been retired from the public Booha World navigation.
+Its page and modular post files in `posts/` remain in the repository as an archive. The
+page is marked not to be indexed by search engines.
 
 ---
 
 ## Karasuki
+
 Karasuki is where forgotten things go.
 
 A fictional world that lives across three formats:
+
 - The **Zukan** (field guide) — original illustrated characters with bilingual entries
 - The **Booha Adventure** — Karasuki is the first of two explorable game worlds
 - The **novel** — currently in progress
@@ -79,19 +86,20 @@ Kara Ageha, Uhibon
 ---
 
 ## Bryan's Workshop
-A portfolio of handmade projects — woodworking, crafts, and original making work. 
+A portfolio of handmade projects — woodworking, crafts, and original making work.
 Bilingual English and Japanese. Featured on Facebook, Hometalk, and LIMIA.
 
 ---
 
 ## Design System
-- **Fonts:** Notable (titles), Spectral (serif body), DM Sans (UI), Noto Sans JP / Noto Serif JP
+- **Fonts:** Notable (titles), Spectral (serif body), DM Sans (UI), Noto Sans JP, and Noto Serif JP
 - **Colors:** Warm dark charcoal backgrounds, moss green Karasuki accent
-- **Approach:** Mobile-first, touch-optimized, no dependencies
+- **Approach:** Mobile-first, touch-optimized, hand-written vanilla HTML/CSS/JavaScript
 
 ---
 
 ## About Bryan Harper
+
 Bryan Harper is from Columbus, Ohio. He came to Japan as a firefighter in the United 
 States Air Force, stationed at Yokota Air Base. After leaving the Air Force he threw 
 himself into teaching — ALT work, international schools, private lessons — before 
