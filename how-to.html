@@ -89,9 +89,13 @@
     .hero-copy { max-width: 590px; color: var(--soft); font-family: 'Noto Sans JP', sans-serif; font-size: clamp(1rem, 2vw, 1.13rem); line-height: 2; }
     .hero-copy .en-text { max-width: 560px; font-size: .98rem; }
     .hero-art { position: relative; min-height: 350px; display: grid; place-items: center; }
-    .hero-art::before { position: absolute; width: 80%; height: 80%; border-radius: 42% 58% 65% 35%; background: linear-gradient(135deg, rgba(255, 212, 90, .9), rgba(255, 150, 143, .8) 48%, rgba(201, 168, 255, .8)); content: ''; transform: rotate(-7deg); box-shadow: 0 0 70px rgba(255, 212, 90, .18); }
-    .hero-art img { position: relative; z-index: 1; width: min(100%, 340px); max-height: 360px; object-fit: contain; filter: drop-shadow(0 24px 26px rgba(10, 5, 24, .38)); animation: float 5s ease-in-out infinite; }
+    .hero-art::before { display: none; }
+    .hero-art img { position: relative; z-index: 1; width: min(100%, 340px); max-height: 360px; object-fit: contain; animation: float 5s ease-in-out infinite, ghostGlow 2.8s ease-in-out infinite; }
     @keyframes float { 0%, 100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(-10px) rotate(-2deg); } }
+    @keyframes ghostGlow {
+      0%, 100% { filter: drop-shadow(0 24px 26px rgba(10, 5, 24, .38)) drop-shadow(0 0 0 rgba(255, 212, 90, 0)); }
+      50% { filter: drop-shadow(0 24px 26px rgba(10, 5, 24, .38)) drop-shadow(0 0 22px rgba(255, 212, 90, .62)) drop-shadow(0 0 42px rgba(255, 150, 143, .28)); }
+    }
 
     .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 27px; }
     .button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 8px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--night); background: var(--yellow); box-shadow: 0 8px 18px rgba(0,0,0,.18); text-align: center; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
