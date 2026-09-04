@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Booha Adventure, A Guided Tour</title>
-<meta name="description" content="A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, the daily curriculum, four profile pages, and the arcade, built from real screens and real art.">
+<meta name="description" content="A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, Grimmerglen, the daily curriculum, profile pages, and the arcade, built from real screens and real art.">
 <meta name="author" content="Bryan Harper">
 <link rel="icon" type="image/webp" href="assets/tour/mascot-ghost-real.webp">
 <script type="application/ld+json">
@@ -18,7 +18,7 @@
     "name": "Bryan Harper",
     "url": "https://booha-adventure-studios.github.io/booha-world/bryan.html"
   },
-  "description": "A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, the daily curriculum, four profile pages, and the arcade, built from real screens and real art.",
+  "description": "A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, Grimmerglen, the daily curriculum, profile pages, and the arcade, built from real screens and real art.",
   "inLanguage": ["en", "ja"],
   "isPartOf": {
     "@type": "WebSite",
@@ -45,6 +45,7 @@
     --c-karasuki:#7fae5a;
     --c-utsuroba:#b28cd6;
     --c-muenba:#6fa683;
+    --c-grimmerglen:#eaa5d5;
     --c-curriculum:#e0a23a;
     --c-profile:#caa662;
     --c-arcade:#e0698a;
@@ -180,6 +181,7 @@
     transform:none;
   }
   .imgStack__item img{aspect-ratio:1/1; object-fit:cover; width:100%;}
+  .imgStack.grimmerglenStack .imgStack__item img{aspect-ratio:16/9; object-fit:cover;}
   @media(max-width:879px){
     .imgStack{grid-template-columns:repeat(2,minmax(0,1fr)); padding:6px 4px 16px;}
   }
@@ -397,6 +399,23 @@
     </div>
   </div>
 
+  <div class="block" style="--bcolor:var(--c-grimmerglen); background:radial-gradient(1000px 420px at 8% -8%, rgba(234,165,213,0.18), transparent 60%);">
+    <div class="wrap block-inner reverse">
+      <div>
+        <div class="block-tag">夢の世界<span class="enSecondary">The Daydream World</span></div>
+        <h2>Grimmerglen: where daydreams end up</h2>
+        <p class="jpHead">グリマーグレン、<ruby>夢<rt>ゆめ</rt></ruby>が <ruby>行<rt>い</rt></ruby>きつく <ruby>場所<rt>ばしょ</rt></ruby></p>
+        <p class="copy">Grimmerglen is where daydreams gather and pile up. Meet Marietta, explore a pastel garden, and help recover the memories hidden inside everyday objects through short English typing challenges. Three reading tiers move from guided support toward remembering on your own.</p>
+        <p class="copy jp">グリマーグレンは、<ruby>夢<rt>ゆめ</rt></ruby>が <ruby>集<rt>あつ</rt></ruby>まり、<ruby>積<rt>つ</rt></ruby>み <ruby>重<rt>かさ</rt></ruby>なる <ruby>場所<rt>ばしょ</rt></ruby>です。マリエッタに <ruby>会<rt>あ</rt></ruby>い、パステルカラーの <ruby>庭<rt>にわ</rt></ruby>を <ruby>探索<rt>たんさく</rt></ruby>しながら、<ruby>身近<rt>みぢか</rt></ruby>なものに <ruby>残<rt>のこ</rt></ruby>された <ruby>記憶<rt>きおく</rt></ruby>を、<ruby>短<rt>みじか</rt></ruby>い <ruby>英語<rt>えいご</rt></ruby>のタイピングで <ruby>取<rt>と</rt></ruby>り <ruby>戻<rt>もど</rt></ruby>します。ヒントのある <ruby>段階<rt>だんかい</rt></ruby>から、<ruby>自分<rt>じぶん</rt></ruby>で <ruby>思<rt>おも</rt></ruby>い <ruby>出<rt>だ</rt></ruby>す <ruby>段階<rt>だんかい</rt></ruby>へ <ruby>進<rt>すす</rt></ruby>みます。</p>
+      </div>
+      <div class="imgStack grimmerglenStack">
+        <div class="imgStack__item"><img src="assets/tour/grimmerglen_01.webp" alt="A Marietta waiting on a pastel forest path in Grimmerglen" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/grimmerglen_02.webp" alt="A Grimmerglen memory exercise with English and Japanese support" loading="lazy"></div>
+        <div class="imgStack__item"><img src="assets/tour/grimmerglen_03.webp" alt="A pastel café clearing in Grimmerglen" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
     <div class="wrap block-inner reverse">
       <div>
@@ -512,8 +531,8 @@
 <div class="panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-profile)">
   <div class="panelIntro">
     <div class="kicker"><span class="jpPrimary">プロフィール</span><span class="enSecondary">Your Profile</span></div>
-    <p>Four pages keep track of everything a student does, each themed to its own part of the world instead of sharing one generic dashboard.</p>
-    <p class="jp"><ruby>四<rt>よっ</rt></ruby>つのページが、<ruby>取<rt>と</rt></ruby>り <ruby>組<rt>く</rt></ruby>んだことを <ruby>記録<rt>きろく</rt></ruby>します。それぞれ <ruby>世界<rt>せかい</rt></ruby>ごとの <ruby>色<rt>いろ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
+    <p>Profile pages keep track of everything a student does, each themed to its own part of the world instead of sharing one generic dashboard.</p>
+    <p class="jp">プロフィールページには、<ruby>取<rt>と</rt></ruby>り <ruby>組<rt>く</rt></ruby>んだことが <ruby>記録<rt>きろく</rt></ruby>されます。それぞれ <ruby>世界<rt>せかい</rt></ruby>ごとの <ruby>色<rt>いろ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
   </div>
 
   <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
