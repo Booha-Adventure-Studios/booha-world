@@ -73,7 +73,7 @@
     .eyebrow .en-sub { margin-top: 2px; color: var(--muted); font-size: .62rem; letter-spacing: .08em; }
 
     .jp-main { font-family: 'Noto Sans JP', sans-serif; }
-    ruby { ruby-position: over; }
+    ruby { ruby-position: over; white-space: nowrap; }
     rt { color: var(--yellow); font: 500 .46em/1 'Noto Sans JP', sans-serif; letter-spacing: 0; }
     .en-sub { display: block; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: .42em; font-weight: 500; line-height: 1.35; letter-spacing: .01em; }
     .en-text { display: block; margin-top: 5px; color: var(--muted); font: 400 .83rem/1.65 'DM Sans', sans-serif; }
@@ -81,6 +81,7 @@
     .keep { white-space: nowrap; }
 
     .hero { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; padding: 68px 0 52px; }
+    .hero > * { min-width: 0; }
     h1, h2, h3, p { margin-top: 0; }
     h1 { max-width: 680px; margin-bottom: 20px; color: var(--ivory); font: 700 clamp(1.75rem, 4.2vw, 3.6rem)/1.35 'Noto Sans JP', Spectral, serif; letter-spacing: -.035em; }
     h1 .jp-main { display: block; font-size: 1em; line-height: 1.45; letter-spacing: -.055em; word-break: keep-all; }
@@ -107,14 +108,15 @@
     .button .arrow { margin-left: 7px; color: var(--coral); font-size: 1.05rem; }
 
     .guide { display: grid; gap: 18px; }
-    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 32px 0 12px; }
-    .section-heading h2 { min-width: 0; margin-bottom: 0; color: var(--ivory); font: 700 clamp(1.2rem, 3.2vw, 1.95rem)/1.55 'Noto Sans JP', sans-serif; letter-spacing: -.035em; line-break: strict; overflow-wrap: normal; text-wrap: balance; }
-    .section-heading h2 .jp-main { display: block; word-break: keep-all; }
+    .guide > section { min-width: 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; min-width: 0; margin: 32px 0 12px; }
+    .section-heading h2 { flex: 1 1 auto; min-width: 0; margin-bottom: 0; color: var(--ivory); font: 700 clamp(1.2rem, 3.2vw, 1.95rem)/1.55 'Noto Sans JP', sans-serif; letter-spacing: -.035em; line-break: strict; overflow-wrap: normal; text-wrap: balance; }
+    .section-heading h2 .jp-main { display: block; word-break: keep-all; white-space: nowrap; }
     .section-heading h2 .en-sub { margin-top: 3px; font-size: .42em; letter-spacing: .01em; }
-    .section-heading > p { margin-bottom: 0; color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: .84rem; text-align: right; }
+    .section-heading > p { flex: 0 1 38%; min-width: 0; margin-bottom: 0; color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: .84rem; text-align: right; overflow-wrap: break-word; }
     .section-heading > p .en-text { font-size: .76rem; text-align: right; }
-    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card { position: relative; overflow: hidden; padding: 25px 23px 23px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); }
+    .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; min-width: 0; }
+    .card { position: relative; min-width: 0; overflow: hidden; padding: 25px 23px 23px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); overflow-wrap: break-word; }
     .card::after { position: absolute; right: -24px; bottom: -34px; width: 100px; height: 100px; border-radius: 50%; background: var(--accent, var(--yellow)); opacity: .12; content: ''; }
     .card:nth-child(2) { --accent: var(--mint); }
     .card:nth-child(3) { --accent: var(--coral); }
@@ -126,14 +128,15 @@
     .card p + p { margin-top: 12px; }
     .card .en-text { font-size: .8rem; line-height: 1.65; }
 
-    .wide-card { padding: 29px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(125deg, rgba(57,42,87,.96), rgba(45,33,72,.92)); box-shadow: var(--shadow); }
+    .wide-card { min-width: 0; padding: 29px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(125deg, rgba(57,42,87,.96), rgba(45,33,72,.92)); box-shadow: var(--shadow); overflow-wrap: break-word; }
+    .homework-intro .wide-card { border-color: rgba(255, 212, 90, .42); background: linear-gradient(125deg, rgba(78, 57, 108, .98), rgba(49, 39, 79, .94)); }
     .wide-card h3 { margin-bottom: 11px; color: var(--yellow); font: 700 1.16rem/1.6 'Noto Sans JP', sans-serif; }
     .wide-card h3 .en-sub { margin-top: 2px; font-size: .7rem; }
     .wide-card p { color: var(--soft); font-family: 'Noto Sans JP', sans-serif; font-size: .93rem; line-height: 2; }
     .wide-card p:last-child { margin-bottom: 0; }
     .wide-card .en-text { font-size: .82rem; line-height: 1.65; }
-    .track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 17px; }
-    .track { padding: 14px; border-left: 3px solid var(--accent); border-radius: 0 13px 13px 0; background: var(--card-light); }
+    .track-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; min-width: 0; margin-top: 17px; }
+    .track { min-width: 0; padding: 14px; border-left: 3px solid var(--accent); border-radius: 0 13px 13px 0; background: var(--card-light); overflow-wrap: break-word; }
     .track:nth-child(1) { --accent: var(--yellow); }
     .track:nth-child(2) { --accent: var(--mint); }
     .track:nth-child(3) { --accent: var(--lavender); }
@@ -200,6 +203,15 @@
       </section>
 
       <div class="guide">
+        <section class="homework-intro" aria-labelledby="homework-title">
+          <div class="section-heading"><h2 id="homework-title"><span class="jp-main"><ruby>毎週<rt>まいしゅう</rt></ruby>の<ruby>宿題<rt>しゅくだい</rt></ruby></span><span class="en-sub">Weekly homework</span></h2><p><span class="jp-main">まずは15<ruby>単語<rt>たんご</rt></ruby>。</span><span class="en-text">Start with 15 words.</span></p></div>
+          <div class="wide-card">
+            <h3><span class="jp-main">まずは、15<ruby>単語<rt>たんご</rt></ruby></span><span class="en-sub">Start with the 15 vocabulary words</span></h3>
+            <p><span class="jp-text"><ruby>最低限<rt>さいていげん</rt></ruby>の<ruby>宿題<rt>しゅくだい</rt></ruby>は、その<ruby>週<rt>しゅう</rt></ruby>の15<ruby>個<rt>こ</rt></ruby>の<ruby>単語<rt>たんご</rt></ruby>を、<ruby>英語<rt>えいご</rt></ruby>と<ruby>日本語<rt>にほんご</rt></ruby>で<ruby>書<rt>か</rt></ruby>くことです。</span><span class="en-text">The minimum homework is to write the 15 vocabulary words for the week in both English and Japanese.</span></p>
+            <p><span class="jp-text"><ruby>文<rt>ぶん</rt></ruby>や<ruby>質問<rt>しつもん</rt></ruby>も<ruby>書<rt>か</rt></ruby>いてみたいなら、とてもいいことです。その<ruby>週<rt>しゅう</rt></ruby>にしたことを<ruby>少<rt>すこ</rt></ruby>し<ruby>書<rt>か</rt></ruby>けたら、<ruby>最高<rt>さいこう</rt></ruby>です。</span><span class="en-text">If a student also wants to write the sentences and questions, that is great. If they write a little about what they did during the week, that is perfect.</span></p>
+          </div>
+        </section>
+
         <section aria-labelledby="start-title">
           <div class="section-heading"><h2 id="start-title"><span class="jp-main"><ruby>毎週<rt>まいしゅう</rt></ruby>の<ruby>流<rt>なが</rt></ruby>れ</span><span class="en-sub">The weekly rhythm</span></h2><p><span class="jp-main"><ruby>簡単<rt>かんたん</rt></ruby>な<ruby>手順<rt>てじゅん</rt></ruby>で、<ruby>少<rt>すこ</rt></ruby>しずつ<ruby>進<rt>すす</rt></ruby>みます。</span><span class="en-text">Simple steps, steady progress.</span></p></div>
           <div class="card-grid">
@@ -236,7 +248,7 @@
           <div class="section-heading"><h2 id="month-title"><span class="jp-main"><ruby>月<rt>つき</rt></ruby>の<ruby>学習<rt>がくしゅう</rt></ruby>サイクル</span><span class="en-sub">The monthly cycle</span></h2><p><span class="jp-main">4<ruby>週分<rt>しゅうぶん</rt></ruby>の<ruby>新<rt>あたら</rt></ruby>しい<ruby>内容<rt>ないよう</rt></ruby>。</span><span class="en-text">Four weeks of new content.</span></p></div>
           <div class="wide-card">
             <p><span class="jp-text">Booha Adventure では、<ruby>毎月<rt>まいげつ</rt></ruby>4<ruby>週間分<rt>しゅうかんぶん</rt></ruby>の<ruby>新<rt>あたら</rt></ruby>しい<ruby>内容<rt>ないよう</rt></ruby>があります。カレンダーに5<ruby>週目<rt>しゅうめ</rt></ruby>がある<ruby>月<rt>つき</rt></ruby>は、4<ruby>週目<rt>しゅうめ</rt></ruby>の<ruby>内容<rt>ないよう</rt></ruby>をもう<ruby>一度<rt>いちど</rt></ruby>使います。これは、<ruby>学習<rt>がくしゅう</rt></ruby>を<ruby>終<rt>お</rt></ruby>えたり、<ruby>復習<rt>ふくしゅう</rt></ruby>したりするための<ruby>時間<rt>じかん</rt></ruby>です。</span><span class="en-text">Booha Adventure has four weeks of new content each month. If the calendar includes a fifth week, Week 4 repeats. This gives students extra time to finish and review the material.</span></p>
-            <div class="note"><strong>ご<ruby>家庭<rt>かてい</rt></ruby>でのポイント：</strong> 5<ruby>週目<rt>しゅうめ</rt></ruby>も、デイリーチェックを<ruby>毎日<rt>まいにち</rt></ruby>してください。まだその<ruby>週<rt>しゅう</rt></ruby>の<ruby>文<rt>ぶん</rt></ruby>や<ruby>質問<rt>しつもん</rt></ruby>を<ruby>書<rt>か</rt></ruby>いていなければ、<ruby>書<rt>か</rt></ruby>いてください。<ruby>単語<rt>たんご</rt></ruby>を<ruby>一度<rt>いちど</rt></ruby><ruby>書<rt>か</rt></ruby>いただけでは、その<ruby>週<rt>しゅう</rt></ruby>の<ruby>学習<rt>がくしゅう</rt></ruby>は<ruby>終<rt>お</rt></ruby>わりません。<span class="en-text"><strong>At home:</strong> Students should still complete the Daily Check every day during a repeat week. If they have not yet written that week’s sentences or questions, they should do those too. Writing the vocabulary words once does not complete the week; please continue reviewing and using the sentences and questions before coming to school.</span></div>
+            <div class="note"><strong>ご<ruby>家庭<rt>かてい</rt></ruby>でのポイント：</strong> 5<ruby>週目<rt>しゅうめ</rt></ruby>も、デイリーチェックを<ruby>毎日<rt>まいにち</rt></ruby>してください。その<ruby>週<rt>しゅう</rt></ruby>の15<ruby>単語<rt>たんご</rt></ruby>をすでに<ruby>書<rt>か</rt></ruby>いている<ruby>場合<rt>ばあい</rt></ruby>は、<ruby>文<rt>ぶん</rt></ruby>や<ruby>質問<rt>しつもん</rt></ruby>も<ruby>書<rt>か</rt></ruby>いてください。<ruby>最低限<rt>さいていげん</rt></ruby>の<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>終<rt>お</rt></ruby>えてから<ruby>学校<rt>がっこう</rt></ruby>に<ruby>来<rt>き</rt></ruby>るようにしてください。<span class="en-text"><strong>At home:</strong> Students should still complete the Daily Check every day during a repeat week. If they have already written the 15 vocabulary words, they should continue with the sentences and questions. Please make sure students complete at least the minimum homework before coming to school.</span></div>
           </div>
         </section>
 
