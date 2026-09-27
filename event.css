@@ -268,3 +268,107 @@ body[data-theme="zombie"] h1 > .jp-main { color: #caff70; font-family: 'Zen Anti
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   .atmosphere::before, .atmosphere::after, .panel-zombie::before, .panel-zombie::after { display: none !important; }
 }
+
+/* ==========================================================
+   SOLID COLOR PASS
+   Candy Forest uses bright sticker-like blocks. The Zombie
+   Scavenger Hunt uses quarantine black, lime, and red.
+   ========================================================== */
+
+/* Remove the floating and atmospheric effects for the solid pass. */
+.atmosphere, .atmosphere::before, .atmosphere::after,
+.panel-zombie::before, .panel-zombie::after { display: none !important; }
+
+/* ---------------- CANDY FOREST ---------------- */
+body[data-theme="candy"] { --ink: #1c0a2b; background: #3d0f63; }
+
+body[data-theme="candy"] .tab.is-active { background: #ff6fae; border-color: #ff6fae; color: var(--ink); }
+body[data-theme="candy"] .tab.is-active .en-sub { color: var(--ink); }
+
+body[data-theme="candy"] .line-warning {
+  background: #ffd23f; border: 3px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); color: var(--ink);
+}
+body[data-theme="candy"] .line-warning .en-sub { color: var(--ink); }
+
+body[data-theme="candy"] .status-card {
+  background: #ff6fae; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+body[data-theme="candy"] .status-card-label,
+body[data-theme="candy"] .status-card-label .en-sub,
+body[data-theme="candy"] .countdown,
+body[data-theme="candy"] .status-card p,
+body[data-theme="candy"] .status-card p .en-sub { color: var(--ink); }
+body[data-theme="candy"] .ghost-dot { border: 2px solid var(--ink); background: rgba(28,10,43,.14); box-shadow: none; }
+body[data-theme="candy"] .ghost-dot.is-found { border-color: var(--ink); background: var(--dot-color); box-shadow: none; }
+
+body[data-theme="candy"] .hunt-shell {
+  background: #4f1780; border: 3px solid var(--ink); box-shadow: 6px 6px 0 var(--ink);
+}
+body[data-theme="candy"] .hunt-art { border-right: 3px solid var(--ink); }
+body[data-theme="candy"] .hunt-content input { background: #fff7ec; color: var(--ink); border: 3px solid var(--ink); }
+body[data-theme="candy"] .target-card { background: #fff7ec; border: 3px solid var(--ink); }
+body[data-theme="candy"] .target-card strong, body[data-theme="candy"] .target-card .en-sub { color: var(--ink); }
+
+body[data-theme="candy"] .primary-button {
+  background: #ffd23f; color: var(--ink); border: 3px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+}
+body[data-theme="candy"] .primary-button .en-sub { color: var(--ink); }
+body[data-theme="candy"] .primary-button:disabled { opacity: 1; background: #9b86b3; color: #2b1840; box-shadow: 4px 4px 0 var(--ink); }
+
+body[data-theme="candy"] .how-it-works { gap: 14px; margin-top: 22px; }
+body[data-theme="candy"] .how-it-works > div {
+  background: var(--step-color); border: 3px solid var(--ink); border-radius: 14px; box-shadow: 5px 5px 0 var(--ink);
+}
+body[data-theme="candy"] .how-it-works > div:nth-child(1) { --step-color: #ff6fae; }
+body[data-theme="candy"] .how-it-works > div:nth-child(2) { --step-color: #4ea8ff; }
+body[data-theme="candy"] .how-it-works > div:nth-child(3) { --step-color: #ffd23f; }
+body[data-theme="candy"] .how-it-works > div:nth-child(4) { --step-color: #5fd37a; }
+body[data-theme="candy"] .how-it-works span,
+body[data-theme="candy"] .how-it-works b,
+body[data-theme="candy"] .how-it-works b .en-sub,
+body[data-theme="candy"] .how-it-works small,
+body[data-theme="candy"] .how-it-works small .en-sub { color: var(--ink); }
+body[data-theme="candy"] .how-it-works small .jp-main,
+body[data-theme="candy"] .how-it-works small .en-sub { font-weight: 500; letter-spacing: 0; }
+
+/* ---------------- ZOMBIE SCAVENGER HUNT ---------------- */
+body[data-theme="zombie"] { --lime: #c6ff3d; --blood: #d7263d; background: #060807; }
+
+body[data-theme="zombie"] .tab.is-active { background: var(--lime); border-color: var(--lime); color: #060807; }
+body[data-theme="zombie"] .tab.is-active .en-sub { color: #060807; }
+body[data-theme="zombie"] h1 > .jp-main { color: var(--lime); text-shadow: none; animation: none; }
+body[data-theme="zombie"] h1 > .en-sub { color: #f2f2e8; }
+body[data-theme="zombie"] .eyebrow { color: var(--lime); }
+
+/* Quarantine tape under the hero. */
+.hero-night { border-bottom: 14px solid; border-image: repeating-linear-gradient(-45deg, #c6ff3d 0 14px, #060807 14px 28px) 14; margin-bottom: 34px; }
+.tba-pill { background: var(--lime, #c6ff3d); border-color: var(--lime, #c6ff3d); color: #060807; border-radius: 4px; }
+.tba-pill .en-sub { color: #060807; }
+.hero-night .hero-image img { border: 2px solid #c6ff3d; border-radius: 4px; box-shadow: none; }
+
+/* Straight, solid field-note cards with no tilt or glow. */
+.night-rules { gap: 12px; }
+.night-rules article,
+.night-rules article:nth-child(n) {
+  transform: none; animation: none; border-radius: 4px;
+  background: #121714; border: 2px solid #2b3a2f; border-top: 6px solid #c6ff3d; box-shadow: none;
+}
+.night-rules article.siren-rule { background: #d7263d; border-color: #d7263d; border-top-color: #060807; box-shadow: none; }
+.night-rules article.siren-rule h2 .jp-main, .night-rules article.siren-rule h2 .en-sub,
+.night-rules article.siren-rule p .jp-main, .night-rules article.siren-rule p .en-sub { color: #fff; }
+
+/* Keep the stamp style on the card number only. */
+.night-rules h2 span, .night-rules p span {
+  display: block; min-width: 0; height: auto; border: 0; transform: none;
+  place-items: initial; letter-spacing: 0; font-size: inherit; font-weight: inherit;
+}
+.night-rules article > span {
+  background: #c6ff3d; border: 0; color: #060807; transform: none; border-radius: 2px; padding: 0 6px;
+}
+.night-rules article.siren-rule > span { background: #060807; color: #fff; }
+.night-rules h2 .jp-main { color: #f2f2e8; font-size: 1.15rem; }
+.night-rules h2 .en-sub { color: #c6ff3d; font-size: .8rem; letter-spacing: .04em; margin-top: 2px; }
+.night-rules p { font-size: 13px; }
+.night-rules p .jp-main { color: #d7ddd6; font-weight: 500; }
+.night-rules p .en-sub { color: #8f9c92; margin-top: 6px; font-weight: 400; }
+.night-note { border: 2px dashed #c6ff3d; border-radius: 4px; }
