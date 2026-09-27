@@ -24,7 +24,7 @@ window.BOOHA_EVENTS = {
       walkEN: "The forest entrance is about a three-minute walk from the parking area.",
       noteJP: "駐車場には限りがあります。当日はスタッフの案内に従ってください。",
       noteEN: "Parking is limited. Please follow staff directions on the day.",
-      photo: "assets/events/location/parking-photo.webp",
+      photo: "assets/events/location/parking-front-photo.webp",
       mapImage: "assets/events/location/parking-map.webp",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
     },
