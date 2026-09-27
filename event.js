@@ -7,6 +7,11 @@
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const setBilingual = (selector, jp, en) => {
+    const element = $(selector);
+    if (!element) return;
+    element.innerHTML = `<span class="jp-main">${jp}</span><span class="en-sub">${en}</span>`;
+  };
   const startsAt = new Date(config.startAt).getTime();
   const latestStartAt = new Date(config.latestStartAt).getTime();
   const arrivalStartAt = new Date(config.arrivalStartAt).getTime();
@@ -105,17 +110,17 @@
     }
 
     const target = ghostById(state.order[state.nextIndex]);
-    $("#target-label").textContent = target.label;
+    $("#target-label-jp").innerHTML = target.jp;
+    $("#target-label-en").textContent = target.label;
     $("#target-swatch").style.background = target.color;
     $("#target-swatch").style.setProperty("--target-color", target.color);
-    $("#target-instruction").textContent = `Find the ${target.label.toLowerCase()} ghost in the forest, then scan its QR code.`;
+    $("#target-instruction-jp").textContent = `森で${target.jp.replace(/<[^>]*>/g, "")}ゴーストを見つけて、QRコードをスキャンしてください。`;
+    $("#target-instruction-en").textContent = `Find the ${target.label.toLowerCase()} ghost in the forest, then scan its QR code.`;
   };
 
   const updateStatus = () => {
     const now = Date.now();
-    const label = $("#candy-status-label");
     const countdown = $("#countdown");
-    const copy = $("#candy-status-copy");
     const startButton = $("#start-hunt");
     const remaining = (timestamp) => Math.max(0, timestamp - now);
     const duration = (milliseconds) => {
@@ -129,25 +134,35 @@
     };
 
     if (now < arrivalStartAt) {
-      label.textContent = "Arrivals open at";
+      $("#candy-status-label-jp").textContent = "来場開始";
+      $("#candy-status-label-en").textContent = "Arrivals open at";
       countdown.textContent = formatTime(arrivalStartAt);
-      copy.textContent = `The forest opens for arrivals at ${formatTime(arrivalStartAt)}. The hunt opens at ${formatTime(startsAt)}.`;
+      $("#candy-status-copy-jp").textContent = `来場受付は${formatTime(arrivalStartAt)}からです。ハントは${formatTime(startsAt)}に始まります。`;
+      $("#candy-status-copy-en").textContent = `The forest opens for arrivals at ${formatTime(arrivalStartAt)}. The hunt opens at ${formatTime(startsAt)}.`;
     } else if (now < startsAt) {
-      label.textContent = "Candy Forest opens in";
+      $("#candy-status-label-jp").textContent = "キャンディの森 開始まで";
+      $("#candy-status-label-en").textContent = "Candy Forest opens in";
       countdown.textContent = duration(remaining(startsAt));
-      copy.textContent = `Arrivals are open. The hunt opens at ${formatTime(startsAt)}.`;
+      $("#candy-status-copy-jp").textContent = `受付中です。ハントは${formatTime(startsAt)}に始まります。`;
+      $("#candy-status-copy-en").textContent = `Arrivals are open. The hunt opens at ${formatTime(startsAt)}.`;
     } else if (now < latestStartAt) {
-      label.textContent = "Candy Forest is open";
+      $("#candy-status-label-jp").textContent = "キャンディの森 開催中";
+      $("#candy-status-label-en").textContent = "Candy Forest is open";
       countdown.textContent = duration(remaining(latestStartAt));
-      copy.textContent = `New families may start until ${formatTime(latestStartAt)}. Started hunts can continue after the cutoff.`;
+      $("#candy-status-copy-jp").textContent = `${formatTime(latestStartAt)}まで新しく始められます。始めたハントは、そのあとも続けられます。`;
+      $("#candy-status-copy-en").textContent = `New families may start until ${formatTime(latestStartAt)}. Started hunts can continue after the cutoff.`;
     } else if (now < stayUntil) {
-      label.textContent = "New starts are closed";
+      $("#candy-status-label-jp").textContent = "新しい受付は終了";
+      $("#candy-status-label-en").textContent = "New starts are closed";
       countdown.textContent = `Until ${formatTime(stayUntil)}`;
-      copy.textContent = "If your family already started, continue your hunt. Families may stay in the forest with lunches and snacks.";
+      $("#candy-status-copy-jp").textContent = "始めたハントは続けられます。お弁当やおやつを持って、森で過ごせます。";
+      $("#candy-status-copy-en").textContent = "If your family already started, continue your hunt. Families may stay in the forest with lunches and snacks.";
     } else {
-      label.textContent = "Daytime forest period finished";
+      $("#candy-status-label-jp").textContent = "昼の森イベント終了";
+      $("#candy-status-label-en").textContent = "Daytime forest period finished";
       countdown.textContent = "—";
-      copy.textContent = "Please follow staff instructions for the next event or the marshmallow area.";
+      $("#candy-status-copy-jp").textContent = "次のイベントやマシュマロエリアについては、スタッフの案内に従ってください。";
+      $("#candy-status-copy-en").textContent = "Please follow staff instructions for the next event or the marshmallow area.";
     }
 
     startButton.disabled = !(now >= startsAt && now < latestStartAt);
@@ -181,7 +196,7 @@
     };
     saveState(state);
     renderTarget(state);
-    setFeedback("Your order is ready. Find your first ghost.", "is-muted");
+    setFeedback("順番が決まりました。最初のゴーストをさがしてください。 / Your order is ready. Find your first ghost.", "is-muted");
   };
 
   const processGhostScan = () => {
@@ -190,22 +205,22 @@
     if (!state) {
       $("#panel-candy").hidden = false;
       $("#hunt-start").hidden = false;
-      setFeedback("Start your family hunt first, then scan the ghost again.", "is-muted");
+      setFeedback("先に家族のハントを始めてから、もう一度スキャンしてください。 / Start your family hunt first, then scan the ghost again.", "is-muted");
       return;
     }
     if (state.nextIndex >= config.ghosts.length) return;
     const scanned = ghostById(ghostParam);
     if (!scanned) {
-      setFeedback("That Booha signal is mysterious. Check the event QR code.", "is-wrong");
+      setFeedback("ブーハーの信号が見つかりません。イベントのQRコードを確認してください。 / Check the event QR code.", "is-wrong");
       return;
     }
     if (state.found.includes(scanned.id)) {
-      setFeedback(`${scanned.label} is already in your collection. Keep looking for your current target.`, "is-muted");
+      setFeedback(`${scanned.label}はもう見つけています。今のターゲットをさがしてください。 / Already found. Keep looking for your current target.`, "is-muted");
       return;
     }
     const targetId = state.order[state.nextIndex];
     if (scanned.id !== targetId) {
-      setFeedback(`Not yet! Your current target is ${ghostById(targetId).label}. Nothing is lost.`, "is-wrong");
+      setFeedback("まだです！今のターゲットをさがしてください。順番は失われません。 / Not yet! Keep looking for your current target.", "is-wrong");
       return;
     }
     state.found.push(scanned.id);
@@ -214,8 +229,8 @@
     saveState(state);
     playReward();
     renderTarget(state);
-    if (state.completedAt) setFeedback("All ten ghosts found! Show your completion screen to Bryan.");
-    else setFeedback(`${scanned.label} found! Booha says: keep going.`, "");
+    if (state.completedAt) setFeedback("10ひき全部見つけました！完了画面をブライアンに見せてください。 / All ten ghosts found! Show your completion screen to Bryan.");
+    else setFeedback(`${scanned.label}を発見！つぎへ進みましょう。 / ${scanned.label} found! Keep going.`, "");
   };
 
   const selectTab = (tabName) => {
@@ -225,13 +240,18 @@
       panel.hidden = !active;
       panel.classList.toggle("is-active", active);
     });
+    document.body.dataset.theme = tabName;
     if (tabName === "candy") updateStatus();
   };
 
-  $("#location-copy").textContent = config.sections.location.body;
-  $("#bring-copy").textContent = config.sections.bring.body;
-  $("#safety-copy").textContent = config.sections.safety.body;
-  $("#schedule-copy").textContent = config.sections.schedule.body;
+  setBilingual("#location-copy", config.sections.location.jp, config.sections.location.en);
+  setBilingual("#bring-copy", config.sections.bring.jp, config.sections.bring.en);
+  setBilingual("#safety-copy", config.sections.safety.jp, config.sections.safety.en);
+  setBilingual("#schedule-copy", config.sections.schedule.jp, config.sections.schedule.en);
+  $("#parking-address-jp").textContent = config.parking.addressJP;
+  $("#parking-address-en").textContent = config.parking.addressEN;
+  setBilingual("#parking-note", config.parking.noteJP, config.parking.noteEN);
+  $("#parking-map-link").href = config.parking.mapUrl;
   $("#email-link").textContent = config.contacts.email;
   $("#email-link").href = `mailto:${config.contacts.email}`;
   $("#phone-link").textContent = config.contacts.phone;

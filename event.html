@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -16,10 +16,10 @@
   <div class="atmosphere" aria-hidden="true"></div>
 
   <header class="site-header wrap">
-    <a class="brand" href="index.html" aria-label="Booha World home">
+    <div class="brand" aria-label="Booha World event information">
       <span class="brand-mark">B</span>
-      <span><strong>Booha World</strong><small>event information</small></span>
-    </a>
+      <span><strong>Booha World</strong><small>event information · イベント案内</small></span>
+    </div>
     <div class="header-meta">
       <span class="status-dot"></span>
       <span id="header-status">October 31, 2026 · Japan/Tokyo</span>
@@ -28,20 +28,20 @@
 
   <main class="wrap">
     <nav class="tabs" aria-label="Event sections">
-      <button class="tab is-active" type="button" data-tab="info">Event information</button>
-      <button class="tab" type="button" data-tab="candy">Candy Forest</button>
-      <button class="tab" type="button" data-tab="zombie">Nighttime Booha Hunt</button>
+      <button class="tab is-active" type="button" data-tab="info"><span class="jp-main">イベント案内</span><span class="en-sub">Event information</span></button>
+      <button class="tab" type="button" data-tab="candy"><span class="jp-main">キャンディの森</span><span class="en-sub">Candy Forest</span></button>
+      <button class="tab" type="button" data-tab="zombie"><span class="jp-main">夜のブーハー探検</span><span class="en-sub">Nighttime Booha Hunt</span></button>
     </nav>
 
     <section class="panel tab-panel is-active" id="panel-info" data-panel="info">
       <div class="hero hero-info">
         <div class="hero-copy">
-          <p class="eyebrow">Saturday · October 31, 2026</p>
-          <h1><span>Welcome to</span> Candy Forest</h1>
-          <p class="hero-lede">A real forest adventure with ten hidden Booha Ghosts, a huge maze, and room to stay awhile.</p>
+          <p class="eyebrow"><span class="jp-main"><ruby>10月<rt>がつ</rt></ruby>31日<ruby>土曜日<rt>どようび</rt></ruby></span><span class="en-sub">Saturday · October 31, 2026</span></p>
+          <h1><span class="jp-main"><ruby>キャンディの森<rt>もり</rt></ruby>へようこそ</span><span class="en-sub">Welcome to Candy Forest</span></h1>
+          <p class="hero-lede"><span class="jp-main">本当の森で、10ひきのブーハーゴーストをさがそう。森はとても広いので、ゆっくり楽しめます。</span><span class="en-sub">A real forest adventure with ten hidden Booha Ghosts, a huge maze, and room to stay awhile.</span></p>
           <div class="hero-actions">
-            <button class="primary-button" type="button" data-go-tab="candy">Open Candy Forest</button>
-            <a class="text-link" href="#schedule">See the schedule ↓</a>
+            <button class="primary-button" type="button" data-go-tab="candy"><span class="jp-main">ゴーストをさがす</span><span class="en-sub">Open Candy Forest</span></button>
+            <a class="text-link" href="#parking"><span class="jp-main">駐車場を確認 ↓</span><span class="en-sub">See parking information</span></a>
           </div>
         </div>
         <figure class="hero-image">
@@ -50,114 +50,131 @@
         </figure>
       </div>
 
+      <section class="parking-priority" id="parking" aria-labelledby="parking-title">
+        <div class="parking-heading">
+          <p class="eyebrow"><span class="jp-main">いちばん大切な案内</span><span class="en-sub">Most important arrival information</span></p>
+          <h2 id="parking-title"><span class="jp-main">まず、駐車場を確認してください</span><span class="en-sub">Please check the parking location first</span></h2>
+          <p id="parking-note"></p>
+        </div>
+        <div class="parking-grid">
+          <div class="parking-facts">
+            <div class="parking-address"><span class="jp-main">駐車場</span><span class="en-sub">Parking</span><strong id="parking-address-jp"></strong><small id="parking-address-en"></small></div>
+            <div class="parking-walk"><span class="jp-main">駐車場から会場まで徒歩約3分</span><span class="en-sub">About a three-minute walk to the forest entrance</span></div>
+            <a id="parking-map-link" class="primary-button" href="#parking-map"><span class="jp-main">地図を見る</span><span class="en-sub">View the map</span></a>
+          </div>
+          <figure class="parking-photo"><img src="assets/events/location/parking-photo.jpg" alt="The designated parking area beside the forest event site"><figcaption><span class="jp-main">当日はこの駐車場をご利用ください。</span><span class="en-sub">Please use this designated parking area on event day.</span></figcaption></figure>
+        </div>
+        <figure class="parking-map" id="parking-map"><img src="assets/events/location/parking-map.png" alt="Japanese walking map from the designated parking area to Candy Forest"><figcaption><span class="jp-main">駐車場から森の入口までの道順</span><span class="en-sub">Walking route from parking to the forest entrance</span></figcaption></figure>
+      </section>
+
       <section class="schedule-grid" id="schedule" aria-label="Event schedule">
-        <article class="schedule-card"><span>Arrival</span><strong>9:30–11:00</strong><small>Come anytime in the arrival window.</small></article>
-        <article class="schedule-card highlight"><span>Candy Forest opens</span><strong>10:00</strong><small>New families may start until 11:00.</small></article>
-        <article class="schedule-card"><span>Stay in the forest</span><strong>Until about 16:00</strong><small>Lunches and snacks are welcome.</small></article>
+        <article class="schedule-card"><span class="jp-main">来場時間</span><span class="en-sub">Arrival</span><strong>9:30–11:00</strong><small><span class="jp-main">この時間内ならいつでも参加できます。</span><span class="en-sub">Come anytime in the arrival window.</span></small></article>
+        <article class="schedule-card highlight"><span class="jp-main">キャンディの森 開始</span><span class="en-sub">Candy Forest opens</span><strong>10:00</strong><small><span class="jp-main">11:00までに受付してください。</span><span class="en-sub">New families may start until 11:00.</span></small></article>
+        <article class="schedule-card"><span class="jp-main">森にいられる時間</span><span class="en-sub">Stay in the forest</span><strong>16:00ごろまで</strong><small><span class="jp-main">お弁当やおやつを持ってきてOKです。</span><span class="en-sub">Lunches and snacks are welcome.</span></small></article>
       </section>
 
       <div class="details-grid">
         <details open>
-          <summary><span class="summary-icon">⌖</span><span><b>Arrival, parking, and the forest</b><small>Maps and the walking route</small></span></summary>
+          <summary><span class="summary-icon">⌖</span><span><b><span class="jp-main">来場・駐車場・森</span><span class="en-sub">Arrival, parking, and the forest</span></b><small>Maps and the walking route · 地図と歩く道</small></span></summary>
           <p id="location-copy"></p>
         </details>
         <details>
-          <summary><span class="summary-icon">✦</span><span><b>What to bring</b><small>Clothing, food, and weather</small></span></summary>
+          <summary><span class="summary-icon">✦</span><span><b><span class="jp-main">持ちもの</span><span class="en-sub">What to bring</span></b><small>Clothing, food, and weather · 服・食べもの・天気</small></span></summary>
           <p id="bring-copy"></p>
         </details>
         <details>
-          <summary><span class="summary-icon">♡</span><span><b>Safety and access</b><small>Important forest information</small></span></summary>
+          <summary><span class="summary-icon">♡</span><span><b><span class="jp-main">安全について</span><span class="en-sub">Safety and access</span></b><small>Important forest information · 大切な森の案内</small></span></summary>
           <p id="safety-copy"></p>
         </details>
         <details>
-          <summary><span class="summary-icon">☼</span><span><b>The rest of the day</b><small>Story Time and the next event are TBA</small></span></summary>
+          <summary><span class="summary-icon">☼</span><span><b><span class="jp-main">そのあとの時間</span><span class="en-sub">The rest of the day</span></b><small>Story Time and the next event are TBA · ストーリータイムなどは未定</small></span></summary>
           <p id="schedule-copy"></p>
         </details>
       </div>
 
       <section class="contact-card">
-        <div><p class="eyebrow">Questions?</p><h2>Contact Bryan's English School</h2></div>
+        <div><p class="eyebrow"><span class="jp-main">質問がありますか？</span><span class="en-sub">Questions?</span></p><h2><span class="jp-main">ブライアンズ・イングリッシュ・スクール</span><span class="en-sub">Contact Bryan's English School</span></h2></div>
         <div class="contact-links"><a id="email-link" href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a><a id="phone-link" href="tel:0476769896">0476-76-9896</a></div>
       </section>
     </section>
 
     <section class="panel tab-panel" id="panel-candy" data-panel="candy" hidden>
       <div class="section-heading">
-        <p class="eyebrow">Find · Scan · Reward · Next Target</p>
-        <h1>Candy Forest</h1>
-        <p>Find ten colored Booha Ghosts hidden in the real forest. Your family receives a different order, so show only the current target.</p>
+        <p class="eyebrow"><span class="jp-main">さがす・スキャン・ごほうび・つぎのゴースト</span><span class="en-sub">Find · Scan · Reward · Next Target</span></p>
+        <h1><span class="jp-main">キャンディの森</span><span class="en-sub">Candy Forest</span></h1>
+        <p><span class="jp-main">森の中にかくれている、10色のブーハーゴーストをさがします。家族ごとに順番がちがうので、今のターゲットだけを見てください。</span><span class="en-sub">Find ten colored Booha Ghosts hidden in the real forest. Your family receives a different order, so show only the current target.</span></p>
       </div>
 
       <div class="status-card" id="candy-status-card" aria-live="polite">
-        <div class="status-card-label" id="candy-status-label">Checking the event time…</div>
+        <div class="status-card-label" id="candy-status-label"><span id="candy-status-label-jp" class="jp-main">イベント時間を確認中…</span><span id="candy-status-label-en" class="en-sub">Checking the event time…</span></div>
         <div class="countdown" id="countdown">—</div>
-        <p id="candy-status-copy">The hunt opens at 10:00 Japan/Tokyo time.</p>
+        <p id="candy-status-copy"><span id="candy-status-copy-jp" class="jp-main">ハントは日本時間10:00に始まります。</span><span id="candy-status-copy-en" class="en-sub">The hunt opens at 10:00 Japan/Tokyo time.</span></p>
       </div>
 
       <div class="hunt-shell">
         <div class="hunt-art"><img src="assets/events/atmosphere/candy-forest-path.png" alt="A forest path with one small pink, yellow, blue, orange, and white ghost visible at different distances"></div>
         <div class="hunt-content">
           <div id="hunt-start" class="hunt-view">
-            <p class="eyebrow">Your family hunt</p>
-            <h2>Ready to find the ghosts?</h2>
-            <p>Choose a family or team name. It stays on this device only. The site will create your private ten-color order when you start.</p>
-            <label for="participant-name">Family or team name</label>
+            <p class="eyebrow"><span class="jp-main">かぞくのハント</span><span class="en-sub">Your family hunt</span></p>
+            <h2><span class="jp-main">ゴーストを見つけよう！</span><span class="en-sub">Ready to find the ghosts?</span></h2>
+            <p><span class="jp-main">家族またはチーム名を入力してください。この端末だけに保存され、10色の順番が作られます。</span><span class="en-sub">Choose a family or team name. It stays on this device only. The site will create your private ten-color order when you start.</span></p>
+            <label for="participant-name"><span class="jp-main">家族・チーム名</span><span class="en-sub">Family or team name</span></label>
             <input id="participant-name" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Harper family">
-            <button class="primary-button full" id="start-hunt" type="button">Start the hunt</button>
+            <button class="primary-button full" id="start-hunt" type="button"><span class="jp-main">ハントを始める</span><span class="en-sub">Start the hunt</span></button>
             <div class="feedback" id="prestart-feedback" role="status" aria-live="polite"></div>
-            <p class="fine-print">New hunts open at 10:00 and must start by 11:00. A started hunt can continue until the family finishes or the local record expires.</p>
+            <p class="fine-print"><span class="jp-main">新しいハントは10:00から11:00までに始めてください。始めたハントは、見つけ終わるまで続けられます。</span><span class="en-sub">New hunts open at 10:00 and must start by 11:00. A started hunt can continue until the family finishes or the local record expires.</span></p>
           </div>
 
           <div id="hunt-active" class="hunt-view" hidden>
             <div class="progress-line"><span id="participant-label"></span><span id="progress-count">0 / 10</span></div>
-            <p class="eyebrow">Your current target</p>
+            <p class="eyebrow"><span class="jp-main">今のターゲット</span><span class="en-sub">Your current target</span></p>
             <div class="target-card" id="target-card">
               <span class="target-swatch" id="target-swatch"></span>
-              <strong id="target-label">—</strong>
+              <strong id="target-label"><span id="target-label-jp" class="jp-main">—</span><span id="target-label-en" class="en-sub">—</span></strong>
             </div>
-            <p id="target-instruction">Find this color in the forest, then scan its QR code.</p>
-            <div class="scan-note"><span class="scan-symbol">⌁</span><span>Point your phone camera at the ghost's QR code. The scan brings you back here with your next target.</span></div>
+            <p id="target-instruction"><span id="target-instruction-jp" class="jp-main">森でこの色のゴーストを見つけて、QRコードをスキャンしてください。</span><span id="target-instruction-en" class="en-sub">Find this color in the forest, then scan its QR code.</span></p>
+            <div class="scan-note"><span class="scan-symbol">⌁</span><span><span class="jp-main">ゴーストのQRコードにスマホのカメラを向けてください。スキャンすると、つぎのターゲットが表示されます。</span><span class="en-sub">Point your phone camera at the ghost's QR code. The scan brings you back here with your next target.</span></span></div>
             <div class="feedback" id="scan-feedback" role="status" aria-live="polite"></div>
           </div>
 
           <div id="hunt-complete" class="hunt-view complete-view" hidden>
             <div class="complete-mark">✦</div>
-            <p class="eyebrow">Candy Forest complete</p>
-            <h2>All ten ghosts found!</h2>
+            <p class="eyebrow"><span class="jp-main">キャンディの森 コンプリート</span><span class="en-sub">Candy Forest complete</span></p>
+            <h2><span class="jp-main">10ひき全部見つけた！</span><span class="en-sub">All ten ghosts found!</span></h2>
             <p id="completion-copy"></p>
             <div class="proof-card"><strong>10 / 10</strong><span id="completion-name"></span><small id="completion-time"></small></div>
-            <p class="fine-print">Show this screen to Bryan to collect your candy bag.</p>
+            <p class="fine-print"><span class="jp-main">この画面をブライアンに見せて、キャンディバッグをもらってください。</span><span class="en-sub">Show this screen to Bryan to collect your candy bag.</span></p>
           </div>
         </div>
       </div>
 
       <section class="how-it-works">
-        <div><span>01</span><b>Find</b><small>Search the real forest.</small></div>
-        <div><span>02</span><b>Scan</b><small>Scan the current color.</small></div>
-        <div><span>03</span><b>Reward</b><small>See the Booha response.</small></div>
-        <div><span>04</span><b>Next target</b><small>Keep going until ten.</small></div>
+        <div><span>01</span><b><span class="jp-main">さがす</span><span class="en-sub">Find</span></b><small>森の中をさがします。</small></div>
+        <div><span>02</span><b><span class="jp-main">スキャン</span><span class="en-sub">Scan</span></b><small>今の色のQRを読みます。</small></div>
+        <div><span>03</span><b><span class="jp-main">ごほうび</span><span class="en-sub">Reward</span></b><small>ブーハーのメッセージ。</small></div>
+        <div><span>04</span><b><span class="jp-main">つぎのターゲット</span><span class="en-sub">Next target</span></b><small>10ひき見つけるまで続けます。</small></div>
       </section>
     </section>
 
     <section class="panel tab-panel" id="panel-zombie" data-panel="zombie" hidden>
       <div class="hero hero-night">
         <div class="hero-copy">
-          <p class="eyebrow">A separate nighttime Booha hunt</p>
-          <h1>Zombie Scavenger Hunt</h1>
-          <p class="hero-lede">Fifteen lime-green ghosts. A dark forest. A siren. Zombies. No QR codes.</p>
-          <p class="tba-pill">Nighttime schedule · TBA</p>
+          <p class="eyebrow"><span class="jp-main">別イベント・夜のブーハー探検</span><span class="en-sub">A separate nighttime Booha hunt</span></p>
+          <h1><span class="jp-main">ゾンビ・スカベンジャーハント</span><span class="en-sub">Zombie Scavenger Hunt</span></h1>
+          <p class="hero-lede"><span class="jp-main">ライムグリーンのゴースト15ひき。暗い森。サイレン。ゾンビ。QRコードはありません。</span><span class="en-sub">Fifteen lime-green ghosts. A dark forest. A siren. Zombies. No QR codes.</span></p>
+          <p class="tba-pill"><span class="jp-main">夜の時間は未定</span><span class="en-sub">Nighttime schedule · TBA</span></p>
         </div>
         <figure class="hero-image"><img src="assets/events/atmosphere/zombie-hunt-single-ghost.png" alt="A small lime-green numbered Booha Ghost with reflective eyes on a tree at night"><figcaption>Example Ghost 7 — one of fifteen.</figcaption></figure>
       </div>
 
       <div class="night-rules">
-        <article><span>01</span><h2>Find in order</h2><p>Teams search for Ghost 1 through Ghost 15. Every ghost is photographed as proof.</p></article>
-        <article><span>02</span><h2>Use a covered phone light</h2><p>Phone lights are allowed, but every active light must have the required purple covering. No blacklights or QR scans.</p></article>
-        <article><span>03</span><h2>Hide when the siren sounds</h2><p>If a zombie sees an exposed light or glowstick, they may touch the team. A clothespin marks the bite.</p></article>
-        <article><span>04</span><h2>Return to Hospital</h2><p>Hand in the clothespin for one team glowstick antidote. After Ghost 15, return to the Hospital Desk to finish.</p></article>
+        <article><span>01</span><h2><span class="jp-main">順番に見つける</span><span class="en-sub">Find in order</span></h2><p>チームでゴースト1から15までをさがします。写真が証拠になります。</p></article>
+        <article><span>02</span><h2><span class="jp-main">テープをつけたライト</span><span class="en-sub">Use a covered phone light</span></h2><p>スマホのライトは使えます。ライトには紫色のテープをつけてください。ブラックライトとQRスキャンは使いません。</p></article>
+        <article><span>03</span><h2><span class="jp-main">サイレンでかくれる</span><span class="en-sub">Hide when the siren sounds</span></h2><p>ライトや光るものをゾンビに見られると、タッチされます。洗濯ばさみがゾンビのかみあとです。</p></article>
+        <article><span>04</span><h2><span class="jp-main">病院へ戻る</span><span class="en-sub">Return to Hospital</span></h2><p>洗濯ばさみを病院で外し、チーム用の光る薬を受け取ります。15番のあと、病院デスクに戻って終了です。</p></article>
       </div>
 
-      <div class="night-note"><strong>The next nighttime event is still being planned.</strong><span>Time, final rules, and transition details will be added when confirmed.</span></div>
+      <div class="night-note"><strong>夜のイベントの詳細は、まだ計画中です。</strong><span>The time, final rules, and transition details will be added when confirmed.</span></div>
     </section>
   </main>
 

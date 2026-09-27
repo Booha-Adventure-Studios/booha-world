@@ -1,6 +1,6 @@
 # Reusable Event Site: Product Requirements and Architecture
 
-**Status:** Draft for Bryan's review — documentation only; no implementation in this phase.
+**Status:** Working implementation in `event.html`, `event.css`, `event.js`, and `events/events.js`; final event details remain configurable.
 
 **Scope:** A reusable, static event site centered on `event.html`, hosted from the Booha World GitHub Pages site and distributed privately to participants through QR codes.
 
@@ -135,7 +135,7 @@ assets/events/...          event art, maps, ghost assets, and short sounds
 docs/event-site-requirements.md
 ```
 
-This is a proposed implementation shape, not work to perform in this documentation phase. If the project continues to favor single-file pages, `event.html` may inline the CSS and shell bootstrap while keeping the event registry in a separate data file; the important boundary is configuration versus runtime logic.
+The current implementation follows this shape: `event.html` is the reusable shell, `event.css` contains the event presentation, `event.js` contains countdown/hunt behavior, and `events/events.js` contains event-specific configuration and copy.
 
 ### 4.2 Configuration model
 

@@ -14,34 +14,51 @@ window.BOOHA_EVENTS = {
       email: "bryans.english@gmail.com",
       phone: "0476-76-9896"
     },
+    parking: {
+      titleJP: "まず、駐車場を確認してください",
+      titleEN: "Please check the parking location first",
+      addressJP: "株式会社タイセイプロダクツ　千葉県富里市七栄250",
+      addressEN: "Tai Sei Products · 250 Nanae, Tomisato, Chiba",
+      walkJP: "駐車場から会場まで、歩いて約3分です。",
+      walkEN: "The forest entrance is about a three-minute walk from the parking area.",
+      noteJP: "駐車場には限りがあります。当日はスタッフの案内に従ってください。",
+      noteEN: "Parking is limited. Please follow staff directions on the day.",
+      photo: "assets/events/location/parking-photo.jpg",
+      mapImage: "assets/events/location/parking-map.png",
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
+    },
     ghosts: [
-      { id: "red", label: "Red", color: "#ef5264" },
-      { id: "pink", label: "Pink", color: "#ec82ae" },
-      { id: "yellow", label: "Yellow", color: "#f4cf45" },
-      { id: "blue", label: "Blue", color: "#4e9fe8" },
-      { id: "light-blue", label: "Light Blue", color: "#8ed1e9" },
-      { id: "green", label: "Green", color: "#58b96d" },
-      { id: "light-green", label: "Light Green", color: "#a8d65d" },
-      { id: "black", label: "Black", color: "#24252b" },
-      { id: "white", label: "White", color: "#f5f0e4" },
-      { id: "orange", label: "Orange", color: "#ee844d" }
+      { id: "red", label: "Red", jp: "<ruby>赤<rt>あか</rt></ruby>", color: "#ef5264" },
+      { id: "pink", label: "Pink", jp: "ピンク", color: "#ec82ae" },
+      { id: "yellow", label: "Yellow", jp: "<ruby>黄色<rt>きいろ</rt></ruby>", color: "#f4cf45" },
+      { id: "blue", label: "Blue", jp: "<ruby>青<rt>あお</rt></ruby>", color: "#4e9fe8" },
+      { id: "light-blue", label: "Light Blue", jp: "<ruby>水色<rt>みずいろ</rt></ruby>", color: "#8ed1e9" },
+      { id: "green", label: "Green", jp: "<ruby>緑<rt>みどり</rt></ruby>", color: "#58b96d" },
+      { id: "light-green", label: "Light Green", jp: "<ruby>黄緑<rt>きみどり</rt></ruby>", color: "#a8d65d" },
+      { id: "black", label: "Black", jp: "<ruby>黒<rt>くろ</rt></ruby>", color: "#24252b" },
+      { id: "white", label: "White", jp: "<ruby>白<rt>しろ</rt></ruby>", color: "#f5f0e4" },
+      { id: "orange", label: "Orange", jp: "オレンジ", color: "#ee844d" }
     ],
     sections: {
       location: {
         title: "Arrival, parking, and the forest",
-        body: "Parking address, map, and the walking route are being confirmed. The forest is large and uneven; expect approximately a three-minute walk from parking to the event area. Please wait for the final map before the event."
+        jp: "駐車場から森の入口まで、歩いて約3分です。森は広く、道は平らではありません。",
+        en: "The forest entrance is about a three-minute walk from parking. The forest is large and the paths are uneven."
       },
       bring: {
         title: "What to bring",
-        body: "Wear comfortable shoes that can get dirty. Costumes are welcome. Bring water, snacks, and lunch if you plan to stay in the forest. Insect repellent and weather-appropriate layers are recommended."
+        jp: "歩きやすく、汚れてもよい靴で来てください。仮装も大歓迎です。森に残る方は、水、おやつ、お弁当を持ってきてください。",
+        en: "Wear comfortable shoes that can get dirty. Costumes are welcome. Bring water, snacks, and lunch if you plan to stay."
       },
       safety: {
         title: "Safety and access",
-        body: "Guardians must stay with children. The forest has uneven ground and narrow paths. Toilet and stroller/accessibility details are still being confirmed. Stay on the marked event paths and follow staff instructions."
+        jp: "保護者の方は、お子さまと一緒に行動してください。森の道は狭く、足元が不安定です。",
+        en: "Guardians must stay with children. The forest has narrow paths and uneven ground. Follow staff instructions."
       },
       schedule: {
         title: "The rest of the day",
-        body: "Families may stay with lunches and snacks until approximately 16:00. A Story Time or other daytime follow-up event is TBA. Participants joining the nighttime Zombie Scavenger Hunt will relocate to the marshmallow area when instructed."
+        jp: "お弁当やおやつを持って、午後4時ごろまで森で過ごせます。そのあとのイベントは、まだ決まっていません。",
+        en: "Families may stay with lunches and snacks until about 16:00. The next event is still TBA."
       }
     }
   }
