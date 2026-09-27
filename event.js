@@ -68,6 +68,21 @@
 
   const ghostById = (id) => config.ghosts.find((ghost) => ghost.id === id);
 
+  const renderProgress = (state) => {
+    const row = $("#candy-progress-dots");
+    if (!row) return;
+    const found = new Set(state?.found || []);
+    row.innerHTML = "";
+    config.ghosts.forEach((ghost) => {
+      const dot = document.createElement("span");
+      dot.className = `ghost-dot${found.has(ghost.id) ? " is-found" : ""}`;
+      dot.style.setProperty("--dot-color", ghost.color);
+      dot.setAttribute("aria-label", `${ghost.label}${found.has(ghost.id) ? " found" : " not found"}`);
+      row.appendChild(dot);
+    });
+    row.setAttribute("aria-label", `${state?.nextIndex || 0} of ${config.ghosts.length} ghosts found`);
+  };
+
   const playReward = () => {
     try {
       const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -102,6 +117,7 @@
     $("#hunt-complete").hidden = !complete;
     $("#participant-label").textContent = state.participantLabel;
     $("#progress-count").textContent = `${state.nextIndex} / ${config.ghosts.length}`;
+    renderProgress(state);
 
     if (complete) {
       $("#completion-copy").textContent = config.candyReward;
@@ -113,8 +129,11 @@
     const target = ghostById(state.order[state.nextIndex]);
     $("#target-label-jp").innerHTML = target.jp;
     $("#target-label-en").textContent = target.label;
-    $("#target-swatch").style.background = target.color;
-    $("#target-swatch").style.setProperty("--target-color", target.color);
+    const targetSwatch = $("#target-swatch");
+    targetSwatch.style.background = target.color;
+    targetSwatch.style.setProperty("--target-color", target.color);
+    targetSwatch.style.borderColor = target.id === "black" ? "#fff" : "rgba(255,255,255,.5)";
+    targetSwatch.style.boxShadow = target.id === "black" ? "0 0 0 3px rgba(255,255,255,.24), 0 0 22px rgba(255,255,255,.3)" : `0 0 22px ${target.color}`;
     $("#target-instruction-jp").textContent = `森で${target.jp.replace(/<[^>]*>/g, "")}ゴーストを見つけて、QRコードをスキャンしてください。`;
     $("#target-instruction-en").textContent = `Find the ${target.label.toLowerCase()} ghost in the forest, then scan its QR code.`;
   };
@@ -169,6 +188,7 @@
     startButton.disabled = !(now >= startsAt && now < latestStartAt);
     const state = readState();
     if (state) renderTarget(state);
+    else renderProgress(null);
   };
 
   const startHunt = () => {

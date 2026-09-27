@@ -10,7 +10,7 @@ window.BOOHA_EVENTS = {
     latestStartAt: "2026-10-31T11:00:00+09:00",
     stayUntil: "2026-10-31T16:00:00+09:00",
     huntDurationHours: 12,
-    candyReward: "Candy bag at the Hospital Desk / Bryan's return point",
+    candyReward: "Candy bag at the Candy Forest return point / Bryan's return point",
     contacts: {
       email: "bryans.english@gmail.com",
       phone: "0476-76-9896"
@@ -24,8 +24,8 @@ window.BOOHA_EVENTS = {
       walkEN: "The forest entrance is about a three-minute walk from the parking area.",
       noteJP: "駐車場には限りがあります。当日はスタッフの案内に従ってください。",
       noteEN: "Parking is limited. Please follow staff directions on the day.",
-      photo: "assets/events/location/parking-photo.jpg",
-      mapImage: "assets/events/location/parking-map.png",
+      photo: "assets/events/location/parking-photo.webp",
+      mapImage: "assets/events/location/parking-map.webp",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
     },
     ghosts: [
@@ -48,8 +48,8 @@ window.BOOHA_EVENTS = {
       },
       bring: {
         title: "What to bring",
-        jp: "学生年齢のお子さまは仮装で来てください。保護者の仮装は自由です。歩きやすく、汚れてもよい靴で来てください。森に残る方は、水、おやつ、お弁当を持ってきてください。",
-        en: "Student-aged children must wear costumes; parent costumes are optional. Wear comfortable shoes that can get dirty. Bring water, snacks, and lunch if you plan to stay."
+        jp: "歩きやすく、汚れてもよい靴で来てください。森に残る方は、水、おやつ、お弁当を持ってきてください。",
+        en: "Wear comfortable shoes that can get dirty. Bring water, snacks, and lunch if you plan to stay."
       },
       safety: {
         title: "Safety and access",
