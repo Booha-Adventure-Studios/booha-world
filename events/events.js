@@ -4,7 +4,8 @@ window.BOOHA_EVENTS = {
     title: "Halloween 2026",
     subtitle: "Candy Forest · October 31, 2026",
     timeZone: "Asia/Tokyo",
-    arrivalStartAt: "2026-10-31T09:30:00+09:00",
+    parkingOpenAt: "2026-10-31T09:45:00+09:00",
+    arrivalStartAt: "2026-10-31T10:00:00+09:00",
     startAt: "2026-10-31T10:00:00+09:00",
     latestStartAt: "2026-10-31T11:00:00+09:00",
     stayUntil: "2026-10-31T16:00:00+09:00",
@@ -28,15 +29,15 @@ window.BOOHA_EVENTS = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
     },
     ghosts: [
-      { id: "red", label: "Red", jp: "<ruby>赤<rt>あか</rt></ruby>", color: "#ef5264" },
+      { id: "red", label: "Red", jp: "赤", color: "#ef5264" },
       { id: "pink", label: "Pink", jp: "ピンク", color: "#ec82ae" },
-      { id: "yellow", label: "Yellow", jp: "<ruby>黄色<rt>きいろ</rt></ruby>", color: "#f4cf45" },
-      { id: "blue", label: "Blue", jp: "<ruby>青<rt>あお</rt></ruby>", color: "#4e9fe8" },
-      { id: "light-blue", label: "Light Blue", jp: "<ruby>水色<rt>みずいろ</rt></ruby>", color: "#8ed1e9" },
-      { id: "green", label: "Green", jp: "<ruby>緑<rt>みどり</rt></ruby>", color: "#58b96d" },
-      { id: "light-green", label: "Light Green", jp: "<ruby>黄緑<rt>きみどり</rt></ruby>", color: "#a8d65d" },
-      { id: "black", label: "Black", jp: "<ruby>黒<rt>くろ</rt></ruby>", color: "#24252b" },
-      { id: "white", label: "White", jp: "<ruby>白<rt>しろ</rt></ruby>", color: "#f5f0e4" },
+      { id: "yellow", label: "Yellow", jp: "黄色", color: "#f4cf45" },
+      { id: "blue", label: "Blue", jp: "青", color: "#4e9fe8" },
+      { id: "light-blue", label: "Light Blue", jp: "水色", color: "#8ed1e9" },
+      { id: "green", label: "Green", jp: "緑", color: "#58b96d" },
+      { id: "light-green", label: "Light Green", jp: "黄緑", color: "#a8d65d" },
+      { id: "black", label: "Black", jp: "黒", color: "#24252b" },
+      { id: "white", label: "White", jp: "白", color: "#f5f0e4" },
       { id: "orange", label: "Orange", jp: "オレンジ", color: "#ee844d" }
     ],
     sections: {
@@ -47,8 +48,8 @@ window.BOOHA_EVENTS = {
       },
       bring: {
         title: "What to bring",
-        jp: "歩きやすく、汚れてもよい靴で来てください。仮装も大歓迎です。森に残る方は、水、おやつ、お弁当を持ってきてください。",
-        en: "Wear comfortable shoes that can get dirty. Costumes are welcome. Bring water, snacks, and lunch if you plan to stay."
+        jp: "学生年齢のお子さまは仮装で来てください。保護者の仮装は自由です。歩きやすく、汚れてもよい靴で来てください。森に残る方は、水、おやつ、お弁当を持ってきてください。",
+        en: "Student-aged children must wear costumes; parent costumes are optional. Wear comfortable shoes that can get dirty. Bring water, snacks, and lunch if you plan to stay."
       },
       safety: {
         title: "Safety and access",

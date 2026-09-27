@@ -33,7 +33,7 @@ The content should be organized into short, mobile-friendly sections or accordio
 
 ### 2.2 Candy Forest navigation and pre-start state
 
-Candy Forest is a separate navigation tab or prominent section within the event shell. For October 31, 2026, families may arrive from 09:30, the hunt opens at 10:00, and new families may begin until the 11:00 cutoff. Before 10:00 it must:
+Candy Forest is a separate navigation tab or prominent section within the event shell. For October 31, 2026, parking opens at 09:45, families may arrive from 10:00, the hunt opens at 10:00, and new families may begin until the 11:00 cutoff. Student-aged children must wear costumes; parent costumes are optional. Before 10:00 it must:
 
 - show a countdown in Japan/Tokyo time;
 - explain the simple loop: **Find → Scan → Reward → Next Target**;
@@ -99,7 +99,7 @@ The public event information should explain that people joining the nighttime hu
 
 The two Wix pages should be treated as content and design references, not as a source to copy blindly. Useful daytime Candy Forest content to migrate and rewrite includes:
 
-- 2025 date and 10:00–10:30 arrival window, to be replaced by the 2026 09:30–11:00 arrival window;
+- 2025 date and 10:00–10:30 arrival window, to be replaced by the 2026 10:00–11:00 arrival window and 09:45 parking opening;
 - parking at the Tai Sei Products location, parking limitations, map/photo directions, and the approximately three-minute walk;
 - the forest/maze being larger and less even than expected, picnic area guidance, and the 12:00 Story Time schedule;
 - the Booha Ghost challenge, family-specific ordered list, photo/proof expectation, and return-to-Bryan candy-bag reward flow;
@@ -218,7 +218,7 @@ Recommendations:
 
 | Category | What is known now |
 |---|---|
-| **Provided** | Stable page name is `event.html`; host on Booha World GitHub Pages; public/no-account participant flow; October 31, 2026 event date; 09:30–11:00 arrival window; hunt opens at 10:00; new starts close at 11:00; no fixed family hunt end; families may stay with lunches/snacks until approximately 16:00; next event is TBA; ten larger colored daytime QR ghosts plus ten separate smaller gold ghosts numbered 1–10; randomized per-family color order; one color-only QR per daytime ghost; smooth laminated A4 cutouts fastened to trees; localStorage persistence; approximately twelve-hour expiry; Japan/Tokyo scheduling; separate Candy Forest navigation; nighttime Booha hunt with 15 numbered ghosts, no team blacklights or QR codes, purple-covered phone lights, reflective-tape eyes, photo proof, siren/hide rules, clothespin bites, glowstick antidotes, and Hospital completion; future events; Adventure link near Daily Check and Continue; no student reward chosen yet. |
+| **Provided** | Stable page name is `event.html`; host on Booha World GitHub Pages; public/no-account participant flow; October 31, 2026 event date; parking opens at 09:45; 10:00–11:00 arrival window; hunt opens at 10:00; new starts close at 11:00; no fixed family hunt end; families may stay with lunches/snacks until approximately 16:00; children must wear costumes and parent costumes are optional; next event is TBA; ten larger colored daytime QR ghosts plus ten separate smaller gold ghosts numbered 1–10; randomized per-family color order; one color-only QR per daytime ghost; smooth laminated A4 cutouts fastened to trees; localStorage persistence; approximately twelve-hour expiry; Japan/Tokyo scheduling; separate Candy Forest navigation; nighttime Booha hunt with 15 numbered ghosts, no team blacklights or QR codes, purple-covered phone lights, reflective-tape eyes, photo proof, siren/hide rules, clothespin bites, glowstick antidotes, and Hospital completion; future events; Adventure link near Daily Check and Continue; no student reward chosen yet. |
 | **Provided** | Booha World is a static, framework-free HTML/CSS/JavaScript repository. The Adventure app is a separate, much larger static/PWA repository with its own authenticated systems, service worker, and external progress services. |
 | **Inferred recommendation** | Keep `event.html` as a reusable shell with event registry/configuration; use explicit `+09:00` timestamps; use separate public and Adventure entry points with a shared manifest/URL contract; keep public hunt state device-local; show current target only; treat completion as visual proof, not anti-cheat verification. |
 | **Inferred recommendation** | Preserve the Wix information hierarchy, but rewrite it for 2026 and make parking, arrival, safety, toilets, and contact information visible without hunting through decorative sections. |

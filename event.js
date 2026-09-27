@@ -15,6 +15,7 @@
   const startsAt = new Date(config.startAt).getTime();
   const latestStartAt = new Date(config.latestStartAt).getTime();
   const arrivalStartAt = new Date(config.arrivalStartAt).getTime();
+  const parkingOpenAt = new Date(config.parkingOpenAt || config.arrivalStartAt).getTime();
   const stayUntil = new Date(config.stayUntil).getTime();
 
   const formatTime = (timestamp) => new Intl.DateTimeFormat("en-US", {
@@ -133,18 +134,18 @@
       return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     };
 
-    if (now < arrivalStartAt) {
-      $("#candy-status-label-jp").textContent = "来場開始";
-      $("#candy-status-label-en").textContent = "Arrivals open at";
-      countdown.textContent = formatTime(arrivalStartAt);
-      $("#candy-status-copy-jp").textContent = `来場受付は${formatTime(arrivalStartAt)}からです。ハントは${formatTime(startsAt)}に始まります。`;
-      $("#candy-status-copy-en").textContent = `The forest opens for arrivals at ${formatTime(arrivalStartAt)}. The hunt opens at ${formatTime(startsAt)}.`;
+    if (now < parkingOpenAt) {
+      $("#candy-status-label-jp").textContent = "駐車場オープン";
+      $("#candy-status-label-en").textContent = "Parking opens at";
+      countdown.textContent = formatTime(parkingOpenAt);
+      $("#candy-status-copy-jp").textContent = `駐車場は${formatTime(parkingOpenAt)}からです。来場は${formatTime(arrivalStartAt)}から、ハントは${formatTime(startsAt)}に始まります。`;
+      $("#candy-status-copy-en").textContent = `Parking opens at ${formatTime(parkingOpenAt)}. Arrivals begin at ${formatTime(arrivalStartAt)} and the hunt opens at ${formatTime(startsAt)}.`;
     } else if (now < startsAt) {
-      $("#candy-status-label-jp").textContent = "キャンディの森 開始まで";
-      $("#candy-status-label-en").textContent = "Candy Forest opens in";
-      countdown.textContent = duration(remaining(startsAt));
-      $("#candy-status-copy-jp").textContent = `受付中です。ハントは${formatTime(startsAt)}に始まります。`;
-      $("#candy-status-copy-en").textContent = `Arrivals are open. The hunt opens at ${formatTime(startsAt)}.`;
+      $("#candy-status-label-jp").textContent = "来場開始まで";
+      $("#candy-status-label-en").textContent = "Arrivals open in";
+      countdown.textContent = duration(remaining(arrivalStartAt));
+      $("#candy-status-copy-jp").textContent = `駐車場は開いています。来場は${formatTime(arrivalStartAt)}からです。`;
+      $("#candy-status-copy-en").textContent = `Parking is open. Arrivals begin at ${formatTime(arrivalStartAt)}.`;
     } else if (now < latestStartAt) {
       $("#candy-status-label-jp").textContent = "キャンディの森 開催中";
       $("#candy-status-label-en").textContent = "Candy Forest is open";
