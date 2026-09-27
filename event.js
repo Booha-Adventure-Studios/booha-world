@@ -32,6 +32,32 @@
     minute: "2-digit"
   }).format(new Date(timestamp));
 
+  const formatTimeJP = (timestamp) => new Intl.DateTimeFormat("ja-JP", {
+    timeZone: config.timeZone, hour: "numeric", minute: "2-digit"
+  }).format(new Date(timestamp));
+
+  const formatDateJP = (timestamp) => new Intl.DateTimeFormat("ja-JP", {
+    timeZone: config.timeZone, month: "long", day: "numeric", weekday: "short"
+  }).format(new Date(timestamp));
+
+  const formatDateEN = (timestamp) => new Intl.DateTimeFormat("en-US", {
+    timeZone: config.timeZone, weekday: "long", month: "long", day: "numeric"
+  }).format(new Date(timestamp));
+
+  const renderCountdown = (element, milliseconds) => {
+    const total = Math.floor(milliseconds / 1000);
+    const units = [
+      [Math.floor(total / 86400), "日", "days"],
+      [Math.floor((total % 86400) / 3600), "時間", "hrs"],
+      [Math.floor((total % 3600) / 60), "分", "min"],
+      [total % 60, "秒", "sec"]
+    ].filter(([value], index) => index > 0 || value > 0);
+    element.classList.add("is-units");
+    element.innerHTML = units.map(([value, jp, en]) =>
+      `<span class="cd-unit"><b>${String(value).padStart(2, "0")}</b><small>${jp} · ${en}</small></span>`
+    ).join("");
+  };
+
   const readState = () => {
     try {
       const stored = JSON.parse(localStorage.getItem(storageKey) || "null");
@@ -153,33 +179,35 @@
       return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     };
 
-    if (now < parkingOpenAt) {
-      $("#candy-status-label-jp").textContent = "駐車場オープン";
-      $("#candy-status-label-en").textContent = "Parking opens at";
-      countdown.textContent = formatTime(parkingOpenAt);
-      $("#candy-status-copy-jp").textContent = `駐車場は${formatTime(parkingOpenAt)}からです。来場は${formatTime(arrivalStartAt)}から、ハントは${formatTime(startsAt)}に始まります。`;
-      $("#candy-status-copy-en").textContent = `Parking opens at ${formatTime(parkingOpenAt)}. Arrivals begin at ${formatTime(arrivalStartAt)} and the hunt opens at ${formatTime(startsAt)}.`;
-    } else if (now < startsAt) {
-      $("#candy-status-label-jp").textContent = "来場開始まで";
-      $("#candy-status-label-en").textContent = "Arrivals open in";
-      countdown.textContent = duration(remaining(arrivalStartAt));
-      $("#candy-status-copy-jp").textContent = `駐車場は開いています。来場は${formatTime(arrivalStartAt)}からです。`;
-      $("#candy-status-copy-en").textContent = `Parking is open. Arrivals begin at ${formatTime(arrivalStartAt)}.`;
+    if (now < startsAt) {
+      const parkingOpen = now >= parkingOpenAt;
+      $("#candy-status-label-jp").textContent = "キャンディの森 スタートまで";
+      $("#candy-status-label-en").textContent = "Candy Forest opens in";
+      renderCountdown(countdown, remaining(startsAt));
+      $("#candy-status-copy-jp").textContent = parkingOpen
+        ? `駐車場は開いています。ハントは${formatTimeJP(startsAt)}に始まります。`
+        : `${formatDateJP(startsAt)} ${formatTimeJP(startsAt)}スタート。駐車場は${formatTimeJP(parkingOpenAt)}から、ハントは${formatTimeJP(startsAt)}から始められます。`;
+      $("#candy-status-copy-en").textContent = parkingOpen
+        ? `Parking is open. The hunt starts at ${formatTime(startsAt)}.`
+        : `${formatDateEN(startsAt)} at ${formatTime(startsAt)}. Parking opens at ${formatTime(parkingOpenAt)}; families can start the hunt from ${formatTime(startsAt)}.`;
     } else if (now < latestStartAt) {
       $("#candy-status-label-jp").textContent = "キャンディの森 開催中";
       $("#candy-status-label-en").textContent = "Candy Forest is open";
+      countdown.classList.remove("is-units");
       countdown.textContent = duration(remaining(latestStartAt));
       $("#candy-status-copy-jp").textContent = `${formatTime(latestStartAt)}まで新しく始められます。始めたハントは、そのあとも続けられます。`;
       $("#candy-status-copy-en").textContent = `New families may start until ${formatTime(latestStartAt)}. Started hunts can continue after the cutoff.`;
     } else if (now < stayUntil) {
       $("#candy-status-label-jp").textContent = "新しい受付は終了";
       $("#candy-status-label-en").textContent = "New starts are closed";
+      countdown.classList.remove("is-units");
       countdown.textContent = `Until ${formatTime(stayUntil)}`;
       $("#candy-status-copy-jp").textContent = "始めたハントは続けられます。お弁当やおやつを持って、森で過ごせます。";
       $("#candy-status-copy-en").textContent = "If your family already started, continue your hunt. Families may stay in the forest with lunches and snacks.";
     } else {
       $("#candy-status-label-jp").textContent = "昼の森イベント終了";
       $("#candy-status-label-en").textContent = "Daytime forest period finished";
+      countdown.classList.remove("is-units");
       countdown.textContent = "—";
       $("#candy-status-copy-jp").textContent = "次のイベントやマシュマロエリアについては、スタッフの案内に従ってください。";
       $("#candy-status-copy-en").textContent = "Please follow staff instructions for the next event or the marshmallow area.";
