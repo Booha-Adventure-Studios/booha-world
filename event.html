@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="The Halloween Event 2026 in Tomisato, Chiba — Candy Forest, Story Time and the Zombie Scavenger Hunt. Reservation required.">
   <meta name="theme-color" content="#ff7a1a">
+  <meta property="og:title" content="ハロウィンイベント 2026 | The Halloween Event">
+  <meta property="og:description" content="10月31日（土）富里・キャンディの森、ストーリータイム、ゾンビ・スカベンジャーハント。要予約。">
+  <meta property="og:image" content="https://booha-adventure-studios.github.io/booha-world/assets/events/info/og-share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <title>The Halloween Event 2026 · ハロウィンイベント</title>
   <link rel="icon" type="image/webp" href="assets/img/booha_ghost.webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,10 +37,14 @@
 
     <section class="panel tab-panel is-active info-panel" id="panel-info" data-panel="info">
       <section class="info-hero info-sticker" aria-labelledby="info-title">
+        <picture class="info-hero-photo">
+          <source media="(max-width: 600px)" srcset="assets/events/info/hero-forest-mobile.webp">
+          <img src="assets/events/info/hero-forest-desktop.webp" width="2400" height="1000" fetchpriority="high" alt="夕方の大きな森の小道。竹と木々が奥へ続く自然な森">
+        </picture>
         <p class="info-date-pill"><span class="jp-main">10月31日（土）</span><span class="en-sub">Saturday, October 31, 2026</span></p>
         <h1 id="info-title"><span class="jp-main">ハロウィンイベント</span></h1>
         <p class="info-hero-en">THE HALLOWEEN EVENT 2026</p>
-        <p class="info-lede"><span class="jp-main">昼はキャンディの森とストーリータイム、夜はゾンビ・スカベンジャーハント！</span><span class="en-sub">Candy Forest and Story Time by day, the Zombie Scavenger Hunt at night!</span></p>
+        <p class="info-lede"><span class="jp-main"><span>昼はキャンディの森とストーリータイム、</span> <span>夜はゾンビ・スカベンジャーハント！</span></span><span class="en-sub"><span>Choose Candy Forest or Story Time by day,</span> <span>or join the Zombie Scavenger Hunt at night!</span></span></p>
         <p class="info-countdown-label"><span id="info-countdown-label-jp" class="jp-main">キャンディの森 スタートまで</span><span id="info-countdown-label-en" class="en-sub">Candy Forest opens in</span></p>
         <div class="countdown" id="info-countdown" aria-live="polite">—</div>
         <div class="info-actions">
@@ -46,32 +56,32 @@
       <section class="info-section info-reservation info-sticker" id="reservation" aria-labelledby="reservation-title">
         <p class="eyebrow"><span class="jp-main">まずは予約</span><span class="en-sub">Start here</span></p>
         <h2 id="reservation-title"><span class="jp-main">参加には予約が必要です</span><span class="en-sub">Reservation required</span></h2>
-        <p class="info-copy"><span class="jp-main">ブライアン英会話教室にメールでご予約ください。</span><span class="en-sub">Please reserve by emailing Bryan's English School.</span></p>
+        <p class="info-copy"><span class="jp-main">ブライアン英会話教室にメールでご予約ください。3つのイベントは、参加したいものだけ選べます。</span><span class="en-sub">Please reserve by emailing Bryan's English School. The three activities are independent—choose one, two, or all three.</span></p>
         <a id="reservation-link" class="primary-button info-button" href="mailto:bryans.english@gmail.com"><span class="jp-main">メールで予約する</span><span class="en-sub">Reserve by email</span></a>
         <p class="copyable-contact" id="reservation-email">bryans.english@gmail.com</p>
       </section>
 
       <section class="info-notices" aria-label="Must-know information">
-        <article class="info-notice notice-phone"><span class="notice-icon" aria-hidden="true">📱</span><h2><span class="jp-main">1グループに1台、電波の入るスマホが必要です</span><span class="en-sub">One phone with mobile data per family or team</span></h2><p><span class="jp-main">会場にWi-Fiはありません。キャンディの森とゾンビ・スカベンジャーハントで使います。充電してきてください。</span><span class="en-sub">There is no Wi-Fi. You'll need it for both hunts — come fully charged.</span></p></article>
-        <article class="info-notice notice-costume"><span class="notice-icon" aria-hidden="true">👻</span><h2><span class="jp-main">子ども（小学生〜高校生）は仮装必須</span><span class="en-sub">Costumes are required for children</span></h2><p><span class="jp-main">保護者の仮装は自由です。</span><span class="en-sub">Children from elementary to high school must wear costumes. Optional for parents.</span></p></article>
-        <article class="info-notice notice-toilet"><span class="notice-icon" aria-hidden="true">🚻</span><h2><span class="jp-main">森の中にトイレはありません</span><span class="en-sub">There are no toilets in the forest</span></h2><p><span class="jp-main">来場前におすませください。</span><span class="en-sub">Please go before you arrive.</span></p></article>
+        <article class="info-notice notice-phone"><span class="notice-tag"><span class="jp-main">スマホ</span><span class="en-sub">PHONE</span></span><h2><span class="jp-main">1グループに1台、電波の入るスマホが必要です</span><span class="en-sub">One phone with mobile data per family or team</span></h2><p><span class="jp-main">会場にWi-Fiはありません。キャンディの森とゾンビ・スカベンジャーハントで使います。充電してきてください。</span><span class="en-sub">There is no Wi-Fi. You'll need it for both hunts — come fully charged.</span></p></article>
+        <article class="info-notice notice-costume"><span class="notice-tag"><span class="jp-main">仮装</span><span class="en-sub">COSTUMES</span></span><h2><span class="jp-main">子ども（小学生〜高校生）は仮装必須</span><span class="en-sub">Costumes are required for children</span></h2><p><span class="jp-main">保護者の仮装は自由です。</span><span class="en-sub">Children from elementary to high school must wear costumes. Optional for parents.</span></p></article>
+        <article class="info-notice notice-toilet"><span class="notice-tag"><span class="jp-main">トイレ</span><span class="en-sub">TOILETS</span></span><h2><span class="jp-main">森の中にトイレはありません</span><span class="en-sub">There are no toilets in the forest</span></h2><p><span class="jp-main">来場前におすませください。</span><span class="en-sub">Please go before you arrive.</span></p></article>
       </section>
 
       <section class="info-section info-events" aria-labelledby="events-title">
-        <div class="info-section-heading"><p class="eyebrow"><span class="jp-main">1日の予定</span><span class="en-sub">The day at a glance</span></p><h2 id="events-title"><span class="jp-main">昼から夜まで楽しもう</span><span class="en-sub">Three parts of the Halloween Event</span></h2></div>
+        <div class="info-section-heading"><p class="eyebrow"><span class="jp-main">1日の予定</span><span class="en-sub">The day at a glance</span></p><h2 id="events-title"><span class="jp-main">昼から夜まで楽しもう</span><span class="en-sub">Three parts of the Halloween Event</span></h2><p class="info-copy event-choice-note"><span class="jp-main">3つのイベントは別々に参加できます。好きなものを選んでください。</span><span class="en-sub">Each activity is separate — choose one, two, or all three.</span></p></div>
         <div class="event-cards">
-          <article class="event-card event-card-candy"><time>10:00〜16:00ごろ</time><h3><span class="jp-main">キャンディの森</span><span class="en-sub">Candy Forest</span></h3><p><span class="jp-main">森にかくれた10ひきのブーハーゴーストをさがそう。11:00までにスタート。</span><span class="en-sub">Find ten hidden Booha Ghosts in the forest. Start by 11:00.</span></p><strong id="info-candy-card-price">キャンディバッグ ¥1,000</strong><button class="info-card-button" type="button" data-go-tab="candy"><span class="jp-main">詳しく見る</span><span class="en-sub">View details</span></button></article>
-          <article class="event-card event-card-story"><time>お昼ごろ<span class="en-sub">Around lunchtime</span></time><h3><span class="jp-main">ストーリータイム</span><span class="en-sub">Story Time</span></h3><p><span class="jp-main">お昼ごはんのあとにお話の時間。</span><span class="en-sub">A story session around lunchtime.</span></p></article>
-          <article class="event-card event-card-zombie"><time>18:00</time><h3><span class="jp-main">ゾンビ・スカベンジャーハント</span><span class="en-sub">Zombie Scavenger Hunt</span></h3><p><span class="jp-main">暗い森でゴーストをさがせ。サイレンが鳴ったらかくれろ！</span><span class="en-sub">Find the ghosts in the dark forest. When the siren sounds — hide!</span></p><strong id="info-zombie-card-price">グッズバッグ ¥1,000</strong><button class="info-card-button" type="button" data-go-tab="zombie"><span class="jp-main">詳しく見る</span><span class="en-sub">View details</span></button></article>
+          <article class="event-card event-card-candy"><img class="event-card-photo" src="assets/events/info/card-candy-forest.webp" width="1200" height="800" loading="lazy" alt="昼の森の小道。木の陰に小さなゴーストがかくれている森"><time>10:00〜16:00<small>ごろ</small></time><h3><span class="jp-main">キャンディの森</span><span class="en-sub">Candy Forest</span></h3><p><span class="jp-main">森にかくれた10ひきのブーハーゴーストをさがそう。11:00までにスタート。</span><span class="en-sub">Find ten hidden Booha Ghosts in the forest. Start by 11:00.</span></p><strong id="info-candy-card-price">キャンディバッグ ¥1,000</strong><button class="info-card-button" type="button" data-go-tab="candy"><span class="jp-main">詳しく見る</span><span class="en-sub">View details</span></button></article>
+          <article class="event-card event-card-story"><img class="event-card-photo" src="assets/events/info/card-story-time.webp" width="1200" height="800" loading="lazy" alt="森の小道。小さなハロウィンキャラクターがいる森"><time>お昼ごろ<span class="en-sub">Around lunchtime</span></time><h3><span class="jp-main">ストーリータイム</span><span class="en-sub">Story Time</span></h3><p><span class="jp-main">お昼ごはんのあとにお話の時間。</span><span class="en-sub">A story session around lunchtime.</span></p></article>
+          <article class="event-card event-card-zombie"><img class="event-card-photo" src="assets/events/info/card-zombie-hunt.webp" width="1200" height="800" loading="lazy" alt="霧の夜の森の小道。うす紫のライトの光"><time>18:00</time><h3><span class="jp-main">ゾンビ・スカベンジャーハント</span><span class="en-sub">Zombie Scavenger Hunt</span></h3><p><span class="jp-main">暗い森でゴーストをさがせ。サイレンが鳴ったらかくれろ！</span><span class="en-sub">Find the ghosts in the dark forest. When the siren sounds — hide!</span></p><strong id="info-zombie-card-price">グッズバッグ ¥1,000</strong><button class="info-card-button" type="button" data-go-tab="zombie"><span class="jp-main">詳しく見る</span><span class="en-sub">View details</span></button></article>
         </div>
       </section>
 
       <section class="info-section info-prices info-sticker" aria-labelledby="prices-title">
         <p class="eyebrow"><span class="jp-main">料金</span><span class="en-sub">Prices</span></p>
-        <h2 id="prices-title"><span class="jp-main">キャンディバッグ・グッズバッグ</span><span class="en-sub">Candy bags &amp; goodie bags</span></h2>
+        <h2 id="prices-title"><span class="jp-main">バッグ料金</span><span class="en-sub">Bag prices</span></h2>
         <div class="price-tiles">
-          <article class="price-tile price-candy"><span class="jp-main">キャンディの森 キャンディバッグ</span><span class="en-sub">Candy Forest candy bag</span><strong id="info-candy-price">¥1,000</strong></article>
-          <article class="price-tile price-zombie"><span class="jp-main">ゾンビ・スカベンジャーハント グッズバッグ</span><span class="en-sub">Zombie Scavenger Hunt goodie bag</span><strong id="info-zombie-price">¥1,000</strong></article>
+          <article class="price-tile price-candy"><span class="jp-main"><span>キャンディの森</span><span>キャンディバッグ</span></span><span class="en-sub">Candy Forest candy bag</span><strong id="info-candy-price">¥1,000</strong></article>
+          <article class="price-tile price-zombie"><span class="jp-main"><span>ゾンビ・スカベンジャーハント</span><span>グッズバッグ</span></span><span class="en-sub">Zombie Scavenger Hunt goodie bag</span><strong id="info-zombie-price">¥1,000</strong></article>
         </div>
         <p class="price-note"><span class="jp-main">お子さま1人あたりの料金です。両方に参加する場合は<span id="info-both-price">¥2,000</span>です。</span><span class="en-sub">Prices are per child. Joining both events is <span id="info-both-price-en">¥2,000</span>.</span></p>
         <p class="price-note"><span class="jp-main">保護者の方はバッグの購入は不要です。</span><span class="en-sub">Parents do not need to buy a bag.</span></p>
@@ -84,13 +94,13 @@
           <div class="timeline-stop"><time>10:00</time><p><span class="jp-main">キャンディの森スタート</span><span class="en-sub">Candy Forest starts</span></p></div>
           <div class="timeline-stop"><time>11:00</time><p><span class="jp-main">新しいスタートの締め切り</span><span class="en-sub">Last start</span></p></div>
           <div class="timeline-stop"><time>お昼ごろ</time><p><span class="jp-main">ストーリータイム</span><span class="en-sub">Story Time</span></p></div>
-          <div class="timeline-stop"><time>16:00ごろ</time><p><span class="jp-main">森の時間おわり</span><span class="en-sub">Daytime forest ends</span></p></div>
+          <div class="timeline-stop"><time>16:00<small>ごろ</small></time><p><span class="jp-main">森の時間おわり</span><span class="en-sub">Daytime forest ends</span></p></div>
           <div class="timeline-stop timeline-zombie"><time>18:00</time><p><span class="jp-main">ゾンビ・スカベンジャーハント</span><span class="en-sub">Zombie Scavenger Hunt</span></p></div>
         </div>
       </section>
 
       <section class="info-section info-checklist info-sticker" aria-labelledby="checklist-title">
-        <p class="eyebrow"><span class="jp-main">準備</span><span class="en-sub">Before you come</span></p><h2 id="checklist-title"><span class="jp-main">来る前にチェック</span><span class="en-sub">Before you come</span></h2>
+        <p class="eyebrow"><span class="jp-main">準備</span></p><h2 id="checklist-title"><span class="jp-main">来る前にチェック</span><span class="en-sub">Before you come</span></h2>
         <ul class="checklist">
           <li><span>✓</span><span><span class="jp-main">予約メールを送った</span><span class="en-sub">Reservation email sent</span></span></li>
           <li><span>✓</span><span><span class="jp-main">電波の入るスマホ（充電済み）</span><span class="en-sub">Phone with mobile data, fully charged</span></span></li>
@@ -103,18 +113,24 @@
         </ul>
       </section>
 
+      <section class="info-closing-banner info-sticker" aria-label="夕暮れの森">
+        <picture>
+          <source media="(max-width: 600px)" srcset="assets/events/info/banner-forest-dusk-mobile.webp">
+          <img src="assets/events/info/banner-forest-dusk-desktop.webp" width="2400" height="800" loading="lazy" alt="夕暮れの大きな森。自然な小道が木々の間へ続く">
+        </picture>
+      </section>
+
       <section class="info-section info-getting" id="getting-there" aria-labelledby="getting-title">
-        <div class="info-section-heading"><p class="eyebrow"><span class="jp-main">会場への行き方</span><span class="en-sub">How to get there</span></p><h2 id="getting-title"><span class="jp-main">駐車場から森の入口まで</span><span class="en-sub">From parking to the forest entrance</span></h2></div>
-        <div class="info-address-card info-sticker"><strong id="parking-address-jp"></strong><span id="parking-address-en" class="en-sub"></span><p><span class="jp-main">駐車場から森の入口まで徒歩約3分</span><span class="en-sub">About a three-minute walk from parking to the forest entrance.</span></p><a id="parking-map-link" class="primary-button info-button" href="#parking-map" target="_blank" rel="noopener"><span class="jp-main">Googleマップで見る</span><span class="en-sub">Open Google Maps</span></a></div>
+        <div class="info-section-heading"><p class="eyebrow"><span class="jp-main">会場への行き方</span></p><h2 id="getting-title"><span class="jp-main">駐車場から森の入口まで</span><span class="en-sub">From parking to the forest entrance</span></h2></div>
+        <div class="info-address-card info-sticker"><strong id="parking-company-jp"></strong><strong id="parking-street-jp"></strong><span id="parking-address-en" class="en-sub"></span><p><span class="jp-main">駐車場から森の入口まで徒歩約3分</span><span class="en-sub">About a three-minute walk from parking to the forest entrance.</span></p><a id="parking-map-link" class="primary-button info-button" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250" target="_blank" rel="noopener"><span class="jp-main">Googleマップで見る</span><span class="en-sub">Open Google Maps</span></a></div>
         <p class="parking-limit-note" id="parking-note"></p>
         <figure class="parking-map parking-route-map info-map-card"><img src="assets/events/location/parking-map.webp" alt="Japanese walking map from the parking area to Candy Forest"><figcaption><span class="jp-main">駐車場から森の入口までの道順</span><span class="en-sub">Walking route from parking to the forest entrance</span></figcaption></figure>
         <figure class="parking-map parking-aerial info-map-card" id="parking-map"><div class="parking-aerial-frame"><img src="assets/events/location/parking-aerial-marked.webp" alt="航空写真に前側駐車場と奥側駐車場、進入方向を示した案内図"></div><figcaption><span class="jp-main">航空写真：前側と奥側の駐車場</span><span class="en-sub">Aerial view: front lot and rear lot</span></figcaption></figure>
-        <figure class="parking-photo info-front-photo"><img src="assets/events/location/parking-front-photo.webp" alt="The front gravel parking area and blue-roofed building at the event location"><figcaption><span class="jp-main">会場前の駐車場です。奥側の駐車場もご利用ください。</span><span class="en-sub">This is the front lot. Please also use the rear lot.</span></figcaption></figure>
       </section>
 
       <section class="info-section info-contact info-sticker" aria-labelledby="contact-title">
         <p class="eyebrow"><span class="jp-main">お問い合わせ</span><span class="en-sub">Contact</span></p><h2 id="contact-title"><span class="jp-main">質問がありますか？</span><span class="en-sub">Questions?</span></h2><p><span class="jp-main">ブライアン英会話教室</span><span class="en-sub">Bryan's English School</span></p>
-        <div class="contact-actions"><a id="info-phone-link" class="secondary-button info-button" href="tel:0476769896">📞 電話する 0476-76-9896</a><a id="info-email-link" class="primary-button info-button" href="mailto:bryans.english@gmail.com">✉️ メールする</a></div>
+        <div class="contact-actions"><a id="info-phone-link" class="secondary-button info-button" href="tel:0476769896"><span class="jp-main">電話する</span><span class="en-sub">Call 0476-76-9896</span></a><a id="info-email-link" class="primary-button info-button" href="mailto:bryans.english@gmail.com"><span class="jp-main">メールする</span><span class="en-sub">Email us</span></a></div>
       </section>
     </section>
 
@@ -135,7 +151,7 @@
       </div>
 
       <div class="hunt-shell">
-        <div class="hunt-art"><img src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="A small pink Booha Ghost attached to a tree beside a forest path"></div>
+        <div class="hunt-art"><img src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="A real forest path with a tiny hidden Booha Ghost partly behind a tree"></div>
         <div class="hunt-content">
           <div id="hunt-start" class="hunt-view">
             <p class="eyebrow"><span class="jp-main">かぞくのハント</span><span class="en-sub">Your family hunt</span></p>
@@ -187,7 +203,7 @@
           <p class="hero-lede"><span class="jp-main">ライムグリーンのゴースト15ひき。暗い森。サイレン。ゾンビ。QRコードはありません。</span><span class="en-sub">Fifteen lime-green ghosts. A dark forest. A siren. Zombies. No QR codes.</span></p>
           <p class="tba-pill"><span class="jp-main">夜の時間は未定</span><span class="en-sub">Nighttime schedule · TBA</span></p>
         </div>
-        <figure class="hero-image"><img src="assets/events/atmosphere/zombie-hunt-single-ghost.webp" alt="A small lime-green numbered Booha Ghost with reflective eyes on a tree at night"><figcaption>Example Ghost 7 — one of fifteen.</figcaption></figure>
+        <figure class="hero-image"><img src="assets/events/atmosphere/zombie-hunt-single-ghost.webp" alt="A dark, misty forest path at night"><figcaption>A real forest path after dark.</figcaption></figure>
       </div>
 
       <div class="night-rules">

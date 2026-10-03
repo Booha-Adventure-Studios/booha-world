@@ -22,7 +22,8 @@ window.BOOHA_EVENTS = {
     parking: {
       titleJP: "会場への行き方と駐車場",
       titleEN: "How to get there and parking",
-      addressJP: "株式会社タイセイプロダクツ　千葉県富里市七栄250",
+      companyJP: "株式会社タイセイプロダクツ",
+      streetJP: "千葉県富里市七栄250",
       addressEN: "Tai Sei Products · 250 Nanae, Tomisato, Chiba",
       walkJP: "駐車場から会場まで、歩いて約3分です。",
       walkEN: "The forest entrance is about a three-minute walk from the parking area.",

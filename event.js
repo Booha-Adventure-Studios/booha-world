@@ -330,7 +330,7 @@
     "電話番号 / Phone:",
     "お子さまの人数と学年 / Number of children and grades:",
     "保護者の人数 / Number of adults:",
-    "参加するイベント / Events (キャンディの森 / ゾンビ / 両方):"
+    "参加するイベント / Choose any (キャンディの森 / ストーリータイム / ゾンビ / いくつでも):"
   ].join("\n");
   const reservationHref = `mailto:${reservationEmail}?subject=${encodeURIComponent("ハロウィンイベント予約 / Halloween Event reservation")}&body=${encodeURIComponent(reservationBody)}`;
 
@@ -344,7 +344,8 @@
   $("#info-zombie-card-price").textContent = `グッズバッグ ${formatYen(prices.zombie)}`;
   $("#info-both-price").textContent = formatYen(bothPrice);
   $("#info-both-price-en").textContent = formatYen(bothPrice);
-  $("#parking-address-jp").textContent = config.parking.addressJP;
+  $("#parking-company-jp").textContent = config.parking.companyJP || config.parking.addressJP || "";
+  $("#parking-street-jp").textContent = config.parking.streetJP || "";
   $("#parking-address-en").textContent = config.parking.addressEN;
   setBilingual("#parking-note", config.parking.noteJP, config.parking.noteEN);
   $("#parking-map-link").href = config.parking.mapUrl;
