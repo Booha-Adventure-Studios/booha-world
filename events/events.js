@@ -16,14 +16,14 @@ window.BOOHA_EVENTS = {
       phone: "0476-76-9896"
     },
     parking: {
-      titleJP: "まず、駐車場を確認してください",
-      titleEN: "Please check the parking location first",
+      titleJP: "会場への行き方と駐車場",
+      titleEN: "How to get there and parking",
       addressJP: "株式会社タイセイプロダクツ　千葉県富里市七栄250",
       addressEN: "Tai Sei Products · 250 Nanae, Tomisato, Chiba",
       walkJP: "駐車場から会場まで、歩いて約3分です。",
       walkEN: "The forest entrance is about a three-minute walk from the parking area.",
-      noteJP: "駐車場には限りがあります。当日はスタッフの案内に従ってください。",
-      noteEN: "Parking is limited. Please follow staff directions on the day.",
+      noteJP: "駐車場には限りがあります。参加には予約が必要です。",
+      noteEN: "Parking is limited. A reservation is required to attend.",
       photo: "assets/events/location/parking-front-photo.webp",
       mapImage: "assets/events/location/parking-map.webp",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
@@ -43,8 +43,8 @@ window.BOOHA_EVENTS = {
     sections: {
       location: {
         title: "Arrival, parking, and the forest",
-        jp: "駐車場から森の入口まで、歩いて約3分です。森は広く、道は平らではありません。",
-        en: "The forest entrance is about a three-minute walk from parking. The forest is large and the paths are uneven."
+        jp: "前側と奥側の駐車場から、森の入口まで歩いて約3分です。森は広く、道は平らではありません。",
+        en: "The forest entrance is about a three-minute walk from the front or rear parking lot. The forest is large and the paths are uneven."
       },
       bring: {
         title: "What to bring",
