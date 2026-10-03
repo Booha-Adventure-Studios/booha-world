@@ -713,6 +713,7 @@ body[data-theme="info"] .info-address-card strong { display: block; }
 body[data-theme="info"] .info-address-card > .en-sub { color: var(--muted); font-size: 14px; }
 body[data-theme="info"] .info-map-card { background: var(--card); }
 body[data-theme="info"] .info-map-card figcaption { color: var(--muted); font-size: 14px; }
+body[data-theme="info"] .info-front-photo img { height: auto; max-height: none; object-fit: cover; }
 body[data-theme="info"] .info-contact { background: var(--card); }
 body[data-theme="info"] .info-contact .contact-actions { gap: 16px; }
 body[data-theme="info"] .site-footer a { color: var(--ink); text-decoration: underline; }
