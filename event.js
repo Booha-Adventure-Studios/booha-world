@@ -17,6 +17,7 @@
   const arrivalStartAt = new Date(config.arrivalStartAt).getTime();
   const parkingOpenAt = new Date(config.parkingOpenAt || config.arrivalStartAt).getTime();
   const stayUntil = new Date(config.stayUntil).getTime();
+  const zombieStartAt = new Date(config.zombieStartAt).getTime();
 
   const formatTime = (timestamp) => new Intl.DateTimeFormat("en-US", {
     timeZone: config.timeZone,
@@ -179,6 +180,32 @@
       return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
     };
 
+    const infoCountdown = $("#info-countdown");
+    if (infoCountdown) {
+      const infoLabelJP = $("#info-countdown-label-jp");
+      const infoLabelEN = $("#info-countdown-label-en");
+      if (now < startsAt) {
+        infoLabelJP.textContent = "キャンディの森 スタートまで";
+        infoLabelEN.textContent = "Candy Forest opens in";
+        renderCountdown(infoCountdown, remaining(startsAt));
+      } else if (now < stayUntil) {
+        infoLabelJP.textContent = "開催中！";
+        infoLabelEN.textContent = "Happening now!";
+        infoCountdown.classList.remove("is-units");
+        infoCountdown.textContent = "開催中！ / Happening now!";
+      } else if (now < zombieStartAt) {
+        infoLabelJP.textContent = "夜のイベントまで";
+        infoLabelEN.textContent = "Until the nighttime event";
+        infoCountdown.classList.remove("is-units");
+        infoCountdown.textContent = "ゾンビ・スカベンジャーハントは18:00から / Zombie Scavenger Hunt at 18:00";
+      } else {
+        infoLabelJP.textContent = "ゾンビ・スカベンジャーハント開催中！";
+        infoLabelEN.textContent = "Zombie Scavenger Hunt is underway!";
+        infoCountdown.classList.remove("is-units");
+        infoCountdown.textContent = "開催中！ / Happening now!";
+      }
+    }
+
     if (now < startsAt) {
       const parkingOpen = now >= parkingOpenAt;
       $("#candy-status-label-jp").textContent = "キャンディの森 スタートまで";
@@ -282,7 +309,7 @@
     else setFeedback(`${scanned.label}を発見！つぎへ進みましょう。 / ${scanned.label} found! Keep going.`, "");
   };
 
-  const selectTab = (tabName) => {
+  const selectTab = (tabName, updateHash = true) => {
     $$(".tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.tab === tabName));
     $$(".tab-panel").forEach((panel) => {
       const active = panel.dataset.panel === tabName;
@@ -290,28 +317,53 @@
       panel.classList.toggle("is-active", active);
     });
     document.body.dataset.theme = tabName;
-    if (tabName === "candy") updateStatus();
+    if (updateHash && window.location.hash !== `#${tabName}`) history.replaceState(null, "", `#${tabName}`);
+    updateStatus();
   };
 
-  setBilingual("#location-copy", config.sections.location.jp, config.sections.location.en);
-  setBilingual("#bring-copy", config.sections.bring.jp, config.sections.bring.en);
-  setBilingual("#safety-copy", config.sections.safety.jp, config.sections.safety.en);
-  setBilingual("#schedule-copy", config.sections.schedule.jp, config.sections.schedule.en);
+  const formatYen = (amount) => `¥${Number(amount).toLocaleString("en-US")}`;
+  const prices = config.prices || { candy: 1000, zombie: 1000 };
+  const bothPrice = prices.candy + prices.zombie;
+  const reservationEmail = config.reservationEmail || config.contacts.email;
+  const reservationBody = [
+    "代表者のお名前 / Your name:",
+    "電話番号 / Phone:",
+    "お子さまの人数と学年 / Number of children and grades:",
+    "保護者の人数 / Number of adults:",
+    "参加するイベント / Events (キャンディの森 / ゾンビ / 両方):"
+  ].join("\n");
+  const reservationHref = `mailto:${reservationEmail}?subject=${encodeURIComponent("ハロウィンイベント予約 / Halloween Event reservation")}&body=${encodeURIComponent(reservationBody)}`;
+
+  ["#hero-reserve-link", "#reservation-link"].forEach((selector) => {
+    const link = $(selector);
+    if (link) link.href = reservationHref;
+  });
+  $("#info-candy-price").textContent = formatYen(prices.candy);
+  $("#info-zombie-price").textContent = formatYen(prices.zombie);
+  $("#info-candy-card-price").textContent = `キャンディバッグ ${formatYen(prices.candy)}`;
+  $("#info-zombie-card-price").textContent = `グッズバッグ ${formatYen(prices.zombie)}`;
+  $("#info-both-price").textContent = formatYen(bothPrice);
+  $("#info-both-price-en").textContent = formatYen(bothPrice);
   $("#parking-address-jp").textContent = config.parking.addressJP;
   $("#parking-address-en").textContent = config.parking.addressEN;
   setBilingual("#parking-note", config.parking.noteJP, config.parking.noteEN);
   $("#parking-map-link").href = config.parking.mapUrl;
-  $("#email-link").textContent = config.contacts.email;
-  $("#email-link").href = `mailto:${config.contacts.email}`;
-  $("#phone-link").textContent = config.contacts.phone;
-  $("#phone-link").href = `tel:${config.contacts.phone.replace(/\D/g, "")}`;
+  $("#reservation-email").textContent = reservationEmail;
+  $("#info-email-link").href = `mailto:${reservationEmail}`;
+  $("#info-phone-link").href = `tel:${config.contacts.phone.replace(/\D/g, "")}`;
 
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
-  $$('[data-go-tab="candy"]').forEach((button) => button.addEventListener("click", () => { selectTab("candy"); window.scrollTo({ top: 0, behavior: "smooth" }); }));
+  $$('[data-go-tab]').forEach((button) => button.addEventListener("click", () => { selectTab(button.dataset.goTab); window.scrollTo({ top: 0, behavior: "smooth" }); }));
   $("#start-hunt").addEventListener("click", startHunt);
   $("#participant-name").addEventListener("input", (event) => event.target.setCustomValidity(""));
   window.setInterval(updateStatus, 1000);
   updateStatus();
-  selectTab(ghostParam ? "candy" : "info");
+  const hashTab = window.location.hash.slice(1);
+  const initialTab = ghostParam ? "candy" : ["info", "candy", "zombie"].includes(hashTab) ? hashTab : "info";
+  selectTab(initialTab, false);
+  window.addEventListener("hashchange", () => {
+    const nextTab = window.location.hash.slice(1);
+    if (["info", "candy", "zombie"].includes(nextTab)) selectTab(nextTab, false);
+  });
   processGhostScan();
 })();
