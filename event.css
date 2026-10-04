@@ -1026,6 +1026,7 @@ body[data-theme="info"] .afternoon-copy .eyebrow { color: #f0c5ff; }
 body[data-theme="info"] .afternoon-copy h1 { margin: 0 0 20px; color: #fffaf1; }
 body[data-theme="info"] .afternoon-copy h1 > .jp-main { color: #fffaf1; }
 body[data-theme="info"] .afternoon-copy h1 > .en-sub { color: #f0c5ff; }
+body[data-theme="info"] .afternoon-desktop-break { display: none; }
 body[data-theme="info"] .afternoon-lede { margin-bottom: 26px; color: #fffaf1; font-size: 1.05rem; }
 body[data-theme="info"] .afternoon-lede .en-sub { color: #eadcf2; }
 body[data-theme="info"] .afternoon-intro { margin-bottom: 12px; color: #fffaf1; font-weight: 700; }
@@ -1053,6 +1054,10 @@ body[data-theme="info"] .afternoon-image figcaption .jp-main { color: #fffaf1; }
 
 @media (max-width: 680px) {
   body[data-theme="info"] .tabs { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 801px) {
+  body[data-theme="info"] .afternoon-desktop-break { display: block; }
 }
 .night-rules h2 .jp-main { font-size: 18px; font-weight: 800; }
 .night-rules h2 .en-sub { font-size: 13px; font-weight: 500; }
