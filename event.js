@@ -278,7 +278,7 @@
           : "12:00まで / Until 12:00";
       } else if (now < stayUntil) {
         infoLabelJP.textContent = "午後のイベント開催中";
-        infoLabelEN.textContent = "The Afternoon Event is on";
+        infoLabelEN.textContent = "Afternoon Events are on";
         infoCountdown.classList.remove("is-units");
         infoCountdown.textContent = "16:00まで / Until 4:00 pm";
       } else if (now < zombieStartAt) {
@@ -324,7 +324,7 @@
       countdown.classList.remove("is-units");
       countdown.textContent = "—";
       $("#candy-status-copy-jp").textContent = "ピクニックエリアで午後のイベント（16:00まで）。";
-      $("#candy-status-copy-en").textContent = "The Afternoon Event is on in the picnic area until 4:00 pm.";
+      $("#candy-status-copy-en").textContent = "Afternoon Events are on in the picnic area until 4:00 pm.";
     } else {
       $("#candy-status-label-jp").textContent = "昼の部は終了";
       $("#candy-status-label-en").textContent = "Daytime events are over";

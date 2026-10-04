@@ -17,7 +17,7 @@ window.BOOHA_EVENTS = {
     candyReward: "Candy bag at Bryan's return point",
     afternoonEvent: {
       nameJP: "午後のイベント",
-      nameEN: "The Afternoon Event",
+      nameEN: "Afternoon Events",
       presentedByJP: "提供：Terakoya・Sotobo Community School",
       presentedByEN: "Presented by Terakoya and Sotobo Community School",
       presenterLinks: [
@@ -26,8 +26,8 @@ window.BOOHA_EVENTS = {
       ],
       timeJP: "12:00〜16:00",
       timeEN: "12:00–4:00 pm",
-      detailsJP: "内容は後日お知らせします",
-      detailsEN: "Details coming soon"
+      detailsJP: "お弁当・ストーリータイム・ハロウィンペインティング・魔女の材料さがし・森のモンスターづくり・自由あそび",
+      detailsEN: "Bring your own lunch · Story Time · Halloween Painting · Witch's Ingredient Hunt · Build a Forest Monster · Free Play"
     },
     eligibility: {
       candyJP: "未就学児〜高校生",
