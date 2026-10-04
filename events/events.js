@@ -7,28 +7,64 @@ window.BOOHA_EVENTS = {
     parkingOpenAt: "2026-10-31T09:45:00+09:00",
     arrivalStartAt: "2026-10-31T10:00:00+09:00",
     startAt: "2026-10-31T10:00:00+09:00",
-    latestStartAt: "2026-10-31T11:00:00+09:00",
+    latestStartAt: "2026-10-31T10:30:00+09:00",
+    candyEndAt: "2026-10-31T12:00:00+09:00",
     stayUntil: "2026-10-31T16:00:00+09:00",
-    storyTime: "お昼ごろ / Around lunchtime",
     zombieStartAt: "2026-10-31T18:00:00+09:00",
     prices: { candy: 1000, zombie: 1000 },
     reservationEmail: "bryans.english@gmail.com",
     huntDurationHours: 12,
     candyReward: "Candy bag at Bryan's return point",
+    afternoonEvent: {
+      nameJP: "午後のイベント",
+      nameEN: "The Afternoon Event",
+      presentedByJP: "提供：Terakoya・Sotobo Community School",
+      presentedByEN: "Presented by Terakoya and Sotobo Community School",
+      presenterLinks: [
+        { label: "Terakoya", url: "https://www.instagram.com/world_of_iwase/" },
+        { label: "Sotobo Community School", url: "https://www.instagram.com/umikaze_sotobo" }
+      ],
+      timeJP: "12:00〜16:00",
+      timeEN: "12:00–4:00 pm",
+      detailsJP: "内容は後日お知らせします",
+      detailsEN: "Details coming soon"
+    },
+    eligibility: {
+      candyJP: "未就学児〜高校生",
+      candyEN: "Preschool to high school",
+      zombieJP: "小学生〜高校生（未就学児は参加できません）",
+      zombieEN: "Elementary to high school (no preschoolers)"
+    },
+    rain: {
+      jp: "雨天中止です。中止の場合は、ブライアン英会話教室のウェブサイトとInstagramでお知らせします。中止になった場合も、バッグはお渡しします。返金はありません。",
+      en: "The event will be cancelled if it rains. Any cancellation will be announced on Bryan's English School website and Instagram. If the event is cancelled, your bags will still be available. No refunds.",
+      socialLinks: [
+        { label: "ウェブサイト", labelEN: "Website", url: "https://www.bryanharper.tokyo" },
+        { label: "Instagram", labelEN: "Instagram", url: "https://www.instagram.com/bryans.english.school/" }
+      ]
+    },
+    bagDeadline: {
+      at: "2026-10-23T23:59:00+09:00",
+      jp: "バッグのお申し込みは10月23日（金）までです。",
+      en: "Bag orders close on Friday, October 23."
+    },
     contacts: {
       email: "bryans.english@gmail.com",
-      phone: "0476-76-9896"
+      phone: "0476-76-9896",
+      phoneHoursJP: "受付 19:00〜21:00",
+      phoneHoursEN: "Calls 19:00–21:00",
+      addressJP: "〒286-0212 千葉県富里市七栄35-21"
     },
     parking: {
       titleJP: "会場への行き方と駐車場",
       titleEN: "How to get there and parking",
       companyJP: "株式会社タイセイプロダクツ",
       streetJP: "千葉県富里市七栄250",
-      addressEN: "Tai Sei Products · 250 Nanae, Tomisato, Chiba",
+      addressEN: "Taisei Products · 250 Nanae, Tomisato, Chiba",
       walkJP: "駐車場から会場まで、歩いて約3分です。",
       walkEN: "The forest entrance is about a three-minute walk from the parking area.",
-      noteJP: "駐車場には限りがあります。当日はスタッフの案内に従ってください。",
-      noteEN: "Parking is limited. Please follow staff directions on the day.",
+      noteJP: "9:45〜10:30は駐車場に誘導スタッフがいます。\n夜は誘導スタッフがいません。\n奥のスペースから詰めて駐車し、ほかの車の出入りをふさがないようご協力ください。\n駐車場内での事故やトラブルについて、株式会社タイセイプロダクツおよびブライアン英会話教室は一切の責任を負いかねます。",
+      noteEN: "A parking guide will be on site from 9:45 to 10:30 am.\nThere is no parking guide at night.\nPlease park considerately: fill the back spaces first and never block in other cars.\nTaisei Products and Bryan's English School accept no responsibility or liability for any accidents, damage or loss in the parking area.",
       photo: "assets/events/location/parking-front-photo.webp",
       mapImage: "assets/events/location/parking-map.webp",
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"

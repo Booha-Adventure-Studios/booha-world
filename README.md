@@ -34,7 +34,7 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 | `zukan.html` | Karasuki field guide — original illustrated characters |
 | `bryan.html` | About Bryan Harper |
 | `notes.html` | Archived writing section, preserved but no longer linked from public navigation |
-| `event.html` | Reusable event information page and Candy Forest QR hunt shell |
+| `event.html` | Reusable Halloween Event information page, Candy Forest QR hunt, Afternoon Event, and Zombie Scavenger Hunt |
 
 ---
 

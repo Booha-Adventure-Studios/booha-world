@@ -12,10 +12,57 @@
     if (!element) return;
     element.innerHTML = `<span class="jp-main">${jp}</span><span class="en-sub">${en}</span>`;
   };
+  const renderSocialLinks = (selector, links = []) => {
+    const element = $(selector);
+    if (!element) return;
+    element.innerHTML = "";
+    links.forEach((link) => {
+      const anchor = document.createElement("a");
+      anchor.href = link.url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener";
+      anchor.className = "social-link";
+      const jp = document.createElement("span");
+      jp.className = "jp-main";
+      jp.textContent = link.label;
+      const en = document.createElement("span");
+      en.className = "en-sub";
+      en.textContent = link.labelEN || link.label;
+      anchor.append(jp, en);
+      element.append(anchor);
+    });
+  };
+  const renderPresenterLine = () => {
+    const element = $("#afternoon-presenter");
+    if (!element || !config.afternoonEvent) return;
+    element.innerHTML = "";
+    const jp = document.createElement("span");
+    jp.className = "jp-main";
+    const en = document.createElement("span");
+    en.className = "en-sub";
+    const links = config.afternoonEvent.presenterLinks || [];
+    const jpPrefix = config.afternoonEvent.presentedByJP.split(links[0]?.label || "")[0];
+    const enPrefix = config.afternoonEvent.presentedByEN.split(links[0]?.label || "")[0];
+    jp.append(document.createTextNode(jpPrefix));
+    en.append(document.createTextNode(enPrefix));
+    links.forEach((link, index) => {
+      [jp, en].forEach((wrapper, wrapperIndex) => {
+        const anchor = document.createElement("a");
+        anchor.href = link.url;
+        anchor.target = "_blank";
+        anchor.rel = "noopener";
+        anchor.textContent = link.label;
+        wrapper.append(anchor);
+        if (index < links.length - 1) wrapper.append(document.createTextNode(wrapperIndex === 0 ? "・" : " and "));
+      });
+    });
+    element.append(jp, en);
+  };
   const startsAt = new Date(config.startAt).getTime();
   const latestStartAt = new Date(config.latestStartAt).getTime();
   const arrivalStartAt = new Date(config.arrivalStartAt).getTime();
   const parkingOpenAt = new Date(config.parkingOpenAt || config.arrivalStartAt).getTime();
+  const candyEndAt = new Date(config.candyEndAt).getTime();
   const stayUntil = new Date(config.stayUntil).getTime();
   const zombieStartAt = new Date(config.zombieStartAt).getTime();
 
@@ -188,16 +235,22 @@
         infoLabelJP.textContent = "キャンディの森 スタートまで";
         infoLabelEN.textContent = "Candy Forest opens in";
         renderCountdown(infoCountdown, remaining(startsAt));
+      } else if (now < candyEndAt) {
+        infoLabelJP.textContent = "キャンディの森 開催中！";
+        infoLabelEN.textContent = "Candy Forest is on!";
+        infoCountdown.classList.remove("is-units");
+        infoCountdown.textContent = now < latestStartAt
+          ? "受付は10:30まで / Check-in until 10:30"
+          : "12:00まで / Until 12:00";
       } else if (now < stayUntil) {
-        infoLabelJP.textContent = "開催中！";
-        infoLabelEN.textContent = "Happening now!";
+        infoLabelJP.textContent = "午後のイベント開催中";
+        infoLabelEN.textContent = "The Afternoon Event is on";
         infoCountdown.classList.remove("is-units");
-        infoCountdown.textContent = "開催中！ / Happening now!";
+        infoCountdown.textContent = "16:00まで / Until 4:00 pm";
       } else if (now < zombieStartAt) {
-        infoLabelJP.textContent = "夜のイベントまで";
-        infoLabelEN.textContent = "Until the nighttime event";
-        infoCountdown.classList.remove("is-units");
-        infoCountdown.textContent = "ゾンビ・スカベンジャーハントは18:00から / Zombie Scavenger Hunt at 18:00";
+        infoLabelJP.textContent = "ゾンビ・スカベンジャーハントまで";
+        infoLabelEN.textContent = "Zombie Scavenger Hunt starts in";
+        renderCountdown(infoCountdown, remaining(zombieStartAt));
       } else {
         infoLabelJP.textContent = "ゾンビ・スカベンジャーハント開催中！";
         infoLabelEN.textContent = "Zombie Scavenger Hunt is underway!";
@@ -218,26 +271,33 @@
         ? `Parking is open. The hunt starts at ${formatTime(startsAt)}.`
         : `${formatDateEN(startsAt)} at ${formatTime(startsAt)}. Parking opens at ${formatTime(parkingOpenAt)}; families can start the hunt from ${formatTime(startsAt)}.`;
     } else if (now < latestStartAt) {
-      $("#candy-status-label-jp").textContent = "キャンディの森 開催中";
-      $("#candy-status-label-en").textContent = "Candy Forest is open";
+      $("#candy-status-label-jp").textContent = "受付中";
+      $("#candy-status-label-en").textContent = "Check-in open";
       countdown.classList.remove("is-units");
       countdown.textContent = duration(remaining(latestStartAt));
-      $("#candy-status-copy-jp").textContent = `${formatTime(latestStartAt)}まで新しく始められます。始めたハントは、そのあとも続けられます。`;
-      $("#candy-status-copy-en").textContent = `New families may start until ${formatTime(latestStartAt)}. Started hunts can continue after the cutoff.`;
-    } else if (now < stayUntil) {
-      $("#candy-status-label-jp").textContent = "新しい受付は終了";
-      $("#candy-status-label-en").textContent = "New starts are closed";
+      $("#candy-status-copy-jp").textContent = "10:30まで新しく始められます。キャンディの森は12:00までです。";
+      $("#candy-status-copy-en").textContent = "New families may start until 10:30. The Candy Forest ends at 12:00.";
+    } else if (now < candyEndAt) {
+      $("#candy-status-label-jp").textContent = "受付終了・ハント中";
+      $("#candy-status-label-en").textContent = "Check-in closed — hunt in progress";
       countdown.classList.remove("is-units");
-      countdown.textContent = `Until ${formatTime(stayUntil)}`;
-      $("#candy-status-copy-jp").textContent = "始めたハントは続けられます。お弁当やおやつを持って、森で過ごせます。";
-      $("#candy-status-copy-en").textContent = "If your family already started, continue your hunt. Families may stay in the forest with lunches and snacks.";
-    } else {
-      $("#candy-status-label-jp").textContent = "昼の森イベント終了";
-      $("#candy-status-label-en").textContent = "Daytime forest period finished";
+      countdown.textContent = duration(remaining(candyEndAt));
+      $("#candy-status-copy-jp").textContent = "始めたハントは12:00まで続けられます。";
+      $("#candy-status-copy-en").textContent = "Hunts already started can continue until 12:00.";
+    } else if (now < stayUntil) {
+      $("#candy-status-label-jp").textContent = "キャンディの森は終了しました";
+      $("#candy-status-label-en").textContent = "The Candy Forest has ended";
       countdown.classList.remove("is-units");
       countdown.textContent = "—";
-      $("#candy-status-copy-jp").textContent = "次のイベントやマシュマロエリアについては、スタッフの案内に従ってください。";
-      $("#candy-status-copy-en").textContent = "Please follow staff instructions for the next event or the marshmallow area.";
+      $("#candy-status-copy-jp").textContent = "ピクニックエリアで午後のイベント（16:00まで）。";
+      $("#candy-status-copy-en").textContent = "The Afternoon Event is on in the picnic area until 4:00 pm.";
+    } else {
+      $("#candy-status-label-jp").textContent = "昼の部は終了";
+      $("#candy-status-label-en").textContent = "Daytime events are over";
+      countdown.classList.remove("is-units");
+      countdown.textContent = "—";
+      $("#candy-status-copy-jp").textContent = "ゾンビ・スカベンジャーハントは18:00からです（18:00までに受付）。";
+      $("#candy-status-copy-en").textContent = "The Zombie Scavenger Hunt starts at 6:00 pm — check in by 6:00 pm.";
     }
 
     startButton.disabled = !(now >= startsAt && now < latestStartAt);
@@ -328,9 +388,10 @@
   const reservationBody = [
     "代表者のお名前 / Your name:",
     "電話番号 / Phone:",
-    "お子さまの人数と学年 / Number of children and grades:",
-    "保護者の人数 / Number of adults:",
-    "参加するイベント / Choose any (キャンディの森 / ストーリータイム / ゾンビ / いくつでも):"
+    "参加するイベント / Events (キャンディの森 / ゾンビ / 両方):",
+    "キャンディの森に参加する子どもの人数と学年（未就学児も含む）/ Candy Forest children and grades (incl. preschool):",
+    "ゾンビに参加する子どもの人数と学年（小学生〜高校生）/ Zombie Hunt children and grades (elem.–high school):",
+    "保護者の人数 / Number of adults:"
   ].join("\n");
   const reservationHref = `mailto:${reservationEmail}?subject=${encodeURIComponent("ハロウィンイベント予約 / Halloween Event reservation")}&body=${encodeURIComponent(reservationBody)}`;
 
@@ -344,14 +405,24 @@
   $("#info-zombie-card-price").textContent = `グッズバッグ ${formatYen(prices.zombie)}`;
   $("#info-both-price").textContent = formatYen(bothPrice);
   $("#info-both-price-en").textContent = formatYen(bothPrice);
+  setBilingual("#info-candy-eligibility", config.eligibility.candyJP, config.eligibility.candyEN);
+  setBilingual("#info-candy-price-eligibility", config.eligibility.candyJP, config.eligibility.candyEN);
+  setBilingual("#info-zombie-eligibility", config.eligibility.zombieJP, config.eligibility.zombieEN);
+  setBilingual("#info-zombie-price-eligibility", config.eligibility.zombieJP, config.eligibility.zombieEN);
+  setBilingual("#rain-notice-copy", config.rain.jp, config.rain.en);
+  renderSocialLinks("#rain-notice-links", config.rain.socialLinks);
+  renderSocialLinks("#contact-social-links", config.rain.socialLinks);
+  renderSocialLinks("#zombie-social-links", config.rain.socialLinks);
+  renderPresenterLine();
   $("#parking-company-jp").textContent = config.parking.companyJP || config.parking.addressJP || "";
   $("#parking-street-jp").textContent = config.parking.streetJP || "";
   $("#parking-address-en").textContent = config.parking.addressEN;
-  setBilingual("#parking-note", config.parking.noteJP, config.parking.noteEN);
+  setBilingual("#parking-note p", config.parking.noteJP, config.parking.noteEN);
   $("#parking-map-link").href = config.parking.mapUrl;
   $("#reservation-email").textContent = reservationEmail;
   $("#info-email-link").href = `mailto:${reservationEmail}`;
   $("#info-phone-link").href = `tel:${config.contacts.phone.replace(/\D/g, "")}`;
+  $("#contact-address").textContent = config.contacts.addressJP;
 
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
   $$('[data-go-tab]').forEach((button) => button.addEventListener("click", () => { selectTab(button.dataset.goTab); window.scrollTo({ top: 0, behavior: "smooth" }); }));

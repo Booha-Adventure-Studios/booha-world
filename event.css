@@ -462,7 +462,7 @@ body[data-theme="info"] .info-reservation .info-button { margin: 14px auto 0; }
 body[data-theme="info"] .copyable-contact { margin: 16px 0 0; font: 700 16px/1.4 'DM Sans', sans-serif; }
 body[data-theme="info"] .eyebrow { color: var(--ink); font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif; font-size: 13px; letter-spacing: .08em; }
 body[data-theme="info"] .eyebrow .en-sub { color: var(--muted); font-size: 13px; }
-body[data-theme="info"] .info-notices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+body[data-theme="info"] .info-notices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; text-align: left; }
 body[data-theme="info"] .info-notice { min-height: 100%; padding: 24px 20px; border: 3px solid var(--ink); border-radius: 16px; box-shadow: 5px 5px 0 var(--ink); color: var(--ink); }
 body[data-theme="info"] .notice-phone { background: var(--notice); }
 body[data-theme="info"] .notice-costume { background: var(--candy); }
@@ -535,6 +535,149 @@ body[data-theme="info"] .site-footer a { color: var(--ink); }
   .tab { width: 100%; text-align: left; }
   .tab-label-full, .tab .en-sub { display: block !important; }
   .tab-label-short { display: none !important; }
+}
+
+body[data-theme="info"] .event-card time { white-space: normal; }
+body[data-theme="info"] .event-card time > span:first-child { display: block; }
+body[data-theme="info"] .event-card time .tba-pill {
+  display: inline-flex;
+  width: max-content;
+  margin: 8px 0 0;
+  white-space: normal;
+}
+body[data-theme="candy"] .candy-rain-note {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 2px solid #ff6fae;
+  border-radius: 14px;
+  background: #fff;
+  color: #31133d;
+  font-weight: 700;
+}
+body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
+body[data-theme="candy"] .line-warning { white-space: normal; }
+
+@media (max-width: 680px) {
+  body[data-theme="info"] .event-card time .tba-pill { display: flex; }
+}
+
+body[data-theme="info"] .event-card time { white-space: normal; }
+body[data-theme="info"] .event-card time > span:first-child { display: block; }
+body[data-theme="info"] .event-card time .tba-pill {
+  display: inline-flex;
+  width: max-content;
+  margin: 8px 0 0;
+  white-space: normal;
+}
+body[data-theme="candy"] .candy-rain-note {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 2px solid #ff6fae;
+  border-radius: 14px;
+  background: #fff;
+  color: #31133d;
+  font-weight: 700;
+}
+body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
+body[data-theme="candy"] .line-warning { white-space: normal; }
+
+@media (max-width: 680px) {
+  body[data-theme="info"] .event-card time .tba-pill { display: flex; }
+}
+
+body[data-theme="info"] .notice-rain {
+  background: var(--night);
+  color: var(--paper);
+}
+body[data-theme="info"] .notice-rain h2,
+body[data-theme="info"] .notice-rain h2 .en-sub,
+body[data-theme="info"] .notice-rain p .en-sub { color: inherit; }
+body[data-theme="info"] .notice-rain p { white-space: normal; }
+body[data-theme="info"] .social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+body[data-theme="info"] .social-link {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border: 2px solid currentColor;
+  border-radius: 10px;
+  color: inherit;
+  font-weight: 800;
+  text-decoration: none;
+}
+body[data-theme="info"] .social-link .en-sub { color: inherit; font-size: 12px; }
+body[data-theme="info"] .parking-limit-note {
+  max-width: 760px;
+  padding: 20px 24px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 5px 5px 0 var(--ink);
+  text-align: left;
+}
+body[data-theme="info"] .parking-limit-note h3 {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font: 800 18px/1.3 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+}
+body[data-theme="info"] .parking-limit-note h3 .en-sub { color: var(--muted); font-size: 13px; }
+body[data-theme="info"] .parking-limit-note p {
+  margin: 0;
+  color: var(--ink);
+  white-space: pre-line;
+  font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+body[data-theme="info"] .parking-limit-note p .en-sub { color: var(--muted); }
+body[data-theme="info"] .eligibility-line {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 800;
+}
+body[data-theme="info"] .eligibility-line .en-sub { color: inherit; font-size: 12px; }
+body[data-theme="info"] .presenter-line a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+body[data-theme="info"] .event-card time .tba-pill {
+  display: inline-flex;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+body[data-theme="zombie"] .hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+body[data-theme="zombie"] .hero-pills .tba-pill { margin: 0; }
+body[data-theme="zombie"] .night-information {
+  margin-top: 28px;
+  padding: 26px;
+  border: 1px solid rgba(141, 210, 210, .25);
+  border-radius: 4px;
+  background: rgba(17, 28, 32, .78);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, .28);
+}
+body[data-theme="zombie"] .night-information h2 { margin-top: 0; color: var(--lime); }
+body[data-theme="zombie"] .night-information ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 28px;
+  margin: 0;
+  padding-left: 28px;
+}
+body[data-theme="zombie"] .night-information li { padding-left: 8px; color: var(--text); }
+body[data-theme="zombie"] .night-information li::marker { color: var(--lime); font-weight: 800; }
+body[data-theme="zombie"] .night-information .en-sub { color: var(--muted); }
+body[data-theme="zombie"] .night-information .social-links { color: var(--lime); }
+
+@media (max-width: 800px) {
+  body[data-theme="info"] .info-notices { grid-template-columns: 1fr; }
+  body[data-theme="zombie"] .night-information ol { grid-template-columns: 1fr; }
 }
 
 /* Keep the Candy Forest atmosphere photographic; do not float a flat ghost cutout over it. */
@@ -735,4 +878,28 @@ body[data-theme="info"] .site-footer a { color: var(--ink); text-decoration: und
   .tab { width: 100%; text-align: left; }
   .tab-label-full, .tab .en-sub { display: block !important; }
   .tab-label-short { display: none !important; }
+}
+
+body[data-theme="info"] .event-card time { white-space: normal; }
+body[data-theme="info"] .event-card time > span:first-child { display: block; }
+body[data-theme="info"] .event-card time .tba-pill {
+  display: inline-flex;
+  width: max-content;
+  margin: 8px 0 0;
+  white-space: normal;
+}
+body[data-theme="candy"] .candy-rain-note {
+  margin: 18px 0;
+  padding: 14px 16px;
+  border: 2px solid #ff6fae;
+  border-radius: 14px;
+  background: #fff;
+  color: #31133d;
+  font-weight: 700;
+}
+body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
+body[data-theme="candy"] .line-warning { white-space: normal; }
+
+@media (max-width: 680px) {
+  body[data-theme="info"] .event-card time .tba-pill { display: flex; }
 }
