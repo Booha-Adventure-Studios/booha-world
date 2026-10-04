@@ -40,6 +40,7 @@
     const en = document.createElement("span");
     en.className = "en-sub";
     en.textContent = link.labelEN || link.label;
+    if (en.textContent === jp.textContent) label.classList.add("is-single");
     label.append(jp, en);
     anchor.append(ring, label);
     return anchor;
