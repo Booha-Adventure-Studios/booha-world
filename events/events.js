@@ -32,8 +32,8 @@ window.BOOHA_EVENTS = {
     eligibility: {
       candyJP: "未就学児〜高校生",
       candyEN: "Preschool to high school",
-      zombieJP: "小学生〜高校生（未就学児は参加できません）",
-      zombieEN: "Elementary to high school (no preschoolers)"
+      zombieJP: "小学生〜高校生（未就学児は参加できません）・小学生は大人の同伴が必要です",
+      zombieEN: "Elementary to high school; no preschoolers. Elementary-age students must be accompanied by an adult."
     },
     rain: {
       jp: "雨天中止です。中止の場合は、ブライアン英会話教室のウェブサイトとInstagramでお知らせします。中止になった場合も、バッグはお渡しします。返金はありません。",

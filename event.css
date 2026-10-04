@@ -684,6 +684,46 @@ body[data-theme="zombie"] .hero-pills {
   margin-top: 20px;
 }
 body[data-theme="zombie"] .hero-pills .tba-pill { margin: 0; }
+body[data-theme="zombie"] .volunteer-callout {
+  max-width: 620px;
+  margin-top: 20px;
+  padding: 16px 18px;
+  border: 3px solid #ffb276;
+  border-radius: 14px;
+  background: #dd8b54;
+  color: #160d0b;
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, .35);
+}
+body[data-theme="zombie"] .volunteer-callout h2 {
+  margin: 0 0 8px;
+  color: inherit;
+  font-family: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.3;
+}
+body[data-theme="zombie"] .volunteer-callout p {
+  margin: 0 0 8px;
+  color: inherit;
+  font-size: 15px;
+  line-height: 1.55;
+}
+body[data-theme="zombie"] .volunteer-callout .en-sub { color: inherit; }
+body[data-theme="zombie"] .volunteer-link {
+  display: inline-flex;
+  min-height: 46px;
+  margin-top: 4px;
+  padding: 8px 14px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #160d0b;
+  border-radius: 999px;
+  background: #ffb276;
+  color: #160d0b;
+  text-align: center;
+  text-decoration: none;
+}
+body[data-theme="zombie"] .volunteer-link:hover,
+body[data-theme="zombie"] .volunteer-link:focus-visible { background: #ffd0a8; outline: 3px solid #c6ff3d; outline-offset: 3px; }
 body[data-theme="zombie"] .night-information {
   margin-top: 28px;
   padding: 26px;
