@@ -79,7 +79,9 @@ window.BOOHA_EVENTS = {
       { id: "light-green", label: "Light Green", jp: "黄緑", color: "#a8d65d" },
       { id: "black", label: "Black", jp: "黒", color: "#24252b" },
       { id: "white", label: "White", jp: "白", color: "#f5f0e4" },
-      { id: "orange", label: "Orange", jp: "オレンジ", color: "#ee844d" }
+      { id: "orange", label: "Orange", jp: "オレンジ", color: "#ee844d" },
+      { id: "purple", label: "Purple", jp: "紫", color: "#9a67d4" },
+      { id: "brown", label: "Brown", jp: "茶色", color: "#9a6847" }
     ],
   }
 };

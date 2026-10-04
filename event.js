@@ -399,7 +399,7 @@
     saveState(state);
     playReward();
     renderTarget(state);
-    if (state.completedAt) setFeedback("10ひき全部見つけました！完了画面をブライアンに見せてください。 / All ten ghosts found! Show your completion screen to Bryan.");
+    if (state.completedAt) setFeedback("12ひき全部見つけました！完了画面をブライアンに見せてください。 / All 12 ghosts found! Show your completion screen to Bryan.");
     else setFeedback(`${scanned.label}を発見！つぎへ進みましょう。 / ${scanned.label} found! Keep going.`, "");
   };
 
