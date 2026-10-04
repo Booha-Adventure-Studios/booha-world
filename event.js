@@ -73,6 +73,14 @@
     element.append(label, row);
   };
 
+  const renderAfternoonFriends = () => {
+    const element = $("#afternoon-friends-links");
+    if (!element || !config.afternoonEvent) return;
+    element.innerHTML = "";
+    const ariaPrefix = "仲間のスクール / Our friends";
+    (config.afternoonEvent.presenterLinks || []).forEach((link) => element.append(createIconLink(link, ariaPrefix)));
+  };
+
   const renderParkingNote = () => {
     const element = $("#parking-note p");
     if (!element || !config.parking) return;
@@ -449,6 +457,7 @@
   renderSocialLinks("#candy-rain-links", config.rain.socialLinks);
   renderSocialLinks("#zombie-social-links", config.rain.socialLinks);
   renderAfternoonPresenter();
+  renderAfternoonFriends();
   $("#parking-company-jp").textContent = config.parking.companyJP || config.parking.addressJP || "";
   $("#parking-street-jp").textContent = config.parking.streetJP || "";
   $("#parking-address-en").textContent = config.parking.addressEN;
