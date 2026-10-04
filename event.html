@@ -46,6 +46,7 @@
     <nav class="tabs" aria-label="Event sections">
       <button class="tab is-active" type="button" data-tab="info" aria-label="Event information"><span class="jp-main tab-label-full">イベント案内</span><span class="tab-label-short" aria-hidden="true">イベント案内</span><span class="en-sub">Event information</span></button>
       <button class="tab" type="button" data-tab="candy" aria-label="Candy Forest"><span class="jp-main tab-label-full">キャンディの森</span><span class="tab-label-short" aria-hidden="true">キャンディの森</span><span class="en-sub">Candy Forest</span></button>
+      <button class="tab" type="button" data-tab="afternoon" aria-label="Afternoon Events"><span class="jp-main tab-label-full">午後のイベント</span><span class="tab-label-short" aria-hidden="true">午後のイベント</span><span class="en-sub">Afternoon Events</span></button>
       <button class="tab" type="button" data-tab="zombie" aria-label="Zombie Scavenger Hunt"><span class="jp-main tab-label-full">ゾンビ・スカベンジャーハント</span><span class="tab-label-short" aria-hidden="true">ゾンビ</span><span class="en-sub">Zombie Scavenger Hunt</span></button>
     </nav>
 
@@ -111,9 +112,9 @@
         <p class="eyebrow"><span class="jp-main">時間</span><span class="en-sub">Timeline</span></p><h2 id="timeline-title"><span class="jp-main">当日の流れ</span><span class="en-sub">Schedule for the day</span></h2>
         <div class="timeline-list">
           <div class="timeline-stop"><time>9:45</time><p><span class="jp-main">駐車場オープン</span><span class="en-sub">Parking opens</span></p></div>
-          <div class="timeline-stop"><time>10:00</time><p><span class="jp-main">キャンディの森スタート</span><span class="en-sub">Candy Forest starts</span></p></div>
+          <div class="timeline-stop timeline-candy"><time>10:00</time><p><span class="jp-main">キャンディの森スタート</span><span class="en-sub">Candy Forest starts</span></p></div>
           <div class="timeline-stop"><time>10:30</time><p><span class="jp-main">キャンディの森 最終受付</span><span class="en-sub">Last Candy Forest check-in</span></p></div>
-          <div class="timeline-stop"><time>12:00</time><p><span class="jp-main">キャンディの森おわり・午後のイベント</span><span class="en-sub">Candy Forest ends · Afternoon Events begin</span></p></div>
+          <div class="timeline-stop timeline-afternoon"><time>12:00</time><p><span class="jp-main">キャンディの森おわり・午後のイベント</span><span class="en-sub">Candy Forest ends · Afternoon Events begin</span></p></div>
           <div class="timeline-stop"><time>16:00</time><p><span class="jp-main">午後のイベントおわり</span><span class="en-sub">Afternoon Events end</span></p></div>
           <div class="timeline-stop timeline-zombie"><time>18:00</time><p><span class="jp-main">ゾンビ・スカベンジャーハント（18:00までに受付）</span><span class="en-sub">Zombie Scavenger Hunt — check in by 6:00 pm</span></p></div>
         </div>
@@ -219,6 +220,26 @@
         <div><span>03</span><b><span class="jp-main">ごほうび</span><span class="en-sub">Reward</span></b><small><span class="jp-main">短いチャイムで発見を知らせます。</span><span class="en-sub">A short chime confirms the find.</span></small></div>
         <div><span>04</span><b><span class="jp-main">つぎのターゲット</span><span class="en-sub">Next target</span></b><small><span class="jp-main">12ひき見つけるまで続けます。</span><span class="en-sub">Keep going until you find all 12.</span></small></div>
       </section>
+    </section>
+
+    <section class="panel tab-panel panel-afternoon" id="panel-afternoon" data-panel="afternoon" hidden>
+      <div class="afternoon-shell">
+        <div class="afternoon-copy">
+          <p class="eyebrow"><span class="jp-main">午後のイベント</span><span class="en-sub">Afternoon Events</span></p>
+          <h1><span class="jp-main">午後のイベント</span><span class="en-sub">Afternoon Events</span></h1>
+          <p class="afternoon-lede"><span class="jp-main">キャンディの森、ゾンビ・スカベンジャーハント、または両方に参加するご家族向けです。ここでは午後のイベントの大まかな内容をご案内します。</span><span class="en-sub">These activities are for families participating in the Candy Forest, the Zombie Scavenger Hunt, or both. This page gives a general idea of what to expect.</span></p>
+          <p class="afternoon-intro"><span class="jp-main">お昼ごはんの後は、次のイベントを予定しています。</span><span class="en-sub">After lunch, we plan to offer:</span></p>
+          <ul class="afternoon-activities">
+            <li><span class="jp-main">スプーキー・イングリッシュ・ストーリータイム</span><span class="en-sub">Spooky English Story Time</span></li>
+            <li><span class="jp-main">ハロウィンペインティング</span><span class="en-sub">Halloween Painting</span></li>
+            <li><span class="jp-main">魔女の材料さがし</span><span class="en-sub">Witch’s Ingredient Hunt</span></li>
+            <li><span class="jp-main">森のモンスターづくり</span><span class="en-sub">Build a Forest Monster</span></li>
+          </ul>
+          <p class="afternoon-time"><span class="jp-main">12:00〜16:00</span><span class="en-sub">12:00–4:00 pm</span></p>
+          <p class="presenter-line" id="afternoon-presenter"></p>
+        </div>
+        <figure class="afternoon-image"><img src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="昼の森の小道。木の陰に小さなゴーストがかくれている森"><figcaption><span class="jp-main">森の中で楽しむ午後</span><span class="en-sub">An afternoon in the forest</span></figcaption></figure>
+      </div>
     </section>
 
     <section class="panel tab-panel panel-zombie" id="panel-zombie" data-panel="zombie" hidden>

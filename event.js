@@ -410,7 +410,7 @@
       panel.hidden = !active;
       panel.classList.toggle("is-active", active);
     });
-    document.body.dataset.theme = tabName;
+    document.body.dataset.theme = tabName === "afternoon" ? "info" : tabName;
     if (updateHash && window.location.hash !== `#${tabName}`) history.replaceState(null, "", `#${tabName}`);
     updateStatus();
   };
@@ -466,11 +466,11 @@
   window.setInterval(updateStatus, 1000);
   updateStatus();
   const hashTab = window.location.hash.slice(1);
-  const initialTab = ghostParam ? "candy" : ["info", "candy", "zombie"].includes(hashTab) ? hashTab : "info";
+  const initialTab = ghostParam ? "candy" : ["info", "candy", "afternoon", "zombie"].includes(hashTab) ? hashTab : "info";
   selectTab(initialTab, false);
   window.addEventListener("hashchange", () => {
     const nextTab = window.location.hash.slice(1);
-    if (["info", "candy", "zombie"].includes(nextTab)) selectTab(nextTab, false);
+    if (["info", "candy", "afternoon", "zombie"].includes(nextTab)) selectTab(nextTab, false);
   });
   processGhostScan();
 })();
