@@ -12,51 +12,84 @@
     if (!element) return;
     element.innerHTML = `<span class="jp-main">${jp}</span><span class="en-sub">${en}</span>`;
   };
+  const createIconLink = (link, ariaPrefix = "") => {
+    const anchor = document.createElement("a");
+    const iconName = link.icon || "website";
+    const iconLabel = iconName === "instagram" ? "Instagram" : iconName === "phone" ? "Phone" : iconName === "mail" ? "Mail" : "Website";
+    anchor.href = link.url;
+    anchor.target = "_blank";
+    anchor.rel = "noopener";
+    anchor.className = "icon-link";
+    anchor.setAttribute("aria-label", (ariaPrefix ? ariaPrefix + ": " : "") + link.label + " " + iconLabel + "（新しいタブで開きます）");
+
+    const ring = document.createElement("span");
+    ring.className = "icon-ring";
+    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    icon.classList.add("icon");
+    icon.setAttribute("aria-hidden", "true");
+    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+    use.setAttribute("href", "#icon-" + iconName);
+    icon.append(use);
+    ring.append(icon);
+
+    const label = document.createElement("span");
+    label.className = "icon-label";
+    const jp = document.createElement("span");
+    jp.className = "jp-main";
+    jp.textContent = link.label;
+    const en = document.createElement("span");
+    en.className = "en-sub";
+    en.textContent = link.labelEN || link.label;
+    label.append(jp, en);
+    anchor.append(ring, label);
+    return anchor;
+  };
+
   const renderSocialLinks = (selector, links = []) => {
     const element = $(selector);
     if (!element) return;
     element.innerHTML = "";
-    links.forEach((link) => {
-      const anchor = document.createElement("a");
-      anchor.href = link.url;
-      anchor.target = "_blank";
-      anchor.rel = "noopener";
-      anchor.className = "social-link";
-      const jp = document.createElement("span");
-      jp.className = "jp-main";
-      jp.textContent = link.label;
-      const en = document.createElement("span");
-      en.className = "en-sub";
-      en.textContent = link.labelEN || link.label;
-      anchor.append(jp, en);
-      element.append(anchor);
-    });
+    links.forEach((link) => element.append(createIconLink(link)));
   };
-  const renderPresenterLine = () => {
+
+  const renderAfternoonPresenter = () => {
     const element = $("#afternoon-presenter");
     if (!element || !config.afternoonEvent) return;
     element.innerHTML = "";
+    const label = document.createElement("div");
+    label.className = "presented-by-label";
     const jp = document.createElement("span");
     jp.className = "jp-main";
+    jp.textContent = "提供";
     const en = document.createElement("span");
     en.className = "en-sub";
-    const links = config.afternoonEvent.presenterLinks || [];
-    const jpPrefix = config.afternoonEvent.presentedByJP.split(links[0]?.label || "")[0];
-    const enPrefix = config.afternoonEvent.presentedByEN.split(links[0]?.label || "")[0];
-    jp.append(document.createTextNode(jpPrefix));
-    en.append(document.createTextNode(enPrefix));
-    links.forEach((link, index) => {
-      [jp, en].forEach((wrapper, wrapperIndex) => {
-        const anchor = document.createElement("a");
-        anchor.href = link.url;
-        anchor.target = "_blank";
-        anchor.rel = "noopener";
-        anchor.textContent = link.label;
-        wrapper.append(anchor);
-        if (index < links.length - 1) wrapper.append(document.createTextNode(wrapperIndex === 0 ? "・" : " and "));
-      });
+    en.textContent = "Presented by";
+    label.append(jp, en);
+    const row = document.createElement("div");
+    row.className = "presenter-links";
+    const ariaPrefix = config.afternoonEvent.presentedByJP + " / " + config.afternoonEvent.presentedByEN;
+    (config.afternoonEvent.presenterLinks || []).forEach((link) => row.append(createIconLink(link, ariaPrefix)));
+    element.append(label, row);
+  };
+
+  const renderParkingNote = () => {
+    const element = $("#parking-note p");
+    if (!element || !config.parking) return;
+    element.innerHTML = "";
+    const jpLines = config.parking.noteJP.split("\n");
+    const enLines = config.parking.noteEN.split("\n");
+    jpLines.forEach((line, index) => {
+      const row = document.createElement("span");
+      row.className = "parking-line " + (index < 2 ? "is-guide" : index === jpLines.length - 1 ? "is-liability" : "is-courtesy");
+      const jp = document.createElement("span");
+      jp.className = "jp-main";
+      jp.textContent = line;
+      const en = document.createElement("span");
+      en.className = "en-sub";
+      en.textContent = enLines[index] || "";
+      row.append(jp, en);
+      element.append(row);
     });
-    element.append(jp, en);
   };
   const startsAt = new Date(config.startAt).getTime();
   const latestStartAt = new Date(config.latestStartAt).getTime();
@@ -412,12 +445,13 @@
   setBilingual("#rain-notice-copy", config.rain.jp, config.rain.en);
   renderSocialLinks("#rain-notice-links", config.rain.socialLinks);
   renderSocialLinks("#contact-social-links", config.rain.socialLinks);
+  renderSocialLinks("#candy-rain-links", config.rain.socialLinks);
   renderSocialLinks("#zombie-social-links", config.rain.socialLinks);
-  renderPresenterLine();
+  renderAfternoonPresenter();
   $("#parking-company-jp").textContent = config.parking.companyJP || config.parking.addressJP || "";
   $("#parking-street-jp").textContent = config.parking.streetJP || "";
   $("#parking-address-en").textContent = config.parking.addressEN;
-  setBilingual("#parking-note p", config.parking.noteJP, config.parking.noteEN);
+  renderParkingNote();
   $("#parking-map-link").href = config.parking.mapUrl;
   $("#reservation-email").textContent = reservationEmail;
   $("#info-email-link").href = `mailto:${reservationEmail}`;

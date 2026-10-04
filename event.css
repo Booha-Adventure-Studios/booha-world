@@ -229,12 +229,6 @@ body[data-theme="zombie"] h1 > .jp-main { color: #caff70; font-family: 'Zen Anti
   .parking-grid { grid-template-columns: 1fr; }
   .parking-photo img { height: auto; max-height: none; }
 }
-@media (max-width: 680px) {
-  .tabs { display: grid; grid-template-columns: 1fr; gap: 9px; overflow: visible; padding: 8px 0 20px; }
-  .tab { width: 100%; padding: 12px 17px; text-align: left; }
-  .tab .jp-main, .tab .en-sub { display: block; }
-  .tab .en-sub { margin-left: 0; }
-}
 @media (max-width: 560px) {
   .wrap { width: min(100% - 28px, 1120px); }
   .site-header { align-items: flex-start; }
@@ -530,61 +524,120 @@ body[data-theme="info"] .info-contact .contact-actions { gap: 16px; }
 body[data-theme="info"] .site-footer { border-top-color: var(--ink); color: var(--muted); }
 body[data-theme="info"] .site-footer a { color: var(--ink); }
 
-@media (max-width: 680px) {
-  .tabs { display: grid; grid-template-columns: 1fr; gap: 9px; overflow: visible; }
-  .tab { width: 100%; text-align: left; }
-  .tab-label-full, .tab .en-sub { display: block !important; }
-  .tab-label-short { display: none !important; }
+/* Part 4: shared, accessible icon links and readable labels. */
+.social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 16px;
 }
-
-body[data-theme="info"] .event-card time { white-space: normal; }
-body[data-theme="info"] .event-card time > span:first-child { display: block; }
-body[data-theme="info"] .event-card time .tba-pill {
+.icon-link {
   display: inline-flex;
-  width: max-content;
-  margin: 8px 0 0;
-  white-space: normal;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
 }
-body[data-theme="candy"] .candy-rain-note {
-  margin: 18px 0;
-  padding: 14px 16px;
-  border: 2px solid #ff6fae;
-  border-radius: 14px;
-  background: #fff;
-  color: #31133d;
+.icon-link .icon-ring {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 2.5px solid currentColor;
+  border-radius: 50%;
+  transition: background-color .18s ease, color .18s ease;
+}
+.icon-link .icon { width: 24px; height: 24px; }
+.icon-link .icon-label {
+  display: flex;
+  max-width: 9em;
+  flex-direction: column;
+  color: inherit;
+  font-size: 13px;
   font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
 }
-body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
-body[data-theme="candy"] .line-warning { white-space: normal; }
-
-@media (max-width: 680px) {
-  body[data-theme="info"] .event-card time .tba-pill { display: flex; }
+.icon-link .icon-label .jp-main,
+.icon-link .icon-label .en-sub {
+  display: block;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: 1.25;
 }
-
-body[data-theme="info"] .event-card time { white-space: normal; }
-body[data-theme="info"] .event-card time > span:first-child { display: block; }
-body[data-theme="info"] .event-card time .tba-pill {
-  display: inline-flex;
-  width: max-content;
-  margin: 8px 0 0;
-  white-space: normal;
+.icon-link:hover .icon-ring,
+.icon-link:focus-visible .icon-ring {
+  background: currentColor;
+  color: var(--icon-bg, var(--bg));
 }
-body[data-theme="candy"] .candy-rain-note {
-  margin: 18px 0;
-  padding: 14px 16px;
-  border: 2px solid #ff6fae;
-  border-radius: 14px;
-  background: #fff;
-  color: #31133d;
+.icon-link:focus-visible {
+  outline: 3px solid var(--harvest, #E2B23A);
+  outline-offset: 3px;
+}
+.icon-button {
+  flex-direction: row !important;
+  gap: 8px;
+}
+.icon-button .button-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+.icon-button .button-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.presenter-line {
+  text-align: center;
+}
+.presented-by-label {
+  color: var(--paper, inherit);
+  font-size: 13px;
   font-weight: 700;
+  text-align: center;
 }
-body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
-body[data-theme="candy"] .line-warning { white-space: normal; }
-
-@media (max-width: 680px) {
-  body[data-theme="info"] .event-card time .tba-pill { display: flex; }
+.presented-by-label .jp-main,
+.presented-by-label .en-sub { display: inline; margin: 0 4px; color: inherit; font-size: inherit; }
+.presenter-links {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 10px;
 }
-
+body[data-theme="info"] .event-card-afternoon {
+  --icon-bg: #4E2A47;
+  color: #F3EADB;
+}
+body[data-theme="info"] .info-contact {
+  --icon-bg: #FFFAF1;
+  color: #2B1E16;
+}
+body[data-theme="info"] .notice-rain {
+  --icon-bg: #12160F;
+  color: #F3EADB;
+}
+body[data-theme="info"] .notice-rain .social-links { color: #F3EADB; }
+body[data-theme="zombie"] .night-information {
+  --icon-bg: #121714;
+  color: #C6FF3D;
+}
+body[data-theme="zombie"] .night-information .social-links { color: #C6FF3D; }
+body[data-theme="info"] .notice-tag .en-sub { color: inherit; opacity: 1; }
+body[data-theme="info"] .parking-line {
+  display: block;
+  font-weight: 400;
+}
+body[data-theme="info"] .parking-line.is-guide { font-weight: 700; }
+body[data-theme="info"] .parking-line.is-liability,
+body[data-theme="info"] .parking-line.is-liability .en-sub {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 400;
+}
 body[data-theme="info"] .notice-rain {
   background: var(--night);
   color: var(--paper);
@@ -593,23 +646,6 @@ body[data-theme="info"] .notice-rain h2,
 body[data-theme="info"] .notice-rain h2 .en-sub,
 body[data-theme="info"] .notice-rain p .en-sub { color: inherit; }
 body[data-theme="info"] .notice-rain p { white-space: normal; }
-body[data-theme="info"] .social-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 16px;
-}
-body[data-theme="info"] .social-link {
-  display: inline-flex;
-  flex-direction: column;
-  padding: 8px 12px;
-  border: 2px solid currentColor;
-  border-radius: 10px;
-  color: inherit;
-  font-weight: 800;
-  text-decoration: none;
-}
-body[data-theme="info"] .social-link .en-sub { color: inherit; font-size: 12px; }
 body[data-theme="info"] .parking-limit-note {
   max-width: 760px;
   padding: 20px 24px;
@@ -640,13 +676,7 @@ body[data-theme="info"] .eligibility-line {
   font-size: 13px;
   font-weight: 800;
 }
-body[data-theme="info"] .eligibility-line .en-sub { color: inherit; font-size: 12px; }
-body[data-theme="info"] .presenter-line a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
-body[data-theme="info"] .event-card time .tba-pill {
-  display: inline-flex;
-  margin-left: 8px;
-  vertical-align: middle;
-}
+body[data-theme="info"] .eligibility-line .en-sub { color: inherit; font-size: 13px; }
 body[data-theme="zombie"] .hero-pills {
   display: flex;
   flex-wrap: wrap;
@@ -826,8 +856,7 @@ body[data-theme="info"] .event-card-candy { background: var(--pine); color: var(
 body[data-theme="info"] .event-card-story { background: var(--plum); color: var(--paper); }
 body[data-theme="info"] .event-card-zombie { background: var(--night); color: var(--glow); }
 body[data-theme="info"] .event-card h3 { font-size: clamp(20px, 2.2vw, 24px); }
-body[data-theme="info"] .event-card time { white-space: nowrap; }
-body[data-theme="info"] .event-card time small { display: inline; margin-left: 4px; font-size: 60%; }
+body[data-theme="info"] .event-card time small { display: inline; margin-left: 4px; }
 body[data-theme="info"] .event-card h3 .en-sub { color: inherit; }
 body[data-theme="info"] .event-card p { font-size: 16px; }
 body[data-theme="info"] .event-card p .en-sub { font-size: 14px; }
@@ -880,6 +909,7 @@ body[data-theme="info"] .site-footer a { color: var(--ink); text-decoration: und
   .tab-label-short { display: none !important; }
 }
 
+/* Final Part 4 overrides. */
 body[data-theme="info"] .event-card time { white-space: normal; }
 body[data-theme="info"] .event-card time > span:first-child { display: block; }
 body[data-theme="info"] .event-card time .tba-pill {
@@ -889,6 +919,7 @@ body[data-theme="info"] .event-card time .tba-pill {
   white-space: normal;
 }
 body[data-theme="candy"] .candy-rain-note {
+  --icon-bg: #FFFFFF;
   margin: 18px 0;
   padding: 14px 16px;
   border: 2px solid #ff6fae;
@@ -898,8 +929,42 @@ body[data-theme="candy"] .candy-rain-note {
   font-weight: 700;
 }
 body[data-theme="candy"] .candy-rain-note .en-sub { color: #5a4062; }
+body[data-theme="candy"] .candy-rain-note .social-links { color: #1C0A2B; }
 body[data-theme="candy"] .line-warning { white-space: normal; }
 
 @media (max-width: 680px) {
   body[data-theme="info"] .event-card time .tba-pill { display: flex; }
+}
+
+/* Keep the minimum readable type rules last in the cascade. */
+.en-sub { font-size: max(13px, .86em); }
+small, figcaption, .eyebrow, .cd-unit small, .night-rules article > span {
+  font-size: max(13px, 1em);
+}
+body[data-theme="zombie"] .panel-zombie .tba-pill {
+  flex-direction: column;
+  align-items: flex-start;
+}
+body[data-theme="zombie"] .panel-zombie .tba-pill .jp-main { font-size: 14px; }
+body[data-theme="zombie"] .panel-zombie .tba-pill .en-sub { font-size: 13px; }
+
+/* Keep supporting labels readable on every tab, including the compact mobile view. */
+.brand small,
+.header-meta,
+.eyebrow,
+.hero-image figcaption,
+.tba-pill,
+.parking-arrival-route b,
+.status-card-label,
+.fine-print,
+.progress-line,
+.scan-note,
+.how-it-works span,
+.how-it-works small,
+.night-rules span,
+.site-footer,
+.cd-unit small,
+body[data-theme="info"] .event-card time small,
+body[data-theme="info"] .timeline-stop time small {
+  font-size: max(13px, 1em);
 }

@@ -21,8 +21,8 @@ window.BOOHA_EVENTS = {
       presentedByJP: "提供：Terakoya・Sotobo Community School",
       presentedByEN: "Presented by Terakoya and Sotobo Community School",
       presenterLinks: [
-        { label: "Terakoya", url: "https://www.instagram.com/world_of_iwase/" },
-        { label: "Sotobo Community School", url: "https://www.instagram.com/umikaze_sotobo" }
+        { label: "Terakoya", icon: "instagram", url: "https://www.instagram.com/world_of_iwase/" },
+        { label: "Sotobo Community School", icon: "instagram", url: "https://www.instagram.com/umikaze_sotobo" }
       ],
       timeJP: "12:00〜16:00",
       timeEN: "12:00–4:00 pm",
@@ -39,8 +39,8 @@ window.BOOHA_EVENTS = {
       jp: "雨天中止です。中止の場合は、ブライアン英会話教室のウェブサイトとInstagramでお知らせします。中止になった場合も、バッグはお渡しします。返金はありません。",
       en: "The event will be cancelled if it rains. Any cancellation will be announced on Bryan's English School website and Instagram. If the event is cancelled, your bags will still be available. No refunds.",
       socialLinks: [
-        { label: "ウェブサイト", labelEN: "Website", url: "https://www.bryanharper.tokyo" },
-        { label: "Instagram", labelEN: "Instagram", url: "https://www.instagram.com/bryans.english.school/" }
+        { label: "ウェブサイト", labelEN: "Website", icon: "website", url: "https://www.bryanharper.tokyo" },
+        { label: "Instagram", labelEN: "Instagram", icon: "instagram", url: "https://www.instagram.com/bryans.english.school/" }
       ]
     },
     bagDeadline: {
