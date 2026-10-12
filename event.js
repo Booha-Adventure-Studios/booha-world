@@ -428,12 +428,18 @@
   const bothPrice = prices.candy + prices.zombie;
   const reservationEmail = config.reservationEmail || config.contacts.email;
   const reservationBody = [
-    "代表者のお名前 / Your name:",
-    "電話番号 / Phone:",
-    "参加するイベント / Events (キャンディの森 / ゾンビ / 両方):",
-    "キャンディの森に参加する子どもの人数と学年（未就学児も含む）/ Candy Forest children and grades (incl. preschool):",
-    "ゾンビに参加する子どもの人数と学年（小学生〜高校生）/ Zombie Hunt children and grades (elem.–high school):",
-    "保護者の人数 / Number of adults:"
+    "1. 代表者のお名前 / Your name:",
+    "",
+    "2. 参加するイベント / Events:",
+    "   キャンディの森 / ゾンビ・スカベンジャーハント / 両方",
+    "",
+    "3. 参加するお子さま全員のお名前・学年・年齢:",
+    "   ※お名前はローマ字でご記入ください。",
+    "   ※参加するお子さまは、参加するイベントのバッグを購入してください。キャンディの森はキャンディバッグ、ゾンビ・スカベンジャーハントはグッズバッグです。",
+    "",
+    "4. バッグの個数 / Number of bags:",
+    "",
+    "5. 参加する保護者を含む大人の人数 / Number of all adults attending:"
   ].join("\n");
   const reservationHref = `mailto:${reservationEmail}?subject=${encodeURIComponent("ハロウィンイベント予約 / Halloween Event reservation")}&body=${encodeURIComponent(reservationBody)}`;
 
