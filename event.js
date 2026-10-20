@@ -260,12 +260,23 @@
     feedback.className = `feedback ${kind}`.trim();
   };
 
+  const openCandyFullscreen = () => {
+    document.body.classList.add("candy-fullscreen");
+    $("#hunt-start").hidden = true;
+    $("#hunt-welcome").hidden = false;
+    $("#hunt-active").hidden = true;
+    $("#hunt-complete").hidden = true;
+  };
+
   const renderTarget = (state) => {
     const complete = state.nextIndex >= config.ghosts.length;
+    document.body.classList.add("candy-fullscreen");
     $("#hunt-start").hidden = true;
+    $("#hunt-welcome").hidden = true;
     $("#hunt-active").hidden = complete;
     $("#hunt-complete").hidden = !complete;
     $("#restart-test-hunt").hidden = !state.testMode;
+    $("#reset-test-active").hidden = !state.testMode;
     $("#participant-label").textContent = state.participantLabel;
     $("#progress-count").textContent = `${state.nextIndex} / ${config.ghosts.length}`;
     $("#completion-count").textContent = `${config.ghosts.length} / ${config.ghosts.length}`;
@@ -397,6 +408,15 @@
     input.setCustomValidity("");
     const testMode = isTestCode(name);
     if (!testMode && (Date.now() < startsAt || Date.now() >= latestStartAt)) return;
+    $("#welcome-name").textContent = testMode ? "Candy Forest Test Team" : name;
+    $("#welcome-name-en").textContent = testMode ? "Candy Forest Test Team" : name;
+    openCandyFullscreen();
+  };
+
+  const beginHunt = () => {
+    const name = $("#participant-name").value.trim();
+    const testMode = isTestCode(name);
+    if (!testMode && (Date.now() < startsAt || Date.now() >= latestStartAt)) return;
     const now = Date.now();
     const state = {
       schemaVersion: 1,
@@ -418,10 +438,23 @@
       : "順番が決まりました。最初のゴーストをさがしてください。 / Your order is ready. Find your first ghost.", "is-muted");
   };
 
+  const resetTestHunt = () => {
+    try { localStorage.removeItem(storageKey); } catch (error) { /* best effort */ }
+    document.body.classList.remove("candy-fullscreen");
+    $("#participant-name").value = config.testCode;
+    $("#hunt-start").hidden = false;
+    $("#hunt-welcome").hidden = true;
+    $("#hunt-active").hidden = true;
+    $("#hunt-complete").hidden = true;
+    updateStatus();
+    setFeedback("テストをリセットしました。 / Test reset. Press Continue.", "is-muted");
+  };
+
   const processGhostScan = () => {
     if (!ghostParam) return;
     const state = readState();
     if (!state) {
+      document.body.classList.remove("candy-fullscreen");
       $("#panel-candy").hidden = false;
       $("#hunt-start").hidden = false;
       setFeedback("先に家族のハントを始めてから、もう一度スキャンしてください。 / Start your family hunt first, then scan the ghost again.", "is-muted");
@@ -518,6 +551,7 @@
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
   $$('[data-go-tab]').forEach((button) => button.addEventListener("click", () => { selectTab(button.dataset.goTab); window.scrollTo({ top: 0, behavior: "smooth" }); }));
   $("#start-hunt").addEventListener("click", startHunt);
+  $("#begin-hunt").addEventListener("click", beginHunt);
   $("#participant-name").addEventListener("input", (event) => {
     event.target.setCustomValidity("");
     updateStatus();
@@ -532,15 +566,8 @@
       setFeedback("QRのURLを確認してください。 / Check the scanned QR URL.", "is-wrong");
     }
   });
-  $("#restart-test-hunt").addEventListener("click", () => {
-    try { localStorage.removeItem(storageKey); } catch (error) { /* best effort */ }
-    $("#participant-name").value = config.testCode;
-    $("#hunt-complete").hidden = true;
-    $("#hunt-start").hidden = false;
-    $("#hunt-active").hidden = true;
-    updateStatus();
-    setFeedback("テストをリセットしました。 / Test reset. Press Start the hunt.", "is-muted");
-  });
+  $("#restart-test-hunt").addEventListener("click", resetTestHunt);
+  $("#reset-test-active").addEventListener("click", resetTestHunt);
   renderQrGallery();
   window.setInterval(updateStatus, 1000);
   updateStatus();

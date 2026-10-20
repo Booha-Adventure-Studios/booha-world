@@ -178,7 +178,15 @@
       </div>
 
       <div class="hunt-shell">
-        <div class="hunt-art"><img src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="A real forest path with a tiny hidden Booha Ghost partly behind a tree"></div>
+        <div class="hunt-art">
+          <img class="hunt-forest" src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="A real forest path with a tiny hidden Booha Ghost partly behind a tree">
+          <div class="hunt-scene" aria-hidden="true">
+            <span class="scene-orb scene-orb-one"></span><span class="scene-orb scene-orb-two"></span><span class="scene-orb scene-orb-three"></span>
+            <span class="scene-spark scene-spark-one">✦</span><span class="scene-spark scene-spark-two">✧</span><span class="scene-spark scene-spark-three">✦</span>
+            <img class="hunt-mascot" src="assets/events/ghosts/booha-ghost-red.png" alt="">
+            <span class="scene-cloud scene-cloud-one"></span><span class="scene-cloud scene-cloud-two"></span>
+          </div>
+        </div>
         <div class="hunt-content">
           <div id="hunt-start" class="hunt-view">
             <p class="eyebrow"><span class="jp-main">かぞくのハント</span><span class="en-sub">Your family hunt</span></p>
@@ -187,9 +195,18 @@
             <label for="participant-name"><span class="jp-main">家族・チーム名</span><span class="en-sub">Family or team name</span></label>
             <input id="participant-name" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Harper family">
             <p class="test-hint" id="test-hint"><span class="jp-main">テストするには「CANDY-TEST」と入力してください。</span><span class="en-sub">For testing, enter “CANDY-TEST” as the family/team name.</span></p>
-            <button class="primary-button full" id="start-hunt" type="button"><span class="jp-main">ハントを始める</span><span class="en-sub">Start the hunt</span></button>
+            <button class="primary-button full" id="start-hunt" type="button"><span class="jp-main">つぎへ</span><span class="en-sub">Continue</span></button>
             <div class="feedback" id="prestart-feedback" role="status" aria-live="polite"></div>
             <p class="fine-print"><span class="jp-main">新しいハントは10:00から10:30までに始めてください。キャンディの森は12:00までです。</span><span class="en-sub">New hunts must start between 10:00 and 10:30. The Candy Forest ends at 12:00.</span></p>
+          </div>
+
+          <div id="hunt-welcome" class="hunt-view welcome-view" hidden>
+            <p class="welcome-kicker"><span class="jp-main">キャンディの森へようこそ！</span><span class="en-sub">Welcome to Candy Forest!</span></p>
+            <h2><span class="jp-main">ようこそ、<strong id="welcome-name">チーム</strong>さん！</span><span class="en-sub">Welcome, <strong id="welcome-name-en">team</strong>!</span></h2>
+            <p class="welcome-copy"><span class="jp-main"><ruby>森<rt>もり</rt></ruby>のゴーストを12ひき、<ruby>順番<rt>じゅんばん</rt></ruby>に見つけよう。</span><span class="en-sub">Find all 12 forest ghosts in order.</span></p>
+            <div class="welcome-badge"><span>12</span><small><span class="jp-main">ひきのゴースト</span><span class="en-sub">ghosts</span></small></div>
+            <button class="primary-button welcome-button" id="begin-hunt" type="button"><span class="jp-main">ぼうけんをはじめる</span><span class="en-sub">Start the adventure</span></button>
+            <p class="welcome-note"><span class="jp-main">さいしょの色を見つけたら、QRコードをスキャン！</span><span class="en-sub">Find your first color, then scan its QR code!</span></p>
           </div>
 
           <div id="hunt-active" class="hunt-view" hidden>
@@ -206,6 +223,7 @@
               <div class="scan-fallback-row"><input id="scan-url" type="url" inputmode="url" placeholder="Paste the scanned URL here"><button class="secondary-button" id="use-scan-url" type="button"><span class="jp-main">使う</span><span class="en-sub">Use URL</span></button></div>
             </div>
             <div class="feedback" id="scan-feedback" role="status" aria-live="polite"></div>
+            <button class="secondary-button test-reset-active" id="reset-test-active" type="button" hidden><span class="jp-main">テストをリセット</span><span class="en-sub">Reset test</span></button>
           </div>
 
           <div id="hunt-complete" class="hunt-view complete-view" hidden>
