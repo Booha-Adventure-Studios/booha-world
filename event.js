@@ -202,23 +202,6 @@
     brown: "hue-rotate(6deg) saturate(.68) brightness(.68)"
   };
 
-  const renderQrGallery = () => {
-    const gallery = $("#qr-gallery");
-    if (!gallery) return;
-    gallery.innerHTML = "";
-    const base = "assets/events/ghosts/booha-ghost-red.png";
-    config.ghosts.forEach((ghost, index) => {
-      const url = `${window.location.origin}${window.location.pathname}?event=${encodeURIComponent(config.id)}&ghost=${encodeURIComponent(ghost.id)}`;
-      const card = document.createElement("article");
-      card.className = "qr-card";
-      card.innerHTML = `
-        <div class="qr-card-top"><span class="qr-number">${String(index + 1).padStart(2, "0")}</span><strong>${ghost.jp}</strong><span>${ghost.label}</span></div>
-        <img class="qr-ghost-art" src="${base}" alt="${ghost.label} Booha Ghost picture" style="filter:${GHOST_FILTERS[ghost.id] || "none"}">
-        <img class="qr-code" src="assets/events/qr/candy-forest/ghost-${ghost.id}.svg" alt="QR code for the ${ghost.label} Booha Ghost">
-        <code>${url.replace(window.location.origin, "")}</code>`;
-      gallery.append(card);
-    });
-  };
 
   const renderProgress = (state) => {
     const row = $("#candy-progress-dots");
@@ -962,7 +945,6 @@
   });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !game.hidden) requestWakeLock(); });
   $$("[data-ghost-total]").forEach((element) => { element.textContent = GHOST_TOTAL; });
-  renderQrGallery();
   window.setInterval(updateStatus, 1000);
   updateStatus();
   const hashTab = window.location.hash.slice(1);
