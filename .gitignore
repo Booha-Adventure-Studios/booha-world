@@ -4,3 +4,7 @@ _to_delete/
 
 # macOS
 .DS_Store
+
+# Printable event files (contain the hunt QR codes) and Python caches — keep off GitHub
+output/
+__pycache__/
