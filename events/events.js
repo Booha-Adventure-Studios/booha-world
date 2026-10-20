@@ -14,6 +14,8 @@ window.BOOHA_EVENTS = {
     prices: { candy: 1000, zombie: 1000 },
     reservationEmail: "bryans.english@gmail.com",
     huntDurationHours: 12,
+    testCode: "CANDY-TEST",
+    testHuntDurationHours: 24,
     candyReward: "Candy bag at Bryan's return point",
     afternoonEvent: {
       nameJP: "午後のイベント",

@@ -186,6 +186,7 @@
             <p><span class="jp-main">家族またはチーム名を入力してください。この端末だけに保存され、12色の順番が作られます。</span><span class="en-sub">Choose a family or team name. It stays on this device only. The site will create your private 12-color order when you start.</span></p>
             <label for="participant-name"><span class="jp-main">家族・チーム名</span><span class="en-sub">Family or team name</span></label>
             <input id="participant-name" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Harper family">
+            <p class="test-hint" id="test-hint"><span class="jp-main">テストするには「CANDY-TEST」と入力してください。</span><span class="en-sub">For testing, enter “CANDY-TEST” as the family/team name.</span></p>
             <button class="primary-button full" id="start-hunt" type="button"><span class="jp-main">ハントを始める</span><span class="en-sub">Start the hunt</span></button>
             <div class="feedback" id="prestart-feedback" role="status" aria-live="polite"></div>
             <p class="fine-print"><span class="jp-main">新しいハントは10:00から10:30までに始めてください。キャンディの森は12:00までです。</span><span class="en-sub">New hunts must start between 10:00 and 10:30. The Candy Forest ends at 12:00.</span></p>
@@ -200,6 +201,10 @@
             </div>
             <p id="target-instruction"><span id="target-instruction-jp" class="jp-main">森でこの色のゴーストを見つけて、QRコードをスキャンしてください。</span><span id="target-instruction-en" class="en-sub">Find this color in the forest, then scan its QR code.</span></p>
             <div class="scan-note"><span class="scan-symbol">⌁</span><span><span class="jp-main">ゴーストのQRコードにスマホのカメラを向けてください。スキャンすると、つぎのターゲットが表示されます。</span><span class="en-sub">Point your phone camera at the ghost's QR code. The scan brings you back here with your next target.</span></span></div>
+            <div class="scan-fallback">
+              <label for="scan-url"><span class="jp-main">カメラが使えないとき</span><span class="en-sub">No-camera fallback</span></label>
+              <div class="scan-fallback-row"><input id="scan-url" type="url" inputmode="url" placeholder="Paste the scanned URL here"><button class="secondary-button" id="use-scan-url" type="button"><span class="jp-main">使う</span><span class="en-sub">Use URL</span></button></div>
+            </div>
             <div class="feedback" id="scan-feedback" role="status" aria-live="polite"></div>
           </div>
 
@@ -208,8 +213,9 @@
             <p class="eyebrow"><span class="jp-main">キャンディの森 コンプリート</span><span class="en-sub">Candy Forest complete</span></p>
             <h2><span class="jp-main">12ひき全部見つけた！</span><span class="en-sub">All 12 ghosts found!</span></h2>
             <p id="completion-copy"></p>
-            <div class="proof-card"><strong>12 / 12</strong><span id="completion-name"></span><small id="completion-time"></small></div>
+            <div class="proof-card"><strong id="completion-count">12 / 12</strong><span id="completion-name"></span><small id="completion-time"></small></div>
             <p class="fine-print"><span class="jp-main">この画面をブライアンに見せて、キャンディバッグをもらってください。</span><span class="en-sub">Show this screen to Bryan to collect your candy bag.</span></p>
+            <button class="secondary-button test-restart" id="restart-test-hunt" type="button" hidden><span class="jp-main">テストをもう一度</span><span class="en-sub">Restart test</span></button>
           </div>
         </div>
       </div>
@@ -220,6 +226,12 @@
         <div><span>03</span><b><span class="jp-main">ごほうび</span><span class="en-sub">Reward</span></b><small><span class="jp-main">短いチャイムで発見を知らせます。</span><span class="en-sub">A short chime confirms the find.</span></small></div>
         <div><span>04</span><b><span class="jp-main">つぎのターゲット</span><span class="en-sub">Next target</span></b><small><span class="jp-main">12ひき見つけるまで続けます。</span><span class="en-sub">Keep going until you find all 12.</span></small></div>
       </section>
+
+      <details class="qr-kit">
+        <summary><span class="jp-main">スタッフ用：ゴースト画像とQRコード</span><span class="en-sub">Staff kit: ghost pictures and QR codes</span></summary>
+        <p class="qr-kit-intro"><span class="jp-main">下のカードを印刷して、同じ色のゴーストにQRコードを貼ってください。各QRはこのページのゴーストURLにリンクします。</span><span class="en-sub">Print these cards and attach each QR code to the matching colored ghost. Each QR links back to this hunt with that ghost ID.</span></p>
+        <div class="qr-gallery" id="qr-gallery"></div>
+      </details>
     </section>
 
     <section class="panel tab-panel panel-afternoon" id="panel-afternoon" data-panel="afternoon" hidden>

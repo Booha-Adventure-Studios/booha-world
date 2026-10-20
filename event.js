@@ -4,6 +4,8 @@
   const config = window.BOOHA_EVENTS?.[eventId] || window.BOOHA_EVENTS?.["halloween-2026"];
   const ghostParam = params.get("ghost");
   const storageKey = `booha:event-hunt:v1:${config.id}`;
+  const normalizeText = (value) => String(value || "").trim().toUpperCase();
+  const isTestCode = (value) => normalizeText(value) === normalizeText(config.testCode);
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -184,6 +186,38 @@
 
   const ghostById = (id) => config.ghosts.find((ghost) => ghost.id === id);
 
+  const renderQrGallery = () => {
+    const gallery = $("#qr-gallery");
+    if (!gallery) return;
+    gallery.innerHTML = "";
+    const filters = {
+      red: "none",
+      pink: "hue-rotate(330deg) saturate(1.15)",
+      yellow: "hue-rotate(58deg) saturate(1.35)",
+      blue: "hue-rotate(170deg) saturate(1.2)",
+      "light-blue": "hue-rotate(185deg) saturate(.85) brightness(1.18)",
+      green: "hue-rotate(112deg) saturate(1.1)",
+      "light-green": "hue-rotate(92deg) saturate(.95) brightness(1.1)",
+      black: "grayscale(1) brightness(.22)",
+      white: "grayscale(1) brightness(2.45)",
+      orange: "hue-rotate(24deg) saturate(1.18)",
+      purple: "hue-rotate(275deg) saturate(.95)",
+      brown: "hue-rotate(6deg) saturate(.68) brightness(.68)"
+    };
+    const base = "assets/events/ghosts/booha-ghost-red.png";
+    config.ghosts.forEach((ghost, index) => {
+      const url = `${window.location.origin}${window.location.pathname}?event=${encodeURIComponent(config.id)}&ghost=${encodeURIComponent(ghost.id)}`;
+      const card = document.createElement("article");
+      card.className = "qr-card";
+      card.innerHTML = `
+        <div class="qr-card-top"><span class="qr-number">${String(index + 1).padStart(2, "0")}</span><strong>${ghost.jp}</strong><span>${ghost.label}</span></div>
+        <img class="qr-ghost-art" src="${base}" alt="${ghost.label} Booha Ghost picture" style="filter:${filters[ghost.id] || "none"}">
+        <img class="qr-code" src="assets/events/qr/candy-forest/ghost-${ghost.id}.svg" alt="QR code for the ${ghost.label} Booha Ghost">
+        <code>${url.replace(window.location.origin, "")}</code>`;
+      gallery.append(card);
+    });
+  };
+
   const renderProgress = (state) => {
     const row = $("#candy-progress-dots");
     if (!row) return;
@@ -231,8 +265,10 @@
     $("#hunt-start").hidden = true;
     $("#hunt-active").hidden = complete;
     $("#hunt-complete").hidden = !complete;
+    $("#restart-test-hunt").hidden = !state.testMode;
     $("#participant-label").textContent = state.participantLabel;
     $("#progress-count").textContent = `${state.nextIndex} / ${config.ghosts.length}`;
+    $("#completion-count").textContent = `${config.ghosts.length} / ${config.ghosts.length}`;
     renderProgress(state);
 
     if (complete) {
@@ -342,14 +378,14 @@
       $("#candy-status-copy-en").textContent = "The Zombie Scavenger Hunt starts at 6:00 pm — check in by 6:00 pm.";
     }
 
-    startButton.disabled = !(now >= startsAt && now < latestStartAt);
+    const testModeRequested = isTestCode($("#participant-name")?.value);
+    startButton.disabled = !testModeRequested && !(now >= startsAt && now < latestStartAt);
     const state = readState();
     if (state) renderTarget(state);
     else renderProgress(null);
   };
 
   const startHunt = () => {
-    if (Date.now() < startsAt || Date.now() >= latestStartAt) return;
     const input = $("#participant-name");
     const name = input.value.trim();
     if (!name) {
@@ -359,22 +395,27 @@
       return;
     }
     input.setCustomValidity("");
+    const testMode = isTestCode(name);
+    if (!testMode && (Date.now() < startsAt || Date.now() >= latestStartAt)) return;
     const now = Date.now();
     const state = {
       schemaVersion: 1,
       eventId: config.id,
-      participantLabel: name,
-      order: shuffle(config.ghosts.map((ghost) => ghost.id)),
+      participantLabel: testMode ? "Candy Forest Test Team" : name,
+      testMode,
+      order: testMode ? config.ghosts.map((ghost) => ghost.id) : shuffle(config.ghosts.map((ghost) => ghost.id)),
       found: [],
       nextIndex: 0,
       startedAt: now,
       updatedAt: now,
-      expiresAt: now + config.huntDurationHours * 60 * 60 * 1000,
+      expiresAt: now + (testMode ? config.testHuntDurationHours : config.huntDurationHours) * 60 * 60 * 1000,
       completedAt: null
     };
     saveState(state);
     renderTarget(state);
-    setFeedback("順番が決まりました。最初のゴーストをさがしてください。 / Your order is ready. Find your first ghost.", "is-muted");
+    setFeedback(testMode
+      ? "テストモード：赤から順番にQRをスキャンできます。 / Test mode: scan the QR codes in color order, starting with red."
+      : "順番が決まりました。最初のゴーストをさがしてください。 / Your order is ready. Find your first ghost.", "is-muted");
   };
 
   const processGhostScan = () => {
@@ -407,7 +448,7 @@
     saveState(state);
     playReward();
     renderTarget(state);
-    if (state.completedAt) setFeedback("12ひき全部見つけました！完了画面をブライアンに見せてください。 / All 12 ghosts found! Show your completion screen to Bryan.");
+    if (state.completedAt) setFeedback(`${config.ghosts.length}ひき全部見つけました！完了画面をブライアンに見せてください。 / All ${config.ghosts.length} ghosts found! Show your completion screen to Bryan.`);
     else setFeedback(`${scanned.label}を発見！つぎへ進みましょう。 / ${scanned.label} found! Keep going.`, "");
   };
 
@@ -477,7 +518,30 @@
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
   $$('[data-go-tab]').forEach((button) => button.addEventListener("click", () => { selectTab(button.dataset.goTab); window.scrollTo({ top: 0, behavior: "smooth" }); }));
   $("#start-hunt").addEventListener("click", startHunt);
-  $("#participant-name").addEventListener("input", (event) => event.target.setCustomValidity(""));
+  $("#participant-name").addEventListener("input", (event) => {
+    event.target.setCustomValidity("");
+    updateStatus();
+  });
+  $("#use-scan-url").addEventListener("click", () => {
+    const input = $("#scan-url");
+    try {
+      const url = new URL(input.value.trim(), window.location.href);
+      if (url.searchParams.get("event") !== config.id || !url.searchParams.get("ghost")) throw new Error("invalid");
+      window.location.href = url.href;
+    } catch (error) {
+      setFeedback("QRのURLを確認してください。 / Check the scanned QR URL.", "is-wrong");
+    }
+  });
+  $("#restart-test-hunt").addEventListener("click", () => {
+    try { localStorage.removeItem(storageKey); } catch (error) { /* best effort */ }
+    $("#participant-name").value = config.testCode;
+    $("#hunt-complete").hidden = true;
+    $("#hunt-start").hidden = false;
+    $("#hunt-active").hidden = true;
+    updateStatus();
+    setFeedback("テストをリセットしました。 / Test reset. Press Start the hunt.", "is-muted");
+  });
+  renderQrGallery();
   window.setInterval(updateStatus, 1000);
   updateStatus();
   const hashTab = window.location.hash.slice(1);
