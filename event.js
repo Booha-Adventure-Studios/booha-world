@@ -186,24 +186,26 @@
 
   const ghostById = (id) => config.ghosts.find((ghost) => ghost.id === id);
 
+  // Fallback tints (used if the browser cannot recolor the ghost image).
+  const GHOST_FILTERS = {
+    red: "none",
+    pink: "hue-rotate(330deg) saturate(1.15)",
+    yellow: "hue-rotate(58deg) saturate(1.35)",
+    blue: "hue-rotate(170deg) saturate(1.2)",
+    "light-blue": "hue-rotate(185deg) saturate(.85) brightness(1.18)",
+    green: "hue-rotate(112deg) saturate(1.1)",
+    "light-green": "hue-rotate(92deg) saturate(.95) brightness(1.1)",
+    black: "grayscale(1) brightness(.22)",
+    white: "grayscale(1) brightness(2.45)",
+    orange: "hue-rotate(24deg) saturate(1.18)",
+    purple: "hue-rotate(275deg) saturate(.95)",
+    brown: "hue-rotate(6deg) saturate(.68) brightness(.68)"
+  };
+
   const renderQrGallery = () => {
     const gallery = $("#qr-gallery");
     if (!gallery) return;
     gallery.innerHTML = "";
-    const filters = {
-      red: "none",
-      pink: "hue-rotate(330deg) saturate(1.15)",
-      yellow: "hue-rotate(58deg) saturate(1.35)",
-      blue: "hue-rotate(170deg) saturate(1.2)",
-      "light-blue": "hue-rotate(185deg) saturate(.85) brightness(1.18)",
-      green: "hue-rotate(112deg) saturate(1.1)",
-      "light-green": "hue-rotate(92deg) saturate(.95) brightness(1.1)",
-      black: "grayscale(1) brightness(.22)",
-      white: "grayscale(1) brightness(2.45)",
-      orange: "hue-rotate(24deg) saturate(1.18)",
-      purple: "hue-rotate(275deg) saturate(.95)",
-      brown: "hue-rotate(6deg) saturate(.68) brightness(.68)"
-    };
     const base = "assets/events/ghosts/booha-ghost-red.png";
     config.ghosts.forEach((ghost, index) => {
       const url = `${window.location.origin}${window.location.pathname}?event=${encodeURIComponent(config.id)}&ghost=${encodeURIComponent(ghost.id)}`;
@@ -211,7 +213,7 @@
       card.className = "qr-card";
       card.innerHTML = `
         <div class="qr-card-top"><span class="qr-number">${String(index + 1).padStart(2, "0")}</span><strong>${ghost.jp}</strong><span>${ghost.label}</span></div>
-        <img class="qr-ghost-art" src="${base}" alt="${ghost.label} Booha Ghost picture" style="filter:${filters[ghost.id] || "none"}">
+        <img class="qr-ghost-art" src="${base}" alt="${ghost.label} Booha Ghost picture" style="filter:${GHOST_FILTERS[ghost.id] || "none"}">
         <img class="qr-code" src="assets/events/qr/candy-forest/ghost-${ghost.id}.svg" alt="QR code for the ${ghost.label} Booha Ghost">
         <code>${url.replace(window.location.origin, "")}</code>`;
       gallery.append(card);
@@ -233,72 +235,428 @@
     row.setAttribute("aria-label", `${state?.nextIndex || 0} of ${config.ghosts.length} ghosts found`);
   };
 
-  const playReward = () => {
-    try {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      const context = new AudioContext();
-      const now = context.currentTime;
-      [523.25, 659.25, 783.99].forEach((frequency, index) => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
-        oscillator.type = "sine";
-        oscillator.frequency.value = frequency;
-        gain.gain.setValueAtTime(0.0001, now + index * .08);
-        gain.gain.exponentialRampToValueAtTime(.12, now + index * .08 + .02);
-        gain.gain.exponentialRampToValueAtTime(.0001, now + index * .08 + .28);
-        oscillator.connect(gain).connect(context.destination);
-        oscillator.start(now + index * .08);
-        oscillator.stop(now + index * .08 + .3);
-      });
-    } catch (error) { /* Sound is optional. */ }
-  };
-
   const setFeedback = (message, kind = "") => {
-    const feedback = $("#hunt-active").hidden ? $("#prestart-feedback") : $("#scan-feedback");
+    const feedback = $("#prestart-feedback");
+    if (!feedback) return;
     feedback.textContent = message;
     feedback.className = `feedback ${kind}`.trim();
   };
 
-  const openCandyFullscreen = () => {
-    document.body.classList.add("candy-fullscreen");
-    $("#hunt-start").hidden = true;
-    $("#hunt-welcome").hidden = false;
-    $("#hunt-active").hidden = true;
-    $("#hunt-complete").hidden = true;
+  /* ==========================================================
+     CANDY FOREST LIVE HUNT — full-screen game
+     ========================================================== */
+  const TEST_TEAM_NAME = "テストチーム";
+  const GHOST_TOTAL = config.ghosts.length;
+  const POP = ["#ff5fa2", "#ffd23f", "#3ec1ff", "#7cdf64", "#b07cff", "#ff8a3d", "#ffffff"];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, reducedMotion ? Math.min(ms, 120) : ms));
+  const game = $("#booha-game");
+  const sprites = {};
+  let spriteFallback = false;
+  let spritesReady = null;
+  let gameState = null;
+  let busy = false;
+  let wakeLock = null;
+
+  const ghostJP = (ghost) => ghost.jp || ghost.kana || ghost.label;
+  const ghostEN = (ghost) => ghost.label;
+
+  /* colors */
+  const hexToRgb = (hex) => [1, 3, 5].map((index) => parseInt(hex.slice(index, index + 2), 16));
+  const rgbToHex = (rgb) => "#" + rgb.map((value) => Math.round(Math.max(0, Math.min(255, value))).toString(16).padStart(2, "0")).join("");
+  const mixColor = (a, b, t) => { const from = hexToRgb(a); const to = hexToRgb(b); return rgbToHex(from.map((value, index) => value + (to[index] - value) * t)); };
+  const sceneColors = (ghost) => {
+    if (ghost.id === "white") return { bg: "#ffd3e8", ray: "#ffbddc" };
+    if (ghost.id === "black") return { bg: "#9f8fd6", ray: "#8c7bc9" };
+    if (ghost.id === "yellow") return { bg: "#ffb8d6", ray: "#ffa3c9" };
+    if (ghost.id === "light-green") return { bg: "#bfe3ff", ray: "#a9d8ff" };
+    return { bg: mixColor(ghost.color, "#ffffff", .62), ray: mixColor(ghost.color, "#ffffff", .48) };
+  };
+  const applyScene = (element, ghost) => {
+    const scene = sceneColors(ghost);
+    element.style.setProperty("--c", ghost.color);
+    element.style.setProperty("--bg", scene.bg);
+    element.style.setProperty("--ray", scene.ray);
   };
 
-  const renderTarget = (state) => {
-    const complete = state.nextIndex >= config.ghosts.length;
-    document.body.classList.add("candy-fullscreen");
-    $("#hunt-start").hidden = true;
-    $("#hunt-welcome").hidden = true;
-    $("#hunt-active").hidden = complete;
-    $("#hunt-complete").hidden = !complete;
-    $("#restart-test-hunt").hidden = !state.testMode;
-    $("#reset-test-active").hidden = !state.testMode;
-    $("#participant-label").textContent = state.participantLabel;
-    $("#progress-count").textContent = `${state.nextIndex} / ${config.ghosts.length}`;
-    $("#completion-count").textContent = `${config.ghosts.length} / ${config.ghosts.length}`;
-    renderProgress(state);
+  /* Recolor the red Booha render into every configured color (no extra image files). */
+  const buildSprites = () => {
+    if (spritesReady) return spritesReady;
+    spritesReady = new Promise((resolve) => {
+      const base = "assets/events/ghosts/booha-ghost-red.png";
+      const useFallback = () => { spriteFallback = true; config.ghosts.forEach((ghost) => { sprites[ghost.id] = base; }); resolve(); };
+      const image = new Image();
+      image.onerror = useFallback;
+      image.onload = () => {
+        try {
+          const scale = Math.min(1, 380 / Math.max(image.naturalWidth, image.naturalHeight));
+          const width = Math.round(image.naturalWidth * scale);
+          const height = Math.round(image.naturalHeight * scale);
+          const canvas = document.createElement("canvas");
+          canvas.width = width; canvas.height = height;
+          const context = canvas.getContext("2d", { willReadFrequently: true });
+          context.drawImage(image, 0, 0, width, height);
+          const source = context.getImageData(0, 0, width, height);
+          // Trim the transparent margin so the ghost fills its box.
+          let minX = width, minY = height, maxX = 0, maxY = 0;
+          for (let y = 0; y < height; y += 1) for (let x = 0; x < width; x += 1) {
+            if (source.data[(y * width + x) * 4 + 3] > 24) { if (x < minX) minX = x; if (x > maxX) maxX = x; if (y < minY) minY = y; if (y > maxY) maxY = y; }
+          }
+          if (maxX <= minX || maxY <= minY) { minX = 0; minY = 0; maxX = width - 1; maxY = height - 1; }
+          const cropW = maxX - minX + 1, cropH = maxY - minY + 1;
+          const out = document.createElement("canvas");
+          out.width = cropW; out.height = cropH;
+          const outContext = out.getContext("2d");
+          config.ghosts.forEach((ghost) => {
+            const tinted = context.createImageData(width, height);
+            const s = source.data, d = tinted.data;
+            const [tr, tg, tb] = hexToRgb(ghost.color);
+            const lift = ghost.id === "black" ? 1.5 : 1;
+            for (let i = 0; i < s.length; i += 4) {
+              const r = s[i], g = s[i + 1], b = s[i + 2];
+              d[i + 3] = s[i + 3];
+              if (r - Math.max(g, b) > 70) {
+                const shade = Math.pow(r / 242, 1.6) * lift;
+                const highlight = Math.min(1, Math.max(0, (Math.min(g, b) - 18) / 120));
+                let R = tr * shade, G = tg * shade, B = tb * shade;
+                R += (255 - R) * highlight * .85; G += (255 - G) * highlight * .85; B += (255 - B) * highlight * .85;
+                d[i] = R; d[i + 1] = G; d[i + 2] = B;
+              } else { d[i] = r; d[i + 1] = g; d[i + 2] = b; }
+            }
+            context.putImageData(tinted, 0, 0);
+            outContext.clearRect(0, 0, cropW, cropH);
+            outContext.drawImage(canvas, minX, minY, cropW, cropH, 0, 0, cropW, cropH);
+            sprites[ghost.id] = out.toDataURL("image/png");
+          });
+          resolve();
+        } catch (error) { useFallback(); }
+      };
+      image.src = base;
+    });
+    return spritesReady;
+  };
+  const tintFor = (id) => (spriteFallback && GHOST_FILTERS[id] && GHOST_FILTERS[id] !== "none") ? GHOST_FILTERS[id] : "saturate(1)";
+  const setGhostImage = (image, id) => {
+    image.src = sprites[id];
+    image.style.setProperty("--tint", tintFor(id));
+  };
+  const ghostImageTag = (id, className = "") => `<img class="${className}" src="${sprites[id]}" alt="" style="--tint:${tintFor(id)}">`;
 
-    if (complete) {
-      $("#completion-copy").textContent = config.candyReward;
-      $("#completion-name").textContent = state.participantLabel;
-      $("#completion-time").textContent = `Completed ${formatDateTime(state.completedAt)}`;
-      return;
+  /* sound: Web Audio only, no files. The first tap unlocks it. */
+  let audioContext = null;
+  let soundOn = true;
+  try { soundOn = localStorage.getItem("booha:sound") !== "off"; } catch (error) { /* default on */ }
+  const audio = () => {
+    if (!soundOn) return null;
+    try {
+      audioContext = audioContext || new (window.AudioContext || window.webkitAudioContext)();
+      if (audioContext.state === "suspended") audioContext.resume();
+      return audioContext;
+    } catch (error) { return null; }
+  };
+  const tone = (frequency, offset, length, type = "sine", volume = .14, slideTo) => {
+    const context = audio(); if (!context) return;
+    const time = context.currentTime + offset;
+    const oscillator = context.createOscillator(); const gain = context.createGain();
+    oscillator.type = type; oscillator.frequency.setValueAtTime(frequency, time);
+    if (slideTo) oscillator.frequency.exponentialRampToValueAtTime(slideTo, time + length);
+    gain.gain.setValueAtTime(.0001, time); gain.gain.exponentialRampToValueAtTime(volume, time + .015); gain.gain.exponentialRampToValueAtTime(.0001, time + length);
+    oscillator.connect(gain).connect(context.destination); oscillator.start(time); oscillator.stop(time + length + .05);
+  };
+  const noise = (offset, length, volume = .12) => {
+    const context = audio(); if (!context) return;
+    const size = Math.floor(context.sampleRate * length);
+    const buffer = context.createBuffer(1, size, context.sampleRate); const channel = buffer.getChannelData(0);
+    for (let i = 0; i < size; i += 1) channel[i] = (Math.random() * 2 - 1) * (1 - i / size);
+    const source = context.createBufferSource(); const gain = context.createGain(); const filter = context.createBiquadFilter();
+    filter.type = "bandpass"; filter.frequency.value = 900; source.buffer = buffer; gain.gain.value = volume;
+    source.connect(filter).connect(gain).connect(context.destination); source.start(context.currentTime + offset);
+  };
+  const SFX = {
+    tap: () => tone(880, 0, .08, "triangle", .08),
+    boo: () => { tone(300, 0, .25, "square", .05, 700); tone(600, .05, .2, "sine", .06, 1200); },
+    catch: () => { noise(0, .18, .2); [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, .12 + i * .07, .32, "triangle", .13)); [2093, 2637, 3136].forEach((f, i) => tone(f, .55 + i * .06, .25, "sine", .05)); },
+    drum: () => { for (let i = 0; i < 9; i += 1) noise(i * .07, .05, .06 + i * .012); tone(392, .68, .12, "square", .06); tone(784, .74, .4, "triangle", .14); },
+    wrong: () => { tone(420, 0, .45, "sawtooth", .07, 90); tone(160, .05, .35, "square", .04, 70); },
+    giggle: () => { [900, 1100, 950, 1200].forEach((f, i) => tone(f, .5 + i * .09, .07, "square", .03)); },
+    fanfare: () => { const notes = [523, 523, 523, 659, 784, 659, 784, 1047]; const times = [0, .12, .24, .36, .56, .76, .88, 1.05]; notes.forEach((f, i) => { const len = i === 7 ? .8 : .16; tone(f, times[i], len, "square", .06); tone(f * 2, times[i], len, "triangle", .06); }); }
+  };
+  const buzz = (pattern) => { try { if (navigator.vibrate && navigator.userActivation?.hasBeenActive !== false) navigator.vibrate(pattern); } catch (error) { /* optional */ } };
+  const renderSoundButton = () => {
+    const button = $("#g-sound"); if (!button) return;
+    button.innerHTML = soundOn
+      ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>'
+      : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
+    button.setAttribute("aria-pressed", String(soundOn));
+  };
+  const requestWakeLock = async () => {
+    try { if (navigator.wakeLock && !wakeLock) { wakeLock = await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release", () => { wakeLock = null; }); } } catch (error) { /* optional */ }
+  };
+
+  /* particles: ambient sparkles and confetti */
+  const fxCanvases = new Map();
+  const getFx = (canvas) => { if (!fxCanvases.has(canvas)) fxCanvases.set(canvas, { canvas, context: canvas.getContext("2d"), parts: [], ambient: canvas.hasAttribute("data-ambient"), dpr: 1 }); return fxCanvases.get(canvas); };
+  const sizeFx = (fx) => {
+    const rect = fx.canvas.getBoundingClientRect(); const dpr = Math.min(2, window.devicePixelRatio || 1);
+    if (fx.canvas.width !== Math.round(rect.width * dpr) || fx.canvas.height !== Math.round(rect.height * dpr)) { fx.canvas.width = Math.round(rect.width * dpr); fx.canvas.height = Math.round(rect.height * dpr); }
+    fx.dpr = dpr; fx.w = rect.width; fx.h = rect.height;
+  };
+  const drawStar = (context, x, y, radius, rotation) => {
+    context.save(); context.translate(x, y); context.rotate(rotation); context.beginPath();
+    for (let i = 0; i < 8; i += 1) { const r = i % 2 ? radius * .38 : radius; const a = i * Math.PI / 4; context.lineTo(Math.cos(a) * r, Math.sin(a) * r); }
+    context.closePath(); context.fill(); context.restore();
+  };
+  let fxFrame = 0;
+  const runFx = () => { if (!fxFrame) fxFrame = requestAnimationFrame(tickFx); };
+  const burst = (canvas, x, y, colors, count = 90, power = 11) => {
+    if (!canvas) return; const fx = getFx(canvas); sizeFx(fx); if (reducedMotion) count = Math.min(count, 20);
+    for (let i = 0; i < count; i += 1) {
+      const angle = Math.random() * Math.PI * 2; const speed = power * (.35 + Math.random());
+      fx.parts.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed - 4, g: .32, life: 1, decay: .006 + Math.random() * .01, size: 5 + Math.random() * 8, rot: Math.random() * 6, vr: (Math.random() - .5) * .4, color: colors[i % colors.length], shape: ["rect", "circle", "star"][i % 3] });
     }
+    runFx();
+  };
+  const confettiRain = (canvas, colors, count = 70) => {
+    if (!canvas || reducedMotion) return; const fx = getFx(canvas); sizeFx(fx);
+    for (let i = 0; i < count; i += 1) fx.parts.push({ x: Math.random() * fx.w, y: -20 - Math.random() * fx.h * .6, vx: (Math.random() - .5) * 2, vy: 2 + Math.random() * 3, g: .05, life: 1, decay: .003, size: 6 + Math.random() * 7, rot: Math.random() * 6, vr: (Math.random() - .5) * .3, color: colors[i % colors.length], shape: i % 2 ? "rect" : "star" });
+    runFx();
+  };
+  const tickFx = (time) => {
+    fxFrame = 0; let alive = false;
+    if (game.hidden) return;
+    fxCanvases.forEach((fx) => {
+      if (fx.canvas.closest("[hidden]")) { fx.parts = []; return; }
+      sizeFx(fx); const context = fx.context;
+      context.setTransform(fx.dpr, 0, 0, fx.dpr, 0, 0); context.clearRect(0, 0, fx.w, fx.h);
+      if (fx.ambient && !reducedMotion) {
+        if (!fx.amb) fx.amb = Array.from({ length: 26 }, () => ({ x: Math.random(), y: Math.random(), r: 3 + Math.random() * 7, s: .2 + Math.random() * .5, ph: Math.random() * 6, c: POP[Math.floor(Math.random() * 6)] }));
+        fx.amb.forEach((a) => {
+          a.y -= a.s / 1000; if (a.y < -.05) { a.y = 1.05; a.x = Math.random(); }
+          context.globalAlpha = .55 + .45 * Math.sin(time / 500 + a.ph); context.fillStyle = a.c;
+          drawStar(context, a.x * fx.w + Math.sin(time / 1200 + a.ph) * 12, a.y * fx.h, a.r * (.7 + .3 * Math.sin(time / 300 + a.ph)), time / 2000 + a.ph);
+        });
+        context.globalAlpha = 1; alive = true;
+      }
+      fx.parts = fx.parts.filter((p) => p.life > 0 && p.y < fx.h + 40);
+      fx.parts.forEach((p) => {
+        p.vx *= .985; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life -= p.decay;
+        context.globalAlpha = Math.max(0, Math.min(1, p.life * 1.5)); context.fillStyle = p.color; context.strokeStyle = "#251034"; context.lineWidth = 1.5;
+        if (p.shape === "star") drawStar(context, p.x, p.y, p.size, p.rot);
+        else if (p.shape === "circle") { context.beginPath(); context.arc(p.x, p.y, p.size / 2, 0, 7); context.fill(); context.stroke(); }
+        else { context.save(); context.translate(p.x, p.y); context.rotate(p.rot); context.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); context.strokeRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); context.restore(); }
+      });
+      context.globalAlpha = 1; if (fx.parts.length) alive = true;
+    });
+    if (alive) runFx();
+  };
+  $$("#booha-game canvas.fx").forEach((canvas) => getFx(canvas));
 
-    const target = ghostById(state.order[state.nextIndex]);
-    $("#target-label-jp").innerHTML = target.jp;
-    $("#target-label-en").textContent = target.label;
-    const targetSwatch = $("#target-swatch");
-    targetSwatch.style.background = target.color;
-    targetSwatch.style.setProperty("--target-color", target.color);
-    targetSwatch.style.borderColor = target.id === "black" ? "#fff" : "rgba(255,255,255,.5)";
-    targetSwatch.style.boxShadow = target.id === "black" ? "0 0 0 3px rgba(255,255,255,.24), 0 0 22px rgba(255,255,255,.3)" : `0 0 22px ${target.color}`;
-    $("#target-instruction-jp").textContent = `森で${target.jp.replace(/<[^>]*>/g, "")}ゴーストを見つけて、QRコードをスキャンしてください。`;
-    $("#target-instruction-en").textContent = `Find the ${target.label.toLowerCase()} ghost in the forest, then scan its QR code.`;
+  /* game screens */
+  const G_SCREENS = ["g-rules", "g-needstart", "g-hunt", "g-complete"];
+  const G_OVERLAYS = ["g-catch", "g-reveal", "g-wrong"];
+  const showScreen = (id) => { G_SCREENS.forEach((screen) => { $("#" + screen).hidden = screen !== id; }); runFx(); };
+  const showOverlay = (id) => { G_OVERLAYS.forEach((overlay) => { $("#" + overlay).hidden = overlay !== id; }); runFx(); };
+  const closeSheets = () => { $("#g-demo-sheet").hidden = true; $("#g-help-sheet").hidden = true; };
+  const gameToast = (html) => { const toast = document.createElement("div"); toast.className = "g-toast"; toast.setAttribute("role", "status"); toast.innerHTML = html; game.appendChild(toast); setTimeout(() => toast.remove(), 2800); };
+  const waitForTap = (element, ms) => new Promise((resolve) => {
+    let done = false; let timer = 0;
+    const finish = () => { if (done) return; done = true; element.removeEventListener("pointerdown", finish); clearTimeout(timer); resolve(); };
+    element.addEventListener("pointerdown", finish);
+    if (ms) timer = setTimeout(finish, ms);
+  });
+  const currentTarget = () => ghostById(gameState.order[gameState.found.length]);
+  const formatClock = (timestamp, withSeconds) => new Intl.DateTimeFormat("ja-JP", { timeZone: config.timeZone, hour: "2-digit", minute: "2-digit", second: withSeconds ? "2-digit" : undefined, hour12: false }).format(new Date(timestamp));
+  const applyTestOnly = () => { $$("#booha-game [data-test-only]").forEach((element) => { element.hidden = !gameState?.testMode; }); };
+
+  const openGame = async () => {
+    document.body.classList.add("game-open");
+    game.hidden = false;
+    renderSoundButton();
+    await buildSprites();
+    const loading = $("#g-loading"); if (loading) loading.hidden = true;
+    requestWakeLock();
+  };
+  const closeGame = () => {
+    game.hidden = true;
+    document.body.classList.remove("game-open");
+    closeSheets(); showOverlay(null);
+    clearInterval(closeGame.completeTimer);
+    try { wakeLock?.release(); } catch (error) { /* ignore */ }
+    selectTab("candy");
+    const shell = $(".hunt-shell"); if (shell) shell.scrollIntoView({ block: "center" });
+  };
+
+  const renderHunt = () => {
+    const target = currentTarget(); const hunt = $("#g-hunt");
+    applyScene(hunt, target);
+    applyTestOnly();
+    $("#g-team").textContent = gameState.participantLabel;
+    $("#g-count").textContent = gameState.found.length;
+    $("#g-target-name").innerHTML = ghostJP(target);
+    $("#g-target-en").textContent = ghostEN(target);
+    setGhostImage($("#g-hero"), target.id);
+    $("#g-hero").alt = `${target.kana || target.label}のゴースト / ${target.label} ghost`;
+    $("#g-find").innerHTML = `<span>${ghostJP(target)}のゴーストを<ruby>森<rt>もり</rt></ruby>でさがして、QRコードを<ruby>読<rt>よ</rt></ruby>みとろう！</span><span class="en">Find the ${target.label.toLowerCase()} ghost in the forest and scan its QR code.</span>`;
+    const slots = $("#g-slots"); slots.innerHTML = "";
+    for (let i = 0; i < GHOST_TOTAL; i += 1) {
+      const id = gameState.found[i];
+      const slot = document.createElement("div");
+      slot.className = `slot ${id ? "full" : "empty"}`; slot.dataset.index = i;
+      const image = document.createElement("img"); image.alt = id ? ghostById(id).label : "";
+      setGhostImage(image, id || "white");
+      slot.appendChild(image); slots.appendChild(slot);
+    }
+  };
+
+  const showReveal = async () => {
+    const next = currentTarget(); const reveal = $("#g-reveal");
+    reveal.style.setProperty("--c", next.color); reveal.classList.remove("open");
+    setGhostImage($("#g-reveal-ghost"), next.id);
+    $("#g-reveal-name").innerHTML = ghostJP(next); $("#g-reveal-name").style.setProperty("--c", next.color);
+    $("#g-reveal-en").textContent = ghostEN(next);
+    showOverlay("g-reveal"); SFX.drum();
+    await sleep(750); reveal.classList.add("open"); buzz(30);
+    await waitForTap(reveal, 4500);
+    showOverlay(null); renderHunt(); showScreen("g-hunt");
+  };
+
+  const renderComplete = () => {
+    applyTestOnly();
+    $("#g-proof-team").textContent = gameState.participantLabel;
+    $("#g-proof-start").textContent = formatClock(gameState.startedAt);
+    $("#g-proof-end").textContent = formatClock(gameState.completedAt);
+    const parade = $("#g-parade"); parade.innerHTML = "";
+    const perRow = Math.ceil(GHOST_TOTAL / 2);
+    gameState.found.forEach((id, i) => {
+      const image = document.createElement("img"); image.className = "ghost-img thin"; image.alt = "";
+      setGhostImage(image, id);
+      const row = i < perRow ? 0 : 1; const col = i % perRow;
+      image.style.left = `calc(${(col + .5 + row * .5) * (100 / (perRow + .5))}% - 29px)`;
+      image.style.top = `${row * 54}px`; image.style.animationDelay = `${i * -.1}s`;
+      parade.appendChild(image);
+    });
+    const tickNow = () => { if (!game.hidden && !$("#g-complete").hidden) $("#g-proof-now").textContent = formatClock(Date.now(), true); };
+    tickNow(); clearInterval(closeGame.completeTimer); closeGame.completeTimer = setInterval(tickNow, 1000);
+  };
+  const showComplete = (celebrate) => {
+    renderComplete(); showScreen("g-complete");
+    const canvas = $("#g-complete-fx");
+    if (celebrate) {
+      SFX.fanfare(); buzz([60, 60, 60, 60, 200]);
+      const rect = canvas.getBoundingClientRect();
+      burst(canvas, rect.width / 2, rect.height * .55, POP, 140, 14);
+      setTimeout(() => confettiRain(canvas, POP, 90), 500);
+    }
+    clearInterval(showComplete.rainTimer);
+    showComplete.rainTimer = setInterval(() => { if (!game.hidden && !$("#g-complete").hidden) confettiRain(canvas, POP, 25); }, 4000);
+  };
+
+  const doCatch = async (ghost) => {
+    const overlay = $("#g-catch"); applyScene(overlay, ghost); overlay.classList.remove("caught");
+    setGhostImage($("#g-catch-ghost"), ghost.id);
+    $("#g-stamp").classList.remove("show"); $("#g-catch-hint").hidden = false; $("#g-catch-bubble").hidden = false;
+    showOverlay("g-catch"); SFX.boo();
+    // This tap is the user gesture that lets sound and vibration play after a QR page load.
+    await waitForTap(overlay);
+    $("#g-catch-hint").hidden = true; $("#g-catch-bubble").hidden = true;
+    overlay.classList.add("caught"); SFX.catch(); buzz([40, 30, 80]);
+    const canvas = $("#g-catch-fx"); const rect = canvas.getBoundingClientRect();
+    burst(canvas, rect.width / 2, rect.height / 2, [ghost.color, ghost.color, ...POP], 130, 13);
+    await sleep(260); $("#g-stamp").classList.add("show");
+    await sleep(1100);
+
+    gameState.found.push(ghost.id);
+    gameState.nextIndex = gameState.found.length;
+    const finished = gameState.nextIndex >= GHOST_TOTAL;
+    if (finished) gameState.completedAt = Date.now();
+    saveState(gameState);
+
+    if (finished) { showOverlay(null); showComplete(true); return; }
+    renderHunt(); showScreen("g-hunt");
+    const slot = $(`#g-slots .slot[data-index="${gameState.found.length - 1}"]`);
+    if (slot && !reducedMotion) {
+      const source = $("#g-catch-ghost"); const from = source.getBoundingClientRect(); const to = slot.getBoundingClientRect();
+      const flyer = source.cloneNode();
+      Object.assign(flyer.style, { position: "fixed", left: `${from.left}px`, top: `${from.top}px`, width: `${from.width}px`, zIndex: 30, animation: "none", margin: 0 });
+      game.appendChild(flyer); overlay.hidden = true;
+      try {
+        await flyer.animate([
+          { transform: "translate(0, 0) scale(1) rotate(0deg)" },
+          { transform: `translate(${to.left + to.width / 2 - from.left - from.width / 2}px, ${to.top + to.height / 2 - from.top - from.height / 2}px) scale(${to.width / from.width}) rotate(360deg)` }
+        ], { duration: 650, easing: "cubic-bezier(.5,-0.3,.6,1)" }).finished;
+      } catch (error) { /* ignore */ }
+      flyer.remove(); slot.classList.add("pop"); SFX.tap();
+      burst($("#g-hunt canvas.fx"), to.left + to.width / 2, to.top + to.height / 2, [ghost.color, "#ffffff", "#ffd23f"], 24, 5);
+      await sleep(450);
+    }
+    await showReveal();
+  };
+
+  const WRONG_LINES = [["ちがうよ〜！", "Nope, not me!"], ["ざんねん！", "Not this one!"], ["ハズレ〜！", "Wrong ghost!"], ["ぼくじゃないよ！", "It's not me!"]];
+  const doWrong = async (ghost, alreadyFound) => {
+    const overlay = $("#g-wrong"); applyScene(overlay, ghost); overlay.classList.remove("leave");
+    const [jp, en] = alreadyFound ? ["もうつかまえたよ！", "You already caught me!"] : WRONG_LINES[Math.floor(Math.random() * WRONG_LINES.length)];
+    $("#g-wrong-bubble").innerHTML = `${jp}<span class="en">${en}</span>`;
+    setGhostImage($("#g-wrong-ghost"), ghost.id);
+    const target = currentTarget();
+    $("#g-wrong-target").innerHTML = `${ghostImageTag(target.id, "ghost-img thin")}<span>いまさがすのは ${ghostJP(target)}<span class="en">You're looking for ${target.label}</span></span>`;
+    showOverlay("g-wrong"); SFX.wrong(); SFX.giggle(); buzz([20, 40, 20]);
+    await waitForTap(overlay, 4000);
+    overlay.classList.add("leave"); await sleep(450); showOverlay(null);
+  };
+
+  const scanGhost = async (id) => {
+    const ghost = ghostById(id);
+    if (!gameState || busy) return;
+    if (!ghost) { gameToast("このQRコードはつかえません<br><span style='opacity:.8'>This QR code isn't part of the hunt.</span>"); return; }
+    if (gameState.completedAt) { showComplete(false); return; }
+    busy = true; closeSheets();
+    try {
+      if (gameState.found.includes(ghost.id)) await doWrong(ghost, true);
+      else if (ghost.id === currentTarget().id) await doCatch(ghost);
+      else await doWrong(ghost, false);
+    } finally { busy = false; }
+  };
+
+  /* Candy Forest page: name entry before a hunt, Continue after */
+  const renderCandyPanel = (state) => {
+    const startView = $("#hunt-start"); const resumeView = $("#hunt-resume");
+    if (!startView || !resumeView) return;
+    startView.hidden = Boolean(state);
+    resumeView.hidden = !state;
+    if (!state) return;
+    const complete = Boolean(state.completedAt);
+    $("#resume-label-jp").textContent = complete ? "コンプリート！" : "ハントのとちゅうです";
+    $("#resume-label-en").textContent = complete ? "Hunt complete!" : "Your hunt is in progress";
+    $("#resume-count").textContent = `${state.found.length} / ${GHOST_TOTAL}`;
+    $("#resume-team").textContent = state.participantLabel;
+    $("#resume-hunt-jp").textContent = complete ? "完了画面を見る" : "つづける";
+    $("#resume-hunt-en").textContent = complete ? "Show the completion screen" : "Continue the hunt";
+    $("#resume-reset").hidden = !state.testMode;
+  };
+
+  const startButtonCountdown = (milliseconds) => {
+    const total = Math.max(0, Math.floor(milliseconds / 1000));
+    const days = Math.floor(total / 86400); const hours = Math.floor((total % 86400) / 3600);
+    const minutes = Math.floor((total % 3600) / 60); const seconds = total % 60;
+    if (days > 0) return { jp: `${days}日${hours}時間`, en: `${days}d ${hours}h` };
+    const clock = `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    return { jp: clock, en: clock };
+  };
+  const renderStartButton = (now) => {
+    const button = $("#start-hunt"); if (!button) return;
+    const testMode = isTestCode($("#participant-name")?.value);
+    const open = now >= startsAt && now < latestStartAt;
+    let jp, en;
+    if (testMode) { jp = "テストをはじめる"; en = "Start test"; }
+    else if (now < startsAt) { const left = startButtonCountdown(startsAt - now); jp = `あと <span class="start-time">${left.jp}</span> でスタート`; en = `Opens at ${formatTime(startsAt)} · <span class="start-time">${left.en}</span>`; }
+    else if (open) { jp = "スタート！"; en = "Start the hunt"; }
+    else { jp = "受付は終了しました"; en = "Check-in has closed"; }
+    button.disabled = !testMode && !open;
+    button.classList.toggle("is-ready", testMode || open);
+    button.classList.toggle("is-test", testMode);
+    $("#start-hunt-jp").innerHTML = jp;
+    $("#start-hunt-en").innerHTML = en;
   };
 
   const updateStatus = () => {
@@ -389,39 +747,30 @@
       $("#candy-status-copy-en").textContent = "The Zombie Scavenger Hunt starts at 6:00 pm — check in by 6:00 pm.";
     }
 
-    const testModeRequested = isTestCode($("#participant-name")?.value);
-    startButton.disabled = !testModeRequested && !(now >= startsAt && now < latestStartAt);
+    renderStartButton(now);
     const state = readState();
-    if (state) renderTarget(state);
-    else renderProgress(null);
+    renderCandyPanel(state);
+    renderProgress(state);
   };
 
-  const startHunt = () => {
+  const startHunt = async () => {
     const input = $("#participant-name");
     const name = input.value.trim();
     if (!name) {
       input.focus();
-      input.setCustomValidity("Enter a family or team name.");
+      input.setCustomValidity("チームの名前を入れてください。 / Enter a family or team name.");
       input.reportValidity();
       return;
     }
     input.setCustomValidity("");
     const testMode = isTestCode(name);
-    if (!testMode && (Date.now() < startsAt || Date.now() >= latestStartAt)) return;
-    $("#welcome-name").textContent = testMode ? "Candy Forest Test Team" : name;
-    $("#welcome-name-en").textContent = testMode ? "Candy Forest Test Team" : name;
-    openCandyFullscreen();
-  };
-
-  const beginHunt = () => {
-    const name = $("#participant-name").value.trim();
-    const testMode = isTestCode(name);
-    if (!testMode && (Date.now() < startsAt || Date.now() >= latestStartAt)) return;
     const now = Date.now();
-    const state = {
+    if (!testMode && (now < startsAt || now >= latestStartAt)) return;
+    audio(); SFX.tap();
+    gameState = {
       schemaVersion: 1,
       eventId: config.id,
-      participantLabel: testMode ? "Candy Forest Test Team" : name,
+      participantLabel: testMode ? TEST_TEAM_NAME : name,
       testMode,
       order: testMode ? config.ghosts.map((ghost) => ghost.id) : shuffle(config.ghosts.map((ghost) => ghost.id)),
       found: [],
@@ -431,58 +780,53 @@
       expiresAt: now + (testMode ? config.testHuntDurationHours : config.huntDurationHours) * 60 * 60 * 1000,
       completedAt: null
     };
-    saveState(state);
-    renderTarget(state);
-    setFeedback(testMode
-      ? "テストモード：赤から順番にQRをスキャンできます。 / Test mode: scan the QR codes in color order, starting with red."
-      : "順番が決まりました。最初のゴーストをさがしてください。 / Your order is ready. Find your first ghost.", "is-muted");
+    saveState(gameState);
+    setFeedback("");
+    updateStatus();
+    await openGame();
+    $("#g-welcome-team").textContent = `ようこそ、${gameState.participantLabel}！`;
+    applyTestOnly(); showOverlay(null); showScreen("g-rules");
+  };
+
+  const resumeHunt = async () => {
+    gameState = readState();
+    if (!gameState) { updateStatus(); return; }
+    audio();
+    await openGame();
+    applyTestOnly(); showOverlay(null);
+    if (gameState.completedAt) showComplete(false);
+    else { renderHunt(); showScreen("g-hunt"); }
   };
 
   const resetTestHunt = () => {
     try { localStorage.removeItem(storageKey); } catch (error) { /* best effort */ }
-    document.body.classList.remove("candy-fullscreen");
+    gameState = null;
+    if (!game.hidden) closeGame();
     $("#participant-name").value = config.testCode;
-    $("#hunt-start").hidden = false;
-    $("#hunt-welcome").hidden = true;
-    $("#hunt-active").hidden = true;
-    $("#hunt-complete").hidden = true;
     updateStatus();
-    setFeedback("テストをリセットしました。 / Test reset. Press Continue.", "is-muted");
+    setFeedback("テストをリセットしました。 / Test reset. Press Start.", "is-muted");
   };
 
-  const processGhostScan = () => {
+  // A QR scan opens event.html?event=…&ghost=<color>. Open the game straight away.
+  const bootFromScan = async () => {
     if (!ghostParam) return;
-    const state = readState();
-    if (!state) {
-      document.body.classList.remove("candy-fullscreen");
-      $("#panel-candy").hidden = false;
-      $("#hunt-start").hidden = false;
-      setFeedback("先に家族のハントを始めてから、もう一度スキャンしてください。 / Start your family hunt first, then scan the ghost again.", "is-muted");
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("ghost");
+      history.replaceState(null, "", `${url.pathname}${url.search}#candy`);
+    } catch (error) { /* keep URL */ }
+    gameState = readState();
+    await openGame();
+    showOverlay(null);
+    if (!gameState) {
+      setGhostImage($("#g-needstart-ghost"), ghostById(ghostParam) ? ghostParam : config.ghosts[0].id);
+      showScreen("g-needstart");
       return;
     }
-    if (state.nextIndex >= config.ghosts.length) return;
-    const scanned = ghostById(ghostParam);
-    if (!scanned) {
-      setFeedback("ブーハーの信号が見つかりません。イベントのQRコードを確認してください。 / Check the event QR code.", "is-wrong");
-      return;
-    }
-    if (state.found.includes(scanned.id)) {
-      setFeedback(`${scanned.label}はもう見つけています。今のターゲットをさがしてください。 / Already found. Keep looking for your current target.`, "is-muted");
-      return;
-    }
-    const targetId = state.order[state.nextIndex];
-    if (scanned.id !== targetId) {
-      setFeedback("まだです！今のターゲットをさがしてください。順番は失われません。 / Not yet! Keep looking for your current target.", "is-wrong");
-      return;
-    }
-    state.found.push(scanned.id);
-    state.nextIndex += 1;
-    if (state.nextIndex >= config.ghosts.length) state.completedAt = Date.now();
-    saveState(state);
-    playReward();
-    renderTarget(state);
-    if (state.completedAt) setFeedback(`${config.ghosts.length}ひき全部見つけました！完了画面をブライアンに見せてください。 / All ${config.ghosts.length} ghosts found! Show your completion screen to Bryan.`);
-    else setFeedback(`${scanned.label}を発見！つぎへ進みましょう。 / ${scanned.label} found! Keep going.`, "");
+    applyTestOnly();
+    if (gameState.completedAt) { showComplete(false); return; }
+    renderHunt(); showScreen("g-hunt");
+    scanGhost(ghostParam);
   };
 
   const selectTab = (tabName, updateHash = true) => {
@@ -551,23 +895,73 @@
   $$(".tab").forEach((tab) => tab.addEventListener("click", () => selectTab(tab.dataset.tab)));
   $$('[data-go-tab]').forEach((button) => button.addEventListener("click", () => { selectTab(button.dataset.goTab); window.scrollTo({ top: 0, behavior: "smooth" }); }));
   $("#start-hunt").addEventListener("click", startHunt);
-  $("#begin-hunt").addEventListener("click", beginHunt);
   $("#participant-name").addEventListener("input", (event) => {
     event.target.setCustomValidity("");
     updateStatus();
   });
-  $("#use-scan-url").addEventListener("click", () => {
-    const input = $("#scan-url");
+  $("#participant-name").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !$("#start-hunt").disabled) startHunt();
+  });
+  $("#resume-hunt").addEventListener("click", resumeHunt);
+  $("#resume-reset").addEventListener("click", resetTestHunt);
+  $("#g-go").addEventListener("click", async () => {
+    if (busy || !gameState) return;
+    busy = true;
+    SFX.tap(); requestWakeLock();
+    renderHunt(); $("#g-rules").hidden = true;
+    try { await showReveal(); } finally { busy = false; }
+  });
+  $("#g-needstart-go").addEventListener("click", () => { closeGame(); $("#participant-name")?.focus(); });
+  $("#g-info").addEventListener("click", closeGame);
+  $("#g-complete-info").addEventListener("click", closeGame);
+  $("#g-complete-reset").addEventListener("click", resetTestHunt);
+  $("#g-demo-reset").addEventListener("click", resetTestHunt);
+  $("#g-sound").addEventListener("click", () => {
+    soundOn = !soundOn;
+    try { localStorage.setItem("booha:sound", soundOn ? "on" : "off"); } catch (error) { /* optional */ }
+    renderSoundButton();
+    if (soundOn) SFX.tap();
+  });
+  $("#g-hero").addEventListener("click", (event) => {
+    const hero = event.currentTarget;
+    hero.classList.remove("boo"); void hero.offsetWidth; hero.classList.add("boo");
+    SFX.boo(); buzz(15);
+    const rect = hero.getBoundingClientRect();
+    burst($("#g-hunt canvas.fx"), rect.left + rect.width / 2, rect.top + rect.height * .3, [currentTarget().color, "#ffffff"], 16, 6);
+  });
+  $("#g-hero").addEventListener("animationend", (event) => { if (event.animationName === "gBoo") event.currentTarget.classList.remove("boo"); });
+  $("#g-demo").addEventListener("click", () => {
+    if (!gameState?.testMode) return;
+    const chips = $("#g-chips"); chips.innerHTML = "";
+    config.ghosts.forEach((ghost) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = `chip${gameState.found.includes(ghost.id) ? " got" : ""}`;
+      chip.innerHTML = `${ghostImageTag(ghost.id, "ghost-img thin")}<span>${ghost.kana || ghost.label}</span>`;
+      chip.setAttribute("aria-label", ghost.label);
+      chip.addEventListener("click", () => scanGhost(ghost.id));
+      chips.appendChild(chip);
+    });
+    $("#g-demo-sheet").hidden = false;
+  });
+  $("#g-demo-correct").addEventListener("click", () => { if (gameState?.testMode && !gameState.completedAt) scanGhost(currentTarget().id); });
+  $("#g-demo-close").addEventListener("click", closeSheets);
+  $("#g-help").addEventListener("click", () => { $("#g-paste-err").textContent = ""; $("#g-help-sheet").hidden = false; });
+  $("#g-help-close").addEventListener("click", closeSheets);
+  $$("#booha-game .sheet-wrap").forEach((wrap) => wrap.addEventListener("click", (event) => { if (event.target === wrap) closeSheets(); }));
+  $("#g-paste-go").addEventListener("click", () => {
     try {
-      const url = new URL(input.value.trim(), window.location.href);
-      if (url.searchParams.get("event") !== config.id || !url.searchParams.get("ghost")) throw new Error("invalid");
-      window.location.href = url.href;
+      const url = new URL($("#g-paste-url").value.trim(), window.location.href);
+      const id = url.searchParams.get("ghost");
+      if (url.searchParams.get("event") !== config.id || !ghostById(id)) throw new Error("invalid");
+      $("#g-paste-url").value = "";
+      scanGhost(id);
     } catch (error) {
-      setFeedback("QRのURLを確認してください。 / Check the scanned QR URL.", "is-wrong");
+      $("#g-paste-err").textContent = "このURLはつかえません / That link isn't a ghost QR code.";
     }
   });
-  $("#restart-test-hunt").addEventListener("click", resetTestHunt);
-  $("#reset-test-active").addEventListener("click", resetTestHunt);
+  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !game.hidden) requestWakeLock(); });
+  $$("[data-ghost-total]").forEach((element) => { element.textContent = GHOST_TOTAL; });
   renderQrGallery();
   window.setInterval(updateStatus, 1000);
   updateStatus();
@@ -578,5 +972,5 @@
     const nextTab = window.location.hash.slice(1);
     if (["info", "candy", "afternoon", "zombie"].includes(nextTab)) selectTab(nextTab, false);
   });
-  processGhostScan();
+  bootFromScan();
 })();

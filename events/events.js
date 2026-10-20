@@ -72,18 +72,18 @@ window.BOOHA_EVENTS = {
       mapUrl: "https://www.google.com/maps/search/?api=1&query=%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%E3%82%BF%E3%82%A4%E3%82%BB%E3%82%A4%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%83%84%20%E5%8D%83%E8%91%89%E7%9C%8C%E5%AF%8C%E9%87%8C%E5%B8%82%E4%B8%83%E6%A0%84250"
     },
     ghosts: [
-      { id: "red", label: "Red", jp: "赤", color: "#ef5264" },
-      { id: "pink", label: "Pink", jp: "ピンク", color: "#ec82ae" },
-      { id: "yellow", label: "Yellow", jp: "黄色", color: "#f4cf45" },
-      { id: "blue", label: "Blue", jp: "青", color: "#4e9fe8" },
-      { id: "light-blue", label: "Light Blue", jp: "水色", color: "#8ed1e9" },
-      { id: "green", label: "Green", jp: "緑", color: "#58b96d" },
-      { id: "light-green", label: "Light Green", jp: "黄緑", color: "#a8d65d" },
-      { id: "black", label: "Black", jp: "黒", color: "#24252b" },
-      { id: "white", label: "White", jp: "白", color: "#f5f0e4" },
-      { id: "orange", label: "Orange", jp: "オレンジ", color: "#ee844d" },
-      { id: "purple", label: "Purple", jp: "紫", color: "#9a67d4" },
-      { id: "brown", label: "Brown", jp: "茶色", color: "#9a6847" }
+      { id: "red", label: "Red", jp: "<ruby>赤<rt>あか</rt></ruby>", kana: "あか", color: "#ef5264" },
+      { id: "pink", label: "Pink", jp: "ピンク", kana: "ピンク", color: "#ec82ae" },
+      { id: "yellow", label: "Yellow", jp: "<ruby>黄色<rt>きいろ</rt></ruby>", kana: "きいろ", color: "#f4cf45" },
+      { id: "blue", label: "Blue", jp: "<ruby>青<rt>あお</rt></ruby>", kana: "あお", color: "#4e9fe8" },
+      { id: "light-blue", label: "Light Blue", jp: "<ruby>水色<rt>みずいろ</rt></ruby>", kana: "みずいろ", color: "#8ed1e9" },
+      { id: "green", label: "Green", jp: "<ruby>緑<rt>みどり</rt></ruby>", kana: "みどり", color: "#58b96d" },
+      { id: "light-green", label: "Light Green", jp: "<ruby>黄緑<rt>きみどり</rt></ruby>", kana: "きみどり", color: "#a8d65d" },
+      { id: "black", label: "Black", jp: "<ruby>黒<rt>くろ</rt></ruby>", kana: "くろ", color: "#24252b" },
+      { id: "white", label: "White", jp: "<ruby>白<rt>しろ</rt></ruby>", kana: "しろ", color: "#f5f0e4" },
+      { id: "orange", label: "Orange", jp: "オレンジ", kana: "オレンジ", color: "#ee844d" },
+      { id: "purple", label: "Purple", jp: "<ruby>紫<rt>むらさき</rt></ruby>", kana: "むらさき", color: "#9a67d4" },
+      { id: "brown", label: "Brown", jp: "<ruby>茶色<rt>ちゃいろ</rt></ruby>", kana: "ちゃいろ", color: "#9a6847" }
     ],
   }
 };

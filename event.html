@@ -180,12 +180,6 @@
       <div class="hunt-shell">
         <div class="hunt-art">
           <img class="hunt-forest" src="assets/events/atmosphere/candy-forest-single-ghost.webp" alt="A real forest path with a tiny hidden Booha Ghost partly behind a tree">
-          <div class="hunt-scene" aria-hidden="true">
-            <span class="scene-orb scene-orb-one"></span><span class="scene-orb scene-orb-two"></span><span class="scene-orb scene-orb-three"></span>
-            <span class="scene-spark scene-spark-one">✦</span><span class="scene-spark scene-spark-two">✧</span><span class="scene-spark scene-spark-three">✦</span>
-            <img class="hunt-mascot" src="assets/events/ghosts/booha-ghost-red.png" alt="">
-            <span class="scene-cloud scene-cloud-one"></span><span class="scene-cloud scene-cloud-two"></span>
-          </div>
         </div>
         <div class="hunt-content">
           <div id="hunt-start" class="hunt-view">
@@ -194,46 +188,17 @@
             <p><span class="jp-main">家族またはチーム名を入力してください。この端末だけに保存され、12色の順番が作られます。</span><span class="en-sub">Choose a family or team name. It stays on this device only. The site will create your private 12-color order when you start.</span></p>
             <label for="participant-name"><span class="jp-main">家族・チーム名</span><span class="en-sub">Family or team name</span></label>
             <input id="participant-name" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Harper family">
-            <p class="test-hint" id="test-hint"><span class="jp-main">テストするには「CANDY-TEST」と入力してください。</span><span class="en-sub">For testing, enter “CANDY-TEST” as the family/team name.</span></p>
-            <button class="primary-button full" id="start-hunt" type="button"><span class="jp-main">つぎへ</span><span class="en-sub">Continue</span></button>
+            <button class="primary-button full" id="start-hunt" type="button" disabled><span class="jp-main" id="start-hunt-jp">スタート！</span><span class="en-sub" id="start-hunt-en">Start the hunt</span></button>
             <div class="feedback" id="prestart-feedback" role="status" aria-live="polite"></div>
             <p class="fine-print"><span class="jp-main">新しいハントは10:00から10:30までに始めてください。キャンディの森は12:00までです。</span><span class="en-sub">New hunts must start between 10:00 and 10:30. The Candy Forest ends at 12:00.</span></p>
           </div>
 
-          <div id="hunt-welcome" class="hunt-view welcome-view" hidden>
-            <p class="welcome-kicker"><span class="jp-main">キャンディの森へようこそ！</span><span class="en-sub">Welcome to Candy Forest!</span></p>
-            <h2><span class="jp-main">ようこそ、<strong id="welcome-name">チーム</strong>さん！</span><span class="en-sub">Welcome, <strong id="welcome-name-en">team</strong>!</span></h2>
-            <p class="welcome-copy"><span class="jp-main"><ruby>森<rt>もり</rt></ruby>のゴーストを12ひき、<ruby>順番<rt>じゅんばん</rt></ruby>に見つけよう。</span><span class="en-sub">Find all 12 forest ghosts in order.</span></p>
-            <div class="welcome-badge"><span>12</span><small><span class="jp-main">ひきのゴースト</span><span class="en-sub">ghosts</span></small></div>
-            <button class="primary-button welcome-button" id="begin-hunt" type="button"><span class="jp-main">ぼうけんをはじめる</span><span class="en-sub">Start the adventure</span></button>
-            <p class="welcome-note"><span class="jp-main">さいしょの色を見つけたら、QRコードをスキャン！</span><span class="en-sub">Find your first color, then scan its QR code!</span></p>
-          </div>
-
-          <div id="hunt-active" class="hunt-view" hidden>
-            <div class="progress-line"><span id="participant-label"></span><span id="progress-count">0 / 12</span></div>
-            <p class="eyebrow"><span class="jp-main">今のターゲット</span><span class="en-sub">Your current target</span></p>
-            <div class="target-card" id="target-card">
-              <span class="target-swatch" id="target-swatch"></span>
-              <strong id="target-label"><span id="target-label-jp" class="jp-main">—</span><span id="target-label-en" class="en-sub">—</span></strong>
-            </div>
-            <p id="target-instruction"><span id="target-instruction-jp" class="jp-main">森でこの色のゴーストを見つけて、QRコードをスキャンしてください。</span><span id="target-instruction-en" class="en-sub">Find this color in the forest, then scan its QR code.</span></p>
-            <div class="scan-note"><span class="scan-symbol">⌁</span><span><span class="jp-main">ゴーストのQRコードにスマホのカメラを向けてください。スキャンすると、つぎのターゲットが表示されます。</span><span class="en-sub">Point your phone camera at the ghost's QR code. The scan brings you back here with your next target.</span></span></div>
-            <div class="scan-fallback">
-              <label for="scan-url"><span class="jp-main">カメラが使えないとき</span><span class="en-sub">No-camera fallback</span></label>
-              <div class="scan-fallback-row"><input id="scan-url" type="url" inputmode="url" placeholder="Paste the scanned URL here"><button class="secondary-button" id="use-scan-url" type="button"><span class="jp-main">使う</span><span class="en-sub">Use URL</span></button></div>
-            </div>
-            <div class="feedback" id="scan-feedback" role="status" aria-live="polite"></div>
-            <button class="secondary-button test-reset-active" id="reset-test-active" type="button" hidden><span class="jp-main">テストをリセット</span><span class="en-sub">Reset test</span></button>
-          </div>
-
-          <div id="hunt-complete" class="hunt-view complete-view" hidden>
-            <div class="complete-mark">✦</div>
-            <p class="eyebrow"><span class="jp-main">キャンディの森 コンプリート</span><span class="en-sub">Candy Forest complete</span></p>
-            <h2><span class="jp-main">12ひき全部見つけた！</span><span class="en-sub">All 12 ghosts found!</span></h2>
-            <p id="completion-copy"></p>
-            <div class="proof-card"><strong id="completion-count">12 / 12</strong><span id="completion-name"></span><small id="completion-time"></small></div>
-            <p class="fine-print"><span class="jp-main">この画面をブライアンに見せて、キャンディバッグをもらってください。</span><span class="en-sub">Show this screen to Bryan to collect your candy bag.</span></p>
-            <button class="secondary-button test-restart" id="restart-test-hunt" type="button" hidden><span class="jp-main">テストをもう一度</span><span class="en-sub">Restart test</span></button>
+          <div id="hunt-resume" class="hunt-view hunt-resume" hidden>
+            <p class="eyebrow"><span class="jp-main" id="resume-label-jp">ハントのとちゅうです</span><span class="en-sub" id="resume-label-en">Your hunt is in progress</span></p>
+            <strong class="resume-count" id="resume-count">0 / 12</strong>
+            <span class="resume-team" id="resume-team"></span>
+            <button class="primary-button full" id="resume-hunt" type="button"><span class="jp-main" id="resume-hunt-jp">つづける</span><span class="en-sub" id="resume-hunt-en">Continue the hunt</span></button>
+            <button class="secondary-button" id="resume-reset" type="button" hidden><span class="jp-main">テストをリセット</span><span class="en-sub">Reset test</span></button>
           </div>
         </div>
       </div>
@@ -241,7 +206,7 @@
       <section class="how-it-works">
         <div><span>01</span><b><span class="jp-main">さがす</span><span class="en-sub">Find</span></b><small><span class="jp-main">森の中をさがします。</span><span class="en-sub">Search the forest.</span></small></div>
         <div><span>02</span><b><span class="jp-main">スキャン</span><span class="en-sub">Scan</span></b><small><span class="jp-main">今の色のQRを読みます。</span><span class="en-sub">Scan the QR code for your current color.</span></small></div>
-        <div><span>03</span><b><span class="jp-main">ごほうび</span><span class="en-sub">Reward</span></b><small><span class="jp-main">短いチャイムで発見を知らせます。</span><span class="en-sub">A short chime confirms the find.</span></small></div>
+        <div><span>03</span><b><span class="jp-main">つかまえる</span><span class="en-sub">Catch</span></b><small><span class="jp-main">ゴーストをタップしてつかまえます。</span><span class="en-sub">Tap the ghost to catch it.</span></small></div>
         <div><span>04</span><b><span class="jp-main">つぎのターゲット</span><span class="en-sub">Next target</span></b><small><span class="jp-main">12ひき見つけるまで続けます。</span><span class="en-sub">Keep going until you find all 12.</span></small></div>
       </section>
 
@@ -300,6 +265,137 @@
   </main>
 
   <footer class="site-footer wrap"><span>The Halloween Event 2026</span><a href="index.html">Back to Booha World</a></footer>
+
+  <!-- Candy Forest live hunt: full-screen game. Opened by event.js after Start, a QR scan, or Continue. -->
+  <div id="booha-game" hidden>
+    <div class="g-loading" id="g-loading">ブーハーをよんでいます…</div>
+
+    <section class="g-screen" id="g-rules" hidden>
+      <div class="rays"></div><div class="vignette"></div><canvas class="fx" data-ambient></canvas>
+      <span class="test-flag" data-test-only hidden>TEST MODE</span>
+      <div class="g-content">
+        <div class="welcome-team sticker" id="g-welcome-team"></div>
+        <h1 class="logo">あそびかた</h1>
+        <div class="steps">
+          <div class="step sticker"><span class="num">1</span><div><b>さがす</b><p><ruby>画面<rt>がめん</rt></ruby>の<ruby>色<rt>いろ</rt></ruby>のゴーストを<ruby>森<rt>もり</rt></ruby>でさがそう。</p><span class="en">Find the ghost with the color on your screen.</span></div></div>
+          <div class="step sticker"><span class="num">2</span><div><b>スキャン</b><p>スマホのカメラでQRコードを<ruby>読<rt>よ</rt></ruby>みとろう。</p><span class="en">Scan its QR code with your phone camera.</span></div></div>
+          <div class="step sticker"><span class="num">3</span><div><b>つかまえる</b><p>ゴーストをタップしてつかまえよう！<ruby>全部<rt>ぜんぶ</rt></ruby>で<span data-ghost-total>12</span>ひき。</p><span class="en">Tap the ghost to catch it. Catch all <span data-ghost-total>12</span>!</span></div></div>
+        </div>
+        <button class="g-btn pink" id="g-go" type="button">ぼうけんスタート！<span class="en">Start the adventure</span></button>
+      </div>
+    </section>
+
+    <section class="g-screen" id="g-needstart" hidden>
+      <div class="rays"></div><div class="vignette"></div><canvas class="fx" data-ambient></canvas>
+      <div class="g-content">
+        <img class="peek ghost-img" id="g-needstart-ghost" alt="">
+        <h1 class="logo">さきに<br>スタートしてね！</h1>
+        <p class="needstart-copy sticker">キャンディの<ruby>森<rt>もり</rt></ruby>のページでチームの<ruby>名前<rt>なまえ</rt></ruby>を<ruby>入<rt>い</rt></ruby>れてスタートしてから、もう<ruby>一度<rt>いちど</rt></ruby>QRコードを<ruby>読<rt>よ</rt></ruby>んでね。<span class="en">Enter your team name on the Candy Forest page and press Start, then scan the QR code again.</span></p>
+        <button class="g-btn pink" id="g-needstart-go" type="button">スタートページへ<span class="en">Go to the start page</span></button>
+      </div>
+    </section>
+
+    <section class="g-screen" id="g-hunt" hidden>
+      <div class="rays"></div><div class="vignette"></div><canvas class="fx" data-ambient></canvas>
+      <div class="topbar">
+        <button class="icon-btn" id="g-info" type="button" aria-label="イベント案内にもどる / Back to event info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.01"/></svg></button>
+        <div class="team sticker" id="g-team"></div>
+        <div class="count" aria-live="polite"><b id="g-count">0</b> / <span data-ghost-total>12</span></div>
+        <button class="icon-btn" id="g-sound" type="button" aria-label="音 / Sound" aria-pressed="true"></button>
+      </div>
+      <div class="target-plate sticker">
+        <div class="lbl">いまさがすゴースト<span class="en">Find this ghost</span></div>
+        <div class="target-name" id="g-target-name"></div>
+        <div class="target-name-en" id="g-target-en"></div>
+      </div>
+      <div class="stage">
+        <div class="halo"></div><div class="shadow"></div>
+        <div class="ghost-wrap"><img class="ghost-img" id="g-hero" alt=""></div>
+      </div>
+      <div class="find-line sticker" id="g-find"></div>
+      <div class="shelf sticker">
+        <div class="shelf-title"><span>つかまえたゴースト</span><span class="en">Your collection</span></div>
+        <div class="slots" id="g-slots"></div>
+      </div>
+      <div class="bottom-row">
+        <button class="g-btn small white" id="g-help" type="button"><span>QRが<ruby>読<rt>よ</rt></ruby>めない？</span><span class="en">Can't scan?</span></button>
+        <button class="g-btn small sky" id="g-demo" type="button" data-test-only hidden>デモ：スキャン<span class="en">Demo: scan</span></button>
+      </div>
+    </section>
+
+    <section class="g-screen" id="g-complete" hidden>
+      <div class="rays"></div><div class="vignette"></div><canvas class="fx" id="g-complete-fx"></canvas>
+      <div class="parade" id="g-parade" aria-hidden="true"></div>
+      <div class="proof sticker" role="status">
+        <div class="done">コンプリート！</div>
+        <div class="score"><span data-ghost-total>12</span>/<span data-ghost-total>12</span></div>
+        <div class="team-name" id="g-proof-team"></div>
+        <dl>
+          <dt>スタート</dt><dd id="g-proof-start"></dd>
+          <dt>ゴール</dt><dd id="g-proof-end"></dd>
+          <dt>いま</dt><dd><span class="live" id="g-proof-now"></span></dd>
+        </dl>
+        <div class="show-bryan">この<ruby>画面<rt>がめん</rt></ruby>をブライアンに<ruby>見<rt>み</rt></ruby>せてね！<span class="en">Show this screen to Bryan for your candy bag.</span></div>
+      </div>
+      <div class="complete-row">
+        <button class="g-btn small white" id="g-complete-info" type="button"><span>イベント<ruby>案内<rt>あんない</rt></ruby></span><span class="en">Event info</span></button>
+        <button class="g-btn small white" id="g-complete-reset" type="button" data-test-only hidden>テストをリセット<span class="en">Reset test</span></button>
+      </div>
+    </section>
+
+    <section class="g-overlay" id="g-catch" hidden>
+      <div class="rays"></div><canvas class="fx" id="g-catch-fx"></canvas>
+      <div class="bubble sticker" id="g-catch-bubble">みつけた！<span class="en">You found it!</span></div>
+      <div class="trap"><div class="ring"></div><img class="big-ghost ghost-img" id="g-catch-ghost" alt=""></div>
+      <div class="tap-hint" id="g-catch-hint">タップしてつかまえよう！<span class="en">Tap to catch!</span></div>
+      <div class="stamp" id="g-stamp">つかまえた！<span class="en">CAUGHT!</span></div>
+    </section>
+
+    <section class="g-overlay" id="g-reveal" hidden>
+      <div class="rays"></div><div class="swirl"></div>
+      <div class="next-lbl"><ruby>次<rt>つぎ</rt></ruby>のゴーストは…<span class="en">Next ghost…</span></div>
+      <img class="big-ghost ghost-img" id="g-reveal-ghost" alt="">
+      <div class="target-name" id="g-reveal-name"></div>
+      <div class="target-name-en" id="g-reveal-en"></div>
+      <div class="tap-hint">タップしてスタート<span class="en">Tap to go</span></div>
+    </section>
+
+    <section class="g-overlay" id="g-wrong" hidden>
+      <div class="rays"></div>
+      <div class="bubble sticker" id="g-wrong-bubble"></div>
+      <img class="big-ghost ghost-img" id="g-wrong-ghost" alt="">
+      <div class="mini-target sticker" id="g-wrong-target"></div>
+      <div class="tap-hint">タップしてもどる<span class="en">Tap to go back</span></div>
+    </section>
+
+    <div class="sheet-wrap" id="g-demo-sheet" hidden>
+      <div class="sheet" role="dialog" aria-labelledby="g-demo-title">
+        <h2 id="g-demo-title">テスト：QRスキャン<span class="en">Test: pretend to scan a ghost</span></h2>
+        <p>テストモードだけのボタンです。<ruby>色<rt>いろ</rt></ruby>をタップするとQRコードを<ruby>読<rt>よ</rt></ruby>んだのと<ruby>同<rt>おな</rt></ruby>じになります。</p>
+        <p class="note">Test mode only. Tapping a color works the same as scanning that ghost's QR code.</p>
+        <button class="g-btn pink wide" id="g-demo-correct" type="button">正しいゴーストをスキャン<span class="en">Scan the correct ghost</span></button>
+        <div class="chips" id="g-chips"></div>
+        <button class="g-btn small white wide" id="g-demo-reset" type="button">テストをリセット<span class="en">Reset test</span></button>
+        <button class="g-btn small white wide" id="g-demo-close" type="button">とじる<span class="en">Close</span></button>
+      </div>
+    </div>
+
+    <div class="sheet-wrap" id="g-help-sheet" hidden>
+      <div class="sheet" role="dialog" aria-labelledby="g-help-title">
+        <h2 id="g-help-title">QRコードが<ruby>読<rt>よ</rt></ruby>めないとき<span class="en">If the QR code won't scan</span></h2>
+        <p>1. スマホの「カメラ」アプリをひらいて、QRコードに<ruby>向<rt>む</rt></ruby>けてください。<span class="en">Open your phone's Camera app and point it at the code.</span></p>
+        <p>2. LINEでは<ruby>読<rt>よ</rt></ruby>まないでください。<ruby>記録<rt>きろく</rt></ruby>が<ruby>消<rt>き</rt></ruby>えることがあります。<span class="en">Don't scan inside LINE. Your progress may be lost.</span></p>
+        <p>3. <ruby>読<rt>よ</rt></ruby>んだURLをここに<ruby>貼<rt>は</rt></ruby>りつけてもOK。<span class="en">Or paste the scanned link here.</span></p>
+        <div class="row">
+          <input id="g-paste-url" type="url" inputmode="url" autocomplete="off" placeholder="https://…event.html?event=…&amp;ghost=…">
+          <button class="g-btn small" id="g-paste-go" type="button">つかう<span class="en">Use</span></button>
+        </div>
+        <p class="err" id="g-paste-err" role="alert"></p>
+        <p>それでもダメなら、<ruby>近<rt>ちか</rt></ruby>くのスタッフに<ruby>声<rt>こえ</rt></ruby>をかけてね。<span class="en">Still stuck? Ask a staff member.</span></p>
+        <button class="g-btn small white wide" id="g-help-close" type="button">とじる<span class="en">Close</span></button>
+      </div>
+    </div>
+  </div>
 
   <script src="events/events.js"></script>
   <script src="event.js"></script>
