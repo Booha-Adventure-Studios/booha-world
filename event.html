@@ -330,6 +330,7 @@
           <dt>スタート</dt><dd id="g-proof-start"></dd>
           <dt>ゴール</dt><dd id="g-proof-end"></dd>
           <dt>いま</dt><dd><span class="live" id="g-proof-now"></span></dd>
+          <dt>ジョーカー</dt><dd id="g-proof-jokers"></dd>
         </dl>
         <div class="show-bryan">この<ruby>画面<rt>がめん</rt></ruby>をブライアンに<ruby>見<rt>み</rt></ruby>せてね！<span class="en">Show this screen to Bryan for your candy bag.</span></div>
       </div>
@@ -364,6 +365,29 @@
       <div class="tap-hint">タップしてもどる<span class="en">Tap to go back</span></div>
     </section>
 
+    <section class="g-overlay" id="g-joker" hidden>
+      <div class="joker-bg" aria-hidden="true"></div><canvas class="fx" id="g-joker-fx"></canvas>
+      <div class="joker-title" id="g-joker-title"></div>
+      <div class="joker-stage">
+        <div class="joker-dancer">
+          <svg class="jester-hat" viewBox="0 0 200 120" aria-hidden="true">
+            <path d="M18 104 C 30 60, 10 34, 2 20 C 40 30, 70 56, 100 78 C 130 56, 160 30, 198 20 C 190 34, 170 60, 182 104 Z" fill="#7a3cff" stroke="#251034" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M100 78 C 92 50, 96 22, 100 4 C 104 22, 108 50, 100 78 Z" fill="#7cdf64" stroke="#251034" stroke-width="6" stroke-linejoin="round"/>
+            <path d="M18 104 C 30 60, 10 34, 2 20 C 40 30, 70 56, 100 78 Z" fill="#ff5fa2" stroke="#251034" stroke-width="7" stroke-linejoin="round"/>
+            <rect x="12" y="96" width="176" height="22" rx="11" fill="#ffd23f" stroke="#251034" stroke-width="6"/>
+            <circle cx="4" cy="20" r="11" fill="#ffd23f" stroke="#251034" stroke-width="5"/>
+            <circle cx="196" cy="20" r="11" fill="#ffd23f" stroke="#251034" stroke-width="5"/>
+            <circle cx="100" cy="6" r="10" fill="#ffd23f" stroke="#251034" stroke-width="5"/>
+          </svg>
+          <img class="big-ghost ghost-img joker-ghost" id="g-joker-ghost" alt="">
+        </div>
+      </div>
+      <div class="joker-caption sticker" id="g-joker-caption"></div>
+      <div class="joker-tally" id="g-joker-tally"></div>
+      <div class="mini-target sticker" id="g-joker-target"></div>
+      <div class="tap-hint">タップしてもどる<span class="en">Tap to go back</span></div>
+    </section>
+
     <section class="g-scanner" id="g-scanner" hidden aria-label="QRスキャナー / QR scanner">
       <video id="g-video" playsinline muted autoplay></video>
       <div class="scan-frame" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="scan-line"></span></div>
@@ -388,6 +412,8 @@
         <p class="note">Test mode only. Tapping a color works the same as scanning that ghost's QR code.</p>
         <button class="g-btn pink wide" id="g-demo-correct" type="button">正しいゴーストをスキャン<span class="en">Scan the correct ghost</span></button>
         <div class="chips" id="g-chips"></div>
+        <p class="note">ジョーカー（テスト） / Jokers (test)</p>
+        <div class="chips" id="g-joker-chips"></div>
         <button class="g-btn small white wide" id="g-demo-reset" type="button">テストをリセット<span class="en">Reset test</span></button>
         <button class="g-btn small white wide" id="g-demo-close" type="button">とじる<span class="en">Close</span></button>
       </div>

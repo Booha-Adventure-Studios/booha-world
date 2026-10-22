@@ -241,6 +241,8 @@
   let busy = false;
   let wakeLock = null;
 
+  const JOKERS = config.jokers || [];
+  const jokerById = (id) => JOKERS.find((joker) => joker.id === id);
   const ghostJP = (ghost) => ghost.jp || ghost.kana || ghost.label;
   const ghostEN = (ghost) => ghost.label;
 
@@ -362,6 +364,13 @@
     drum: () => { for (let i = 0; i < 9; i += 1) noise(i * .07, .05, .06 + i * .012); tone(392, .68, .12, "square", .06); tone(784, .74, .4, "triangle", .14); },
     wrong: () => { tone(420, 0, .45, "sawtooth", .07, 90); tone(160, .05, .35, "square", .04, 70); },
     giggle: () => { [900, 1100, 950, 1200].forEach((f, i) => tone(f, .5 + i * .09, .07, "square", .03)); },
+    joker: () => {
+      // bike-horn honk, then a wobbly kazoo riff
+      [0, .22].forEach((t) => { tone(330, t, .16, "sawtooth", .09, 290); tone(415, t, .16, "square", .05, 370); });
+      const riff = [523, 494, 523, 659, 587, 523, 392, 440, 392, 523];
+      riff.forEach((f, i) => tone(f, .55 + i * .13, .12, "square", .05, f * (i % 2 ? .94 : 1.06)));
+      [880, 1175, 1568].forEach((f, i) => tone(f, 1.95 + i * .05, .3, "triangle", .06));
+    },
     fanfare: () => { const notes = [523, 523, 523, 659, 784, 659, 784, 1047]; const times = [0, .12, .24, .36, .56, .76, .88, 1.05]; notes.forEach((f, i) => { const len = i === 7 ? .8 : .16; tone(f, times[i], len, "square", .06); tone(f * 2, times[i], len, "triangle", .06); }); }
   };
   const buzz = (pattern) => { try { if (navigator.vibrate && navigator.userActivation?.hasBeenActive !== false) navigator.vibrate(pattern); } catch (error) { /* optional */ } };
@@ -436,7 +445,7 @@
 
   /* game screens */
   const G_SCREENS = ["g-rules", "g-needstart", "g-hunt", "g-complete"];
-  const G_OVERLAYS = ["g-catch", "g-reveal", "g-wrong"];
+  const G_OVERLAYS = ["g-catch", "g-reveal", "g-wrong", "g-joker"];
   const showScreen = (id) => { G_SCREENS.forEach((screen) => { $("#" + screen).hidden = screen !== id; }); runFx(); };
   const showOverlay = (id) => { G_OVERLAYS.forEach((overlay) => { $("#" + overlay).hidden = overlay !== id; }); runFx(); };
   const closeSheets = () => { $("#g-demo-sheet").hidden = true; $("#g-help-sheet").hidden = true; };
@@ -509,6 +518,8 @@
     $("#g-proof-team").textContent = gameState.participantLabel;
     $("#g-proof-start").textContent = formatClock(gameState.startedAt);
     $("#g-proof-end").textContent = formatClock(gameState.completedAt);
+    const fooled = gameState.jokerScans || 0;
+    $("#g-proof-jokers").textContent = fooled ? `${fooled}かい だまされた！` : "0かい！すごい！";
     const parade = $("#g-parade"); parade.innerHTML = "";
     const perRow = Math.ceil(GHOST_TOTAL / 2);
     gameState.found.forEach((id, i) => {
@@ -589,9 +600,44 @@
     overlay.classList.add("leave"); await sleep(450); showOverlay(null);
   };
 
+  const JOKER_LINES = [
+    ["ひっかかった〜！", "Gotcha!"],
+    ["<ruby>偽物<rt>にせもの</rt></ruby>でした〜！", "I'm a fake!"],
+    ["ジョーカーブーハー<br><ruby>参上<rt>さんじょう</rt></ruby>！", "Joker Booha is here!"],
+    ["だまされた〜！", "Fooled you!"],
+    ["ブーハーブーハー！ハハハ！", "Booha booha! Ha ha ha!"]
+  ];
+  const doJoker = async (joker) => {
+    const looksLike = ghostById(joker.looksLike) || config.ghosts[0];
+    gameState.jokerScans = (gameState.jokerScans || 0) + 1;
+    saveState(gameState);
+    const overlay = $("#g-joker");
+    const [jp, en] = JOKER_LINES[Math.floor(Math.random() * JOKER_LINES.length)];
+    $("#g-joker-title").innerHTML = `${jp}<span class="en">${en}</span>`;
+    setGhostImage($("#g-joker-ghost"), looksLike.id);
+    const tellJP = joker.tellJP || "<ruby>名前<rt>なまえ</rt></ruby>と<ruby>目<rt>め</rt></ruby>をよく<ruby>見<rt>み</rt></ruby>てね！";
+    const tellEN = joker.tellEN || "Check the name and the eyes!";
+    $("#g-joker-caption").innerHTML = `ぼくは「${joker.kana}」！${tellJP}<span class="en">I'm "${joker.label}"! ${tellEN}</span>`;
+    $("#g-joker-tally").innerHTML = `ジョーカーにだまされた：${gameState.jokerScans}かい<span class="en">Fooled by jokers: ${gameState.jokerScans}</span>`;
+    const target = currentTarget();
+    $("#g-joker-target").innerHTML = `${ghostImageTag(target.id, "ghost-img thin")}<span><ruby>本物<rt>ほんもの</rt></ruby>は ${ghostJP(target)}<span class="en">The real one is ${target.label}</span></span>`;
+    showOverlay("g-joker"); SFX.joker(); buzz([30, 40, 30, 40, 90]);
+    const canvas = $("#g-joker-fx"); const rect = canvas.getBoundingClientRect();
+    burst(canvas, rect.width / 2, rect.height * .45, ["#7a3cff", "#ffd23f", "#ff5fa2", "#7cdf64"], 110, 13);
+    await sleep(900);
+    await waitForTap(overlay, 6500);
+    showOverlay(null);
+  };
+
   const scanGhost = async (id) => {
     const ghost = ghostById(id);
+    const joker = jokerById(id);
     if (!gameState || busy) return;
+    if (joker && !gameState.completedAt) {
+      busy = true; closeSheets();
+      try { await doJoker(joker); } finally { busy = false; }
+      return;
+    }
     if (!ghost) { gameToast("このQRコードはつかえません<br><span style='opacity:.8'>This QR code isn't part of the hunt.</span>"); return; }
     if (gameState.completedAt) { showComplete(false); return; }
     busy = true; closeSheets();
@@ -629,7 +675,7 @@
       const id = url.searchParams.get("ghost");
       const scannedEvent = url.searchParams.get("event");
       if (scannedEvent && scannedEvent !== config.id) return null;
-      return ghostById(id) ? id : null;
+      return (ghostById(id) || jokerById(id)) ? id : null;
     } catch (error) { return null; }
   };
   const setScanMessage = (jp, en) => { $("#g-scan-msg").innerHTML = `${jp}<span class="en">${en}</span>`; };
@@ -922,7 +968,8 @@
     await openGame();
     showOverlay(null);
     if (!gameState) {
-      setGhostImage($("#g-needstart-ghost"), ghostById(ghostParam) ? ghostParam : config.ghosts[0].id);
+      const lookId = ghostById(ghostParam) ? ghostParam : (jokerById(ghostParam)?.looksLike || config.ghosts[0].id);
+      setGhostImage($("#g-needstart-ghost"), lookId);
       showScreen("g-needstart");
       return;
     }
@@ -1046,6 +1093,15 @@
       chip.addEventListener("click", () => scanGhost(ghost.id));
       chips.appendChild(chip);
     });
+    const jokerChips = $("#g-joker-chips"); jokerChips.innerHTML = "";
+    JOKERS.forEach((joker) => {
+      const chip = document.createElement("button");
+      chip.type = "button"; chip.className = "chip";
+      chip.innerHTML = `${ghostImageTag(joker.looksLike, "ghost-img thin")}<span>${joker.kana}</span>`;
+      chip.setAttribute("aria-label", `Joker ${joker.label}`);
+      chip.addEventListener("click", () => scanGhost(joker.id));
+      jokerChips.appendChild(chip);
+    });
     $("#g-demo-sheet").hidden = false;
   });
   $("#g-demo-correct").addEventListener("click", () => { if (gameState?.testMode && !gameState.completedAt) scanGhost(currentTarget().id); });
@@ -1063,7 +1119,7 @@
     try {
       const url = new URL($("#g-paste-url").value.trim(), window.location.href);
       const id = url.searchParams.get("ghost");
-      if (url.searchParams.get("event") !== config.id || !ghostById(id)) throw new Error("invalid");
+      if (url.searchParams.get("event") !== config.id || !(ghostById(id) || jokerById(id))) throw new Error("invalid");
       $("#g-paste-url").value = "";
       scanGhost(id);
     } catch (error) {

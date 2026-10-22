@@ -85,5 +85,15 @@ window.BOOHA_EVENTS = {
       { id: "purple", label: "Purple", jp: "<ruby>紫<rt>むらさき</rt></ruby>", kana: "むらさき", color: "#9a67d4" },
       { id: "brown", label: "Brown", jp: "<ruby>茶色<rt>ちゃいろ</rt></ruby>", kana: "ちゃいろ", color: "#9a6847" }
     ],
+    // Joker ghosts: look like a real color, but the name is misspelled and the eyes are different.
+    // The id is the misspelling, so the QR link never says "joker".
+    jokers: [
+      { id: "pnik", looksLike: "pink", kana: "ピソク", label: "PNIK", tellJP: "ウインクしてたよ！", tellEN: "I was winking!" },
+      { id: "bleu", looksLike: "blue", kana: "おあ", label: "BLEU", tellJP: "<ruby>目<rt>め</rt></ruby>の<ruby>光<rt>ひか</rt></ruby>りがハートだよ！", tellEN: "My eye shines are hearts!" },
+      { id: "yelow", looksLike: "yellow", kana: "きいる", label: "YELOW", tellJP: "<ruby>目<rt>め</rt></ruby>の<ruby>大<rt>おお</rt></ruby>きさがちがうよ！", tellEN: "My eyes are different sizes!" },
+      { id: "ligth-green", looksLike: "light-green", kana: "きみとり", label: "LIGTH GREEN", tellJP: "<ruby>目<rt>め</rt></ruby>がぐるぐるだよ！", tellEN: "My eyes are swirly!" },
+      { id: "orenge", looksLike: "orange", kana: "オレソジ", label: "ORENGE", tellJP: "ねむそうな<ruby>目<rt>め</rt></ruby>だよ！", tellEN: "I have sleepy eyes!" },
+      { id: "wihte", looksLike: "white", kana: "レろ", label: "WIHTE", tellJP: "<ruby>目<rt>め</rt></ruby>に<ruby>光<rt>ひか</rt></ruby>りがないよ！", tellEN: "My eyes have no shine!" }
+    ],
   }
 };

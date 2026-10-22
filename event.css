@@ -1453,3 +1453,47 @@ body[data-theme="info"] .info-lede .en-sub > span { display: inline; }
 body[data-theme="candy"] .inapp-warning { margin: 14px 0 0; padding: 12px 14px; border: 3px solid var(--ink); border-radius: 14px; background: #fff3a8; color: var(--ink) !important; font-weight: 700; }
 body[data-theme="candy"] .inapp-warning .en-sub { color: var(--ink); }
 @media (prefers-reduced-motion: reduce) { #booha-game .scan-line { animation: none; top: 50%; } }
+
+/* Joker Booha: a deliberately different, loud visual world */
+#booha-game #g-joker { gap: 10px; color: #fff; background: #120818; }
+#booha-game .joker-bg { position: absolute; inset: -40px; z-index: 0; pointer-events: none;
+  background:
+    repeating-conic-gradient(from 45deg, #7a3cff 0 25%, #ffd23f 0 50%) 0 0 / 76px 76px,
+    #7a3cff;
+  animation: gJokerBg 1.6s linear infinite, gJokerHue 2.4s linear infinite; opacity: .95; }
+#booha-game .joker-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, rgba(255,95,162,.0) 0, rgba(18,8,24,.15) 40%, rgba(18,8,24,.75) 100%); }
+@keyframes gJokerBg { to { background-position: 76px 76px, 0 0; } }
+@keyframes gJokerHue { to { filter: hue-rotate(360deg); } }
+#booha-game .joker-title { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 11vw, 3.2rem); line-height: 1.25; color: #ffd23f;
+  -webkit-text-stroke: 5px var(--ink); paint-order: stroke fill; text-shadow: 4px 5px 0 var(--ink); animation: gJokerTitle .5s ease-in-out infinite alternate; }
+#booha-game .joker-title rt { -webkit-text-stroke: 0; text-shadow: none; color: #fff; font-size: .32em; }
+#booha-game .joker-title .en { -webkit-text-stroke: 0; text-shadow: 0 2px 0 var(--ink); color: #fff; font-size: .9rem; opacity: 1; }
+@keyframes gJokerTitle { from { rotate: -4deg; scale: 1; } to { rotate: 4deg; scale: 1.06; } }
+#booha-game .joker-stage { position: relative; display: grid; place-items: center; height: min(44vh, 330px); width: 100%; }
+#booha-game .joker-dancer { position: relative; display: grid; justify-items: center; animation: gJokerDance 1.2s cubic-bezier(.4,0,.2,1) infinite; transform-origin: 50% 100%; }
+#booha-game .joker-ghost { width: min(52vw, 230px); animation: gJokerColors 1.2s steps(6) infinite; }
+#booha-game .jester-hat { width: min(48vw, 210px); margin-bottom: max(-11vw, -48px); position: relative; z-index: 2; animation: gHatFlop .3s ease-in-out infinite alternate; transform-origin: 50% 100%; }
+@keyframes gJokerDance {
+  0% { transform: translateX(0) rotate(0) scale(1, 1); }
+  12% { transform: translateX(-34px) rotate(-14deg) scale(1.08, .9); }
+  25% { transform: translateX(-34px) translateY(-30px) rotate(-6deg) scale(.92, 1.12); }
+  37% { transform: translateX(0) rotate(0) scale(1.1, .88); }
+  50% { transform: translateX(34px) rotate(14deg) scale(1.08, .9); }
+  62% { transform: translateX(34px) translateY(-30px) rotate(6deg) scale(.92, 1.12); }
+  75% { transform: translateX(0) rotate(360deg) scale(1, 1); }
+  88% { transform: translateX(0) translateY(-46px) rotate(360deg) scale(.9, 1.15); }
+  100% { transform: translateX(0) rotate(360deg) scale(1, 1); }
+}
+@keyframes gJokerColors { from { filter: var(--tint, saturate(1)) hue-rotate(0deg) var(--outline); } to { filter: var(--tint, saturate(1)) hue-rotate(360deg) var(--outline); } }
+@keyframes gHatFlop { from { rotate: -6deg; } to { rotate: 6deg; } }
+#booha-game .joker-caption { padding: 10px 18px; border-radius: 20px; font-family: var(--display); font-weight: 800; font-size: 1.15rem; line-height: 1.6; color: var(--ink); rotate: -2deg; }
+#booha-game .joker-caption .en { font-size: .78rem; }
+#booha-game .joker-tally { font-size: .95rem; padding: 4px 14px; border-radius: 999px; background: var(--ink); color: #ffd23f; border: 3px solid #fff; }
+#booha-game .joker-tally .en { display: inline; color: #fff; font-size: .72rem; margin-left: 6px; }
+#booha-game #g-joker .mini-target { color: var(--ink); }
+#booha-game #g-joker .tap-hint { color: #fff; }
+@media (max-height: 700px) { #booha-game .joker-stage { height: 36vh; } #booha-game .joker-title { font-size: 2rem; } }
+@media (prefers-reduced-motion: reduce) { #booha-game .joker-bg { animation: none; } }
+#booha-game #g-joker .joker-bg { position: absolute; z-index: 0; }
+#booha-game .joker-tally .en { display: block; margin: 0; text-align: center; }
+#booha-game .joker-tally { text-align: center; border-radius: 16px; }
