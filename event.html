@@ -167,7 +167,7 @@
       </div>
 
       <div class="dropoff-warning"><span class="jp-main">このイベントは、お子さまを預けて参加するイベントではありません。未就学児・小学生は、保護者の同伴が必要です。</span><span class="en-sub">This is not a drop-off event. Parents or guardians must accompany preschool and elementary-age students.</span></div>
-      <div class="line-warning"><span class="jp-main">QRはスマホのカメラで読んでください（LINEは使わないでください）</span><span class="en-sub">Scan the QR code with your phone's camera, not inside LINE.</span></div>
+      <div class="line-warning"><span class="jp-main">QRコードは、このページの「スキャン」ボタンで読みます。FacebookやLINEのアプリの中ではなく、SafariかChromeで開いてください。</span><span class="en-sub">Scan the QR codes with this page's Scan button. Open this page in Safari or Chrome, not inside Facebook or LINE.</span></div>
       <div class="candy-rain-note"><span class="jp-main">雨天中止です。中止の場合もキャンディバッグはお渡しします（返金なし）。お知らせはウェブサイトとInstagramで。</span><span class="en-sub">Cancelled if it rains. Candy bags will still be available (no refunds). Check our website and Instagram.</span><div class="social-links" id="candy-rain-links"></div></div>
 
       <div class="status-card" id="candy-status-card" aria-live="polite">
@@ -188,6 +188,7 @@
             <p><span class="jp-main">家族またはチーム名を入力してください。この端末だけに保存され、12色の順番が作られます。</span><span class="en-sub">Choose a family or team name. It stays on this device only. The site will create your private 12-color order when you start.</span></p>
             <label for="participant-name"><span class="jp-main">家族・チーム名</span><span class="en-sub">Family or team name</span></label>
             <input id="participant-name" type="text" maxlength="40" autocomplete="off" placeholder="e.g. Harper family">
+            <p class="inapp-warning" id="inapp-warning" hidden><span class="jp-main">いまFacebookやLINEなどのアプリの中で開いています。カメラや記録がうまく動かないことがあるので、メニューから「ブラウザで開く」を選んで、SafariかChromeで開いてください。</span><span class="en-sub">You're inside an app like Facebook or LINE. The camera and your saved hunt may not work here. Use the menu to open this page in Safari or Chrome.</span></p>
             <button class="primary-button full" id="start-hunt" type="button" disabled><span class="jp-main" id="start-hunt-jp">スタート！</span><span class="en-sub" id="start-hunt-en">Start the hunt</span></button>
             <div class="feedback" id="prestart-feedback" role="status" aria-live="polite"></div>
             <p class="fine-print"><span class="jp-main">新しいハントは10:00から10:30までに始めてください。キャンディの森は12:00までです。</span><span class="en-sub">New hunts must start between 10:00 and 10:30. The Candy Forest ends at 12:00.</span></p>
@@ -273,7 +274,7 @@
         <h1 class="logo">あそびかた</h1>
         <div class="steps">
           <div class="step sticker"><span class="num">1</span><div><b>さがす</b><p><ruby>画面<rt>がめん</rt></ruby>の<ruby>色<rt>いろ</rt></ruby>のゴーストを<ruby>森<rt>もり</rt></ruby>でさがそう。</p><span class="en">Find the ghost with the color on your screen.</span></div></div>
-          <div class="step sticker"><span class="num">2</span><div><b>スキャン</b><p>スマホのカメラでQRコードを<ruby>読<rt>よ</rt></ruby>みとろう。</p><span class="en">Scan its QR code with your phone camera.</span></div></div>
+          <div class="step sticker"><span class="num">2</span><div><b>スキャン</b><p>「スキャン」をおして、QRコードを<ruby>読<rt>よ</rt></ruby>みとろう。</p><span class="en">Tap Scan and point the camera at the QR code.</span></div></div>
           <div class="step sticker"><span class="num">3</span><div><b>つかまえる</b><p>ゴーストをタップしてつかまえよう！<ruby>全部<rt>ぜんぶ</rt></ruby>で<span data-ghost-total>12</span>ひき。</p><span class="en">Tap the ghost to catch it. Catch all <span data-ghost-total>12</span>!</span></div></div>
         </div>
         <button class="g-btn pink" id="g-go" type="button">ぼうけんスタート！<span class="en">Start the adventure</span></button>
@@ -314,7 +315,7 @@
       </div>
       <div class="bottom-row">
         <button class="g-btn small white" id="g-help" type="button"><span>QRが<ruby>読<rt>よ</rt></ruby>めない？</span><span class="en">Can't scan?</span></button>
-        <button class="g-btn small sky" id="g-demo" type="button" data-test-only hidden>デモ：スキャン<span class="en">Demo: scan</span></button>
+        <button class="g-btn pink scan-btn" id="g-scan" type="button"><span class="scan-btn-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><rect x="8.5" y="8.5" width="7" height="7" rx="1" fill="currentColor" stroke="none"/></svg><span>スキャン！</span></span><span class="en">Scan</span></button>
       </div>
     </section>
 
@@ -363,6 +364,23 @@
       <div class="tap-hint">タップしてもどる<span class="en">Tap to go back</span></div>
     </section>
 
+    <section class="g-scanner" id="g-scanner" hidden aria-label="QRスキャナー / QR scanner">
+      <video id="g-video" playsinline muted autoplay></video>
+      <div class="scan-frame" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="scan-line"></span></div>
+      <div class="scan-top">
+        <button class="icon-btn" id="g-scan-close" type="button" aria-label="とじる / Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <div class="scan-target sticker" id="g-scan-target"></div>
+      </div>
+      <div class="scan-msg sticker" id="g-scan-msg" role="status"></div>
+      <div class="scan-error" id="g-scan-error" hidden>
+        <div class="sticker scan-error-card">
+          <p id="g-scan-error-text"></p>
+          <button class="g-btn pink wide" id="g-scan-retry" type="button"><span>もう<ruby>一度<rt>いちど</rt></ruby></span><span class="en">Try again</span></button>
+          <button class="g-btn small white wide" id="g-scan-error-close" type="button">とじる<span class="en">Close</span></button>
+        </div>
+      </div>
+    </section>
+
     <div class="sheet-wrap" id="g-demo-sheet" hidden>
       <div class="sheet" role="dialog" aria-labelledby="g-demo-title">
         <h2 id="g-demo-title">テスト：QRスキャン<span class="en">Test: pretend to scan a ghost</span></h2>
@@ -378,8 +396,8 @@
     <div class="sheet-wrap" id="g-help-sheet" hidden>
       <div class="sheet" role="dialog" aria-labelledby="g-help-title">
         <h2 id="g-help-title">QRコードが<ruby>読<rt>よ</rt></ruby>めないとき<span class="en">If the QR code won't scan</span></h2>
-        <p>1. スマホの「カメラ」アプリをひらいて、QRコードに<ruby>向<rt>む</rt></ruby>けてください。<span class="en">Open your phone's Camera app and point it at the code.</span></p>
-        <p>2. LINEでは<ruby>読<rt>よ</rt></ruby>まないでください。<ruby>記録<rt>きろく</rt></ruby>が<ruby>消<rt>き</rt></ruby>えることがあります。<span class="en">Don't scan inside LINE. Your progress may be lost.</span></p>
+        <p>1. 「スキャン」をおして、カメラを「<ruby>許可<rt>きょか</rt></ruby>」してください。QRコードを<ruby>白<rt>しろ</rt></ruby>いわくに<ruby>入<rt>い</rt></ruby>れると<ruby>読<rt>よ</rt></ruby>めます。<span class="en">Tap Scan and allow the camera. Fit the QR code inside the white frame.</span></p>
+        <p>2. FacebookやLINEのアプリの<ruby>中<rt>なか</rt></ruby>では、カメラが<ruby>使<rt>つか</rt></ruby>えないことがあります。メニューから「ブラウザで<ruby>開<rt>ひら</rt></ruby>く」を<ruby>選<rt>えら</rt></ruby>んでください。<span class="en">Inside the Facebook or LINE app the camera may not work. Use the menu to open this page in your browser.</span></p>
         <p>3. <ruby>読<rt>よ</rt></ruby>んだURLをここに<ruby>貼<rt>は</rt></ruby>りつけてもOK。<span class="en">Or paste the scanned link here.</span></p>
         <div class="row">
           <input id="g-paste-url" type="url" inputmode="url" autocomplete="off" placeholder="https://…event.html?event=…&amp;ghost=…">
@@ -387,6 +405,7 @@
         </div>
         <p class="err" id="g-paste-err" role="alert"></p>
         <p>それでもダメなら、<ruby>近<rt>ちか</rt></ruby>くのスタッフに<ruby>声<rt>こえ</rt></ruby>をかけてね。<span class="en">Still stuck? Ask a staff member.</span></p>
+        <button class="g-btn small sky wide" id="g-demo" type="button" data-test-only hidden>テスト：デモスキャン<span class="en">Test: demo scan</span></button>
         <button class="g-btn small white wide" id="g-help-close" type="button">とじる<span class="en">Close</span></button>
       </div>
     </div>

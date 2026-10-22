@@ -460,6 +460,7 @@
     requestWakeLock();
   };
   const closeGame = () => {
+    closeScanner();
     game.hidden = true;
     document.body.classList.remove("game-open");
     closeSheets(); showOverlay(null);
@@ -479,7 +480,7 @@
     $("#g-target-en").textContent = ghostEN(target);
     setGhostImage($("#g-hero"), target.id);
     $("#g-hero").alt = `${target.kana || target.label}のゴースト / ${target.label} ghost`;
-    $("#g-find").innerHTML = `<span>${ghostJP(target)}のゴーストを<ruby>森<rt>もり</rt></ruby>でさがして、QRコードを<ruby>読<rt>よ</rt></ruby>みとろう！</span><span class="en">Find the ${target.label.toLowerCase()} ghost in the forest and scan its QR code.</span>`;
+    $("#g-find").innerHTML = `<span>${ghostJP(target)}のゴーストを<ruby>森<rt>もり</rt></ruby>でさがして、「スキャン」でQRコードを<ruby>読<rt>よ</rt></ruby>みとろう！</span><span class="en">Find the ${target.label.toLowerCase()} ghost in the forest, then tap Scan.</span>`;
     const slots = $("#g-slots"); slots.innerHTML = "";
     for (let i = 0; i < GHOST_TOTAL; i += 1) {
       const id = gameState.found[i];
@@ -599,6 +600,125 @@
       else if (ghost.id === currentTarget().id) await doCatch(ghost);
       else await doWrong(ghost, false);
     } finally { busy = false; }
+  };
+
+
+  /* In-page QR scanner: camera opens inside the game so the hunt stays in one browser. */
+  const isInAppBrowser = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Line\/|MicroMessenger/i.test(navigator.userAgent);
+  let scanStream = null;
+  let scanFrame = 0;
+  let scanDetector = null;
+  let jsQRLoading = null;
+  let scanSession = 0;
+  const loadJsQR = () => {
+    if (window.jsQR) return Promise.resolve();
+    if (!jsQRLoading) {
+      jsQRLoading = new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "assets/vendor/jsqr-1.4.0.min.js";
+        script.onload = () => resolve();
+        script.onerror = () => { jsQRLoading = null; reject(new Error("jsQR failed to load")); };
+        document.head.appendChild(script);
+      });
+    }
+    return jsQRLoading;
+  };
+  const ghostIdFromScan = (text) => {
+    try {
+      const url = new URL(String(text).trim(), window.location.href);
+      const id = url.searchParams.get("ghost");
+      const scannedEvent = url.searchParams.get("event");
+      if (scannedEvent && scannedEvent !== config.id) return null;
+      return ghostById(id) ? id : null;
+    } catch (error) { return null; }
+  };
+  const setScanMessage = (jp, en) => { $("#g-scan-msg").innerHTML = `${jp}<span class="en">${en}</span>`; };
+  const stopCamera = () => {
+    cancelAnimationFrame(scanFrame); scanFrame = 0;
+    if (scanStream) { scanStream.getTracks().forEach((track) => track.stop()); scanStream = null; }
+    const video = $("#g-video"); if (video) video.srcObject = null;
+  };
+  const closeScanner = () => { scanSession += 1; stopCamera(); $("#g-scanner").hidden = true; $("#g-scan-error").hidden = true; };
+  const showScanError = (error) => {
+    stopCamera();
+    const denied = error && (error.name === "NotAllowedError" || error.name === "SecurityError");
+    let jp, en;
+    if (isInAppBrowser) {
+      jp = "FacebookやLINEのアプリの<ruby>中<rt>なか</rt></ruby>では、カメラが<ruby>使<rt>つか</rt></ruby>えないことがあります。メニューから「ブラウザで<ruby>開<rt>ひら</rt></ruby>く」を<ruby>選<rt>えら</rt></ruby>んで、SafariかChromeで<ruby>開<rt>ひら</rt></ruby>いてください。";
+      en = "The camera may not work inside the Facebook or LINE app. Use the menu to open this page in Safari or Chrome.";
+    } else if (denied) {
+      jp = "カメラが<ruby>許可<rt>きょか</rt></ruby>されていません。ブラウザの<ruby>設定<rt>せってい</rt></ruby>でカメラを<ruby>許可<rt>きょか</rt></ruby>してから、もう<ruby>一度<rt>いちど</rt></ruby>ためしてください。";
+      en = "Camera access is blocked. Allow the camera in your browser settings, then try again.";
+    } else {
+      jp = "カメラを<ruby>開<rt>ひら</rt></ruby>けませんでした。スマホの「カメラ」アプリでQRコードを<ruby>読<rt>よ</rt></ruby>んでもOKです。";
+      en = "The camera couldn't start. You can also scan the QR code with your phone's Camera app.";
+    }
+    $("#g-scan-error-text").innerHTML = `${jp}<span class="en">${en}</span>`;
+    $("#g-scan-msg").innerHTML = "";
+    $("#g-scan-error").hidden = false;
+  };
+  const openScanner = async () => {
+    if (busy || !gameState || gameState.completedAt) return;
+    closeSheets();
+    const session = ++scanSession;
+    const scanner = $("#g-scanner");
+    const target = currentTarget();
+    $("#g-scan-target").innerHTML = `${ghostImageTag(target.id, "ghost-img thin")}<span>${ghostJP(target)}のゴースト<span class="en">Looking for ${target.label}</span></span>`;
+    $("#g-scan-error").hidden = true;
+    scanner.hidden = false;
+    setScanMessage("カメラをじゅんびしています…", "Starting the camera…");
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { showScanError(null); return; }
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } } });
+    } catch (error) { if (session === scanSession) showScanError(error); return; }
+    if (session !== scanSession) { stream.getTracks().forEach((track) => track.stop()); return; }
+    scanStream = stream;
+    const video = $("#g-video");
+    video.srcObject = stream;
+    try { await video.play(); } catch (error) { /* autoplay with muted+playsinline normally works */ }
+    if (!scanDetector && "BarcodeDetector" in window) {
+      try { const formats = await window.BarcodeDetector.getSupportedFormats(); if (formats.includes("qr_code")) scanDetector = new window.BarcodeDetector({ formats: ["qr_code"] }); } catch (error) { scanDetector = null; }
+    }
+    if (!scanDetector) {
+      try { await loadJsQR(); } catch (error) { if (session === scanSession) showScanError(error); return; }
+    }
+    if (session !== scanSession) return;
+    setScanMessage("ゴーストのQRコードを<ruby>白<rt>しろ</rt></ruby>いわくに<ruby>入<rt>い</rt></ruby>れてね", "Fit the ghost's QR code inside the white frame");
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    let lastRun = 0; let detecting = false; let warnedAt = 0;
+    const step = async (time) => {
+      if (session !== scanSession || !scanStream) return;
+      scanFrame = requestAnimationFrame(step);
+      if (time - lastRun < 110 || detecting || video.readyState < 2 || !video.videoWidth) return;
+      lastRun = time; detecting = true;
+      let text = null;
+      try {
+        if (scanDetector) {
+          const codes = await scanDetector.detect(video);
+          text = codes.length ? codes[0].rawValue : null;
+        } else {
+          const vw = video.videoWidth, vh = video.videoHeight;
+          const side = Math.min(vw, vh) * .85;
+          const size = Math.round(Math.min(720, side));
+          canvas.width = size; canvas.height = size;
+          context.drawImage(video, (vw - side) / 2, (vh - side) / 2, side, side, 0, 0, size, size);
+          const code = window.jsQR(context.getImageData(0, 0, size, size).data, size, size, { inversionAttempts: "dontInvert" });
+          text = code ? code.data : null;
+        }
+      } catch (error) { text = null; }
+      detecting = false;
+      if (!text || session !== scanSession) return;
+      const id = ghostIdFromScan(text);
+      if (!id) {
+        if (time - warnedAt > 2500) { warnedAt = time; setScanMessage("このQRコードはハントのものではありません", "That QR code isn't one of the hunt ghosts"); }
+        return;
+      }
+      closeScanner();
+      scanGhost(id);
+    };
+    scanFrame = requestAnimationFrame(step);
   };
 
   /* Candy Forest page: name entry before a hunt, Continue after */
@@ -915,6 +1035,7 @@
   $("#g-hero").addEventListener("animationend", (event) => { if (event.animationName === "gBoo") event.currentTarget.classList.remove("boo"); });
   $("#g-demo").addEventListener("click", () => {
     if (!gameState?.testMode) return;
+    closeSheets();
     const chips = $("#g-chips"); chips.innerHTML = "";
     config.ghosts.forEach((ghost) => {
       const chip = document.createElement("button");
@@ -929,6 +1050,12 @@
   });
   $("#g-demo-correct").addEventListener("click", () => { if (gameState?.testMode && !gameState.completedAt) scanGhost(currentTarget().id); });
   $("#g-demo-close").addEventListener("click", closeSheets);
+  $("#g-scan").addEventListener("click", () => { SFX.tap(); openScanner(); });
+  $("#g-scan-close").addEventListener("click", closeScanner);
+  $("#g-scan-error-close").addEventListener("click", closeScanner);
+  $("#g-scan-retry").addEventListener("click", openScanner);
+  const inAppWarning = $("#inapp-warning");
+  if (inAppWarning) inAppWarning.hidden = !isInAppBrowser;
   $("#g-help").addEventListener("click", () => { $("#g-paste-err").textContent = ""; $("#g-help-sheet").hidden = false; });
   $("#g-help-close").addEventListener("click", closeSheets);
   $$("#booha-game .sheet-wrap").forEach((wrap) => wrap.addEventListener("click", (event) => { if (event.target === wrap) closeSheets(); }));
@@ -943,7 +1070,10 @@
       $("#g-paste-err").textContent = "このURLはつかえません / That link isn't a ghost QR code.";
     }
   });
-  document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && !game.hidden) requestWakeLock(); });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible" && !game.hidden) requestWakeLock();
+    if (document.visibilityState === "hidden" && !$("#g-scanner").hidden) closeScanner();
+  });
   $$("[data-ghost-total]").forEach((element) => { element.textContent = GHOST_TOTAL; });
   window.setInterval(updateStatus, 1000);
   updateStatus();

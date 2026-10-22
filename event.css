@@ -458,7 +458,8 @@ body.game-open { overflow: hidden; }
   --c: #ef5264;
   --bg: #f9b3bc;
   --ray: #f6939f;
-  --display: "Dela Gothic One", "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif;
+  --display: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif;
+  --numfont: "Dela Gothic One", "M PLUS Rounded 1c", sans-serif;
   --body: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans", system-ui, sans-serif;
   --shadow: 4px 5px 0 var(--ink);
   --outline: drop-shadow(4px 0 0 var(--ink)) drop-shadow(-4px 0 0 var(--ink)) drop-shadow(0 4px 0 var(--ink)) drop-shadow(0 -4px 0 var(--ink)) drop-shadow(5px 8px 0 rgba(37,16,52,.35));
@@ -494,7 +495,7 @@ body.game-open { overflow: hidden; }
 #booha-game .sticker { background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; box-shadow: var(--shadow); }
 #booha-game .g-btn { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
   min-height: 64px; padding: 10px 28px; border: 3px solid var(--ink); border-radius: 999px; box-shadow: var(--shadow);
-  background: var(--pop-yellow); color: var(--ink); font-family: var(--display); font-size: 1.35rem; line-height: 1.25; transition: translate .08s, box-shadow .08s; }
+  background: var(--pop-yellow); color: var(--ink); font-family: var(--display); font-weight: 800; font-size: 1.35rem; line-height: 1.25; transition: translate .08s, box-shadow .08s; }
 #booha-game .g-btn .en { font-size: .8rem; }
 #booha-game .g-btn:active { translate: 3px 4px; box-shadow: 1px 1px 0 var(--ink); }
 #booha-game .g-btn.pink { background: var(--pop-pink); color: #fff; }
@@ -504,8 +505,8 @@ body.game-open { overflow: hidden; }
 #booha-game .g-btn.small .en { font-size: .68rem; }
 #booha-game .g-btn.wide { width: 100%; }
 
-#booha-game .logo { font-family: var(--display); font-size: clamp(1.9rem, 9vw, 2.6rem); line-height: 1.2; color: #fff; text-align: center; text-wrap: balance;
-  -webkit-text-stroke: 7px var(--ink); paint-order: stroke fill; text-shadow: 4px 6px 0 var(--ink); }
+#booha-game .logo { font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 9vw, 2.6rem); line-height: 1.2; color: #fff; text-align: center; text-wrap: balance;
+  -webkit-text-stroke: 5px var(--ink); paint-order: stroke fill; text-shadow: 4px 6px 0 var(--ink); }
 #booha-game .logo rt { -webkit-text-stroke: 4px var(--ink); font-size: .32em; }
 #booha-game .test-flag { position: absolute; z-index: 5; top: calc(env(safe-area-inset-top, 0px) + 8px); left: 50%; translate: -50% 0; background: var(--ink); color: var(--pop-yellow); font-size: .7rem; padding: 3px 12px; border-radius: 999px; letter-spacing: .08em; white-space: nowrap; }
 
@@ -515,11 +516,11 @@ body.game-open { overflow: hidden; }
 #booha-game .g-content { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 420px; }
 #booha-game .steps { display: grid; gap: 12px; width: 100%; }
 #booha-game .step { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 12px; padding: 12px 14px; text-align: left; }
-#booha-game .step .num { width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--ink); display: grid; place-items: center; font-family: var(--display); font-size: 1.5rem; box-shadow: 3px 3px 0 var(--ink); }
+#booha-game .step .num { width: 54px; height: 54px; border-radius: 50%; border: 3px solid var(--ink); display: grid; place-items: center; font-family: var(--numfont); font-size: 1.5rem; box-shadow: 3px 3px 0 var(--ink); }
 #booha-game .step:nth-child(1) .num { background: var(--pop-pink); color: #fff; }
 #booha-game .step:nth-child(2) .num { background: var(--pop-sky); }
 #booha-game .step:nth-child(3) .num { background: var(--pop-lime); }
-#booha-game .step b { font-family: var(--display); font-weight: 400; font-size: 1.3rem; display: block; line-height: 1.5; }
+#booha-game .step b { font-family: var(--display); font-weight: 800; font-size: 1.3rem; display: block; line-height: 1.5; }
 #booha-game .step p { margin-top: 2px; font-size: .92rem; line-height: 1.6; }
 #booha-game .welcome-team { font-size: 1.05rem; padding: 6px 18px; border-radius: 999px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #booha-game .needstart-copy { padding: 14px 18px; font-size: 1rem; line-height: 1.7; }
@@ -529,16 +530,16 @@ body.game-open { overflow: hidden; }
 #booha-game #g-hunt { gap: 8px; }
 #booha-game .topbar { display: flex; align-items: center; gap: 8px; padding-top: 10px; }
 #booha-game .team { flex: 1; min-width: 0; padding: 6px 14px; border-radius: 999px; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#booha-game .count { font-family: var(--display); font-size: 1.15rem; padding: 6px 14px; border-radius: 999px; background: var(--ink); color: #fff; border: 3px solid var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+#booha-game .count { font-family: var(--numfont); font-size: 1.15rem; padding: 6px 14px; border-radius: 999px; background: var(--ink); color: #fff; border: 3px solid var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
 #booha-game .count b { color: var(--pop-yellow); font-weight: 400; }
 #booha-game .icon-btn { width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 50%; padding: 0; background: var(--paper); border: 3px solid var(--ink); box-shadow: 3px 3px 0 var(--ink); }
 #booha-game .icon-btn svg { width: 22px; height: 22px; }
 #booha-game .target-plate { align-self: center; text-align: center; padding: 8px 22px 10px; margin-top: 4px; border-radius: 22px; rotate: -1.5deg; }
 #booha-game .target-plate .lbl { font-size: .85rem; letter-spacing: .06em; }
 #booha-game .target-plate .lbl .en { display: inline; font-size: .72rem; margin-left: 6px; }
-#booha-game .target-name { font-family: var(--display); font-size: clamp(2.4rem, 13vw, 3.4rem); line-height: 1.25; color: var(--c); -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill; text-shadow: 3px 4px 0 var(--ink); }
+#booha-game .target-name { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 13vw, 3.4rem); line-height: 1.25; color: var(--c); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 3px 4px 0 var(--ink); }
 #booha-game .target-name rt { -webkit-text-stroke: 0; text-shadow: none; color: var(--ink); font-size: .3em; }
-#booha-game .target-name-en { font-family: var(--display); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; }
+#booha-game .target-name-en { font-family: var(--numfont); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; }
 #booha-game .stage { flex: 1; min-height: 110px; position: relative; }
 #booha-game .ghost-wrap { position: absolute; inset: 6px 0; display: grid; place-items: center; }
 #booha-game .stage .halo { position: absolute; left: 50%; top: 50%; width: min(66vw, 300px); aspect-ratio: 1; margin: calc(min(66vw, 300px) / -2) 0 0 calc(min(66vw, 300px) / -2); border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.9), rgba(255,255,255,0) 68%); animation: gPulse 2.6s ease-in-out infinite; }
@@ -570,7 +571,7 @@ body.game-open { overflow: hidden; }
 #booha-game .g-overlay { position: absolute; inset: 0; z-index: 20; display: flex; flex-direction: column; gap: 14px; align-items: center; justify-content: center; text-align: center; overflow: hidden;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 #booha-game .big-ghost { width: min(64vw, 280px); }
-#booha-game .bubble { padding: 10px 20px; border-radius: 22px; font-family: var(--display); font-size: 1.5rem; line-height: 1.5; }
+#booha-game .bubble { padding: 10px 20px; border-radius: 22px; font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1.5; }
 #booha-game .bubble .en { font-size: .8rem; }
 #booha-game .tap-hint { margin-top: 4px; font-size: 1rem; color: #fff; text-shadow: 0 2px 0 var(--ink), 2px 0 0 var(--ink), -2px 0 0 var(--ink), 0 -2px 0 var(--ink); animation: gBlink 1s steps(2) infinite; }
 #booha-game .tap-hint .en { opacity: 1; }
@@ -586,8 +587,8 @@ body.game-open { overflow: hidden; }
 @keyframes gRingout { to { scale: 2.2; opacity: 0; } }
 @keyframes gGotcha { 0% { scale: 1; } 40% { scale: 1.35; rotate: -10deg; } 100% { scale: 1.1; rotate: 0deg; } }
 #booha-game .stamp { position: absolute; z-index: 5; top: 50%; left: 50%; translate: -50% -50%; rotate: -12deg; padding: 6px 22px 10px; background: var(--pop-pink); color: #fff; border: 5px solid var(--ink); border-radius: 18px; box-shadow: 6px 7px 0 var(--ink);
-  font-family: var(--display); font-size: clamp(2.6rem, 14vw, 3.8rem); line-height: 1.2; white-space: nowrap; opacity: 0; scale: 3; pointer-events: none; }
-#booha-game .stamp .en { font-family: var(--display); font-size: 1rem; letter-spacing: .2em; opacity: 1; }
+  font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 14vw, 3.8rem); line-height: 1.2; white-space: nowrap; opacity: 0; scale: 3; pointer-events: none; }
+#booha-game .stamp .en { font-family: var(--numfont); font-size: 1rem; letter-spacing: .2em; opacity: 1; }
 #booha-game .stamp.show { animation: gStamp .45s cubic-bezier(.2,1.6,.4,1) forwards; }
 @keyframes gStamp { 0% { opacity: 0; scale: 3; } 100% { opacity: 1; scale: 1; } }
 
@@ -595,7 +596,7 @@ body.game-open { overflow: hidden; }
 #booha-game .swirl { position: absolute; width: 150vmax; aspect-ratio: 1; border-radius: 50%; z-index: 1; pointer-events: none;
   background: repeating-conic-gradient(var(--c) 0 12deg, transparent 12deg 30deg); opacity: .5; animation: gSpin 2.5s linear infinite;
   -webkit-mask: radial-gradient(circle, transparent 12%, #000 13%, #000 60%, transparent 61%); mask: radial-gradient(circle, transparent 12%, #000 13%, #000 60%, transparent 61%); }
-#booha-game .next-lbl { font-family: var(--display); font-size: 1.5rem; color: var(--pop-yellow); -webkit-text-stroke: 5px var(--ink); paint-order: stroke fill; }
+#booha-game .next-lbl { font-family: var(--display); font-weight: 800; font-size: 1.5rem; color: var(--pop-yellow); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; }
 #booha-game .next-lbl rt { -webkit-text-stroke: 0; color: #fff; }
 #booha-game .next-lbl .en { -webkit-text-stroke: 0; color: #fff; }
 #booha-game #g-reveal .big-ghost { scale: 0; }
@@ -622,8 +623,8 @@ body.game-open { overflow: hidden; }
 @keyframes gHop { 0%,100% { translate: 0 0; } 50% { translate: 0 -18px; } }
 #booha-game .proof { width: 100%; max-width: 400px; padding: 18px 18px 16px; text-align: center; border-width: 4px; border-radius: 26px; animation: gGlow 1.6s ease-in-out infinite; }
 @keyframes gGlow { 0%,100% { box-shadow: 6px 7px 0 var(--ink), 0 0 0 0 rgba(255,95,162,0); } 50% { box-shadow: 6px 7px 0 var(--ink), 0 0 0 10px rgba(255,95,162,.45); } }
-#booha-game .proof .done { font-family: var(--display); font-size: clamp(1.8rem, 9.5vw, 2.6rem); white-space: nowrap; line-height: 1.2; color: var(--pop-pink); -webkit-text-stroke: 6px var(--ink); paint-order: stroke fill; text-shadow: 3px 4px 0 var(--ink); }
-#booha-game .proof .score { font-family: var(--display); font-size: 4.2rem; line-height: 1; margin: 6px 0 2px; font-variant-numeric: tabular-nums; }
+#booha-game .proof .done { font-family: var(--display); font-weight: 800; font-size: clamp(1.8rem, 9.5vw, 2.6rem); white-space: nowrap; line-height: 1.2; color: var(--pop-pink); -webkit-text-stroke: 4px var(--ink); paint-order: stroke fill; text-shadow: 3px 4px 0 var(--ink); }
+#booha-game .proof .score { font-family: var(--numfont); font-size: 4.2rem; line-height: 1; margin: 6px 0 2px; font-variant-numeric: tabular-nums; }
 #booha-game .proof .team-name { font-size: 1.4rem; margin: 4px 0; overflow-wrap: anywhere; }
 #booha-game .proof dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 12px auto 0; width: fit-content; text-align: left; font-size: .95rem; }
 #booha-game .proof dt { opacity: .7; }
@@ -640,7 +641,7 @@ body.game-open { overflow: hidden; }
 #booha-game .sheet { width: 100%; max-width: 520px; max-height: 86%; overflow-y: auto; background: var(--paper); border: 3px solid var(--ink); border-bottom: 0; border-radius: 26px 26px 0 0;
   padding: 18px max(18px, env(safe-area-inset-right, 0px)) calc(18px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px)); animation: gUp .25s ease-out; user-select: text; -webkit-user-select: text; }
 @keyframes gUp { from { translate: 0 100%; } }
-#booha-game .sheet h2 { font-family: var(--display); font-weight: 400; font-size: 1.3rem; margin-bottom: 4px; line-height: 1.5; }
+#booha-game .sheet h2 { font-family: var(--display); font-weight: 800; font-size: 1.3rem; margin-bottom: 4px; line-height: 1.5; }
 #booha-game .sheet p { margin: 6px 0; font-size: .92rem; line-height: 1.6; }
 #booha-game .chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 12px 0; }
 #booha-game .chip { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 2px; border: 2.5px solid var(--ink); border-radius: 14px; background: #fff; font-size: .78rem; line-height: 1.3; }
@@ -653,7 +654,7 @@ body.game-open { overflow: hidden; }
 #booha-game .sheet .g-btn + .g-btn { margin-top: 8px; }
 
 #booha-game .g-toast { position: absolute; z-index: 60; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); translate: -50% 0; width: max-content; max-width: calc(100% - 32px); background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 16px; font-size: .9rem; text-align: center; }
-#booha-game .g-loading { position: absolute; inset: 0; z-index: 100; display: grid; place-items: center; background: #ffd6ea; font-family: var(--display); font-size: 1.3rem; }
+#booha-game .g-loading { position: absolute; inset: 0; z-index: 100; display: grid; place-items: center; background: #ffd6ea; font-family: var(--display); font-weight: 800; font-size: 1.3rem; }
 
 @media (max-height: 700px) {
   #booha-game .find-line .en, #booha-game .shelf-title { display: none; }
@@ -1423,3 +1424,32 @@ body[data-theme="info"] .info-section > p.eyebrow .en-sub { font-size: 13px; }
 .status-card-label .en-sub { display: block; margin: 0; }
 .status-card-label .en-sub { margin-top: 2px; letter-spacing: .06em; }
 body[data-theme="info"] .info-lede .en-sub > span { display: inline; }
+
+/* In-page QR scanner */
+#booha-game .bottom-row .scan-btn { flex: 1.5; min-height: 64px; font-size: 1.4rem; }
+#booha-game .scan-btn-row { display: inline-flex; align-items: center; gap: 8px; }
+#booha-game .scan-btn svg { width: 28px; height: 28px; }
+#booha-game .g-scanner { position: absolute; inset: 0; z-index: 35; background: #120818; overflow: hidden; }
+#booha-game .g-scanner video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#booha-game .scan-frame { position: absolute; left: 50%; top: 50%; width: min(72vw, 52vh, 360px); aspect-ratio: 1; translate: -50% -50%; border-radius: 22px; box-shadow: 0 0 0 100vmax rgba(37,16,52,.55); pointer-events: none; }
+#booha-game .scan-frame i { position: absolute; width: 22%; height: 22%; border: 7px solid #fff; filter: drop-shadow(0 0 2px rgba(37,16,52,.6)); }
+#booha-game .scan-frame i:nth-child(1) { top: -4px; left: -4px; border-right: 0; border-bottom: 0; border-top-left-radius: 22px; }
+#booha-game .scan-frame i:nth-child(2) { top: -4px; right: -4px; border-left: 0; border-bottom: 0; border-top-right-radius: 22px; }
+#booha-game .scan-frame i:nth-child(3) { bottom: -4px; left: -4px; border-right: 0; border-top: 0; border-bottom-left-radius: 22px; }
+#booha-game .scan-frame i:nth-child(4) { bottom: -4px; right: -4px; border-left: 0; border-top: 0; border-bottom-right-radius: 22px; }
+#booha-game .scan-line { position: absolute; left: 8%; right: 8%; top: 10%; height: 4px; border-radius: 4px; background: var(--pop-pink); box-shadow: 0 0 14px var(--pop-pink); animation: gScanLine 1.8s ease-in-out infinite alternate; }
+@keyframes gScanLine { to { top: 88%; } }
+#booha-game .scan-top { position: absolute; z-index: 2; top: calc(env(safe-area-inset-top, 0px) + 12px); left: max(16px, env(safe-area-inset-left, 0px)); right: max(16px, env(safe-area-inset-right, 0px)); display: flex; align-items: center; gap: 10px; }
+#booha-game .scan-target { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; padding: 4px 14px 4px 6px; border-radius: 999px; font-size: 1rem; line-height: 1.35; }
+#booha-game .scan-target img { width: 40px; height: 40px; object-fit: contain; flex: none; }
+#booha-game .scan-target .en { font-size: .7rem; }
+#booha-game .scan-msg:empty { display: none; }
+#booha-game .scan-msg { position: absolute; z-index: 2; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 28px); translate: -50% 0; width: min(calc(100% - 32px), 420px); padding: 10px 16px; border-radius: 18px; text-align: center; font-size: 1rem; line-height: 1.5; }
+#booha-game .scan-msg .en { font-size: .75rem; }
+#booha-game .scan-error { position: absolute; inset: 0; z-index: 3; display: grid; place-items: center; padding: 16px; background: rgba(37,16,52,.75); }
+#booha-game .scan-error-card { width: min(100%, 420px); padding: 18px; display: grid; gap: 10px; text-align: center; }
+#booha-game .scan-error-card p { font-size: 1rem; line-height: 1.65; }
+#booha-game .scan-error-card .en { margin-top: 4px; }
+body[data-theme="candy"] .inapp-warning { margin: 14px 0 0; padding: 12px 14px; border: 3px solid var(--ink); border-radius: 14px; background: #fff3a8; color: var(--ink) !important; font-weight: 700; }
+body[data-theme="candy"] .inapp-warning .en-sub { color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { #booha-game .scan-line { animation: none; top: 50%; } }
