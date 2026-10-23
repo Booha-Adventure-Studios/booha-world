@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Booha Adventure, A Guided Tour</title>
-<meta name="description" content="A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, Grimmerglen, the daily curriculum, profile pages, and the arcade, built from real screens and real art.">
+<meta name="description" content="A guided tour of The Booha Adventure: the weekly path from Blitz to the nine maze games, the worlds that open beyond it, rewards and rainbow stars, student progress, and the English Juku class, built from real screens.">
 <meta name="author" content="Bryan Harper">
 <link rel="icon" type="image/webp" href="assets/tour/mascot-ghost-real.webp">
 <script type="application/ld+json">
@@ -18,8 +18,8 @@
     "name": "Bryan Harper",
     "url": "https://booha-adventure-studios.github.io/booha-world/bryan.html"
   },
-  "description": "A guided tour of The Booha Adventure: the maze, Karasuki, Utsuroba, Muenba, Grimmerglen, the daily curriculum, profile pages, and the arcade, built from real screens and real art.",
-  "inLanguage": ["en", "ja"],
+  "description": "A guided tour of The Booha Adventure: the weekly path from Blitz to the nine maze games, the worlds that open beyond it, rewards and rainbow stars, student progress, and the English Juku class, built from real screens.",
+  "inLanguage": ["ja", "en"],
   "isPartOf": {
     "@type": "WebSite",
     "name": "Booha World",
@@ -30,827 +30,600 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+  /* Layout: "misty morning / night maze". A light lavender page (dark at night) where real app screens sit in
+     device frames. The glowing amber maze line from the app is the one signature element: it draws the weekly path. */
   :root{
-    --bg:#0a0806;
-    --ink:#f4efe6;
-    --muted:#b9ad9a;
-    --gold:#e9b64a;
-    --line:rgba(233,182,74,0.22);
-    --maxw:1120px;
-
-    /* per-world accent colors, sampled from the real app's own palettes */
-    --c-hub:#e9b64a;
-    --c-karasuki:#7fae5a;
-    --c-utsuroba:#b28cd6;
-    --c-muenba:#6fa683;
-    --c-grimmerglen:#eaa5d5;
-    --c-curriculum:#e0a23a;
-    --c-profile:#caa662;
-    --c-arcade:#e0698a;
+    --bg:#f2eef8;
+    --bg2:#e9e3f3;
+    --surface:#ffffff;
+    --ink:#271f3d;
+    --muted:#655c7e;
+    --line:rgba(39,31,61,.13);
+    --glow:#ef8f1f;
+    --glow-soft:rgba(239,143,31,.22);
+    --pink:#d9468c;
+    --frame:#1a1530;
+    --note-bg:#e3f6ec; --note-ink:#1f5a3c; --note-line:#7cc49d;
+    --w-karasuki:#4c8636; --w-utsuroba:#6e4fb0; --w-muenba:#2f7d58; --w-grimmerglen:#b94e95; --w-akiya:#2f63c4; --w-juku:#a8741c;
+    --f-display:'Dela Gothic One', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    --f-body:'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', system-ui, sans-serif;
+    --maxw:1140px;
   }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    --bg:#110e1d; --bg2:#181428; --surface:#1e1932; --ink:#f1ecfa; --muted:#a79fbe; --line:rgba(241,236,250,.12);
+    --glow:#ffae45; --glow-soft:rgba(255,174,69,.2); --pink:#ff7cb8; --frame:#000;
+    --note-bg:#14291f; --note-ink:#bfeed3; --note-line:#3f8a63;
+    --w-karasuki:#8fc96f; --w-utsuroba:#b79bf0; --w-muenba:#79d3a3; --w-grimmerglen:#f3a4d6; --w-akiya:#8db4ff; --w-juku:#f0c46a;
+    color-scheme:dark; } }
+  :root[data-theme="dark"]{
+    --bg:#110e1d; --bg2:#181428; --surface:#1e1932; --ink:#f1ecfa; --muted:#a79fbe; --line:rgba(241,236,250,.12);
+    --glow:#ffae45; --glow-soft:rgba(255,174,69,.2); --pink:#ff7cb8; --frame:#000;
+    --note-bg:#14291f; --note-ink:#bfeed3; --note-line:#3f8a63;
+    --w-karasuki:#8fc96f; --w-utsuroba:#b79bf0; --w-muenba:#79d3a3; --w-grimmerglen:#f3a4d6; --w-akiya:#8db4ff; --w-juku:#f0c46a;
+    color-scheme:dark; }
+
+  :root{padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);}
+  [hidden]{display:none!important;}
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Zen Kaku Gothic New', system-ui, -apple-system, "Hiragino Sans", sans-serif;
-  }
-  h1,h2,h3,.display{
-    font-family:'Shippori Mincho', serif;
-    font-weight:600;
-    letter-spacing:.01em;
-  }
-  ruby rt{
-    font-family:'Zen Kaku Gothic New', sans-serif;
-    font-size:.5em;
-    color:var(--muted);
-    user-select:none;
-  }
-  a{color:inherit;}
+  body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.7;}
+  body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:80; background:var(--bg);}
   img{max-width:100%; display:block;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+  ruby rt{font-size:.5em; color:var(--muted); font-weight:500;}
+  h1,h2,h3{text-wrap:balance; margin:0;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));}
+  :focus-visible{outline:3px solid var(--glow); outline-offset:3px; border-radius:6px;}
 
-  /* ---------- top bar ---------- */
-  .topbar{
-    position:sticky; top:0; z-index:60;
-    background:rgba(10,8,6,0.9); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; gap:16px;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:'Shippori Mincho',serif; font-size:1.15rem; white-space:nowrap;}
-  .brand .jpPrimary{font-size:1em;}
-  .brand .enSecondary{font-family:'Zen Kaku Gothic New',sans-serif; font-size:.62em; color:var(--muted); margin-left:-4px;}
-  .brand img{width:30px; height:30px;}
-  .enterBtn{
-    background:var(--gold); color:#241705; padding:9px 20px; border-radius:999px;
-    font-weight:700; text-decoration:none; white-space:nowrap; font-family:'Zen Kaku Gothic New',sans-serif;
-  }
-  .enterBtn .jpPrimary{display:block; line-height:1;}
-  .enterBtn .enSecondary{display:block; font-size:.68em; font-weight:500; line-height:1; margin-top:2px;}
-  @media(max-width:600px){
-    .topbar .wrap{padding:10px 16px; gap:10px;}
-    .brand{gap:8px; font-size:.98rem; min-width:0; overflow:hidden; text-overflow:ellipsis;}
-    .brand img{width:28px; height:28px; flex:0 0 28px;}
-    .enterBtn{padding:9px 14px; font-size:.85rem;}
-  }
+  /* ---------- review strip ---------- */
+  .review{background:var(--note-bg); color:var(--note-ink); border-bottom:1px solid var(--note-line); font-size:.82rem;}
+  .review .wrap{display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; padding-block:9px;}
+  .review b{letter-spacing:.08em; text-transform:uppercase; font-size:.72rem;}
+  .review button{margin-left:auto; font:700 .78rem var(--f-body); color:inherit; background:transparent; border:1px solid var(--note-line); border-radius:999px; padding:5px 12px; cursor:pointer;}
+  .note{margin-top:14px; font-size:.8rem; line-height:1.6; color:var(--note-ink); background:var(--note-bg); border:1px dashed var(--note-line); border-radius:12px; padding:10px 12px; max-width:56ch;}
+  .note b{font-weight:900;}
+  body.clean .note, body.clean .reviewPanel{display:none;}
 
-  /* ---------- tab bar ---------- */
-  .tabbar{
-    position:sticky; top:59px; z-index:50;
-    display:flex; gap:6px; overflow-x:auto; padding:14px 24px 0;
-    max-width:var(--maxw); margin:0 auto;
-    background:rgba(10,8,6,0.92); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .tabbtn{
-    flex:0 0 auto; background:transparent; border:1px solid var(--line); color:var(--muted);
-    padding:10px 18px; border-radius:10px 10px 0 0; font:600 .82rem 'Zen Kaku Gothic New',sans-serif;
-    letter-spacing:.04em; text-transform:uppercase; cursor:pointer; border-bottom:none;
-  }
-  .tabbtn .jpTab{display:block; font-size:1em; font-weight:700; margin-top:0; letter-spacing:0; text-transform:none;}
-  .tabbtn .enTab{display:block; font-size:.72em; font-weight:500; margin-top:2px; letter-spacing:.04em; text-transform:uppercase; opacity:.78;}
-  .tabbtn.active{ color:#1a1206; background:var(--tabcolor,var(--gold)); border-color:var(--tabcolor,var(--gold)); }
-  @media(max-width:600px){
-    .tabbar{top:49px; flex-wrap:wrap; overflow-x:visible; gap:8px 6px;}
-    .tabbtn{flex:1 1 calc(50% - 6px); padding:9px 8px;}
-  }
+  /* ---------- header + tabs ---------- */
+  .top{position:sticky; top:env(safe-area-inset-top,0px); z-index:60; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);}
+  .top .wrap{display:flex; align-items:center; gap:14px; padding-block:10px;}
+  .brand{display:flex; align-items:center; gap:10px; min-width:0; flex:1;}
+  .brand img{width:34px; height:34px; flex:0 0 34px;}
+  .brand b{font-family:var(--f-display); font-weight:400; font-size:1.02rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block;}
+  .brand small{display:block; font-size:.66rem; color:var(--muted); letter-spacing:.06em;}
+  .brand > div{min-width:0;}
+  .enter{flex:0 0 auto; text-decoration:none; background:var(--pink); color:#fff; border-radius:999px; padding:8px 18px; font-weight:900; line-height:1.15; text-align:center; font-size:.9rem; box-shadow:0 6px 18px color-mix(in srgb, var(--pink) 35%, transparent);}
+  .enter small{display:block; font-weight:500; font-size:.66rem; opacity:.9;}
+  .tabs{display:flex; gap:6px; padding-bottom:10px; overflow-x:auto; scrollbar-width:none;}
+  .top .wrap.tabsWrap{padding-block:0;}
+  .tab{flex:0 0 auto; border:1px solid var(--line); background:var(--surface); color:var(--muted); border-radius:999px; padding:7px 16px; font-family:var(--f-body); cursor:pointer; display:flex; align-items:baseline; gap:8px;}
+  .tab b{color:var(--ink); font-weight:900; font-size:.92rem;}
+  .tab span{font-size:.7rem; letter-spacing:.05em;}
+  .tab.on{background:var(--ink); border-color:var(--ink);}
+  .tab.on b,.tab.on span{color:var(--bg);}
+  @media(max-width:600px){ .tab{flex-direction:column; align-items:center; gap:0; padding:5px 13px;} .tab span{font-size:.62rem;} .brand small{display:none;} .top .wrap{gap:10px;} }
 
   /* ---------- hero ---------- */
-  .hero{padding:56px 0 40px; text-align:center; position:relative; overflow:hidden;
-    background:radial-gradient(60vw 50vh at 50% 0%, rgba(233,182,74,0.14), transparent 65%);}
-  .hero-banner{width:100%; max-width:640px; margin:0 auto 28px; border-radius:16px; overflow:hidden;
-    box-shadow:0 24px 50px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);}
-  .hero-banner img{width:100%; display:block;}
-  .eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold);
-    border:1px solid var(--line); padding:6px 16px; border-radius:999px; margin-bottom:20px;}
-  .eyebrow .jpPrimary,.eyebrow .enSecondary{display:block;}
-  .eyebrow .jpPrimary{font-weight:700;}
-  .eyebrow .enSecondary{font-size:.78em; letter-spacing:.12em; margin-top:2px;}
-  .hero h1{font-size:clamp(2rem,5.6vw,3.3rem); margin:6px 0 4px;}
-  .hero .jpTitle{font-size:clamp(.95rem,2.4vw,1.15rem); color:var(--muted); margin:0 0 20px;}
-  .hero p.tagline{max-width:540px; margin:0 auto 8px; color:var(--ink); font-size:1.05rem; line-height:1.7;}
-  .hero p.tagline.jp{color:var(--ink); font-size:1.05rem; margin-bottom:8px;}
-  .hero p.tagline.en{color:var(--muted); font-size:.92rem; margin-bottom:26px;}
-  .badges{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:6px;}
-  .badge{font-size:.76rem; color:var(--muted); border:1px solid var(--line); padding:7px 14px; border-radius:999px;}
-  .badge-jp{display:block; color:var(--ink); font-weight:700;}
-  .badge-en{display:block; font-size:.78em; margin-top:2px;}
-  @media(max-width:600px){ .hero h1{font-size:clamp(1.65rem,7.2vw,2rem);} }
+  .hero{padding-block:52px 48px; position:relative; overflow:hidden;}
+  .hero .wrap{display:grid; grid-template-columns:1.05fr 1fr; gap:44px; align-items:center;}
+  @media(max-width:860px){ .hero .wrap{grid-template-columns:1fr; gap:30px;} }
+  .hero .wrap > *{min-width:0;}
+  .eyebrow{display:inline-block; font-size:.76rem; font-weight:700; color:var(--glow); border:1.5px solid var(--glow); border-radius:999px; padding:4px 12px; margin-bottom:18px;}
+  .hero h1{font-family:var(--f-display); font-weight:400; font-size:clamp(2.1rem,5.6vw,3.6rem); line-height:1.15; letter-spacing:.01em;}
+  .hero .en{font-family:var(--f-display); font-weight:400; color:var(--muted); font-size:clamp(1rem,2.2vw,1.3rem); margin:6px 0 20px;}
+  .hero p{margin:0 0 10px; max-width:34em;}
+  .hero p.sub{color:var(--muted); font-size:.95rem;}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;}
+  .badge{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:6px 12px; font-size:.74rem; color:var(--muted); line-height:1.4;}
+  .badge b{display:block; color:var(--ink); font-size:.82rem;}
+  .heroShot{position:relative; padding-bottom:30px;}
+  .heroShot .dev{transform:rotate(1.2deg);}
+  .heroShot .dev.small{position:absolute; width:34%; left:-5%; bottom:-6%; transform:rotate(-4deg);}
+  @media(max-width:860px){ .heroShot .dev.small{left:auto; right:-1%; width:32%;} }
 
-  /* ---------- tab panels ---------- */
-  .panel{display:none; border-top:1px solid var(--line);}
-  .panel.active{display:block;}
-  .panelIntro{display:flex; flex-direction:column; padding:44px 0 8px; text-align:center;}
-  .panelIntro .kicker{font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--pcolor); font-weight:700;}
-  .panelIntro .kicker .jpPrimary,.panelIntro .kicker .enSecondary{display:block;}
-  .panelIntro .kicker .enSecondary{font-size:.8em; letter-spacing:.12em; margin-top:2px;}
-  .panelIntro p{max-width:640px; margin:14px auto 0; color:var(--muted); font-size:.92rem; line-height:1.75; order:2;}
-  .panelIntro p.jp{color:var(--ink); font-size:1rem; order:1;}
+  /* ---------- device frame ---------- */
+  .dev{background:var(--frame); border-radius:18px; padding:6px; box-shadow:0 22px 50px rgba(30,20,60,.28), 0 0 0 1px var(--line);}
+  .dev img{width:100%; border-radius:13px; cursor:zoom-in;}
+  .cap{font-size:.74rem; color:var(--muted); margin-top:8px; text-align:center; line-height:1.4;}
 
-  /* ---------- content blocks ---------- */
-  .block{padding:52px 0;}
-  .block-inner{display:grid; grid-template-columns:1fr; gap:32px; align-items:center;}
-  @media(min-width:880px){
-    .block-inner{grid-template-columns:1fr 1.1fr; gap:48px;}
-    .block-inner.reverse{direction:rtl;}
-    .block-inner.reverse > *{direction:ltr;}
+  /* ---------- panels ---------- */
+  .panel{display:none;}
+  .panel.on{display:block;}
+  .pIntro{padding-block:46px 30px; text-align:center;}
+  .kick{font-family:var(--f-display); font-weight:400; font-size:clamp(1.7rem,4.2vw,2.6rem); line-height:1.3;}
+  .kick small{display:block; font-family:var(--f-body); font-weight:700; font-size:.36em; color:var(--muted); letter-spacing:.14em; text-transform:uppercase; margin-top:6px;}
+  .pIntro p{max-width:620px; margin:14px auto 0; color:var(--muted);}
+  .pIntro p.jp{color:var(--ink);}
+
+  .sec{padding-block:44px; border-top:1px solid var(--line);}
+  .row{display:grid; grid-template-columns:1fr 1.15fr; gap:44px; align-items:center;}
+  .row.flip > :first-child{order:2;}
+  @media(max-width:860px){ .row{grid-template-columns:1fr; gap:24px;} .row.flip > :first-child{order:0;} }
+  .row > *{min-width:0;}
+  .tag{display:inline-flex; gap:8px; align-items:center; font-size:.74rem; font-weight:900; letter-spacing:.1em; color:var(--c,var(--glow)); text-transform:uppercase; margin-bottom:6px;}
+  .tag::before{content:""; width:18px; height:3px; border-radius:2px; background:currentColor;}
+  .jh{font-size:1.25rem; font-weight:900; line-height:1.7;}
+  .eh{font-size:1rem; font-weight:700; color:var(--muted); margin:2px 0 10px;}
+  .copy{margin:0 0 10px; max-width:52ch;}
+  .copy.en{color:var(--muted); font-size:.93rem;}
+  .facts{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;}
+  .facts span{font-size:.76rem; font-weight:700; border-radius:999px; padding:4px 10px; background:var(--bg2); border:1px solid var(--line);}
+
+  .shots{display:grid; gap:14px; align-items:start;}
+  .s2{grid-template-columns:1fr 1fr;}
+  .s3{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .shots > *{min-width:0;}
+  @media(max-width:560px){ .s3{grid-template-columns:1fr;} }
+  .narrow{max-width:420px;}
+
+  /* ---------- the weekly path ---------- */
+  .path{padding-block:44px 50px; background:linear-gradient(180deg, var(--bg2), var(--bg));}
+  .path h2{font-family:var(--f-display); font-weight:400; text-align:center; font-size:clamp(1.4rem,3.4vw,2rem);}
+  .path .sub{text-align:center; color:var(--muted); margin:6px auto 30px; max-width:600px;}
+  .steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); position:relative;}
+  .steps::before{content:""; position:absolute; left:12.5%; right:12.5%; top:27px; height:6px; border-radius:6px; background:var(--glow); box-shadow:0 0 14px var(--glow), 0 0 4px var(--glow);}
+  .step{position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 10px;}
+  .step .dot{width:60px; height:60px; border-radius:50%; background:var(--surface); border:5px solid var(--glow); display:grid; place-items:center; font-family:var(--f-display); font-size:1.4rem; color:var(--glow); box-shadow:0 0 0 6px var(--bg2), 0 0 18px var(--glow-soft); z-index:1;}
+  .step h3{font-size:1.02rem; font-weight:900; margin-top:14px; line-height:1.7;}
+  .step .e{font-size:.8rem; color:var(--muted); font-weight:700;}
+  .step p{font-size:.84rem; color:var(--muted); margin:8px 0 0; line-height:1.6;}
+  .step .chips{display:flex; flex-wrap:wrap; justify-content:center; gap:4px; margin-top:10px;}
+  .step .chips i{font-style:normal; font-size:.68rem; font-weight:900; border-radius:6px; padding:2px 7px; color:#fff; background:var(--c);}
+  @media(max-width:760px){
+    .steps{grid-template-columns:1fr; gap:22px;}
+    .steps::before{left:27px; right:auto; top:30px; bottom:30px; width:6px; height:auto;}
+    .step{display:grid; grid-template-columns:60px 1fr; column-gap:16px; text-align:left; align-items:start; padding:0;}
+    .step .dot{grid-row:1/span 4;}
+    .step h3{margin-top:4px;}
+    .step .chips{justify-content:flex-start;}
   }
-  .block-inner > div:first-child{display:flex; flex-direction:column;}
-  .block-tag{font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--bcolor,var(--gold)); font-weight:700; margin-bottom:8px; order:0;}
-  .block-tag .enSecondary{font-size:.82em; letter-spacing:.08em; margin-left:7px;}
-  .block h2{font-size:clamp(1.25rem,2.6vw,1.65rem); color:var(--muted); margin:0 0 4px; order:2;}
-  .block .jpHead{color:var(--ink); font-size:1.08rem; margin:0 0 8px; order:1;}
-  .block p.copy{color:var(--muted); font-size:.92rem; line-height:1.75; max-width:52ch; order:4;}
-  .block p.copy.jp{color:var(--ink); font-size:1rem; margin-top:10px; line-height:2; order:3;}
+  .pathFoot{display:flex; justify-content:center; flex-wrap:wrap; gap:8px 20px; margin-top:28px; font-size:.82rem; color:var(--muted);}
+  .pathFoot b{color:var(--ink);}
 
-  /* single UI-screenshot frame */
-  .shotFrame{
-    border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
-    transform:rotate(-0.6deg); background:#0d0b09; display:flex; align-items:center; justify-content:center;
-  }
-  .shotFrame img{width:100%; display:block; max-height:460px; object-fit:contain; object-position:center; cursor:zoom-in;}
+  /* score tiers */
+  .tiers{display:flex; flex-wrap:wrap; gap:5px; margin-top:12px;}
+  .tiers span{font-size:.66rem; font-weight:900; letter-spacing:.08em; padding:4px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface); font-variant-numeric:tabular-nums;}
+  .tiers .lg{background:linear-gradient(90deg,#ff6fb5,#ffb84a,#7ed957,#4cc9f0,#9b8ad1); color:#1a1206; border:0;}
+  .stars{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .stars div{flex:1 1 160px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px; font-size:.8rem; color:var(--muted);}
+  .stars b{display:block; font-size:1.25rem; letter-spacing:2px; line-height:1.2;}
+  .stars .g b{color:#e2a521;}
+  .stars .r b{background:linear-gradient(90deg,#ff6fb5,#ffb84a,#7ed957,#4cc9f0,#9b8ad1); -webkit-background-clip:text; background-clip:text; color:transparent;}
 
-  /* fanned photo stack, for environment art */
-  .imgStack{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:start;}
-  .imgStack__item{
-    position:static; width:auto; max-width:none; border-radius:16px; overflow:hidden;
-    box-shadow:0 16px 36px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.06);
-    transform:none;
-  }
-  .imgStack__item img{aspect-ratio:1/1; object-fit:cover; width:100%;}
-  .imgStack.grimmerglenStack .imgStack__item img{aspect-ratio:16/9; object-fit:cover;}
-  @media(max-width:879px){
-    .imgStack{grid-template-columns:repeat(2,minmax(0,1fr)); padding:6px 4px 16px;}
-  }
+  /* worlds grid */
+  .worlds{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px;}
+  .world{background:var(--surface); border:1px solid var(--line); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; min-width:0;}
+  .world > img{aspect-ratio:16/9; object-fit:cover; width:100%; cursor:zoom-in;}
+  .world .in{padding:16px 18px 18px; border-top:4px solid var(--c);}
+  .world h3{font-size:1.2rem; font-weight:900; color:var(--c);}
+  .world h3 small{font-size:.62em; color:var(--muted); margin-left:8px; letter-spacing:.06em;}
+  .world p{margin:6px 0 0; font-size:.88rem;}
+  .world p.en{color:var(--muted); font-size:.84rem;}
+  @media(max-width:700px){ .worlds{grid-template-columns:1fr;} }
+  .lockline{display:flex; align-items:center; gap:12px; justify-content:center; flex-wrap:wrap; margin:0 auto 22px; background:var(--surface); border:1.5px dashed var(--glow); border-radius:14px; padding:10px 16px; max-width:640px; font-size:.88rem;}
+  .lockline b{color:var(--glow); font-weight:900;}
 
-  /* two-up screenshot pair */
-  .shotPair{display:flex; gap:14px;}
-  @media(max-width:879px){ .shotPair{flex-direction:column;} }
-  .shotPair .shotFrame{flex:1; transform:rotate(0deg); height:320px;}
-  .shotPair .shotFrame img{max-height:none; height:100%;}
-  @media(max-width:600px){ .shotPair .shotFrame{height:260px;} }
+  /* arcade */
+  .arcade{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;}
+  .arcade figure{margin:0; min-width:0;}
+  .arcade img{aspect-ratio:4/3; object-fit:cover; border-radius:12px; width:100%; cursor:zoom-in; box-shadow:0 0 0 1px var(--line);}
+  .arcade figcaption{font-weight:900; font-size:.86rem; margin-top:6px;}
+  .arcade figcaption span{display:block; font-weight:500; color:var(--muted); font-size:.74rem;}
+  @media(max-width:700px){ .arcade{grid-template-columns:1fr 1fr;} }
 
-  /* three-up screenshot row, for the three curriculum tracks */
-  .shotTrio{display:flex; gap:12px;}
-  @media(max-width:879px){ .shotTrio{flex-direction:column;} }
-  .shotTrio .shotFrame{flex:1; transform:rotate(0deg); height:230px;}
-  .shotTrio .shotFrame img{max-height:none; height:100%;}
-  @media(max-width:600px){ .shotTrio .shotFrame{height:210px;} }
+  .rainbow{margin-top:14px; border-radius:16px; padding:2px; background:linear-gradient(90deg,#ff6fb5,#ffb84a,#7ed957,#4cc9f0,#9b8ad1);}
+  .rainbow > *{background:var(--surface);}
+  .rainbow{display:flex; flex-direction:column;}
+  .rainbow .rTop{border-radius:14px 14px 0 0; padding:12px 14px 0; display:flex; align-items:center; gap:10px;}
+  .rainbow .rjh{padding:6px 14px 0; font-weight:900;}
+  .rainbow p{margin:0; border-radius:0 0 14px 14px; padding:4px 14px 12px; font-size:.86rem; color:var(--muted);}
+  .rainbow p b{color:var(--ink);}
+  .rStars{font-size:1.5rem; letter-spacing:3px; background:linear-gradient(90deg,#ff6fb5,#ffb84a,#7ed957,#4cc9f0,#9b8ad1); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .newChip,.openChip{font-size:.66rem; font-weight:900; letter-spacing:.1em; border-radius:6px; padding:3px 8px; color:#fff; background:var(--pink);}
+  .openChip{background:#2f7d58; display:inline-block; margin-bottom:8px;}
+  .happy{display:grid; grid-template-columns:1.2fr 1fr; gap:22px; align-items:center; margin-top:22px; background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:14px;}
+  .happy > *{min-width:0;}
+  .happy img{border-radius:12px; width:100%; aspect-ratio:16/9; object-fit:cover; cursor:zoom-in;}
+  .happy h3{font-size:1.2rem; font-weight:900;}
+  .happy h3 small{display:block; font-size:.7em; color:var(--muted);}
+  .happy p{margin:6px 0 0; font-size:.9rem;}
+  .happy p.en{color:var(--muted); font-size:.86rem;}
+  @media(max-width:700px){ .happy{grid-template-columns:1fr;} }
 
-  /* nine-up thumbnail grid, real gameplay screens */
-  .gameGrid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
-  .gameGrid .shotFrame{transform:rotate(0deg); border-radius:10px;}
-  .gameGrid img{aspect-ratio:6/5; object-fit:cover; object-position:top; max-height:none;}
-  @media(max-width:600px){
-    .gameGrid{grid-template-columns:repeat(2,1fr); gap:12px;}
-  }
+  /* juku */
+  .jukuSteps{display:grid; gap:10px; counter-reset:j;}
+  .jukuSteps > div{display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:start; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px;}
+  .jukuSteps > div::before{counter-increment:j; content:counter(j); width:42px; height:42px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-display); color:#fff; background:var(--w-juku);}
+  .jukuSteps b{display:block;}
+  .jukuSteps span span{font-size:.84rem; color:var(--muted);}
+  .skills{display:flex; flex-wrap:wrap; gap:6px; margin-top:14px;}
+  .skills span{font-size:.78rem; font-weight:700; padding:4px 10px; border-radius:8px; background:color-mix(in srgb, var(--w-juku) 18%, transparent); color:var(--ink);}
+  .btn{display:inline-flex; flex-direction:column; text-decoration:none; background:var(--ink); color:var(--bg); border-radius:999px; padding:10px 22px; font-weight:900; margin-top:18px; line-height:1.2;}
+  .btn small{font-weight:500; font-size:.7rem; opacity:.85;}
 
-  /* small text-only character roll (names, no art, per the no-sprite rule) */
-  .nameRoll{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px;}
-  .nameChip{border:1px solid var(--line); color:var(--muted); font-size:.8rem; padding:6px 12px; border-radius:999px;}
+  /* review panel */
+  .reviewPanel{padding-block:40px; border-top:1px solid var(--note-line); background:var(--note-bg); color:var(--note-ink);}
+  .reviewPanel h2{font-size:1.2rem; font-weight:900;}
+  .reviewPanel .grid{display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:16px;}
+  @media(max-width:760px){ .reviewPanel .grid{grid-template-columns:1fr;} }
+  .reviewPanel ul,.reviewPanel ol{margin:0; padding-left:20px; font-size:.88rem;}
+  .reviewPanel li{margin-bottom:6px;}
 
-  /* ---------- image viewer ---------- */
-  .shotFrame img,.imgStack__item img,.hero-banner img{cursor:zoom-in;}
-  .lightbox[hidden]{display:none;}
-  .lightbox{position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:24px;
-    background:rgba(4,3,2,.94); backdrop-filter:blur(12px);}
-  .lightbox figure{display:flex; flex-direction:column; align-items:center; gap:12px; max-width:94vw; max-height:90vh; margin:0;}
-  .lightbox img{max-width:94vw; max-height:78vh; width:auto; height:auto; object-fit:contain; border-radius:14px;
-    box-shadow:0 24px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.12); cursor:default;}
-  .lightbox figcaption{max-width:70ch; color:var(--ink); text-align:center; font-size:.9rem; line-height:1.5;}
-  .lightboxClose{position:absolute; top:14px; right:18px; width:44px; height:44px; border:1px solid var(--line);
-    border-radius:50%; background:rgba(10,8,6,.72); color:var(--ink); font-size:1.8rem; line-height:1; cursor:pointer;}
-  .lightboxClose:hover,.lightboxClose:focus-visible{background:var(--gold); border-color:var(--gold); color:#241705;}
-  body.lightbox-open{overflow:hidden;}
+  /* footer */
+  .next{padding-block:50px 30px; text-align:center; border-top:1px solid var(--line);}
+  .next h2{font-family:var(--f-display); font-weight:400; font-size:clamp(1.3rem,3vw,1.8rem); line-height:1.6;}
+  .next h2 small{display:block; font-family:var(--f-body); font-size:.5em; color:var(--muted); font-weight:700;}
+  .nextBtn{margin-top:18px; border:0; cursor:pointer; background:var(--glow); color:#2a1700; border-radius:999px; padding:12px 26px; font:900 1rem var(--f-body); line-height:1.25; box-shadow:0 8px 22px var(--glow-soft);}
+  .nextBtn small{display:block; font-weight:500; font-size:.72rem;}
+  footer{border-top:1px solid var(--line); padding-block:26px 40px; font-size:.82rem; color:var(--muted);}
+  footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px;}
+  footer b{color:var(--ink);}
 
-  /* ---------- footer cta ---------- */
-  .footerCta{padding:70px 0 40px; text-align:center; border-top:1px solid var(--line);}
-  .footerCta h2{font-size:clamp(1.5rem,3.6vw,2.1rem); margin:0 0 22px;}
-  .footerCta h2 .jpPrimary,.footerCta h2 .enSecondary{display:block;}
-  .footerCta h2 .enSecondary{font-size:.48em; letter-spacing:.03em; margin-top:6px;}
-  .btnPrimary{
-    display:inline-block; background:var(--gold); color:#241705; font-weight:700; text-decoration:none;
-    padding:12px 28px; border:0; border-radius:999px; font:700 1rem 'Zen Kaku Gothic New',sans-serif; cursor:pointer;
-  }
-  .btnPrimary .nextJp{display:block; font-size:1em;}
-  .btnPrimary .nextEn{display:block; font-size:.68em; font-weight:500; margin-top:3px;}
-  footer.site{border-top:1px solid var(--line); padding:30px 0 44px; color:var(--muted); font-size:.82rem;}
-  footer.site .wrap{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between;}
-  footer.site a{text-decoration:none;}
-  .footerNav{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;}
-  .footerBtn{
-    display:inline-flex; align-items:center; gap:8px; min-height:42px;
-    padding:9px 15px; border:1px solid rgba(233,182,74,.48); border-radius:999px;
-    background:rgba(233,182,74,.08); color:var(--ink); font-weight:700;
-    letter-spacing:.02em; transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
-  }
-  .footerBtn .enSecondary{font-size:.72em; margin-left:2px;}
-  .footerBtn .jpPrimary,.footerBtn .enSecondary{display:inline;}
-  .footerBtn::after{content:'↗'; font-size:.95em; line-height:1;}
-  .footerBtn:hover,
-  .footerBtn:focus-visible{background:var(--gold); border-color:var(--gold); color:#241705; transform:translateY(-1px);}
-  .footerBtn:focus-visible{outline:3px solid rgba(233,182,74,.42); outline-offset:3px;}
-  @media(max-width:600px){
-    footer.site .wrap{display:grid; grid-template-columns:1fr; gap:28px;}
-    .footerNav{margin-top:14px;}
-  }
+  /* lightbox */
+  .lb[hidden]{display:none;}
+  .lb{position:fixed; inset:0; z-index:100; background:rgba(10,8,18,.92); display:grid; place-items:center; padding:max(20px,env(safe-area-inset-top,0px)) 20px 20px;}
+  .lb img{max-width:94vw; max-height:86vh; border-radius:14px;}
+  .lb button{position:absolute; top:calc(14px + env(safe-area-inset-top,0px)); right:calc(14px + env(safe-area-inset-right,0px)); width:44px; height:44px; border-radius:50%; border:0; background:#fff; color:#111; font-size:1.5rem; cursor:pointer;}
+  body.lbOpen{overflow:hidden;}
 </style>
 </head>
 <body>
 
-<header class="topbar">
+<header class="top">
   <div class="wrap">
-    <div class="brand"><img src="assets/tour/mascot-ghost-real.webp" alt="Booha" loading="lazy"><span class="jpPrimary">ブーハー・アドベンチャー</span><span class="enSecondary">The Booha Adventure</span></div>
-    <a class="enterBtn" href="https://www.bryanharper.tokyo/enter-booha"><span class="jpPrimary">ブーハーに入る</span><span class="enSecondary">Enter Booha</span></a>
+    <div class="brand"><img src="assets/tour/mascot-ghost-real.webp" alt=""><div><b>ブーハー・アドベンチャー</b><small>THE BOOHA ADVENTURE · GUIDED TOUR</small></div></div>
+    <a class="enter" href="https://www.bryanharper.tokyo/enter-booha">ブーハーに入る<small>Enter Booha</small></a>
+  </div>
+  <div class="wrap tabsWrap">
+    <nav class="tabs" role="tablist" aria-label="Tour sections" id="tabs">
+      <button class="tab on" role="tab" aria-selected="true" data-t="week" id="t-week"><b>一週間</b><span>The Week</span></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="worlds" id="t-worlds" tabindex="-1"><b>世界</b><span>The Worlds</span></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="rewards" id="t-rewards" tabindex="-1"><b>ごほうび</b><span>Rewards</span></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="progress" id="t-progress" tabindex="-1"><b>きろく</b><span>Progress</span></button>
+      <button class="tab" role="tab" aria-selected="false" data-t="juku" id="t-juku" tabindex="-1"><b>英語塾</b><span>Juku Class</span></button>
+    </nav>
   </div>
 </header>
 
-<nav class="tabbar" id="tabbar" aria-label="Tour sections" role="tablist">
-  <button class="tabbtn active" id="tab-world" type="button" role="tab" aria-selected="true" aria-controls="panel-world" tabindex="0" data-tab="world" style="--tabcolor:var(--c-hub)"><span class="jpTab">世界</span><span class="enTab">The World</span></button>
-  <button class="tabbtn" id="tab-curriculum" type="button" role="tab" aria-selected="false" aria-controls="panel-curriculum" tabindex="-1" data-tab="curriculum" style="--tabcolor:var(--c-curriculum)"><span class="jpTab">カリキュラム</span><span class="enTab">The Curriculum</span></button>
-  <button class="tabbtn" id="tab-profile" type="button" role="tab" aria-selected="false" aria-controls="panel-profile" tabindex="-1" data-tab="profile" style="--tabcolor:var(--c-profile)"><span class="jpTab">プロフィール</span><span class="enTab">Your Profile</span></button>
-  <button class="tabbtn" id="tab-arcade" type="button" role="tab" aria-selected="false" aria-controls="panel-arcade" tabindex="-1" data-tab="arcade" style="--tabcolor:var(--c-arcade)"><span class="jpTab">アーケード</span><span class="enTab">Arcade</span></button>
-</nav>
-
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow"><span class="jpPrimary">ブライアン英会話教室・生徒専用</span><span class="enSecondary">Bryan's English School, exclusive</span></span>
-    <div class="hero-banner"><img src="assets/tour/hero-banner.webp" alt="Welcome to the Booha Adventure"></div>
-    <h1>ブーハー・アドベンチャー</h1>
-    <p class="jpTitle">The Booha Adventure</p>
-    <p class="tagline jp"><ruby>一匹<rt>いっぴき</rt></ruby>の <ruby>小<rt>ちい</rt></ruby>さなおばけの <ruby>中<rt>なか</rt></ruby>に、<ruby>英語<rt>えいご</rt></ruby>の <ruby>学校<rt>がっこう</rt></ruby>が まるごと <ruby>入<rt>はい</rt></ruby>っています。</p>
-    <p class="tagline en">A whole English school living inside one small ghost. This page is a guided tour of what's actually in there, built from real screens, not a highlight reel.</p>
-    <div class="badges">
-      <span class="badge"><span class="badge-jp"><ruby>広告<rt>こうこく</rt></ruby>なし</span><span class="badge-en">No ads, ever</span></span>
-      <span class="badge"><span class="badge-jp"><ruby>個人<rt>こじん</rt></ruby><ruby>情報<rt>じょうほう</rt></ruby>の<ruby>保存<rt>ほぞん</rt></ruby>なし</span><span class="badge-en">Doesn't store your personal information</span></span>
-      <span class="badge"><span class="badge-jp"><ruby>情報<rt>じょうほう</rt></ruby>の<ruby>販売<rt>はんばい</rt></ruby>なし</span><span class="badge-en">Doesn't sell your information</span></span>
-      <span class="badge"><span class="badge-jp">AI<ruby>接続<rt>せつぞく</rt></ruby>なし</span><span class="badge-en">Not connected to AI</span></span>
+    <div>
+      <span class="eyebrow">ブライアン英会話教室・生徒専用 · For Bryan's English School students</span>
+      <h1>ブーハー・<br>アドベンチャー</h1>
+      <div class="en">The Booha Adventure</div>
+      <p><ruby>一匹<rt>いっぴき</rt></ruby>の <ruby>小<rt>ちい</rt></ruby>さなおばけの <ruby>中<rt>なか</rt></ruby>に、<ruby>英語<rt>えいご</rt></ruby>の <ruby>一週間<rt>いっしゅうかん</rt></ruby>が まるごと <ruby>入<rt>はい</rt></ruby>っています。</p>
+      <p class="sub">A whole week of English lives inside one small ghost. Every visit starts at the Week Hub: last week, this week, and next week, homework in one tap, and the three Blitz rounds waiting underneath. Everything on this page is a real screen from the app.</p>
+      <div class="badges">
+        <span class="badge"><b><ruby>広告<rt>こうこく</rt></ruby>なし</b>No ads, ever</span>
+        <span class="badge"><b><ruby>個人<rt>こじん</rt></ruby><ruby>情報<rt>じょうほう</rt></ruby>の<ruby>保存<rt>ほぞん</rt></ruby>なし</b>No personal information stored</span>
+        <span class="badge"><b><ruby>情報<rt>じょうほう</rt></ruby>の<ruby>販売<rt>はんばい</rt></ruby>なし</b>Your information is never sold</span>
+        <span class="badge"><b>AI<ruby>接続<rt>せつぞく</rt></ruby>なし</b>Not connected to AI</span>
+      </div>
+    </div>
+    <div class="heroShot">
+      <div class="dev"><img src="assets/tour/v2-hub.webp" alt="The Week Hub: this week, the nine-game counter, homework and the three Blitz rounds"></div>
+      <div class="dev small"><img src="assets/tour/v2-blitz-play.webp" alt="A Vocab Blitz round in the circus scene"></div>
     </div>
   </div>
 </section>
 
-<!-- ================= THE WORLD ================= -->
-<div class="panel active" id="panel-world" role="tabpanel" aria-labelledby="tab-world" aria-hidden="false" tabindex="-1" style="--pcolor:var(--c-hub)">
-  <div class="panelIntro">
-    <div class="kicker"><span class="jpPrimary">世界</span><span class="enSecondary">The World</span></div>
-    <p>Everything below is real, straight from the app: the maze that reveals one week at a time, the worlds beyond it, and a few of the wanderers who turn up along the way. Most of the thirty-six are still left for a student to actually find.</p>
-    <p class="jp"><ruby>下<rt>した</rt></ruby>にあるものは <ruby>全<rt>すべ</rt></ruby>て <ruby>本物<rt>ほんもの</rt></ruby>です。<ruby>迷路<rt>めいろ</rt></ruby>、その <ruby>先<rt>さき</rt></ruby>の <ruby>世界<rt>せかい</rt></ruby>、そして <ruby>何人<rt>なんにん</rt></ruby>かの <ruby>旅人<rt>たびびと</rt></ruby>たち。ほとんどは まだ <ruby>見<rt>み</rt></ruby>つかっていません。</p>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">ハブ<span class="enSecondary">The Hub</span></div>
-        <h2>The Hub: last week, this week, next week</h2>
-        <p class="jpHead">ハブ、<ruby>先週<rt>せんしゅう</rt></ruby>・<ruby>今週<rt>こんしゅう</rt></ruby>・<ruby>来週<rt>らいしゅう</rt></ruby></p>
-        <p class="copy">Every visit starts here: a short Daily Check ritual, then a look at only three weeks of the school year at a time, so nobody has to stare down fifty weeks of content at once.</p>
-        <p class="copy jp"><ruby>毎回<rt>まいかい</rt></ruby>ここから <ruby>始<rt>はじ</rt></ruby>まります。デイリーチェックの <ruby>後<rt>あと</rt></ruby>、<ruby>三週間分<rt>さんしゅうかんぶん</rt></ruby>だけが <ruby>見<rt>み</rt></ruby>えています。</p>
+<!-- ======================= THE WEEK ======================= -->
+<div class="panel on" id="p-week" role="tabpanel" aria-labelledby="t-week">
+  <section class="path" aria-labelledby="pathTitle">
+    <div class="wrap">
+      <h2 id="pathTitle"><ruby>一週間<rt>いっしゅうかん</rt></ruby>の みち</h2>
+      <p class="sub">Every week follows the same four steps, Sunday to Saturday.<br><ruby>毎週<rt>まいしゅう</rt></ruby>、<ruby>同<rt>おな</rt></ruby>じ <ruby>四<rt>よっ</rt></ruby>つの ステップです。</p>
+      <div class="steps">
+        <div class="step"><span class="dot">1</span><h3>ブリッツで ウォームアップ</h3><span class="e">Warm up with Blitz</span><p>Three timed rounds: words, sentences, questions.</p><div class="chips"><i style="--c:#d9468c">VOCAB</i><i style="--c:#7a5bb0">SENTENCE</i><i style="--c:#2f7d58">QUESTION</i></div></div>
+        <div class="step"><span class="dot">2</span><h3><ruby>迷路<rt>めいろ</rt></ruby>の 9つのゲーム</h3><span class="e">Play the nine maze games</span><p>Words, sentences, and listening, in the student's own track.</p><div class="chips"><i style="--c:#d27a10">9 GAMES</i></div></div>
+        <div class="step"><span class="dot">3</span><h3><ruby>世界<rt>せかい</rt></ruby>が ひらく</h3><span class="e">New worlds open</span><p>Finish all nine and four worlds open for the week.</p><div class="chips"><i style="--c:#6e4fb0">うつろば</i><i style="--c:#2f7d58">むえんば</i><i style="--c:#b94e95">グリマー</i><i style="--c:#2f63c4">あきや</i></div></div>
+        <div class="step"><span class="dot">4</span><h3>もっと れんしゅう</h3><span class="e">Go further</span><p>Two extra practice games and the Week Boss fight.</p><div class="chips"><i style="--c:#c2551f">BITES</i><i style="--c:#2f63c4">ECHO</i><i style="--c:#b0234a">BOSS</i></div></div>
       </div>
-      <div class="shotTrio">
-        <div class="shotFrame"><img src="assets/tour/world-hub.webp" alt="The hub screen, last week, this week, next week" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/ss-hub-dailycheck.webp" alt="Daily Check, the ritual that starts every visit" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/ss-hub-dailycheck2.webp" alt="Daily Check, choosing which class to check in for" loading="lazy"></div>
+      <div class="pathFoot"><span><b>★★ on all nine</b> opens the arcade</span><span><b>All three Blitz cleared</b> unlocks a surprise for that week only</span><span><b>Resets</b> every Sunday</span></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:var(--pink)">Step 1 · Blitz</div>
+        <div class="jh"><ruby>三<rt>みっ</rt></ruby>つの ラウンド、<ruby>三<rt>みっ</rt></ruby>つの <ruby>舞台<rt>ぶたい</rt></ruby></div>
+        <div class="eh">Three timed rounds, three stages</div>
+        <p class="copy en">Words in a circus tent, sentences in a spooky forest, questions in a firefly glade. Each round has a target time and remembers your best. Clear all three and the Maze welcomes you in.</p>
+        <div class="dev narrow" style="margin-top:16px"><img src="assets/tour/v2-records.webp" alt="Blitz records: best times for vocab, sentences and questions"></div>
+      </div>
+      <div class="shots s2">
+        <div class="dev"><img src="assets/tour/v2-blitz-ready.webp" alt="Blitz start screen with the target time and personal best"></div>
+        <div class="dev"><img src="assets/tour/v2-blitz-play.webp" alt="A Vocab Blitz question"></div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
-    <div class="wrap block-inner reverse">
+  <section class="sec">
+    <div class="wrap row">
       <div>
-        <div class="block-tag">迷路<span class="enSecondary">The Maze</span></div>
-        <h2>The Maze: one path per week</h2>
-        <p class="jpHead"><ruby>迷路<rt>めいろ</rt></ruby>、<ruby>週<rt>しゅう</rt></ruby>ごとに <ruby>一本<rt>いっぽん</rt></ruby>の <ruby>道<rt>みち</rt></ruby></p>
-        <p class="copy">The Maze is a separate weekly route, not a reward for clearing Blitz. One path at a time is available across the school-year map, so you can see where the adventure goes next.</p>
-        <p class="copy jp"><ruby>迷路<rt>めいろ</rt></ruby>はブリッツとは <ruby>別<rt>べつ</rt></ruby>の、<ruby>週<rt>しゅう</rt></ruby>ごとのルートです。<ruby>一年分<rt>いちねんぶん</rt></ruby>の <ruby>地図<rt>ちず</rt></ruby>に、ひとつずつ <ruby>道<rt>みち</rt></ruby>が <ruby>見<rt>み</rt></ruby>えてきます。</p>
-      </div>
-      <div class="shotPair">
-        <div class="shotFrame"><img src="assets/tour/ss-maze-blitzgate.webp" alt="Let's go to the Maze, the transition after Blitz" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/world-maze.webp" alt="The maze map, real in-game screenshot" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">迷路の先<span class="enSecondary">Beyond the Maze</span></div>
-        <h2>Karasuki, the world where forgotten things go</h2>
-        <p class="jpHead">カラスキ、<ruby>忘<rt>わす</rt></ruby>れられたものが <ruby>行<rt>い</rt></ruby>く <ruby>世界<rt>せかい</rt></ruby></p>
-        <p class="copy">Step off the maze into a room by room world under a shifting day and night sky. Complete a maze game and wanderers start turning up, some just passing through, some waiting to be found for the very first time.</p>
-        <p class="copy jp"><ruby>迷路<rt>めいろ</rt></ruby>のゲームをクリアすると、<ruby>昼<rt>ひる</rt></ruby>と <ruby>夜<rt>よる</rt></ruby>が <ruby>入<rt>い</rt></ruby>れ<ruby>替<rt>か</rt></ruby>わる <ruby>世界<rt>せかい</rt></ruby>に <ruby>旅人<rt>たびびと</rt></ruby>が <ruby>現<rt>あらわ</rt></ruby>れます。</p>
-      </div>
-      <div class="shotPair">
-        <div class="shotFrame"><img src="assets/tour/karasuki-room-01.webp" alt="Entering Karasuki" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/karasuki-room-02.webp" alt="A lantern-lit grove in Karasuki" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-karasuki); background:radial-gradient(1000px 420px at 8% -8%, rgba(127,174,90,0.16), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">迷路の先<span class="enSecondary">Beyond the Maze</span></div>
-        <h2>Karasuki has its own companions, too</h2>
-        <p class="jpHead">カラスキにも、<ruby>独自<rt>どくじ</rt></ruby>の <ruby>仲間<rt>なかま</rt></ruby>がいます</p>
-        <p class="copy">Wander long enough and something might join you on the path. Each one has its own name, its own habits, and its own reason for showing up.</p>
-        <p class="copy jp"><ruby>十分<rt>じゅうぶん</rt></ruby>に <ruby>歩<rt>ある</rt></ruby>くと、<ruby>誰<rt>だれ</rt></ruby>かが <ruby>道<rt>みち</rt></ruby>で <ruby>合流<rt>ごうりゅう</rt></ruby>するかもしれません。</p>
-      </div>
-      <div class="shotPair">
-        <div class="shotFrame"><img src="assets/tour/karasuki-companion-01.webp" alt="A companion met on the path in Karasuki" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/karasuki-companion-02.webp" alt="Tanoshiika, one of Karasuki's companions, with its profile card" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">読む世界<span class="enSecondary">The Reading World</span></div>
-        <h2>Utsuroba: six drifters, one memory each</h2>
-        <p class="jpHead">うつろば、<ruby>六人<rt>ろくにん</rt></ruby>の <ruby>漂流者<rt>ひょうりゅうしゃ</rt></ruby>と <ruby>記憶<rt>きおく</rt></ruby></p>
-        <p class="copy">Each of the six drifters is stuck between memories, and each holds one story told entirely in English: read it, solve it, give it back. Utsuroba has three tiers for experiencing those memories: Starter Memory, Case Memory, and Deep Memory. To find them, you’ll need to explore.</p>
-        <p class="copy jp">それぞれが <ruby>記憶<rt>きおく</rt></ruby>の <ruby>途中<rt>とちゅう</rt></ruby>で <ruby>止<rt>と</rt></ruby>まっています。<ruby>記憶<rt>きおく</rt></ruby>を <ruby>体験<rt>たいけん</rt></ruby>するための <ruby>三<rt>みっ</rt></ruby>つの レベルがあり、<ruby>見<rt>み</rt></ruby>つけるには <ruby>世界<rt>せかい</rt></ruby>を <ruby>探索<rt>たんさく</rt></ruby>しなければなりません。</p>
-      </div>
-      <div class="imgStack">
-        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-01.webp" alt="The gate into Utsuroba" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-02.webp" alt="Meeting one of the six drifters" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/utsuroba-room-03.webp" alt="Following a clue through Utsuroba" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">不気味なエリア<span class="enSecondary">The Spooky Area</span></div>
-        <h2>Muenba: a tense, spooky area</h2>
-        <p class="jpHead">むえんば、<ruby>緊張感<rt>きんちょうかん</rt></ruby>のある <ruby>不気味<rt>ぶきみ</rt></ruby>なエリア</p>
-        <p class="copy">Muenba is a separate spooky area with fifteen fog-filled rooms and something hiding in each one. It is built for tension and careful movement, with the same three reading tiers too: Starter Memory, Case Memory, and Deep Memory.</p>
-        <p class="copy jp">むえんばは、<ruby>霧<rt>きり</rt></ruby>に <ruby>包<rt>つつ</rt></ruby>まれた 15の <ruby>部屋<rt>へや</rt></ruby>がある、<ruby>緊張感<rt>きんちょうかん</rt></ruby>に <ruby>満<rt>み</rt></ruby>ちた <ruby>別<rt>べつ</rt></ruby>の <ruby>不気味<rt>ぶきみ</rt></ruby>なエリアです。ここにも Starter Memory、Case Memory、Deep Memoryの <ruby>三<rt>みっ</rt></ruby>つの <ruby>読<rt>よ</rt></ruby>み <ruby>方<rt>かた</rt></ruby>があります。</p>
-      </div>
-      <div class="imgStack">
-        <div class="imgStack__item"><img src="assets/tour/muenba-room-01.webp" alt="Entering Muenba" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/muenba-room-02.webp" alt="Something is hiding, seen from a distance" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/muenba-room-03.webp" alt="A hunt target screen, find Twiddle" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-grimmerglen); background:radial-gradient(1000px 420px at 8% -8%, rgba(234,165,213,0.18), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">夢の世界<span class="enSecondary">The Daydream World</span></div>
-        <h2>Grimmerglen: where daydreams end up</h2>
-        <p class="jpHead">グリマーグレン、<ruby>夢<rt>ゆめ</rt></ruby>が <ruby>行<rt>い</rt></ruby>きつく <ruby>場所<rt>ばしょ</rt></ruby></p>
-        <p class="copy">Grimmerglen is where daydreams gather and pile up. Meet Marietta, explore a pastel garden, and help recover the memories hidden inside everyday objects through short English typing challenges. Three reading tiers move from guided support toward remembering on your own.</p>
-        <p class="copy jp">グリマーグレンは、<ruby>夢<rt>ゆめ</rt></ruby>が <ruby>集<rt>あつ</rt></ruby>まり、<ruby>積<rt>つ</rt></ruby>み <ruby>重<rt>かさ</rt></ruby>なる <ruby>場所<rt>ばしょ</rt></ruby>です。マリエッタに <ruby>会<rt>あ</rt></ruby>い、パステルカラーの <ruby>庭<rt>にわ</rt></ruby>を <ruby>探索<rt>たんさく</rt></ruby>しながら、<ruby>身近<rt>みぢか</rt></ruby>なものに <ruby>残<rt>のこ</rt></ruby>された <ruby>記憶<rt>きおく</rt></ruby>を、<ruby>短<rt>みじか</rt></ruby>い <ruby>英語<rt>えいご</rt></ruby>のタイピングで <ruby>取<rt>と</rt></ruby>り <ruby>戻<rt>もど</rt></ruby>します。ヒントのある <ruby>段階<rt>だんかい</rt></ruby>から、<ruby>自分<rt>じぶん</rt></ruby>で <ruby>思<rt>おも</rt></ruby>い <ruby>出<rt>だ</rt></ruby>す <ruby>段階<rt>だんかい</rt></ruby>へ <ruby>進<rt>すす</rt></ruby>みます。</p>
-      </div>
-      <div class="imgStack grimmerglenStack">
-        <div class="imgStack__item"><img src="assets/tour/grimmerglen_01.webp" alt="A Marietta waiting on a pastel forest path in Grimmerglen" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/grimmerglen_02.webp" alt="A Grimmerglen memory exercise with English and Japanese support" loading="lazy"></div>
-        <div class="imgStack__item"><img src="assets/tour/grimmerglen_03.webp" alt="A pastel café clearing in Grimmerglen" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-hub); background:radial-gradient(1000px 420px at 8% -8%, rgba(233,182,74,0.13), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">コレクション<span class="enSecondary">Collecting</span></div>
-        <h2>Wanderers, waiting to be found</h2>
-        <p class="jpHead"><ruby>見<rt>み</rt></ruby>つけられるのを <ruby>待<rt>ま</rt></ruby>つ <ruby>旅<rt>たび</rt></ruby>する <ruby>仲間<rt>なかま</rt></ruby></p>
-        <p class="copy">Wanderers turn up when you complete a maze game. Some turn up often, and some take weeks. Every collection section starts out with thirty-six to find. The list grows, and it sits right alongside the bonus arcade games you can unlock.</p>
-        <p class="copy jp"><ruby>迷路<rt>めいろ</rt></ruby>のゲームをクリアすると、<ruby>旅人<rt>たびびと</rt></ruby>が <ruby>現<rt>あらわ</rt></ruby>れます。<ruby>何度<rt>なんど</rt></ruby>も <ruby>現<rt>あらわ</rt></ruby>れる <ruby>旅人<rt>たびびと</rt></ruby>もいれば、<ruby>見<rt>み</rt></ruby>つかるまで <ruby>何週間<rt>なんしゅうかん</rt></ruby>もかかる <ruby>旅人<rt>たびびと</rt></ruby>もいます。コレクションのページは、<ruby>最初<rt>さいしょ</rt></ruby>は36<ruby>体<rt>たい</rt></ruby>を <ruby>見<rt>み</rt></ruby>つけるところから <ruby>始<rt>はじ</rt></ruby>まり、リストは <ruby>増<rt>ふ</rt></ruby>えていきます。<ruby>解放<rt>かいほう</rt></ruby>できるボーナスゲームも、そのすぐ <ruby>隣<rt>となり</rt></ruby>に <ruby>並<rt>なら</rt></ruby>びます。</p>
-      </div>
-      <div class="shotFrame">
-        <img src="assets/tour/ss-wanderergrid.webp" alt="Bonus games unlocked and wanderers found tracker, 9 of 36" loading="lazy">
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= THE CURRICULUM ================= -->
-<div class="panel" id="panel-curriculum" role="tabpanel" aria-labelledby="tab-curriculum" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-curriculum)">
-  <div class="panelIntro">
-    <div class="kicker"><span class="jpPrimary">カリキュラム</span><span class="enSecondary">The Curriculum</span></div>
-    <p>Underneath the story is a real, graded English curriculum with its own daily rhythm: a short ritual, a flashcard deck, three fast warm up rounds, and three tracks that share one vocabulary spine.</p>
-    <p class="jp"><ruby>物語<rt>ものがたり</rt></ruby>の <ruby>下<rt>した</rt></ruby>には、<ruby>本格的<rt>ほんかくてき</rt></ruby>な <ruby>英語<rt>えいご</rt></ruby>カリキュラムがあります。<ruby>毎日<rt>まいにち</rt></ruby>の <ruby>儀式<rt>ぎしき</rt></ruby>から <ruby>三<rt>みっ</rt></ruby>つのコースまで。</p>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">単語<span class="enSecondary">Vocabulary</span></div>
-        <h2>Weekly flashcards, out loud</h2>
-        <p class="jpHead"><ruby>週<rt>しゅう</rt></ruby>ごとの <ruby>単語<rt>たんご</rt></ruby>カード、<ruby>声<rt>こえ</rt></ruby>に <ruby>出<rt>だ</rt></ruby>して</p>
-        <p class="copy">Every week brings 15 new words, sentences, and questions, plus a hands-free stream. Tap to flip, tap to hear each card, or let the stream play while you listen, in whichever curriculum track fits.</p>
-        <p class="copy jp"><ruby>毎週<rt>まいしゅう</rt></ruby>、15<ruby>個<rt>こ</rt></ruby>の <ruby>新<rt>あたら</rt></ruby>しい <ruby>単語<rt>たんご</rt></ruby>・<ruby>文<rt>ぶん</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>と、ハンズフリーで <ruby>聞<rt>き</rt></ruby>けるストリームがあります。カードをめくって <ruby>音声<rt>おんせい</rt></ruby>を <ruby>聞<rt>き</rt></ruby>くことも、そのまま <ruby>流<rt>なが</rt></ruby>して <ruby>聞<rt>き</rt></ruby>くこともできます。</p>
-      </div>
-      <div class="shotTrio">
-        <div class="shotFrame"><img src="assets/tour/ss-studydeck.webp" alt="Pre-Boo weekly flashcard deck: Vocab, Sentences, Questions, Stream" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/ss-studydeck-booriculum.webp" alt="Boo-riculum weekly flashcard deck" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/ss-studydeck-boocontinuum.webp" alt="Boo-Continuum weekly flashcard deck" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">準備運動<span class="enSecondary">Warm Up</span></div>
-        <h2>Blitz: three rounds in the hub</h2>
-        <p class="jpHead">ブリッツ、ハブでの <ruby>三<rt>みっ</rt></ruby>つのラウンド</p>
-        <p class="copy">Words, sentences, and questions arrive as three fast rounds, picked per curriculum track from the hub itself. Blitz is a warm-up for the week, not a key to the Maze, so students can see what they know before they head into the wider adventure.</p>
-        <p class="copy jp"><ruby>単語<rt>たんご</rt></ruby>・<ruby>文<rt>ぶん</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>の <ruby>三<rt>みっ</rt></ruby>つのラウンドを、ハブでそれぞれのコースごとに <ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>みます。ブリッツは <ruby>一週間<rt>いっしゅうかん</rt></ruby>の <ruby>準備運動<rt>じゅんびうんどう</rt></ruby>で、<ruby>迷路<rt>めいろ</rt></ruby>を <ruby>開<rt>ひら</rt></ruby>く <ruby>鍵<rt>かぎ</rt></ruby>ではありません。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/ss-blitzpanel.webp" alt="Blitz Games panel on the hub, three tracks, three rounds each" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">3つのコース<span class="enSecondary">Three Tracks</span></div>
-        <h2>Same nine games, three depths</h2>
-        <p class="jpHead"><ruby>同<rt>おな</rt></ruby>じ <ruby>九<rt>きゅう</rt></ruby>つのゲームを、<ruby>三<rt>みっ</rt></ruby>つの レベルで</p>
-        <p class="copy">Pre-Boo, Boo-riculum, and Boo-Continuum each open to the same nine game types, at their own reading level and their own color set, so siblings at different levels are still playing side by side.</p>
-        <p class="copy jp">プレブー、ブーリキュラム、ブーコンティニュアム。<ruby>同<rt>おな</rt></ruby>じ <ruby>九<rt>きゅう</rt></ruby>つのゲームを、それぞれの レベルで <ruby>遊<rt>あそ</rt></ruby>べます。</p>
-      </div>
-      <div class="shotTrio">
-        <div class="shotFrame"><img src="assets/tour/trio-preboo.webp" alt="Pre-Boo, choose your game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/trio-booriculum.webp" alt="Boo-riculum, select a game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/trio-boocontinuum.webp" alt="Boo-Continuum, choose your challenge" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">もっと詳しく<span class="enSecondary">A Closer Look</span></div>
-        <h2>What the nine games actually look like</h2>
-        <p class="jpHead"><ruby>九<rt>きゅう</rt></ruby>つのゲームの <ruby>中身<rt>なかみ</rt></ruby></p>
-        <p class="copy">Matching, spelling, building sentences, timed rounds against the clock: vocabulary and sentences and questions, each rebuilt three separate ways across the three tracks.</p>
-        <p class="copy jp">マッチング、スペル、<ruby>文<rt>ぶん</rt></ruby>づくり、タイムアタック。<ruby>単語<rt>たんご</rt></ruby>・<ruby>文<rt>ぶん</rt></ruby>・<ruby>質問<rt>しつもん</rt></ruby>を、<ruby>三<rt>みっ</rt></ruby>つのやり <ruby>方<rt>かた</rt></ruby>で。</p>
-      </div>
-      <div class="gameGrid">
-        <div class="shotFrame"><img src="assets/tour/grid-01.webp" alt="Vocabulary matching game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-02.webp" alt="Sentence matching game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-03.webp" alt="Listen and choose game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-04.webp" alt="Spell the word game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-05.webp" alt="Sentence building game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-06.webp" alt="Reading choice game" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-07.webp" alt="Speed vocabulary round" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-08.webp" alt="Speed reading round" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/grid-09.webp" alt="Question reading round" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-curriculum); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,162,58,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">書き写し練習<span class="enSecondary">Copy Practice</span></div>
-        <h2>The Homework Tree</h2>
-        <p class="jpHead"><ruby>宿題<rt>しゅくだい</rt></ruby>の <ruby>木<rt>き</rt></ruby></p>
-        <p class="copy">A separate copy-practice tree: last week, this week, or next week, in whichever of the three curriculum tracks fits.</p>
-        <p class="copy jp"><ruby>先週<rt>せんしゅう</rt></ruby>・<ruby>今週<rt>こんしゅう</rt></ruby>・<ruby>来週<rt>らいしゅう</rt></ruby>を <ruby>選<rt>えら</rt></ruby>んで、<ruby>書<rt>か</rt></ruby>き<ruby>写<rt>うつ</rt></ruby>し <ruby>練習<rt>れんしゅう</rt></ruby>をします。</p>
-      </div>
-      <div class="shotPair">
-        <div class="shotFrame"><img src="assets/tour/world-homework.webp" alt="The Homework Tree entrance" loading="lazy"></div>
-        <div class="shotFrame"><img src="assets/tour/world-juku.webp" alt="Choosing a week and a curriculum track" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= YOUR PROFILE ================= -->
-<div class="panel" id="panel-profile" role="tabpanel" aria-labelledby="tab-profile" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-profile)">
-  <div class="panelIntro">
-    <div class="kicker"><span class="jpPrimary">プロフィール</span><span class="enSecondary">Your Profile</span></div>
-    <p>Profile pages keep track of everything a student does, each themed to its own part of the world instead of sharing one generic dashboard.</p>
-    <p class="jp">プロフィールページには、<ruby>取<rt>と</rt></ruby>り <ruby>組<rt>く</rt></ruby>んだことが <ruby>記録<rt>きろく</rt></ruby>されます。それぞれ <ruby>世界<rt>せかい</rt></ruby>ごとの <ruby>色<rt>いろ</rt></ruby>を <ruby>持<rt>も</rt></ruby>っています。</p>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">プロフィール 1<span class="enSecondary">Profile One</span></div>
-        <h2>The Adventure Log</h2>
-        <p class="jpHead"><ruby>冒険<rt>ぼうけん</rt></ruby>ログ</p>
-        <p class="copy">The main profile: this week's progress across all nine games and three Blitz rounds, a running streak, and a full month calendar of every day played.</p>
-        <p class="copy jp"><ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>進捗<rt>しんちょく</rt></ruby>と <ruby>連続記録<rt>れんぞくきろく</rt></ruby>、<ruby>遊<rt>あそ</rt></ruby>んだ <ruby>日<rt>ひ</rt></ruby>すべてのカレンダー。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/ss-profile-header.webp" alt="The Adventure Log profile, stars and streak" loading="lazy"></div>
-    </div>
-  </div>
-  <div class="block" style="--bcolor:var(--c-profile); background:radial-gradient(1000px 420px at 8% -8%, rgba(202,166,98,0.14), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">プロフィール 1・続き<span class="enSecondary">Profile One, continued</span></div>
-        <h2>This week, game by game</h2>
-        <p class="jpHead"><ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>記録<rt>きろく</rt></ruby>、ゲームごとに</p>
-        <p class="copy">A daily check-in streak underneath, and every one of the three curriculum tracks lined up below it, ready to open.</p>
-        <p class="copy jp"><ruby>毎日<rt>まいにち</rt></ruby>チェックの <ruby>連続記録<rt>れんぞくきろく</rt></ruby>と、<ruby>三<rt>みっ</rt></ruby>つの コースが <ruby>並<rt>なら</rt></ruby>びます。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/ss-profile-week.webp" alt="Daily Check streak and weekly curriculum tabs" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:#9b8ad1; background:radial-gradient(1000px 420px at 8% -8%, rgba(155,138,209,0.16), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">プロフィール 2<span class="enSecondary">Profile Two</span></div>
-        <h2>My Adventure</h2>
-        <p class="jpHead">マイ・アドベンチャー</p>
-        <p class="copy">Bonus arcade games unlock here week to week, and the same 36-tile wanderer board lives here too, tracking who's actually been met.</p>
-        <p class="copy jp"><ruby>週替<rt>しゅうが</rt></ruby>わりの <ruby>特別<rt>とくべつ</rt></ruby>ゲームと、<ruby>旅人<rt>たびびと</rt></ruby>の <ruby>記録<rt>きろく</rt></ruby>。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/ss-adventureprofile-header.webp" alt="My Adventure profile, bonus games and wanderers found" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-utsuroba); background:radial-gradient(1000px 420px at 8% -8%, rgba(178,140,214,0.16), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">プロフィール 3<span class="enSecondary">Profile Three</span></div>
-        <h2>Utsuroba's Memory Archive</h2>
-        <p class="jpHead">うつろばの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>保管場所<rt>ほかんばしょ</rt></ruby></p>
-        <p class="copy">A quiet room for what stayed. Restored memories collect here, at whichever reading level was chosen for that case.</p>
-        <p class="copy jp"><ruby>残<rt>のこ</rt></ruby>った <ruby>記憶<rt>きおく</rt></ruby>のための、<ruby>静<rt>しず</rt></ruby>かな <ruby>部屋<rt>へや</rt></ruby>。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/utsuroba_profile.webp" alt="Utsuroba profile, Memory Archive, memories restored and rooms visited" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-muenba); background:radial-gradient(1000px 420px at 8% -8%, rgba(111,166,131,0.16), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">プロフィール 4<span class="enSecondary">Profile Four</span></div>
-        <h2>Muenba's Ghost Ledger</h2>
-        <p class="jpHead">むえんばの <ruby>幽霊<rt>ゆうれい</rt></ruby><ruby>台帳<rt>だいちょう</rt></ruby></p>
-        <p class="copy">A record of who's still hiding, energy collected along the way, and every case cracked so far.</p>
-        <p class="copy jp">まだ <ruby>隠<rt>かく</rt></ruby>れている <ruby>相手<rt>あいて</rt></ruby>と、<ruby>集<rt>あつ</rt></ruby>めたエネルギーの <ruby>記録<rt>きろく</rt></ruby>。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/muenba_profile.webp" alt="Muenba profile, Ghost Ledger, cases and rooms tracked" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-grimmerglen); background:radial-gradient(1000px 420px at 8% -8%, rgba(234,165,213,0.18), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">プロフィール 5<span class="enSecondary">Profile Five</span></div>
-        <h2>Grimmerglen's Memory Case File</h2>
-        <p class="jpHead">グリマーグレンの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>事件簿<rt>じけんぼ</rt></ruby></p>
-        <p class="copy">A bright case file for Grimmerglen's weekly Garden: choose Starter, Case, or Deep Memory, then track the clues returned and the memories that stay with you.</p>
-        <p class="copy jp">グリマーグレンの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>事件簿<rt>じけんぼ</rt></ruby>です。<ruby>今週<rt>こんしゅう</rt></ruby>の <ruby>庭<rt>にわ</rt></ruby>と、<ruby>三<rt>みっ</rt></ruby>つの <ruby>記憶<rt>きおく</rt></ruby>の <ruby>段階<rt>だんかい</rt></ruby>、<ruby>取<rt>と</rt></ruby>り <ruby>戻<rt>もど</rt></ruby>した <ruby>記憶<rt>きおく</rt></ruby>を <ruby>記録<rt>きろく</rt></ruby>します。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/grimmerglen_profile.webp" alt="Grimmerglen profile, Memory Case File, weekly garden and memory tiers" loading="lazy"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ================= ARCADE ================= -->
-<div class="panel" id="panel-arcade" role="tabpanel" aria-labelledby="tab-arcade" aria-hidden="true" tabindex="-1" style="--pcolor:var(--c-arcade)">
-  <div class="panelIntro">
-    <div class="kicker"><span class="jpPrimary">アーケード</span><span class="enSecondary">Arcade</span></div>
-    <p>Pure reward, none of it graded, all of it earned.</p>
-    <p class="jp"><ruby>成績<rt>せいせき</rt></ruby>には <ruby>関係<rt>かんけい</rt></ruby>のない、ただの ごほうび。</p>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">物理<span class="enSecondary">Physics</span></div>
-        <h2>Feed Booha</h2>
-        <p class="jpHead"><ruby>物理<rt>ぶつり</rt></ruby>で <ruby>飛<rt>と</rt></ruby>ばして、キャンディを</p>
-        <p class="copy">Cut, swing, and bounce candy across fans and pads until it lands in Booha's mouth. Fifty levels, each with its own star rating.</p>
-        <p class="copy jp">ファンや <ruby>バウンドパッド<rt></rt></ruby>を <ruby>使<rt>つか</rt></ruby>って、キャンディをブーハーの <ruby>口<rt>くち</rt></ruby>へ。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/game-feedbooha.webp" alt="Feed Booha, real gameplay screen" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">シューティング<span class="enSecondary">Arcade Shooter</span></div>
-        <h2>Booha Invaders</h2>
-        <p class="jpHead">よこから <ruby>撃<rt>う</rt></ruby>ち<ruby>込<rt>こ</rt></ruby>む アーケードシューティング</p>
-        <p class="copy">Waves, skill pacing, and a three phase boss fight against Dotty at the end of it.</p>
-        <p class="copy jp"><ruby>波状<rt>はじょう</rt></ruby>の <ruby>敵<rt>てき</rt></ruby>と、<ruby>最後<rt>さいご</rt></ruby>に <ruby>待<rt>ま</rt></ruby>ち <ruby>受<rt>う</rt></ruby>けるボス <ruby>戦<rt>せん</rt></ruby>。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/game-invaders.webp" alt="Booha Invaders, real gameplay screen, wave 3" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">積んで消す<span class="enSecondary">Stack and Clear</span></div>
-        <h2>Booha Blocks</h2>
-        <p class="jpHead"><ruby>積<rt>つ</rt></ruby>んで <ruby>消<rt>け</rt></ruby>す、ブロックゲーム</p>
-        <p class="copy">A familiar falling block game, wearing Booha's own color set.</p>
-        <p class="copy jp">おなじみの <ruby>落<rt>お</rt></ruby>ちものパズルを、ブーハーの <ruby>色<rt>いろ</rt></ruby>で。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/game-blocks.webp" alt="Booha Blocks, real gameplay screen" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
-    <div class="wrap block-inner reverse">
-      <div>
-        <div class="block-tag">スリングショット物理<span class="enSecondary">Slingshot Physics</span></div>
-        <h2>Booha Destruction</h2>
-        <p class="jpHead">ブーハー・デストラクション</p>
-        <p class="copy">Pull back and let go: a slingshot puzzle across chapters and rounds, with a growing roster of unlockable Booha looks along the way.</p>
-        <p class="copy jp">スリングショットで <ruby>狙<rt>ねら</rt></ruby>いを <ruby>定<rt>さだ</rt></ruby>め、<ruby>撃<rt>う</rt></ruby>ち <ruby>抜<rt>ぬ</rt></ruby>く パズルゲーム。</p>
-      </div>
-      <div class="shotFrame"><img src="assets/tour/game-destruction.webp" alt="Booha Destruction, First Shot chapter one, training grounds" loading="lazy"></div>
-    </div>
-  </div>
-
-  <div class="block" style="--bcolor:var(--c-arcade); background:radial-gradient(1000px 420px at 8% -8%, rgba(224,105,138,0.14), transparent 60%);">
-    <div class="wrap block-inner">
-      <div>
-        <div class="block-tag">2人対戦<span class="enSecondary">Two Player</span></div>
-        <h2>Mister Happy's House</h2>
-        <p class="jpHead">二人で <ruby>対戦<rt>たいせん</rt></ruby>する、ミスター・ハッピーズハウス</p>
-        <p class="copy">A small house full of side games and a head to head showdown for two players on one device.</p>
-        <p class="copy jp">一つの <ruby>端末<rt>たんまつ</rt></ruby>で、二人で <ruby>対戦<rt>たいせん</rt></ruby>できるミニゲーム <ruby>集<rt>しゅう</rt></ruby>。</p>
-      </div>
-      <div>
-        <div class="shotFrame" style="margin-bottom:14px;"><img src="assets/tour/happyhouse-title.webp" alt="Mister Happy's House, title card" loading="lazy"></div>
-        <div class="shotTrio">
-          <div class="shotFrame"><img src="assets/tour/happyhouse-room.webp" alt="Inside Mister Happy's House, the two-player game room" loading="lazy"></div>
-          <div class="shotFrame"><img src="assets/tour/happyhouse-liarmachine.webp" alt="The Liar Machine, a two player battle game" loading="lazy"></div>
-          <div class="shotFrame"><img src="assets/tour/happyhouse-snaptest.webp" alt="Snap Test, a two player reflex battle" loading="lazy"></div>
+        <div class="tag" style="--c:var(--glow)">Step 2 · The Maze</div>
+        <div class="jh"><ruby>迷路<rt>めいろ</rt></ruby>の <ruby>中<rt>なか</rt></ruby>に、9つのゲーム</div>
+        <div class="eh">Nine games inside the maze</div>
+        <p class="copy en">The Maze opens onto three trees, one for each track: Pre-Boo, Boo-riculum, and Boo-Continuum. Each tree holds the same nine games at its own level: three for words, three for sentences, three for listening and speaking.</p>
+        <div class="rainbow">
+          <div class="rTop"><span class="newChip">NEW</span><b class="rStars">★★★</b></div>
+          <div class="rjh">にじの <ruby>星<rt>ほし</rt></ruby>は、<ruby>準備<rt>じゅんび</rt></ruby>してきた しるし</div>
+          <p>Students who come prepared and clear the week's maze games at a ready pace earn <b>rainbow stars</b> instead of gold. Gold means the game is done. Rainbow means you studied before you played.</p>
         </div>
+        <div class="tiers" aria-label="Score card tiers out of 15"><span>0–5 TRY AGAIN</span><span>6–10 KEEP GOING</span><span>11–14 GREAT</span><span>15 PERFECT</span><span class="lg">LEGEND</span></div>
+      </div>
+      <div class="shots s2">
+        <div class="dev"><img src="assets/tour/v2-maze.webp" alt="The Maze with the three curriculum trees"></div>
+        <div class="dev"><img src="assets/tour/v2-menu.webp" alt="Pre-Boo game menu: words, sentences, listen, and extra games with stars and crowns"></div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:#b0234a">Step 4 · Extra practice</div>
+        <div class="jh">おまけの 2つと、ウィークボス</div>
+        <div class="eh">Two practice games and a boss fight</div>
+        <p class="copy en"><b>Booha Bites</b>: Booha ate one word from each sentence, find it. <b>Echo</b>: hear a word, type it. <b>Week Boss</b>: fifteen rounds of this week's English in new formats, with critical hits for streaks. Win the week's crown.</p>
+        <p class="copy en">These are bonus practice. They never change the nine-game unlock.</p>
+        <div class="dev" style="margin-top:14px"><img src="assets/tour/v2-bonus.webp" alt="Bonus games panel: Booha Bites, Echo and Week Boss with stars and best scores"></div>
+      </div>
+      <div class="dev narrow" style="justify-self:center; width:100%"><img src="assets/tour/v2-weekboss.webp" alt="Week Boss: type the English for the Japanese"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:var(--w-juku)">Homework and Daily Check</div>
+        <div class="jh"><ruby>宿題<rt>しゅくだい</rt></ruby>と、<ruby>毎日<rt>まいにち</rt></ruby>の ランタン</div>
+        <div class="eh">Homework and the Lantern Path</div>
+        <p class="copy en">Homework is this week's words and sentences to copy into a notebook, with audio, a print view, a test mode that hides the English, and a projector mode for class. A short Daily Check lights one lantern a day.</p>
+        <div class="dev" style="margin-top:14px"><img src="assets/tour/v2-lantern.webp" alt="The Lantern Path: one lantern per Daily Check"></div>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-homework.webp" alt="Homework popup with curriculum choice, copy list, print, test mode and projector"></div>
+    </div>
+  </section>
 </div>
 
-<section class="footerCta">
+<!-- ======================= THE WORLDS ======================= -->
+<div class="panel" id="p-worlds" role="tabpanel" aria-labelledby="t-worlds">
+  <div class="pIntro wrap">
+    <div class="kick"><ruby>迷路<rt>めいろ</rt></ruby>の <ruby>先<rt>さき</rt></ruby>の <ruby>世界<rt>せかい</rt></ruby><small>The Worlds</small></div>
+    <p class="jp">それぞれの <ruby>世界<rt>せかい</rt></ruby>が、ちがう <ruby>遊<rt>あそ</rt></ruby>び<ruby>方<rt>かた</rt></ruby>で <ruby>英語<rt>えいご</rt></ruby>を <ruby>使<rt>つか</rt></ruby>います。</p>
+    <p>Each world uses English in a different way: collecting, reading, investigating, typing, and spotting changes.</p>
+  </div>
   <div class="wrap">
-    <h2><span class="jpPrimary"><ruby>次<rt>つぎ</rt></ruby>のページを <ruby>見<rt>み</rt></ruby>てみますか？</span><span class="enSecondary">Do you want to see the next page?</span></h2>
-    <button class="btnPrimary" id="nextTabBtn" type="button"><span class="nextJp">次のページ: カリキュラム</span><span class="nextEn">Next page: The Curriculum</span></button>
+    <div class="lockline"><span aria-hidden="true">🔒</span><span><b>9 / 9</b> Finish all nine maze games to open Utsuroba, Muenba, Grimmerglen, and Akiya for the week.</span></div>
+    <div class="worlds">
+      <article class="world" style="--c:var(--w-karasuki)"><img src="assets/tour/karasuki-room-01.webp" alt="Karasuki"><div class="in"><h3>カラスキ<small>KARASUKI</small></h3><p><ruby>忘<rt>わす</rt></ruby>れられたものが <ruby>行<rt>い</rt></ruby>く <ruby>世界<rt>せかい</rt></ruby>。</p><p class="en">Where forgotten things go. Finish a maze game and wanderers appear: friendly, mischievous, or dangerous. Thirty-six to find, and travelers like Nuppi stop by too.</p></div></article>
+      <article class="world" style="--c:var(--w-utsuroba)"><img src="assets/tour/utsuroba-room-01.webp" alt="Utsuroba"><div class="in"><h3>うつろば<small>UTSUROBA</small></h3><p><ruby>消<rt>き</rt></ruby>えない <ruby>記憶<rt>きおく</rt></ruby>の <ruby>部屋<rt>へや</rt></ruby>。</p><p class="en">A room for what stayed. Six drifters each hold one memory told in English. Read it at Starter, Case, or Deep depth and give it back.</p></div></article>
+      <article class="world" style="--c:var(--w-muenba)"><img src="assets/tour/muenba-room-01.webp" alt="Muenba"><div class="in"><h3>むえんば<small>MUENBA</small></h3><p>きりの へやが 15こ。ゴーストが 5たい。</p><p class="en">Fifteen foggy rooms, five ghosts hiding. Earn Nuppi's trust, read the case notes, and catch them before Sunday.</p></div></article>
+      <article class="world" style="--c:var(--w-grimmerglen)"><img src="assets/tour/grimmerglen_01.webp" alt="Grimmerglen"><div class="in"><h3>グリマーグレン<small>GRIMMERGLEN</small></h3><p>マリエッタは きもちは おぼえている。</p><p class="en">Marietta remembers the feeling, but not always the thing. Short typing challenges pull memories out of everyday objects, with 24 clues to find each week.</p></div></article>
+    </div>
+  </div>
+
+  <section class="sec" style="margin-top:44px">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:var(--w-akiya)">New · Akiya</div>
+        <div class="jh">あきや、めを そらさないで。</div>
+        <div class="eh">Akiya: don't blink</div>
+        <p class="copy en">Study a room in an empty Japanese house while the light is on. Then it goes dark. Move Booha to whatever changed, mark it, and report the room. The house opens one room at a time, starting at the genkan, and each room can be patient, quicker, or one that lies to you.</p>
+        <div class="facts"><span>Observation</span><span>Memory</span><span>Room by room</span></div>
+      </div>
+      <div class="shots s2">
+        <div class="dev"><img src="assets/tour/v2-akiya.webp" alt="Akiya case file 01, Genkan: Don't blink"></div>
+        <div class="dev"><img src="assets/tour/akiya-genkan.webp" alt="The genkan room in Akiya"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= REWARDS ======================= -->
+<div class="panel" id="p-rewards" role="tabpanel" aria-labelledby="t-rewards">
+  <div class="pIntro wrap">
+    <div class="kick">ごほうび<small>Rewards</small></div>
+    <p class="jp"><ruby>毎週<rt>まいしゅう</rt></ruby>の メダル、ずっと <ruby>残<rt>のこ</rt></ruby>る トークン、そして アーケード。</p>
+    <p>Medals for this week, tokens that stay forever, stars that build a level, and an arcade that is pure fun. None of it is graded.</p>
+  </div>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:#c98f10">Weekly medals</div>
+        <div class="jh">8つの メダル、<ruby>日曜日<rt>にちようび</rt></ruby>に リセット</div>
+        <div class="eh">Eight medals, fresh every Sunday</div>
+        <p class="copy en">Bronze for showing up, silver for finishing, gold for doing it well. Each one adds bonus stars: +3, +5, or +10.</p>
+        <div class="facts"><span>Warm Up</span><span>Wanderer Week</span><span>Lantern Week</span><span>Arcade Open</span><span>Blitz Triple</span><span>Link Master</span><span>Blitz Perfect</span><span>Perfect Week</span></div>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-medals.webp" alt="This week's medals with progress bars"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:var(--glow)">Stars and links</div>
+        <div class="jh">となりどうしが ★★ で、みちが ひかる</div>
+        <div class="eh">Neighbors at two stars light the path</div>
+        <p class="copy en">On the Adventure Log the nine games form a trail. Play them in any order. When two neighbors both reach two stars, the link between them lights up for a bonus star. Every star counts toward a lifetime level that only goes up, and prepared students turn their stars rainbow.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-trail.webp" alt="This week's trail: nine games linked, leading to the arcade chest"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:#c98f10">Adventure tokens</div>
+        <div class="jh">ずっと <ruby>残<rt>のこ</rt></ruby>る トークン</div>
+        <div class="eh">Tokens that stay forever</div>
+        <p class="copy en">Permanent tokens for the whole journey, the student's own track, Muenba, and Grimmerglen. Crown Collector, Boss Buster, Wanderer Host and others have tiers to climb, and some are secret until earned.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-tokens.webp" alt="Adventure tokens grouped by Journey, Curriculum, Muenba and Grimmerglen"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="tag" style="--c:var(--pink)">The arcade</div>
+      <div class="jh">9つ ぜんぶ ★★ で、アーケード オープン</div>
+      <div class="eh">Two stars on all nine opens the arcade</div>
+      <div class="arcade" style="margin-top:16px">
+        <figure><img src="assets/tour/game-feedbooha.webp" alt="Feed Booha"><figcaption>Feed Booha<span>Physics puzzles, fifty levels</span></figcaption></figure>
+        <figure><img src="assets/tour/game-invaders.webp" alt="Booha Invaders"><figcaption>Booha Invaders<span>Waves and a three-phase boss</span></figcaption></figure>
+        <figure><img src="assets/tour/game-destruction.webp" alt="Booha Destruction"><figcaption>Booha Destruction<span>Slingshot puzzles by chapter</span></figcaption></figure>
+        <figure><img src="assets/tour/game-blocks.webp" alt="Booha Blocks"><figcaption>Booha Blocks<span>Stack and clear</span></figcaption></figure>
+      </div>
+      <article class="happy">
+        <img src="assets/tour/happyhouse-title.webp" alt="Mister Happy's House">
+        <div>
+          <span class="openChip">いつでも オープン · Always open</span>
+          <h3>ミスター・ハッピーズハウス<small>Mister Happy's House</small></h3>
+          <p>ともだちと たいせん、または ミスター・ハッピーと しょうぶ。</p>
+          <p class="en">A duel game that never locks. Face a classmate on one device, or take on Mister Happy himself.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= PROGRESS ======================= -->
+<div class="panel" id="p-progress" role="tabpanel" aria-labelledby="t-progress">
+  <div class="pIntro wrap">
+    <div class="kick">きろく<small>Progress</small></div>
+    <p class="jp">おうちの <ruby>人<rt>ひと</rt></ruby>や <ruby>先生<rt>せんせい</rt></ruby>も いっしょに <ruby>見<rt>み</rt></ruby>てね。</p>
+    <p>Everything a student does is recorded on their own profiles, so families and teachers can see the week at a glance.</p>
+  </div>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:var(--glow)">Adventure Log · weekly report</div>
+        <div class="jh"><ruby>今週<rt>こんしゅう</rt></ruby>の レポートと カレンダー</div>
+        <div class="eh">This week's report and calendar</div>
+        <p class="copy en">An understanding score compared with the student's own recent average, Blitz times, and a calendar showing every day played and every Daily Check.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-report.webp" alt="Weekly report with understanding score, Blitz times and adventure calendar"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:var(--glow)">Adventure Log · record book</div>
+        <div class="jh">これまでの しゅうと、ゲームの きろく</div>
+        <div class="eh">Past weeks and every game</div>
+        <p class="copy en">Gold seals for fully completed weeks, and a table of this week's score and best stars for each of the nine games. Approved Juku reports are kept here too.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-records-book.webp" alt="Past weeks with gold seals and the game records table"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <div class="tag" style="--c:var(--w-utsuroba)">World profiles</div>
+      <div class="jh">それぞれの <ruby>世界<rt>せかい</rt></ruby>に、<ruby>自分<rt>じぶん</rt></ruby>の きろく</div>
+      <div class="eh">Each world keeps its own record</div>
+      <div class="shots s3" style="margin-top:16px">
+        <div><div class="dev"><img src="assets/tour/v2-utsuroba.webp" alt="Utsuroba memory archive with reading depth"></div><div class="cap">Utsuroba · Memory Archive</div></div>
+        <div><div class="dev"><img src="assets/tour/v2-muenba.webp" alt="Muenba ghost ledger with this week's hunt"></div><div class="cap">Muenba · Ghost Ledger</div></div>
+        <div><div class="dev"><img src="assets/tour/v2-grimmerglen.webp" alt="Grimmerglen memory case file with three tiers"></div><div class="cap">Grimmerglen · Memory Case File</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:var(--w-karasuki)">Wanderer collection</div>
+        <div class="jh">たびびと ずかん</div>
+        <div class="eh">Thirty-six wanderers to find</div>
+        <p class="copy en">Every wanderer met in Karasuki is kept, sorted into friendly, mischievous, and dangerous, along with the travelers who stopped by.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v2-wanderers.webp" alt="Wanderer collection: friendly, mischievous and dangerous"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======================= JUKU ======================= -->
+<div class="panel" id="p-juku" role="tabpanel" aria-labelledby="t-juku">
+  <div class="pIntro wrap">
+    <div class="kick" style="color:var(--w-juku)">英語塾クラス<small>English Juku Class</small></div>
+    <p class="jp">その<ruby>週<rt>しゅう</rt></ruby>の <ruby>英語<rt>えいご</rt></ruby>を、<ruby>自分<rt>じぶん</rt></ruby>の <ruby>力<rt>ちから</rt></ruby>で <ruby>練習<rt>れんしゅう</rt></ruby>・<ruby>実証<rt>じっしょう</rt></ruby>する。</p>
+    <p>A separate 90-minute class. Students review the week's Booha Adventure at home, then practice and demonstrate what they can do on their own in class.</p>
+  </div>
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="jukuSteps">
+          <div><span><b><ruby>始<rt>はじ</rt></ruby>める · Start</b><span>Review the week's Booha Adventure content at home.</span></span></div>
+          <div><span><b><ruby>確認<rt>かくにん</rt></ruby>する · Check</b><span>In class, use the Juku engine to practice and demonstrate the week's English independently.</span></span></div>
+          <div><span><b><ruby>次<rt>つぎ</rt></ruby>へ · Next</b><span>The teacher reviews oral reading and open answers, then approves a weekly report that appears on the student's Adventure Log.</span></span></div>
+        </div>
+        <div class="skills"><span>Dictation</span><span>Oral reading</span><span>Sentence building</span><span>Vocabulary</span><span>Comprehension</span><span>Translation</span><span>Spelling</span><span>Short writing (Boo-riculum)</span></div>
+        <p class="copy en" style="margin-top:14px">90 minutes · No extra notebook homework · Games never affect a Juku result.</p>
+        <a class="btn" href="https://www.bryanharper.tokyo/juku-class">英語塾クラスについて<small>About the Juku class</small></a>
+      </div>
+      <div class="dev narrow" style="justify-self:center; width:100%"><img src="assets/tour/v2-juku.webp" alt="English Juku class selection"></div>
+    </div>
+  </section>
+</div>
+
+<section class="next">
+  <div class="wrap">
+    <h2><ruby>次<rt>つぎ</rt></ruby>のページを <ruby>見<rt>み</rt></ruby>てみますか？<small>Do you want to see the next page?</small></h2>
+    <button class="nextBtn" id="nextBtn" type="button"><span id="nextJp">次のページ: 世界</span><small id="nextEn">Next page: The Worlds</small></button>
   </div>
 </section>
 
-<footer class="site">
+<footer>
   <div class="wrap">
-    <div>
-      <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Bryan's English School</div>
-      <div>Tomisato, Chiba 286-0221</div>
-      <div>0476-76-9896 (7 to 9 PM)</div>
-      <div><a href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a></div>
-    </div>
-    <div>
-      <div style="color:var(--ink); font-weight:700; margin-bottom:6px;">Elsewhere</div>
-      <nav class="footerNav" aria-label="Other Booha destinations">
-        <a class="footerBtn" href="https://www.bryanharper.tokyo"><span class="jpPrimary">公式サイト</span><span class="enSecondary">Main site</span></a>
-        <a class="footerBtn" href="https://booha-adventure-studios.github.io/booha-world/"><span class="jpPrimary">ブーハーワールド</span><span class="enSecondary">Booha World</span></a>
-      </nav>
-    </div>
+    <div><b>Bryan's English School</b><br>Tomisato, Chiba 286-0221<br>0476-76-9896 (7 to 9 PM)<br>bryans.english@gmail.com</div>
+    <div><b>Elsewhere</b><br><a href="https://www.bryanharper.tokyo">公式サイト Main site</a><br><a href="https://booha-adventure-studios.github.io/booha-world/">ブーハーワールド Booha World</a></div>
   </div>
 </footer>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption" hidden>
-  <button class="lightboxClose" id="lightboxClose" type="button" aria-label="Close image viewer">×</button>
-  <figure>
-    <img id="lightboxImg" alt="">
-    <figcaption id="lightboxCaption"></figcaption>
-  </figure>
-</div>
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Enlarged screen"><button type="button" id="lbX" aria-label="Close">×</button><img id="lbImg" alt=""></div>
 
 <script>
-  const tabbar = document.getElementById('tabbar');
-  const tabButtons = [...tabbar.querySelectorAll('.tabbtn')];
-  const panels = document.querySelectorAll('.panel');
-  const validTabs = new Set(tabButtons.map(btn => btn.dataset.tab));
-  const nextTabBtn = document.getElementById('nextTabBtn');
-  const nextTabJp = document.querySelector('#nextTabBtn .nextJp');
-  const nextTabEn = document.querySelector('#nextTabBtn .nextEn');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const lightboxClose = document.getElementById('lightboxClose');
-  let lastImageTrigger = null;
-  const tabLabels = new Map(tabButtons.map(btn => [btn.dataset.tab, {
-    jp: btn.querySelector('.jpTab').textContent.trim(),
-    en: btn.querySelector('.enTab').textContent.trim()
-  }]));
-
-  function updateNextButton(activeTab){
-    const currentIndex = tabButtons.findIndex(btn => btn.dataset.tab === activeTab);
-    const nextTab = tabButtons[(currentIndex + 1) % tabButtons.length].dataset.tab;
-    nextTabJp.textContent = '次のページ: ' + tabLabels.get(nextTab).jp;
-    nextTabEn.textContent = 'Next page: ' + tabLabels.get(nextTab).en;
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var nJp=document.getElementById('nextJp'), nEn=document.getElementById('nextEn');
+  function go(t,scroll){
+    var i=tabs.findIndex(function(b){return b.dataset.t===t}); if(i<0)i=0;
+    tabs.forEach(function(b,k){var on=k===i; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1;});
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.id==='p-'+tabs[i].dataset.t);});
+    var n=tabs[(i+1)%tabs.length]; nJp.textContent='次のページ: '+n.querySelector('b').textContent; nEn.textContent='Next page: '+n.querySelector('span').textContent;
+    if(scroll){ var y=document.querySelector('.hero').offsetTop+document.querySelector('.hero').offsetHeight; window.scrollTo({top:Math.max(0,y-120)}); }
   }
-
-  function tabFromHash(){
-    const requested = decodeURIComponent(window.location.hash.slice(1));
-    return validTabs.has(requested) ? requested : 'world';
-  }
-
-  function openLightbox(image){
-    lastImageTrigger = image;
-    lightboxImg.src = image.currentSrc || image.src;
-    lightboxImg.alt = image.alt;
-    lightboxCaption.textContent = image.alt;
-    lightbox.hidden = false;
-    document.body.classList.add('lightbox-open');
-    lightboxClose.focus();
-  }
-
-  function closeLightbox(){
-    lightbox.hidden = true;
-    document.body.classList.remove('lightbox-open');
-    lightboxImg.removeAttribute('src');
-    if (lastImageTrigger) lastImageTrigger.focus();
-  }
-
-  document.querySelectorAll('.shotFrame img, .imgStack__item img, .hero-banner img').forEach(image => {
-    image.tabIndex = 0;
-    image.setAttribute('role', 'button');
-    image.setAttribute('aria-label', 'Enlarge image: ' + image.alt);
-    image.addEventListener('click', () => openLightbox(image));
-    image.addEventListener('keydown', e => {
-      if (e.key !== 'Enter' && e.key !== ' ') return;
-      e.preventDefault();
-      openLightbox(image);
-    });
+  document.getElementById('tabs').addEventListener('click',function(e){var b=e.target.closest('.tab'); if(b) go(b.dataset.t,true);});
+  document.getElementById('tabs').addEventListener('keydown',function(e){
+    var i=tabs.indexOf(document.activeElement); if(i<0)return; var n=i;
+    if(e.key==='ArrowRight')n=(i+1)%tabs.length; else if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length; else return;
+    e.preventDefault(); tabs[n].focus(); go(tabs[n].dataset.t,false);
   });
+  document.getElementById('nextBtn').addEventListener('click',function(){var i=tabs.findIndex(function(b){return b.classList.contains('on')}); go(tabs[(i+1)%tabs.length].dataset.t,true);});
+  var h=location.hash.slice(1); go(tabs.some(function(b){return b.dataset.t===h})?h:'week',false);
 
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeLightbox();
+
+  var lb=document.getElementById('lb'), li=document.getElementById('lbImg'), last=null;
+  function close(){lb.hidden=true; document.body.classList.remove('lbOpen'); li.removeAttribute('src'); if(last)last.focus();}
+  document.querySelectorAll('.dev img, .world > img, .arcade img, .happy img').forEach(function(im){
+    im.tabIndex=0; im.setAttribute('role','button');
+    function open(){last=im; li.src=im.src; li.alt=im.alt; lb.hidden=false; document.body.classList.add('lbOpen'); document.getElementById('lbX').focus();}
+    im.addEventListener('click',open);
+    im.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
   });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
-  });
-
-  function activateTab(tabName, { updateHash = true, scroll = true } = {}){
-    const activeButton = tabButtons.find(btn => btn.dataset.tab === tabName) || tabButtons[0];
-    const activeTab = activeButton.dataset.tab;
-
-    tabButtons.forEach(btn => {
-      const isActive = btn === activeButton;
-      btn.classList.toggle('active', isActive);
-      btn.setAttribute('aria-selected', String(isActive));
-      btn.tabIndex = isActive ? 0 : -1;
-    });
-
-    panels.forEach(panel => {
-      const isActive = panel.id === 'panel-' + activeTab;
-      panel.classList.toggle('active', isActive);
-      panel.setAttribute('aria-hidden', String(!isActive));
-    });
-    updateNextButton(activeTab);
-
-    if (updateHash && window.location.hash !== '#' + activeTab){
-      window.history.replaceState(null, '', '#' + activeTab);
-    }
-    if (scroll){
-      window.scrollTo({ top: 0, behavior: 'auto' });
-    }
-  }
-
-  tabbar.addEventListener('click', (e) => {
-    const btn = e.target.closest('.tabbtn');
-    if (!btn) return;
-    activateTab(btn.dataset.tab);
-  });
-
-  nextTabBtn.addEventListener('click', () => {
-    const activeTab = tabButtons.find(btn => btn.classList.contains('active')).dataset.tab;
-    const currentIndex = tabButtons.findIndex(btn => btn.dataset.tab === activeTab);
-    const nextTab = tabButtons[(currentIndex + 1) % tabButtons.length].dataset.tab;
-    nextTabBtn.blur();
-    activateTab(nextTab);
-  });
-
-  tabbar.addEventListener('keydown', (e) => {
-    const currentIndex = tabButtons.indexOf(document.activeElement);
-    if (currentIndex < 0) return;
-    let nextIndex = currentIndex;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextIndex = (currentIndex + 1) % tabButtons.length;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextIndex = (currentIndex - 1 + tabButtons.length) % tabButtons.length;
-    if (e.key === 'Home') nextIndex = 0;
-    if (e.key === 'End') nextIndex = tabButtons.length - 1;
-    if (nextIndex === currentIndex) return;
-    e.preventDefault();
-    tabButtons[nextIndex].focus();
-    activateTab(tabButtons[nextIndex].dataset.tab);
-  });
-
-  window.addEventListener('hashchange', () => activateTab(tabFromHash(), { updateHash: false }));
-  activateTab(tabFromHash(), { updateHash: false, scroll: false });
+  document.getElementById('lbX').addEventListener('click',close);
+  lb.addEventListener('click',function(e){if(e.target===lb)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close();});
+})();
 </script>
-
 </body>
 </html>
