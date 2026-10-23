@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=Zen+Antique&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="event.css">
+  <link rel="stylesheet" href="zombie.css">
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -250,11 +251,30 @@
       </div>
 
       <div class="night-rules">
-        <article><span>01</span><h2><span class="jp-main">順番に見つける</span><span class="en-sub">Find in order</span></h2><p><span class="jp-main">チームでゴースト1から15までをさがします。写真が証拠になります。</span><span class="en-sub">Teams search for Ghost 1 through Ghost 15. Photograph each ghost as proof.</span></p></article>
-        <article><span>02</span><h2><span class="jp-main">テープをつけたライト</span><span class="en-sub">Use a covered phone light</span></h2><p><span class="jp-main">スマホのライトは使えます。ライトには紫色のテープをつけてください。紫のテープは受付でお渡しします。ブラックライトとQRスキャンは使いません。</span><span class="en-sub">Phone lights are allowed, but cover every active light with purple tape. Purple tape is handed out at check-in. No blacklights or QR scans.</span></p></article>
+        <article><span>01</span><h2><span class="jp-main">順番に見つける</span><span class="en-sub">Find in order</span></h2><p><span class="jp-main">チームでゴースト1から15までを順番にさがします。見つけたら、ゲーム画面でそのゴーストのマークをえらびます。正しいと、ひみつのことばが1文字ずつわかります。</span><span class="en-sub">Teams search for Ghost 1 through Ghost 15 in order. When you find one, choose its mark on the game screen. Each correct mark reveals one letter of a secret phrase.</span></p></article>
+        <article><span>02</span><h2><span class="jp-main">ライトは使えません</span><span class="en-sub">No phone lights</span></h2><p><span class="jp-main">スマホのライトや懐中電灯は使えません。あやしく光るゲーム画面が、たったひとつの明かりです。ゴーストの目は光を反射します。スマホの明るさは半分くらいにしてください。</span><span class="en-sub">No phone flashlights or torches. The eerie glow of the game screen is your only light, and the ghosts' eyes reflect it. Please set your screen brightness to about half.</span></p></article>
         <article class="siren-rule"><span>03</span><h2><span class="jp-main">サイレンでかくれる</span><span class="en-sub">Hide when the siren sounds</span></h2><p><span class="jp-main">サイレンが鳴ったら、全員かくれてください。かくれていれば安全です。ゾンビがつかむことはありません。かくれていない人や、光が見えた人は、ゾンビに洗濯ばさみをつけられます。</span><span class="en-sub">When the siren sounds, everyone hides. Anyone who hides is safe. Zombies never grab anyone. Anyone not hiding, or showing a light, may get a clothespin clipped on by a zombie.</span></p></article>
         <article><span>04</span><h2><span class="jp-main">病院へ戻る</span><span class="en-sub">Return to Hospital</span></h2><p><span class="jp-main">洗濯ばさみをつけられたら、チーム全員で病院（ホスピタルデスク）へ戻り、外してもらいます。チーム用の光る薬を受け取って再スタート。15番を見つけたら、病院に戻ってゴールです。</span><span class="en-sub">If anyone gets a clothespin, the whole team returns to the Hospital Desk to have it removed and collect a glowing team medicine, then carries on. After Ghost 15, return to the Hospital Desk to finish.</span></p></article>
       </div>
+
+      <section class="zombie-start" id="zombie-start-section" aria-labelledby="zombie-start-title">
+        <div id="zombie-start" class="zombie-view">
+          <p class="eyebrow"><span class="jp-main">チームのハント</span><span class="en-sub">Your team hunt</span></p>
+          <h2 id="zombie-start-title"><span class="jp-main">ゾンビの森へ入る</span><span class="en-sub">Enter the zombie forest</span></h2>
+          <p><span class="jp-main">チームリーダーのスマホ1台で遊びます。チーム名はこのスマホだけに保存されます。</span><span class="en-sub">One phone per team (the team leader's). The team name stays on this phone only.</span></p>
+          <label for="zombie-team"><span class="jp-main">チーム名</span><span class="en-sub">Team name</span></label>
+          <input id="zombie-team" type="text" maxlength="30" autocomplete="off" placeholder="例：ゾンビバスターズ">
+          <button class="primary-button full" id="zombie-start-btn" type="button" disabled><span class="jp-main" id="zombie-start-jp">ゾンビの森へ！</span><span class="en-sub" id="zombie-start-en">Enter the forest</span></button>
+          <p class="fine-print"><span class="jp-main">18:00から始められます。スマホの明るさは半分くらいにしてください。</span><span class="en-sub">Opens at 6:00 pm. Please set your screen brightness to about half.</span></p>
+        </div>
+        <div id="zombie-resume" class="zombie-view" hidden>
+          <p class="eyebrow"><span class="jp-main" id="zombie-resume-label-jp">ハントのとちゅうです</span><span class="en-sub" id="zombie-resume-label-en">Your hunt is in progress</span></p>
+          <strong class="zombie-resume-count" id="zombie-resume-count">0 / 15</strong>
+          <span class="zombie-resume-team" id="zombie-resume-team"></span>
+          <button class="primary-button full" id="zombie-resume-btn" type="button"><span class="jp-main" id="zombie-resume-jp">つづける</span><span class="en-sub" id="zombie-resume-en">Continue the hunt</span></button>
+          <button class="secondary-button" id="zombie-resume-reset" type="button" hidden><span class="jp-main">テストをリセット</span><span class="en-sub">Reset test</span></button>
+        </div>
+      </section>
 
       <section class="night-information" aria-labelledby="night-information-title"><h2 id="night-information-title"><span class="jp-main">夜の参加について</span><span class="en-sub">Night information</span></h2><ol><li><span class="jp-main">18:00までに到着し、ホスピタルデスクで受付してください。</span><span class="en-sub">Arrive by 6:00 pm and check in at the Hospital Desk.</span></li><li><span class="jp-main">参加できるのは小学生〜高校生です。未就学児は参加できません。小学生は大人の同伴が必要です。</span><span class="en-sub">For elementary to high school students. Preschoolers cannot join. Elementary-age students must be accompanied by an adult.</span></li><li><span class="jp-main">チームに分かれて、チームリーダーと一緒に回ります。</span><span class="en-sub">You'll join a team with a team leader.</span></li><li><span class="jp-main">仮装は不要です。暗い色か汚れてもよい古い服、あたたかい服装で来てください。</span><span class="en-sub">No costumes needed. Wear dark or old clothes, and dress warmly.</span></li><li><span class="jp-main">荷物は車に置いてきてください。</span><span class="en-sub">Please leave bags in your car.</span></li><li><span class="jp-main">森の道はせまくて暗いので、走らないでください。</span><span class="en-sub">The forest path is narrow and dark — please don't run.</span></li><li><span class="jp-main">保護者の方は必ずお子さまを見守ってください。</span><span class="en-sub">Parents must watch their children at all times.</span></li><li><span class="jp-main">森の中にトイレはありません。</span><span class="en-sub">There are no toilets in the forest.</span></li><li><span class="jp-main">夜は駐車場に誘導スタッフがいません。奥から詰めて、ほかの車をふさがないように駐車してください。</span><span class="en-sub">There is no parking guide at night. Fill the back spaces first and don't block in other cars.</span></li><li><span class="jp-main">雨天中止です。ウェブサイトとInstagramでお知らせします。中止の場合もバッグはお渡しします（返金なし）。</span><span class="en-sub">Cancelled if it rains — check our website and Instagram. Bags will still be available (no refunds).</span></li><li><span class="jp-main">参加した子どもたちには、グッズバッグとスモア用のマシュマロがあります。</span><span class="en-sub">Every participating child gets a goodie bag and marshmallows for s'mores.</span></li></ol><div class="social-links" id="zombie-social-links"></div></section>
     </section>
@@ -437,7 +457,98 @@
     </div>
   </div>
 
+  <!-- Zombie Scavenger Hunt: full-screen night game. Opened by zombie.js from the Zombie tab. -->
+  <div id="zombie-game" hidden>
+    <canvas id="z-bg" aria-hidden="true"></canvas>
+
+    <section class="z-screen" id="z-rules" hidden>
+      <span class="z-test-flag" data-test-only hidden>TEST MODE</span>
+      <div class="z-content">
+        <p class="z-welcome" id="z-welcome"></p>
+        <h1 class="z-title">ゾンビの<ruby>森<rt>もり</rt></ruby>のルール</h1>
+        <ol class="z-steps">
+          <li><b>1から<span data-zombie-total>15</span>まで、<ruby>順番<rt>じゅんばん</rt></ruby>にさがす</b><span class="en">Find the ghosts in number order.</span></li>
+          <li><b>見つけたら「みつけた！」→ マークをえらぶ</b><span class="en">Tap "Found it!" and choose the ghost's mark.</span></li>
+          <li><b>まちがえると20びょう まつ</b><span class="en">A wrong mark means a 20-second wait.</span></li>
+          <li><b>サイレンが<ruby>鳴<rt>な</rt></ruby>ったら「サイレン」→ かくれる</b><span class="en">Siren? Tap "Siren" and hide. The screen goes dark.</span></li>
+          <li><b>ひみつのことばをホスピタルデスクで<ruby>言<rt>い</rt></ruby>う</b><span class="en">Say the secret phrase at the Hospital Desk to finish.</span></li>
+        </ol>
+        <button class="z-btn z-btn-main" id="z-go" type="button"><span>ハンティング<ruby>開始<rt>かいし</rt></ruby></span><span class="en">Start hunting</span></button>
+      </div>
+    </section>
+
+    <section class="z-screen" id="z-hunt" hidden>
+      <div class="z-topbar">
+        <button class="z-icon" id="z-back" type="button" aria-label="イベント案内にもどる / Back to event info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <div class="z-team" id="z-team"></div>
+        <div class="z-count"><b id="z-count">0</b> / <span data-zombie-total>15</span></div>
+        <button class="z-icon" id="z-sound" type="button" aria-label="音 / Sound" aria-pressed="true"></button>
+      </div>
+      <div class="z-target">
+        <p class="z-label">いまさがすゴースト<span class="en">Now searching for</span></p>
+        <div class="z-number-wrap"><span class="z-number" id="z-number">1</span><span class="z-ban">ばん</span></div>
+        <p class="z-find" id="z-find"></p>
+      </div>
+      <div class="z-secret">
+        <p class="z-label">ひみつのことば<span class="en">Secret phrase</span></p>
+        <div class="z-tiles" id="z-tiles"></div>
+      </div>
+      <div class="z-actions">
+        <button class="z-btn z-btn-siren" id="z-siren-btn" type="button">サイレン！<span class="en">Siren</span></button>
+        <button class="z-btn z-btn-main" id="z-found-btn" type="button">みつけた！<span class="en">Found it!</span></button>
+      </div>
+    </section>
+
+    <section class="z-screen" id="z-pick" hidden>
+      <div class="z-content">
+        <h2 class="z-title" id="z-pick-title"></h2>
+        <div class="z-choices" id="z-choices"></div>
+        <button class="z-btn z-btn-ghost" id="z-pick-cancel" type="button">まだ見つけてない<span class="en">Not found yet</span></button>
+      </div>
+    </section>
+
+    <section class="z-screen" id="z-complete" hidden>
+      <div class="z-content">
+        <p class="z-escaped">にげきった！<span class="en">You escaped!</span></p>
+        <div class="z-score"><span data-zombie-total>15</span> / <span data-zombie-total>15</span></div>
+        <p class="z-label">ひみつのことば<span class="en">Secret phrase</span></p>
+        <div class="z-phrase" id="z-phrase"></div>
+        <p class="z-say">ホスピタルデスクで、このことばを<ruby>言<rt>い</rt></ruby>ってね！<span class="en">Say this phrase at the Hospital Desk to finish.</span></p>
+        <dl class="z-proof">
+          <dt>チーム</dt><dd id="z-proof-team"></dd>
+          <dt>スタート</dt><dd id="z-proof-start"></dd>
+          <dt>ゴール</dt><dd id="z-proof-end"></dd>
+          <dt>いま</dt><dd><span class="z-live" id="z-proof-now"></span></dd>
+        </dl>
+        <div class="z-row">
+          <button class="z-btn z-btn-ghost" id="z-complete-back" type="button"><span>イベント<ruby>案内<rt>あんない</rt></ruby></span><span class="en">Event info</span></button>
+          <button class="z-btn z-btn-ghost" id="z-complete-reset" type="button" data-test-only hidden>テストをリセット<span class="en">Reset test</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="z-overlay" id="z-found" hidden>
+      <p class="z-found-title" id="z-found-title"></p>
+      <div class="z-big-kana" id="z-found-kana"></div>
+      <div class="z-tiles" id="z-found-tiles"></div>
+      <p class="z-hint">タップしてつぎへ<span class="en">Tap to continue</span></p>
+    </section>
+
+    <section class="z-overlay" id="z-wrong" hidden>
+      <p class="z-wrong-title">ちがう…<span class="en">That's not it…</span></p>
+      <p class="z-wrong-copy">もう<ruby>一度<rt>いちど</rt></ruby>、よく<ruby>見<rt>み</rt></ruby>てね<span class="en">Go back and look closely</span></p>
+      <div class="z-wrong-count" id="z-wrong-count">20</div>
+      <p class="z-hint">びょう まってね<span class="en">seconds</span></p>
+    </section>
+
+    <section class="z-overlay z-siren" id="z-siren" hidden>
+      <p class="z-siren-text">かくれろ…<span class="en">Hide…</span></p>
+      <p class="z-siren-hint">2<ruby>回<rt>かい</rt></ruby>タップでもどる<span class="en">Double-tap to return</span></p>
+    </section>
+  </div>
+
   <script src="events/events.js"></script>
   <script src="event.js"></script>
+  <script src="zombie.js"></script>
 </body>
 </html>

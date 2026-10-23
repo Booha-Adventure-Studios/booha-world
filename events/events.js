@@ -11,6 +11,9 @@ window.BOOHA_EVENTS = {
     candyEndAt: "2026-10-31T12:00:00+09:00",
     stayUntil: "2026-10-31T16:00:00+09:00",
     zombieStartAt: "2026-10-31T18:00:00+09:00",
+    zombieLatestStartAt: "2026-10-31T19:00:00+09:00",
+    zombieTestCode: "ZOMBIE-TEST",
+    zombieHuntDurationHours: 6,
     prices: { candy: 1000, zombie: 1000 },
     reservationEmail: "bryans.english@gmail.com",
     huntDurationHours: 12,
@@ -85,6 +88,31 @@ window.BOOHA_EVENTS = {
       { id: "purple", label: "Purple", jp: "<ruby>紫<rt>むらさき</rt></ruby>", kana: "むらさき", color: "#9a67d4" },
       { id: "brown", label: "Brown", jp: "<ruby>茶色<rt>ちゃいろ</rt></ruby>", kana: "ちゃいろ", color: "#9a6847" }
     ],
+    // Zombie Scavenger Hunt: 15 numbered slime ghosts, found in order. No QR codes.
+    // Each poster shows its number and one symbol; the app asks which symbol the team saw.
+    // Every correct find reveals one kana of the secret phrase (said at the Hospital Desk to finish).
+    zombie: {
+      phrase: ["ゾ", "ン", "ビ", "の", "も", "り", "を", "ぶ", "じ", "に", "ぬ", "け", "だ", "せ", "た"],
+      phraseEN: "We escaped the zombie forest safely!",
+      ghosts: ["bolt", "fish", "moon", "house", "drop", "cat", "tree", "heart", "mushroom", "bell", "star", "leaf", "crown", "cloud", "diamond"]
+    },
+    zombieSymbols: {
+      moon: { jp: "つき", en: "Moon", d: "M64 8 A42 42 0 1 0 92 70 A34 34 0 1 1 64 8 Z" },
+      star: { jp: "ほし", en: "Star", d: "M50 6 L61.8 37.8 L95.7 39.2 L69 60.2 L78.2 92.8 L50 74 L21.8 92.8 L31 60.2 L4.3 39.2 L38.2 37.8 Z" },
+      heart: { jp: "ハート", en: "Heart", d: "M50 90 C20 68 4 50 4 30 C4 14 16 4 30 4 C40 4 47 10 50 18 C53 10 60 4 70 4 C84 4 96 14 96 30 C96 50 80 68 50 90 Z" },
+      bolt: { jp: "かみなり", en: "Lightning", d: "M58 2 L16 56 L44 56 L34 98 L84 38 L56 38 L66 2 Z" },
+      drop: { jp: "しずく", en: "Drop", d: "M50 4 C36 30 18 48 18 66 A32 32 0 0 0 82 66 C82 48 64 30 50 4 Z" },
+      crown: { jp: "おうかん", en: "Crown", d: "M6 82 L12 26 L32 50 L50 14 L68 50 L88 26 L94 82 Z" },
+      fish: { jp: "さかな", en: "Fish", d: "M4 50 C20 24 54 20 72 42 L96 22 L90 50 L96 78 L72 58 C54 80 20 76 4 50 Z" },
+      mushroom: { jp: "きのこ", en: "Mushroom", d: "M4 54 C4 26 26 8 50 8 C74 8 96 26 96 54 Z M36 54 L64 54 L66 90 C66 94 62 96 58 96 L42 96 C38 96 34 94 34 90 Z" },
+      leaf: { jp: "はっぱ", en: "Leaf", d: "M8 92 C8 40 40 8 92 8 C92 60 60 92 8 92 Z" },
+      cloud: { jp: "くも", en: "Cloud", d: "M22 78 A19 19 0 0 1 20 40 A26 26 0 0 1 68 30 A22 22 0 0 1 80 78 Z" },
+      bell: { jp: "ベル", en: "Bell", d: "M50 6 C30 6 22 22 22 42 L22 62 L10 78 L90 78 L78 62 L78 42 C78 22 70 6 50 6 Z M38 84 L62 84 A12 12 0 0 1 38 84 Z" },
+      tree: { jp: "き", en: "Tree", d: "M50 4 L74 36 L62 36 L84 64 L58 64 L58 96 L42 96 L42 64 L16 64 L38 36 L26 36 Z" },
+      house: { jp: "いえ", en: "House", d: "M50 6 L96 46 L84 46 L84 94 L16 94 L16 46 L4 46 Z" },
+      diamond: { jp: "ダイヤ", en: "Diamond", d: "M50 4 L92 50 L50 96 L8 50 Z" },
+      cat: { jp: "ねこ", en: "Cat", d: "M14 30 L14 4 L38 22 L62 22 L86 4 L86 30 C94 42 96 52 96 60 C96 82 76 96 50 96 C24 96 4 82 4 60 C4 52 6 42 14 30 Z" }
+    },
     // Joker ghosts: look like a real color, but the name is misspelled and the eyes are different.
     // The id is the misspelling, so the QR link never says "joker".
     jokers: [

@@ -1,0 +1,148 @@
+/* ==========================================================
+   ZOMBIE SCAVENGER HUNT
+   1. Start / Continue card on the Zombie tab
+   2. Full-screen night game (#zombie-game). Kept dim on purpose:
+      no large bright areas, so the phone never acts as a flashlight.
+   ========================================================== */
+
+/* 1. Zombie tab start card */
+.zombie-start { margin: 28px 0; padding: clamp(20px, 4vw, 34px); border: 2px solid rgba(198,255,61,.45); border-radius: 18px; background: linear-gradient(160deg, rgba(20,34,14,.92), rgba(10,14,10,.96)); box-shadow: 0 0 40px rgba(120,220,60,.08); }
+.zombie-start h2 { margin-bottom: 10px; }
+.zombie-start p { color: #c9d6bf; }
+.zombie-start label { display: block; margin-top: 18px; color: #e8f5dc; font-size: 13px; font-weight: 700; }
+.zombie-start input { width: 100%; margin-top: 7px; padding: 13px 14px; border: 2px solid rgba(198,255,61,.55); border-radius: 10px; background: #0b100a; color: #e8f5dc; font: inherit; }
+.zombie-start input:focus { outline: none; border-color: #c6ff3d; box-shadow: 0 0 0 3px rgba(198,255,61,.18); }
+.zombie-start .primary-button { margin-top: 16px; width: 100%; min-height: 62px; border: 2px solid #c6ff3d; border-radius: 999px; background: #1a2b12; color: #c6ff3d; font-weight: 800; cursor: pointer; }
+.zombie-start .primary-button .en-sub { color: #c6ff3d; }
+.zombie-start .primary-button:disabled { border-color: #4c5a44; background: #12170f; color: #7d8a74; cursor: default; }
+.zombie-start .primary-button:disabled .en-sub { color: #7d8a74; }
+.zombie-start .primary-button.is-ready { background: #c6ff3d; color: #0b100a; animation: zStartPulse 1.6s ease-in-out infinite; }
+.zombie-start .primary-button.is-ready .en-sub { color: #0b100a; }
+.zombie-start .start-time { font-variant-numeric: tabular-nums; }
+.zombie-start .fine-print { margin: 14px 0 0; font-size: 12px; }
+.zombie-start .secondary-button { margin-top: 12px; padding: 10px 16px; border: 2px solid #6f7d66; border-radius: 999px; background: transparent; color: #c9d6bf; cursor: pointer; }
+#zombie-resume { text-align: center; }
+.zombie-resume-count { display: block; margin: 8px 0 4px; color: #c6ff3d; font: 400 2.6rem/1 'Dela Gothic One', sans-serif; font-variant-numeric: tabular-nums; }
+.zombie-resume-team { display: block; margin-bottom: 10px; color: #e8f5dc; font-weight: 800; overflow-wrap: anywhere; }
+@keyframes zStartPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(198,255,61,.45); } 50% { box-shadow: 0 0 0 12px rgba(198,255,61,0); } }
+
+/* 2. Night game */
+#zombie-game {
+  --z-text: #a9e48c;
+  --z-dim: #6f9a5c;
+  --z-glow: #8fe25a;
+  --z-purple: #9a6ad8;
+  --z-red: #b8343f;
+  --z-panel: rgba(16, 28, 13, .72);
+  --z-line: rgba(143, 226, 90, .45);
+  position: fixed; inset: 0; z-index: 1000; overflow: hidden;
+  background: #040705; color: var(--z-text);
+  font: 700 15px/1.5 "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Hiragino Sans", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
+}
+#zombie-game[hidden], #zombie-game [hidden] { display: none !important; }
+#zombie-game *, #zombie-game *::before, #zombie-game *::after { box-sizing: border-box; }
+#zombie-game h1, #zombie-game h2, #zombie-game p, #zombie-game ol { margin: 0; font: inherit; color: inherit; letter-spacing: normal; }
+#zombie-game rt { font-size: .45em; font-weight: 700; }
+#zombie-game .en { display: block; font-size: .74rem; font-weight: 700; color: var(--z-dim); letter-spacing: .02em; }
+#zombie-game button { font: inherit; color: inherit; cursor: pointer; margin: 0; }
+#zombie-game button:focus-visible { outline: 3px solid var(--z-purple); outline-offset: 3px; }
+#z-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+
+#zombie-game .z-screen, #zombie-game .z-overlay { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; overflow: hidden;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#zombie-game .z-overlay { z-index: 5; align-items: center; justify-content: center; gap: 14px; text-align: center; background: rgba(2, 4, 3, .78); }
+#zombie-game .z-content { margin: auto; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; padding-block: 16px; }
+#zombie-game .z-test-flag { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 8px); left: 50%; translate: -50% 0; padding: 3px 12px; border: 1px solid var(--z-line); border-radius: 999px; color: var(--z-glow); font-size: .7rem; letter-spacing: .1em; }
+
+#zombie-game .z-title { font-weight: 800; font-size: clamp(1.6rem, 7.5vw, 2.2rem); line-height: 1.3; color: var(--z-glow); text-shadow: 0 0 18px rgba(143,226,90,.35); }
+#zombie-game .z-title .en { font-size: .8rem; margin-top: 4px; text-shadow: none; }
+#zombie-game .z-welcome { color: var(--z-dim); font-size: 1rem; }
+#zombie-game .z-steps { list-style: none; padding: 0; display: grid; gap: 10px; width: 100%; counter-reset: zstep; text-align: left; }
+#zombie-game .z-steps li { position: relative; padding: 10px 14px 10px 52px; border: 1px solid var(--z-line); border-radius: 14px; background: var(--z-panel); counter-increment: zstep; font-size: .95rem; line-height: 1.6; }
+#zombie-game .z-steps li::before { content: counter(zstep); position: absolute; left: 12px; top: 50%; translate: 0 -50%; width: 30px; height: 30px; display: grid; place-items: center; border: 2px solid var(--z-glow); border-radius: 50%; color: var(--z-glow); font-family: "Dela Gothic One", sans-serif; font-size: .9rem; }
+#zombie-game .z-steps b { font-weight: 800; }
+
+#zombie-game .z-btn { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 58px; padding: 10px 22px; border: 2px solid var(--z-line); border-radius: 999px; background: var(--z-panel); color: var(--z-text); font-weight: 800; font-size: 1.15rem; line-height: 1.3; transition: transform .1s; }
+#zombie-game .z-btn:active { transform: scale(.97); }
+#zombie-game .z-btn-main { border-color: var(--z-glow); background: #1d3a14; color: #c8f5a8; font-size: 1.5rem; min-height: 76px; box-shadow: 0 0 22px rgba(143,226,90,.25), inset 0 0 18px rgba(143,226,90,.15); animation: zBreath 2.6s ease-in-out infinite; }
+#zombie-game .z-btn-main .en { color: #9cc986; }
+#zombie-game .z-btn-siren { border-color: rgba(184,52,63,.7); background: rgba(60,10,16,.75); color: #e3a0a6; }
+#zombie-game .z-btn-siren .en { color: #b9757b; }
+#zombie-game .z-btn-ghost { background: transparent; font-size: 1rem; min-height: 50px; }
+@keyframes zBreath { 0%, 100% { box-shadow: 0 0 14px rgba(143,226,90,.18), inset 0 0 12px rgba(143,226,90,.1); } 50% { box-shadow: 0 0 30px rgba(143,226,90,.38), inset 0 0 22px rgba(143,226,90,.2); } }
+
+/* hunt */
+#zombie-game #z-hunt { gap: 10px; }
+#zombie-game .z-topbar { display: flex; align-items: center; gap: 8px; padding-top: 10px; }
+#zombie-game .z-icon { width: 42px; height: 42px; flex: none; display: grid; place-items: center; padding: 0; border: 1px solid var(--z-line); border-radius: 50%; background: var(--z-panel); color: var(--z-text); }
+#zombie-game .z-icon svg { width: 21px; height: 21px; }
+#zombie-game .z-team { flex: 1; min-width: 0; padding: 7px 14px; border: 1px solid var(--z-line); border-radius: 999px; background: var(--z-panel); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .95rem; }
+#zombie-game .z-count { padding: 6px 12px; border: 1px solid var(--z-line); border-radius: 999px; background: var(--z-panel); font-family: "Dela Gothic One", sans-serif; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#zombie-game .z-count b { color: var(--z-glow); font-weight: 400; }
+#zombie-game .z-target { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 0; }
+#zombie-game .z-label { font-size: .9rem; color: var(--z-dim); }
+#zombie-game .z-label .en { display: inline; margin-left: 6px; font-size: .7rem; }
+#zombie-game .z-number-wrap { display: flex; align-items: baseline; gap: 6px; line-height: 1; margin: 4px 0 8px; }
+#zombie-game .z-number { font-family: "Dela Gothic One", sans-serif; font-size: clamp(7rem, 42vw, 12rem); color: #b6f08f; text-shadow: 0 0 24px rgba(143,226,90,.55), 0 0 60px rgba(120,60,200,.35); animation: zFlicker 7s steps(1) infinite, zFloat 4s ease-in-out infinite; font-variant-numeric: tabular-nums; }
+#zombie-game .z-ban { font-size: 1.6rem; font-weight: 800; color: var(--z-dim); }
+#zombie-game .z-find { font-size: 1.15rem; }
+@keyframes zFlicker { 0%, 41%, 43%, 77%, 79.5%, 100% { opacity: 1; } 42%, 78%, 79% { opacity: .35; } }
+@keyframes zFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+#zombie-game .z-secret { padding: 10px 10px 12px; border: 1px solid var(--z-line); border-radius: 16px; background: var(--z-panel); text-align: center; }
+#zombie-game .z-tiles { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; margin-top: 6px; }
+#zombie-game .z-tile { aspect-ratio: 1; display: grid; place-items: center; border: 1px dashed rgba(143,226,90,.3); border-radius: 8px; color: rgba(143,226,90,.3); font-size: clamp(.9rem, 4.6vw, 1.25rem); font-weight: 800; }
+#zombie-game .z-tile.is-on { border-style: solid; border-color: var(--z-glow); color: #c8f5a8; background: rgba(60,110,40,.35); text-shadow: 0 0 10px rgba(143,226,90,.6); }
+#zombie-game .z-tile.is-new { animation: zTileIn .9s ease-out; border-color: var(--z-purple); box-shadow: 0 0 16px rgba(154,106,216,.6); }
+@keyframes zTileIn { 0% { transform: scale(.2) rotate(-30deg); opacity: 0; } 60% { transform: scale(1.3); opacity: 1; } 100% { transform: scale(1); } }
+#zombie-game .z-actions { display: flex; gap: 10px; padding-bottom: 12px; }
+#zombie-game .z-actions .z-btn-siren { flex: 1; white-space: nowrap; padding-inline: 10px; font-size: 1.05rem; }
+#zombie-game .z-actions .z-btn-main { flex: 1.7; }
+
+/* pick a mark */
+#zombie-game .z-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; }
+#zombie-game .z-choice { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px 12px; border: 2px solid var(--z-line); border-radius: 20px; background: var(--z-panel); color: var(--z-text); font-size: 1rem; }
+#zombie-game .z-choice svg { width: min(26vw, 110px); height: min(26vw, 110px); fill: #b6f08f; filter: drop-shadow(0 0 10px rgba(143,226,90,.45)); }
+#zombie-game .z-choice:active { border-color: var(--z-glow); }
+#zombie-game .z-choice.is-answer::after { content: ""; position: absolute; top: 10px; right: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--z-purple); }
+
+/* found / wrong / siren */
+#zombie-game .z-found-title { font-weight: 800; font-size: 2rem; color: var(--z-glow); text-shadow: 0 0 20px rgba(143,226,90,.5); }
+#zombie-game .z-big-kana { width: 132px; height: 132px; display: grid; place-items: center; border: 3px solid var(--z-purple); border-radius: 26px; background: rgba(40,20,70,.55); color: #e6d6ff; font-size: 5rem; font-weight: 800; text-shadow: 0 0 22px rgba(154,106,216,.9); animation: zTileIn 1s ease-out; }
+#zombie-game #z-found .z-tiles { width: min(100%, 420px); }
+#zombie-game .z-hint { color: var(--z-dim); font-size: .95rem; animation: zBlink 1.4s steps(2) infinite; }
+@keyframes zBlink { 50% { opacity: .4; } }
+#zombie-game .z-wrong-title { font-weight: 800; font-size: 2.4rem; color: #e3a0a6; text-shadow: 0 0 18px rgba(184,52,63,.6); animation: zShake .4s ease-in-out 2; }
+#zombie-game .z-wrong-copy { font-size: 1.1rem; }
+#zombie-game .z-wrong-count { font-family: "Dela Gothic One", sans-serif; font-size: 5rem; line-height: 1; color: #e3a0a6; font-variant-numeric: tabular-nums; }
+@keyframes zShake { 25% { translate: -8px 0; } 75% { translate: 8px 0; } }
+#zombie-game .z-siren { background: #000; gap: 22px; }
+#zombie-game .z-siren-text { color: #5a1015; font-weight: 800; font-size: 1.6rem; animation: zSiren 1.6s ease-in-out infinite; }
+#zombie-game .z-siren-text .en { color: #3c0b0e; }
+#zombie-game .z-siren-hint { color: #2a1416; font-size: .85rem; }
+#zombie-game .z-siren-hint .en { color: #24111a; }
+@keyframes zSiren { 0%, 100% { opacity: .5; } 50% { opacity: 1; } }
+
+/* complete */
+#zombie-game .z-escaped { font-weight: 800; font-size: clamp(2rem, 10vw, 2.8rem); color: var(--z-glow); text-shadow: 0 0 22px rgba(143,226,90,.5); }
+#zombie-game .z-score { font-family: "Dela Gothic One", sans-serif; font-size: 3.4rem; line-height: 1; color: #c8f5a8; }
+#zombie-game .z-phrase { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; padding: 12px; border: 2px solid var(--z-purple); border-radius: 18px; background: rgba(40,20,70,.5); box-shadow: 0 0 26px rgba(154,106,216,.35); }
+#zombie-game .z-phrase span { font-size: clamp(1.4rem, 7vw, 2rem); font-weight: 800; color: #eadcff; text-shadow: 0 0 12px rgba(154,106,216,.8); }
+#zombie-game .z-say { font-size: 1.05rem; }
+#zombie-game .z-proof { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; margin: 0; text-align: left; font-size: .95rem; }
+#zombie-game .z-proof dt { color: var(--z-dim); }
+#zombie-game .z-proof dd { margin: 0; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+#zombie-game .z-live { display: inline-flex; align-items: center; gap: 6px; }
+#zombie-game .z-live::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--z-glow); animation: zBlink 1s steps(2) infinite; }
+#zombie-game .z-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+
+@media (max-height: 700px) {
+  #zombie-game .z-number { font-size: 6.5rem; }
+  #zombie-game .z-steps li { padding-block: 6px; font-size: .88rem; }
+  #zombie-game .z-btn-main { min-height: 64px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #zombie-game *, #zombie-game *::before, #zombie-game *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .zombie-start .primary-button.is-ready { animation: none; }
+}
