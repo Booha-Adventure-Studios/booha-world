@@ -251,8 +251,8 @@
       </div>
 
       <div class="night-rules">
-        <article><span>01</span><h2><span class="jp-main">順番に見つける</span><span class="en-sub">Find in order</span></h2><p><span class="jp-main">チームでゴースト1から15までを順番にさがします。見つけたら、ゲーム画面でそのゴーストのマークをえらびます。正しいと、ひみつのことばが1文字ずつわかります。</span><span class="en-sub">Teams search for Ghost 1 through Ghost 15 in order. When you find one, choose its mark on the game screen. Each correct mark reveals one letter of a secret phrase.</span></p></article>
-        <article><span>02</span><h2><span class="jp-main">ライトは使えません</span><span class="en-sub">No phone lights</span></h2><p><span class="jp-main">スマホのライトや懐中電灯は使えません。あやしく光るゲーム画面が、たったひとつの明かりです。ゴーストの目は光を反射します。スマホの明るさは半分くらいにしてください。</span><span class="en-sub">No phone flashlights or torches. The eerie glow of the game screen is your only light, and the ghosts' eyes reflect it. Please set your screen brightness to about half.</span></p></article>
+        <article><span>01</span><h2><span class="jp-main">チームごとの順番</span><span class="en-sub">Your own order</span></h2><p><span class="jp-main">チームごとに、ゴースト1〜15をさがす順番がちがいます。見つけたら、ゲーム画面でそのゴーストのマークをえらびます。正しいと、ひみつのことばが1文字ずつわかります。まちがえると、その番号はリストの最後にまわります。</span><span class="en-sub">Every team gets its own order for Ghosts 1 to 15. When you find one, choose its mark on the game screen. A correct mark reveals one letter of a secret phrase. A wrong mark sends that number to the end of your list.</span></p></article>
+        <article><span>02</span><h2><span class="jp-main">ゲーム画面がライト</span><span class="en-sub">Your screen is the light</span></h2><p><span class="jp-main">スマホのライトや懐中電灯は使えません。ゲーム画面の「ライト」ボタンをおすと、画面があやしい色に光ります。森にむけて、ゴーストの光る目をさがしてください。スマホの明るさは最大にしてください。</span><span class="en-sub">No phone flashlights or torches. Tap the game's Light button and the screen glows in eerie colors. Point it at the forest and look for the ghosts' shining eyes. Please turn your screen brightness all the way up.</span></p></article>
         <article class="siren-rule"><span>03</span><h2><span class="jp-main">サイレンでかくれる</span><span class="en-sub">Hide when the siren sounds</span></h2><p><span class="jp-main">サイレンが鳴ったら、全員かくれてください。かくれていれば安全です。ゾンビがつかむことはありません。かくれていない人や、光が見えた人は、ゾンビに洗濯ばさみをつけられます。</span><span class="en-sub">When the siren sounds, everyone hides. Anyone who hides is safe. Zombies never grab anyone. Anyone not hiding, or showing a light, may get a clothespin clipped on by a zombie.</span></p></article>
         <article><span>04</span><h2><span class="jp-main">病院へ戻る</span><span class="en-sub">Return to Hospital</span></h2><p><span class="jp-main">洗濯ばさみをつけられたら、チーム全員で病院（ホスピタルデスク）へ戻り、外してもらいます。チーム用の光る薬を受け取って再スタート。15番を見つけたら、病院に戻ってゴールです。</span><span class="en-sub">If anyone gets a clothespin, the whole team returns to the Hospital Desk to have it removed and collect a glowing team medicine, then carries on. After Ghost 15, return to the Hospital Desk to finish.</span></p></article>
       </div>
@@ -265,7 +265,7 @@
           <label for="zombie-team"><span class="jp-main">チーム名</span><span class="en-sub">Team name</span></label>
           <input id="zombie-team" type="text" maxlength="30" autocomplete="off" placeholder="例：ゾンビバスターズ">
           <button class="primary-button full" id="zombie-start-btn" type="button" disabled><span class="jp-main" id="zombie-start-jp">ゾンビの森へ！</span><span class="en-sub" id="zombie-start-en">Enter the forest</span></button>
-          <p class="fine-print"><span class="jp-main">18:00から始められます。スマホの明るさは半分くらいにしてください。</span><span class="en-sub">Opens at 6:00 pm. Please set your screen brightness to about half.</span></p>
+          <p class="fine-print"><span class="jp-main">18:00から始められます。スマホの明るさは最大にしてください。</span><span class="en-sub">Opens at 6:00 pm. Please turn your screen brightness all the way up.</span></p>
         </div>
         <div id="zombie-resume" class="zombie-view" hidden>
           <p class="eyebrow"><span class="jp-main" id="zombie-resume-label-jp">ハントのとちゅうです</span><span class="en-sub" id="zombie-resume-label-en">Your hunt is in progress</span></p>
@@ -467,9 +467,10 @@
         <p class="z-welcome" id="z-welcome"></p>
         <h1 class="z-title">ゾンビの<ruby>森<rt>もり</rt></ruby>のルール</h1>
         <ol class="z-steps">
-          <li><b>1から<span data-zombie-total>15</span>まで、<ruby>順番<rt>じゅんばん</rt></ruby>にさがす</b><span class="en">Find the ghosts in number order.</span></li>
+          <li><b><ruby>画面<rt>がめん</rt></ruby>の<ruby>番号<rt>ばんごう</rt></ruby>のゴーストをさがす。<ruby>順番<rt>じゅんばん</rt></ruby>はチームごとにちがう</b><span class="en">Find the ghost with the number on your screen. Every team has its own order.</span></li>
           <li><b>見つけたら「みつけた！」→ マークをえらぶ</b><span class="en">Tap "Found it!" and choose the ghost's mark.</span></li>
-          <li><b>まちがえると20びょう まつ</b><span class="en">A wrong mark means a 20-second wait.</span></li>
+          <li><b>まちがえると、その<ruby>番号<rt>ばんごう</rt></ruby>はリストの<ruby>最後<rt>さいご</rt></ruby>にまわる</b><span class="en">A wrong mark sends that number to the end of your list.</span></li>
+          <li><b>「ライト」をおすと、<ruby>画面<rt>がめん</rt></ruby>があやしく<ruby>光<rt>ひか</rt></ruby>る。<ruby>森<rt>もり</rt></ruby>にむけてさがそう</b><span class="en">Tap "Light" and the screen glows in eerie colors. Point it at the forest.</span></li>
           <li><b>サイレンが<ruby>鳴<rt>な</rt></ruby>ったら「サイレン」→ かくれる</b><span class="en">Siren? Tap "Siren" and hide. The screen goes dark.</span></li>
           <li><b>ひみつのことばをホスピタルデスクで<ruby>言<rt>い</rt></ruby>う</b><span class="en">Say the secret phrase at the Hospital Desk to finish.</span></li>
         </ol>
@@ -495,6 +496,7 @@
       </div>
       <div class="z-actions">
         <button class="z-btn z-btn-siren" id="z-siren-btn" type="button">サイレン！<span class="en">Siren</span></button>
+        <button class="z-btn z-btn-light" id="z-light-btn" type="button" aria-label="ライト / Light"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2h10v5l-2 3v11a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V10L7 7z"/><path d="M7 7h10M12 13v3"/></svg><span class="en">ライト</span></button>
         <button class="z-btn z-btn-main" id="z-found-btn" type="button">みつけた！<span class="en">Found it!</span></button>
       </div>
     </section>
@@ -518,6 +520,7 @@
           <dt>チーム</dt><dd id="z-proof-team"></dd>
           <dt>スタート</dt><dd id="z-proof-start"></dd>
           <dt>ゴール</dt><dd id="z-proof-end"></dd>
+          <dt>まちがい</dt><dd id="z-proof-wrong"></dd>
           <dt>いま</dt><dd><span class="z-live" id="z-proof-now"></span></dd>
         </dl>
         <div class="z-row">
@@ -535,10 +538,15 @@
     </section>
 
     <section class="z-overlay" id="z-wrong" hidden>
-      <p class="z-wrong-title">ちがう…<span class="en">That's not it…</span></p>
-      <p class="z-wrong-copy">もう<ruby>一度<rt>いちど</rt></ruby>、よく<ruby>見<rt>み</rt></ruby>てね<span class="en">Go back and look closely</span></p>
-      <div class="z-wrong-count" id="z-wrong-count">20</div>
-      <p class="z-hint">びょう まってね<span class="en">seconds</span></p>
+      <p class="z-wrong-title">ちがう…<span class="en">Wrong mark…</span></p>
+      <p class="z-wrong-copy" id="z-wrong-copy"></p>
+      <p class="z-wrong-next" id="z-wrong-next"></p>
+      <p class="z-hint">タップしてつぎへ<span class="en">Tap to continue</span></p>
+    </section>
+
+    <section class="z-light" id="z-light" hidden aria-label="ライト / Light">
+      <div class="z-light-flicker" aria-hidden="true"></div>
+      <button class="z-light-off" id="z-light-off" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 2h10v5l-2 3v11a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V10L7 7z"/><path d="M7 7h10M12 13v3"/></svg><span>ライトをけす</span><span class="en">Light off</span></button>
     </section>
 
     <section class="z-overlay z-siren" id="z-siren" hidden>

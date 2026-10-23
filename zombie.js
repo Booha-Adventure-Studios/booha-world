@@ -1,7 +1,8 @@
 /* Zombie Scavenger Hunt: full-screen night game.
-   Teams find Ghost 1 to 15 in order. No QR codes: after "Found it!" the team picks the
-   symbol they saw on the poster. A wrong pick waits 20 seconds. Each correct find reveals
-   one kana of the secret phrase, which the team says at the Hospital Desk to finish.
+   Each team gets its own random order of Ghost 1 to 15. No QR codes: after "Found it!"
+   the team picks the symbol printed on that numbered ghost. A wrong pick sends that number
+   to the end of the team's list. Each correct find reveals the next kana of the secret
+   phrase, which the team says at the Hospital Desk to finish.
    All data stays on this phone (localStorage). */
 (() => {
   const params = new URLSearchParams(window.location.search);
@@ -17,7 +18,6 @@
   const PHRASE = config.zombie.phrase;
   const SYMBOLS = config.zombieSymbols;
   const TEST_TEAM = "ゾンビテスト";
-  const LOCK_MS = 20000;
   const startsAt = new Date(config.zombieStartAt).getTime();
   const latestStartAt = new Date(config.zombieLatestStartAt || config.zombieStartAt).getTime() || startsAt + 3600e3;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -35,8 +35,29 @@
       const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
       if (!stored) return null;
       if (Date.now() >= stored.expiresAt) { localStorage.removeItem(STORAGE_KEY); return null; }
-      return stored;
+      return upgradeState(stored);
     } catch (error) { return null; }
+  };
+  // Fisher-Yates with crypto randomness, so every team gets its own order.
+  const shuffle = (items) => {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i -= 1) {
+      let random = Math.random();
+      try { const bytes = new Uint32Array(1); crypto.getRandomValues(bytes); random = bytes[0] / 4294967296; } catch (error) { /* Math.random fallback */ }
+      const j = Math.floor(random * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  };
+  const numbers = () => Array.from({ length: TOTAL }, (_, i) => i + 1);
+  // Older saved hunts (from testing) had no queue: rebuild one from what was found.
+  const upgradeState = (saved) => {
+    if (saved && !Array.isArray(saved.queue)) {
+      saved.queue = numbers().slice(saved.found || 0);
+      saved.wrong = saved.wrong || 0;
+      delete saved.lockUntil;
+    }
+    return saved;
   };
   const saveState = () => { if (!state) return; state.updatedAt = Date.now(); try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (error) { /* best effort */ } };
 
@@ -157,11 +178,11 @@
 
   /* ---------- screens ---------- */
   const SCREENS = ["z-rules", "z-hunt", "z-pick", "z-complete"];
-  const OVERLAYS = ["z-found", "z-wrong", "z-siren"];
+  const OVERLAYS = ["z-found", "z-wrong", "z-siren", "z-light"];
   const showScreen = (id) => SCREENS.forEach((screen) => { $("#" + screen).hidden = screen !== id; });
   const showOverlay = (id) => OVERLAYS.forEach((overlay) => { $("#" + overlay).hidden = overlay !== id; });
   const applyTestOnly = () => $$("#zombie-game [data-test-only]").forEach((element) => { element.hidden = !state?.testMode; });
-  const currentNumber = () => Math.min(state.found + 1, TOTAL);
+  const currentNumber = () => state.queue[0];
 
   const renderTiles = (container, revealed, highlight) => {
     container.innerHTML = PHRASE.map((kana, i) => `<span class="z-tile${i < revealed ? " is-on" : ""}${i === highlight ? " is-new" : ""}">${i < revealed ? kana : "?"}</span>`).join("");
@@ -195,7 +216,7 @@
     document.body.classList.remove("game-open");
     showOverlay(null);
     stopAmbience();
-    clearInterval(lockTimer); clearInterval(completeTimer);
+    clearInterval(completeTimer);
     try { wakeLock?.release(); } catch (error) { /* ignore */ }
     const tab = $('.tab[data-tab="zombie"]'); if (tab) tab.click();
     const section = $("#zombie-start-section"); if (section) section.scrollIntoView({ block: "center" });
@@ -203,28 +224,17 @@
   };
 
   /* ---------- found it: pick the symbol ---------- */
-  let lockTimer = 0;
-  const showLock = () => {
-    showOverlay("z-wrong");
-    const tick = () => {
-      const left = Math.max(0, Math.ceil((state.lockUntil - Date.now()) / 1000));
-      $("#z-wrong-count").textContent = left;
-      if (left <= 0) { clearInterval(lockTimer); showOverlay(null); showScreen("z-hunt"); }
-    };
-    clearInterval(lockTimer); tick(); lockTimer = setInterval(tick, 250);
-  };
   const openPick = () => {
-    if (state.lockUntil && Date.now() < state.lockUntil) { showLock(); return; }
     const n = currentNumber();
     const correct = config.zombie.ghosts[n - 1];
-    const others = Object.keys(SYMBOLS).filter((id) => id !== correct).sort(() => Math.random() - .5).slice(0, 3);
-    const choices = [correct, ...others].sort(() => Math.random() - .5);
+    const others = shuffle(Object.keys(SYMBOLS).filter((id) => id !== correct)).slice(0, 3);
+    const choices = shuffle([correct, ...others]);
     $("#z-pick-title").innerHTML = `${n}ばんのゴーストの<br>マークはどれ？<span class="en">Which mark is on Ghost ${n}?</span>`;
     const grid = $("#z-choices"); grid.innerHTML = "";
     choices.forEach((id) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = `z-choice${state.testMode && id === correct ? " is-answer" : ""}`;
+      button.className = "z-choice";
       button.innerHTML = `${symbolSvg(id)}<span>${SYMBOLS[id].jp}</span>`;
       button.setAttribute("aria-label", `${SYMBOLS[id].jp} / ${SYMBOLS[id].en}`);
       button.addEventListener("click", () => choose(id === correct));
@@ -233,22 +243,32 @@
     showScreen("z-pick");
   };
   const choose = (isCorrect) => {
+    const n = state.queue[0];
     if (!isCorrect) {
-      state.lockUntil = Date.now() + LOCK_MS; saveState();
+      // Penalty: this number goes to the end of the team's list.
+      state.queue.push(state.queue.shift());
+      state.wrong = (state.wrong || 0) + 1;
+      saveState();
       SFX.wrong(); buzz([60, 80, 60]); washColor("170, 40, 60", 1200);
-      showScreen("z-hunt"); showLock();
+      const next = state.queue[0];
+      $("#z-wrong-copy").innerHTML = state.queue.length > 1
+        ? `${n}ばんは リストの<ruby>最後<rt>さいご</rt></ruby>にまわったよ<span class="en">Ghost ${n} moved to the end of your list.</span>`
+        : `${n}ばんが<ruby>最後<rt>さいご</rt></ruby>の1ぴき。もう<ruby>一度<rt>いちど</rt></ruby>よく<ruby>見<rt>み</rt></ruby>てね<span class="en">Ghost ${n} is your last one. Go back and look closely.</span>`;
+      $("#z-wrong-next").innerHTML = `つぎは <b>${next}</b>ばん<span class="en">Next: Ghost ${next}</span>`;
+      renderHunt(); showScreen("z-hunt");
+      showOverlay("z-wrong");
       return;
     }
+    state.queue.shift();
     state.found += 1;
-    state.lockUntil = 0;
     if (state.found >= TOTAL) state.completedAt = Date.now();
     saveState();
     SFX.found(); buzz([30, 60, 120]); washColor("120, 255, 120", 1800);
-    const n = state.found;
     $("#z-found-title").innerHTML = `${n}ばん みつけた！<span class="en">Ghost ${n} found!</span>`;
-    $("#z-found-kana").textContent = PHRASE[n - 1];
-    renderTiles($("#z-found-tiles"), n, n - 1);
-    showScreen("z-hunt"); renderHunt();
+    $("#z-found-kana").textContent = PHRASE[state.found - 1];
+    renderTiles($("#z-found-tiles"), state.found, state.found - 1);
+    if (!state.completedAt) renderHunt();
+    showScreen("z-hunt");
     showOverlay("z-found");
   };
   const closeFound = () => {
@@ -265,11 +285,16 @@
     $("#z-proof-team").textContent = state.team;
     $("#z-proof-start").textContent = formatClock(state.startedAt);
     $("#z-proof-end").textContent = formatClock(state.completedAt);
+    $("#z-proof-wrong").textContent = state.wrong ? `${state.wrong}かい` : "0かい！";
     const tick = () => { $("#z-proof-now").textContent = formatClock(Date.now(), true); };
     tick(); clearInterval(completeTimer); completeTimer = setInterval(tick, 1000);
     showOverlay(null); showScreen("z-complete");
     if (celebrate) { SFX.win(); buzz([80, 60, 80, 60, 240]); washColor("150, 255, 120", 3000); }
   };
+
+  /* ---------- screen light: the whole screen glows in shifting eerie colors ---------- */
+  const openLight = () => { SFX.tap(); showOverlay("z-light"); requestWakeLock(); buzz(20); };
+  const closeLight = () => { SFX.tap(); showOverlay(null); showScreen("z-hunt"); };
 
   /* ---------- siren blackout ---------- */
   let lastSirenTap = 0;
@@ -329,8 +354,8 @@
     if (!test && (now < startsAt || now >= latestStartAt)) return;
     audio();
     state = {
-      schemaVersion: 1, eventId: config.id, team: test ? TEST_TEAM : name, testMode: test,
-      found: 0, lockUntil: 0, startedAt: now, updatedAt: now,
+      schemaVersion: 2, eventId: config.id, team: test ? TEST_TEAM : name, testMode: test,
+      queue: test ? numbers() : shuffle(numbers()), found: 0, wrong: 0, startedAt: now, updatedAt: now,
       expiresAt: now + (config.zombieHuntDurationHours || 6) * 3600e3, completedAt: null
     };
     saveState(); renderPanel();
@@ -342,7 +367,7 @@
     state = readState(); if (!state) { renderPanel(); return; }
     audio(); openGame(); applyTestOnly(); showOverlay(null);
     if (state.completedAt) showComplete(false);
-    else { renderHunt(); showScreen("z-hunt"); if (soundOn) startAmbience(); if (state.lockUntil && Date.now() < state.lockUntil) showLock(); }
+    else { renderHunt(); showScreen("z-hunt"); if (soundOn) startAmbience(); }
   };
   const resetTest = () => {
     try { localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
@@ -362,7 +387,10 @@
   $("#z-found-btn").addEventListener("click", () => { SFX.tap(); openPick(); });
   $("#z-pick-cancel").addEventListener("click", () => { showScreen("z-hunt"); });
   $("#z-found").addEventListener("click", closeFound);
+  $("#z-wrong").addEventListener("click", () => { showOverlay(null); showScreen("z-hunt"); });
   $("#z-siren-btn").addEventListener("click", openSiren);
+  $("#z-light-btn").addEventListener("click", openLight);
+  $("#z-light-off").addEventListener("click", closeLight);
   $("#z-siren").addEventListener("click", sirenTap);
   $("#z-back").addEventListener("click", closeGame);
   $("#z-complete-back").addEventListener("click", closeGame);

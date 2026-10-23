@@ -88,9 +88,10 @@ window.BOOHA_EVENTS = {
       { id: "purple", label: "Purple", jp: "<ruby>紫<rt>むらさき</rt></ruby>", kana: "むらさき", color: "#9a67d4" },
       { id: "brown", label: "Brown", jp: "<ruby>茶色<rt>ちゃいろ</rt></ruby>", kana: "ちゃいろ", color: "#9a6847" }
     ],
-    // Zombie Scavenger Hunt: 15 numbered slime ghosts, found in order. No QR codes.
-    // Each poster shows its number and one symbol; the app asks which symbol the team saw.
-    // Every correct find reveals one kana of the secret phrase (said at the Hospital Desk to finish).
+    // Zombie Scavenger Hunt: 15 numbered slime ghosts. Each team gets its own random order. No QR codes.
+    // Each poster shows its number and one symbol (ghosts[n - 1] is the symbol on Ghost n).
+    // The app asks which symbol is on the current ghost; a wrong pick sends that number to the end of the list.
+    // Every correct find reveals the next kana of the secret phrase (said at the Hospital Desk to finish).
     zombie: {
       phrase: ["ゾ", "ン", "ビ", "の", "も", "り", "を", "ぶ", "じ", "に", "ぬ", "け", "だ", "せ", "た"],
       phraseEN: "We escaped the zombie forest safely!",

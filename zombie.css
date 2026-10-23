@@ -52,7 +52,7 @@
 #zombie-game .z-screen, #zombie-game .z-overlay { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; overflow: hidden;
   padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px);
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-#zombie-game .z-overlay { z-index: 5; align-items: center; justify-content: center; gap: 14px; text-align: center; background: rgba(2, 4, 3, .78); }
+#zombie-game .z-overlay { z-index: 5; align-items: center; justify-content: center; gap: 14px; text-align: center; background: rgba(2, 4, 3, .9); }
 #zombie-game .z-content { margin: auto; width: 100%; max-width: 440px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; padding-block: 16px; }
 #zombie-game .z-test-flag { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 8px); left: 50%; translate: -50% 0; padding: 3px 12px; border: 1px solid var(--z-line); border-radius: 999px; color: var(--z-glow); font-size: .7rem; letter-spacing: .1em; }
 
@@ -105,7 +105,6 @@
 #zombie-game .z-choice { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px 12px; border: 2px solid var(--z-line); border-radius: 20px; background: var(--z-panel); color: var(--z-text); font-size: 1rem; }
 #zombie-game .z-choice svg { width: min(26vw, 110px); height: min(26vw, 110px); fill: #b6f08f; filter: drop-shadow(0 0 10px rgba(143,226,90,.45)); }
 #zombie-game .z-choice:active { border-color: var(--z-glow); }
-#zombie-game .z-choice.is-answer::after { content: ""; position: absolute; top: 10px; right: 10px; width: 10px; height: 10px; border-radius: 50%; background: var(--z-purple); }
 
 /* found / wrong / siren */
 #zombie-game .z-found-title { font-weight: 800; font-size: 2rem; color: var(--z-glow); text-shadow: 0 0 20px rgba(143,226,90,.5); }
@@ -115,7 +114,9 @@
 @keyframes zBlink { 50% { opacity: .4; } }
 #zombie-game .z-wrong-title { font-weight: 800; font-size: 2.4rem; color: #e3a0a6; text-shadow: 0 0 18px rgba(184,52,63,.6); animation: zShake .4s ease-in-out 2; }
 #zombie-game .z-wrong-copy { font-size: 1.1rem; }
-#zombie-game .z-wrong-count { font-family: "Dela Gothic One", sans-serif; font-size: 5rem; line-height: 1; color: #e3a0a6; font-variant-numeric: tabular-nums; }
+#zombie-game .z-wrong-copy { max-width: 360px; line-height: 1.6; }
+#zombie-game .z-wrong-next { margin-top: 6px; padding: 10px 20px; border: 1px solid var(--z-line); border-radius: 18px; background: var(--z-panel); font-size: 1.2rem; }
+#zombie-game .z-wrong-next b { font-family: "Dela Gothic One", sans-serif; font-weight: 400; font-size: 2.2rem; color: #b6f08f; text-shadow: 0 0 14px rgba(143,226,90,.5); }
 @keyframes zShake { 25% { translate: -8px 0; } 75% { translate: 8px 0; } }
 #zombie-game .z-siren { background: #000; gap: 22px; }
 #zombie-game .z-siren-text { color: #5a1015; font-weight: 800; font-size: 1.6rem; animation: zSiren 1.6s ease-in-out infinite; }
@@ -146,3 +147,33 @@
   #zombie-game *, #zombie-game *::before, #zombie-game *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   .zombie-start .primary-button.is-ready { animation: none; }
 }
+
+/* Screen light: bright, slowly shifting eerie colors, so the phone lights the forest */
+#zombie-game .z-actions .z-btn-light { flex: none; width: 74px; padding: 6px 4px; border-color: rgba(214,255,184,.7); background: rgba(70,100,50,.6); color: #e4ffd2; }
+#zombie-game .z-btn-light svg { width: 30px; height: 30px; }
+#zombie-game .z-btn-light .en { color: #c6e8b2; font-size: .72rem; }
+#zombie-game .z-light { position: absolute; inset: 0; z-index: 8; display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  background: #d6ffb8; animation: zLightColors 14s ease-in-out infinite; }
+@keyframes zLightColors {
+  0%, 100% { background-color: #d6ffb8; }   /* pale slime */
+  16% { background-color: #b8fff0; }        /* ghost aqua */
+  33% { background-color: #d9c4ff; }        /* spirit violet */
+  50% { background-color: #f2ffa6; }        /* sickly yellow */
+  66% { background-color: #a6ffc9; }        /* toxic mint */
+  83% { background-color: #ffc6ef; }        /* phantom pink */
+}
+#zombie-game .z-light-flicker { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%), #000;
+  opacity: 0; mix-blend-mode: multiply; animation: zLightFlicker 9s steps(1) infinite, zLightPulse 3.2s ease-in-out infinite; }
+@keyframes zLightFlicker { 0%, 31%, 33%, 34.5%, 71%, 72.5%, 100% { opacity: 0; } 32%, 34%, 72% { opacity: .55; } }
+@keyframes zLightPulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(.9); } }
+#zombie-game .z-light-off { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border: 2px solid #0b100a; border-radius: 999px; background: #0b100a; color: #e4ffd2; font-weight: 800; font-size: 1.1rem; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+#zombie-game .z-light-off svg { width: 24px; height: 24px; }
+#zombie-game .z-light-off .en { display: inline; color: #a9c99a; font-size: .75rem; margin-left: 2px; }
+@media (prefers-reduced-motion: reduce) { #zombie-game .z-light { animation: none; } #zombie-game .z-light-flicker { animation: none; opacity: 0; } }
+#zombie-game #z-rules, #zombie-game #z-complete, #zombie-game #z-pick { overflow-y: auto; }
+#zombie-game #z-rules .z-content { padding-top: calc(env(safe-area-inset-top, 0px) + 34px); gap: 12px; }
+#zombie-game .z-steps { gap: 8px; }
+#zombie-game .z-steps li { padding-block: 8px; font-size: .9rem; line-height: 1.5; }
+#zombie-game .z-actions .z-btn { white-space: nowrap; padding-inline: 8px; }
+#zombie-game .z-actions .z-btn-main { font-size: 1.3rem; }
