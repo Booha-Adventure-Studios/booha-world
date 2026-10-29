@@ -88,6 +88,57 @@ window.BOOHA_EVENTS = {
       { id: "purple", label: "Purple", jp: "<ruby>紫<rt>むらさき</rt></ruby>", kana: "むらさき", color: "#9a67d4" },
       { id: "brown", label: "Brown", jp: "<ruby>茶色<rt>ちゃいろ</rt></ruby>", kana: "ちゃいろ", color: "#9a6847" }
     ],
+    // Afternoon team activities. One shared password each (Bryan announces it; capitals don't matter).
+    // Witch: each team gets 10-12 random ingredients with exact counts. rare: true = only about 1 team in 3 gets it.
+    // Monster: each team gets 3-4 random must-have parts; everything else is free.
+    afternoonGames: {
+      witch: {
+        password: "angela",
+        titleJP: "<ruby>魔女<rt>まじょ</rt></ruby>の<ruby>材料<rt>ざいりょう</rt></ruby>さがし", titleEN: "Witch's Ingredient Hunt",
+        pickMin: 10, pickMax: 12,
+        items: [
+          { id: "dragon-claw", jp: "ドラゴンのつめ", en: "Dragon claw", realJP: "Yの<ruby>形<rt>かたち</rt></ruby>のえだ", realEN: "Y-shaped stick", count: 1 },
+          { id: "wand", jp: "まほうのつえ", en: "Magic wand", realJP: "まっすぐな<ruby>長<rt>なが</rt></ruby>いえだ", realEN: "Long straight stick", count: 1 },
+          { id: "fingers", jp: "まじょのゆび", en: "Witch fingers", realJP: "みじかいえだ", realEN: "Short sticks", count: 5 },
+          { id: "eyeballs", jp: "おばけのめだま", en: "Ghost eyeballs", realJP: "どんぐり", realEN: "Acorns", count: 3 },
+          { id: "troll-noses", jp: "トロールのはな", en: "Troll noses", realJP: "くり", realEN: "Chestnuts", count: 2 },
+          { id: "hedgehog", jp: "ハリネズミのおしり", en: "Hedgehog bottom", realJP: "くりのいが（トゲに <ruby>気<rt>き</rt></ruby>をつけて！）", realEN: "Spiky chestnut shell (careful, it's prickly!)", count: 1 },
+          { id: "pot", jp: "おおきなまほうのつぼ", en: "Giant magic pot", realJP: "ひょうたん", realEN: "Gourd", count: 1, rare: true },
+          { id: "fairy-tube", jp: "ようせいのつつ", en: "Fairy tube", realJP: "たけ（おちているもの）", realEN: "Piece of bamboo (from the ground)", count: 1 },
+          { id: "fairy-boats", jp: "ようせいのふね", en: "Fairy boats", realJP: "ささのは", realEN: "Bamboo leaves", count: 3 },
+          { id: "zombie-hair", jp: "ゾンビのかみのけ", en: "Zombie hair", realJP: "ざっそう", realEN: "Weeds", count: 1, countJP: "ひとにぎり", countEN: "a handful" },
+          { id: "fire-feathers", jp: "ほのおのはね", en: "Fire feathers", realJP: "あかいはっぱ", realEN: "Red leaves", count: 3 },
+          { id: "sun-pieces", jp: "おひさまのかけら", en: "Sun pieces", realJP: "きいろいはっぱ", realEN: "Yellow leaves", count: 3 },
+          { id: "spell-paper", jp: "ふるいまほうのかみ", en: "Old spell paper", realJP: "ちゃいろいはっぱ", realEN: "Brown leaves", count: 4 },
+          { id: "dragon-eggs", jp: "ドラゴンのたまご", en: "Dragon eggs", realJP: "まつぼっくり", realEN: "Pine cones", count: 2 },
+          { id: "broom", jp: "まじょのほうきの<ruby>毛<rt>け</rt></ruby>", en: "Broom bristles", realJP: "まつば", realEN: "Pine needles", count: 10 },
+          { id: "troll-teeth", jp: "トロールのはぐき", en: "Troll teeth", realJP: "こいし", realEN: "Small stones", count: 4 },
+          { id: "carpet", jp: "もりのじゅうたん", en: "Forest carpet", realJP: "こけ", realEN: "Moss", count: 1, countJP: "ひとかけら", countEN: "a piece" },
+          { id: "armor", jp: "きのよろい", en: "Tree armor", realJP: "きのかわ（おちているもの）", realEN: "Piece of bark (from the ground)", count: 1 },
+          { id: "heart-leaf", jp: "ハートのはっぱ", en: "Heart leaf", realJP: "ハートの<ruby>形<rt>かたち</rt></ruby>のはっぱ", realEN: "Heart-shaped leaf", count: 1 },
+          { id: "secret", jp: "ひみつのざいりょう", en: "Secret ingredient", realJP: "まるいもの", realEN: "Something round", count: 1 }
+        ]
+      },
+      monster: {
+        password: "karla",
+        titleJP: "<ruby>森<rt>もり</rt></ruby>のモンスターづくり", titleEN: "Build a Forest Monster",
+        pickMin: 3, pickMax: 4,
+        items: [
+          { id: "eyes", jp: "め：どんぐりか くり 2こ", en: "Eyes: 2 acorns or chestnuts" },
+          { id: "arms", jp: "うで：えだ 2ほん", en: "Arms: 2 sticks" },
+          { id: "hair", jp: "かみのけ：ざっそうか まつば", en: "Hair: weeds or pine needles" },
+          { id: "mouth", jp: "くち：まがったえだか こいしのならび", en: "Mouth: a curved stick or a row of small stones" },
+          { id: "teeth", jp: "は：こいし", en: "Teeth: small stones" },
+          { id: "nose", jp: "はな：くりか まつぼっくり", en: "Nose: a chestnut or pine cone" },
+          { id: "spikes", jp: "せなかのトゲ：くりのいがか えだ", en: "Back spikes: chestnut shells or sticks" },
+          { id: "clothes", jp: "ふく：はっぱ（どんな<ruby>色<rt>いろ</rt></ruby>でも）", en: "Clothes: leaves (any color)" },
+          { id: "bamboo", jp: "どこかに たけ", en: "A piece of bamboo somewhere" },
+          { id: "gourd", jp: "からだか あたま：ひょうたん", en: "Body or head: a gourd", rare: true },
+          { id: "wings", jp: "はね：おおきなはっぱ 2まい", en: "Wings: 2 big leaves" },
+          { id: "hat", jp: "ぼうし：なんでもOK！", en: "A hat: anything!" }
+        ]
+      }
+    },
     // Zombie Scavenger Hunt: 15 numbered slime ghosts. Each team gets its own random order. No QR codes.
     // Each poster shows its number and one symbol (ghosts[n - 1] is the symbol on Ghost n).
     // The app asks which symbol is on the current ghost; a wrong pick sends that number to the end of the list.

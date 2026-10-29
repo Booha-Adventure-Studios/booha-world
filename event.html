@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=Zen+Antique&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="event.css">
   <link rel="stylesheet" href="zombie.css">
+  <link rel="stylesheet" href="afternoon.css">
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -227,6 +228,20 @@
             <li><span class="jp-main">魔女の材料さがし</span><span class="en-sub">Witch’s Ingredient Hunt</span></li>
             <li><span class="jp-main">森のモンスターづくり</span><span class="en-sub">Build a Forest Monster</span></li>
           </ul>
+          <section class="afternoon-games" id="afternoon-games" aria-labelledby="afternoon-games-title">
+            <h2 id="afternoon-games-title"><span class="jp-main">チームであそぼう</span><span class="en-sub">Team activities</span></h2>
+            <p><span class="jp-main">あいことばは、当日ブライアンが発表します。</span><span class="en-sub">Bryan will announce the password on the day.</span></p>
+            <button class="activity-button witch" type="button" data-open-activity="witch">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><ellipse cx="32" cy="28" rx="24" ry="6" fill="#7cdf64" stroke="#251034" stroke-width="3"/><path d="M8 29c0 26 48 26 48 0" fill="#2b1440" stroke="#251034" stroke-width="3"/><circle cx="26" cy="17" r="4" fill="#7cdf64" stroke="#251034" stroke-width="2"/><circle cx="38" cy="12" r="5" fill="#7cdf64" stroke="#251034" stroke-width="2"/></svg>
+              <span><b>魔女の材料さがし</b><small>Witch's Ingredient Hunt</small></span>
+              <span class="lock">あいことば</span>
+            </button>
+            <button class="activity-button monster" type="button" data-open-activity="monster">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M12 54C8 30 22 10 32 10s24 20 20 44z" fill="#6aa84f" stroke="#251034" stroke-width="3"/><circle cx="25" cy="30" r="6" fill="#fff" stroke="#251034" stroke-width="2.5"/><circle cx="39" cy="30" r="6" fill="#fff" stroke="#251034" stroke-width="2.5"/><circle cx="26" cy="31" r="2.5" fill="#251034"/><circle cx="40" cy="31" r="2.5" fill="#251034"/><path d="M24 43q8 7 16 0" fill="none" stroke="#251034" stroke-width="3" stroke-linecap="round"/></svg>
+              <span><b>森のモンスターづくり</b><small>Build a Forest Monster</small></span>
+              <span class="lock">あいことば</span>
+            </button>
+          </section>
           <p class="afternoon-time"><span class="jp-main">12:00〜16:00</span><span class="en-sub">12:00–4:00 pm</span></p>
           <aside class="afternoon-friends-card">
             <h2><span class="jp-main">仲間のスクールも見てみてください</span><span class="en-sub">Check out our friends</span></h2>
@@ -555,8 +570,12 @@
     </section>
   </div>
 
+  <!-- Afternoon team activities (Witch's Ingredient Hunt, Build a Forest Monster). Filled by afternoon.js. -->
+  <div id="act-game" hidden></div>
+
   <script src="events/events.js"></script>
   <script src="event.js"></script>
   <script src="zombie.js"></script>
+  <script src="afternoon.js"></script>
 </body>
 </html>
