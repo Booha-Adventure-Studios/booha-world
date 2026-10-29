@@ -605,7 +605,7 @@
     ["<ruby>偽物<rt>にせもの</rt></ruby>でした〜！", "I'm a fake!"],
     ["ジョーカーブーハー<br><ruby>参上<rt>さんじょう</rt></ruby>！", "Joker Booha is here!"],
     ["だまされた〜！", "Fooled you!"],
-    ["ブーハーブーハー！ハハハ！", "Booha booha! Ha ha ha!"]
+    ["ブーハーブーハー！<wbr>ハハハ！", "Booha booha! Ha ha ha!"]
   ];
   const doJoker = async (joker) => {
     const looksLike = ghostById(joker.looksLike) || config.ghosts[0];
@@ -613,11 +613,13 @@
     saveState(gameState);
     const overlay = $("#g-joker");
     const [jp, en] = JOKER_LINES[Math.floor(Math.random() * JOKER_LINES.length)];
-    $("#g-joker-title").innerHTML = `${jp}<span class="en">${en}</span>`;
+    // Each phrase stays on one line; lines may only break at <br>/<wbr>.
+    const keepPhrases = (html) => html.split(/(<br>|<wbr>)/).map((part) => (part === "<br>" || part === "<wbr>") ? part : `<span class="keep">${part}</span>`).join("");
+    $("#g-joker-title").innerHTML = `${keepPhrases(jp)}<span class="en">${en}</span>`;
     setGhostImage($("#g-joker-ghost"), looksLike.id);
     const tellJP = joker.tellJP || "<ruby>名前<rt>なまえ</rt></ruby>と<ruby>目<rt>め</rt></ruby>をよく<ruby>見<rt>み</rt></ruby>てね！";
     const tellEN = joker.tellEN || "Check the name and the eyes!";
-    $("#g-joker-caption").innerHTML = `ぼくは「${joker.kana}」！${tellJP}<span class="en">I'm "${joker.label}"! ${tellEN}</span>`;
+    $("#g-joker-caption").innerHTML = `${keepPhrases(`ぼくは「${joker.kana}」！<wbr>${tellJP}`)}<span class="en">I'm "${joker.label}"! ${tellEN}</span>`;
     $("#g-joker-tally").innerHTML = `ジョーカーにだまされた：${gameState.jokerScans}かい<span class="en">Fooled by jokers: ${gameState.jokerScans}</span>`;
     const target = currentTarget();
     $("#g-joker-target").innerHTML = `${ghostImageTag(target.id, "ghost-img thin")}<span><ruby>本物<rt>ほんもの</rt></ruby>は ${ghostJP(target)}<span class="en">The real one is ${target.label}</span></span>`;

@@ -1497,3 +1497,9 @@ body[data-theme="candy"] .inapp-warning .en-sub { color: var(--ink); }
 #booha-game #g-joker .joker-bg { position: absolute; z-index: 0; }
 #booha-game .joker-tally .en { display: block; margin: 0; text-align: center; }
 #booha-game .joker-tally { text-align: center; border-radius: 16px; }
+
+/* Joker screen: keep Japanese phrases whole (break only at <br>/<wbr>), and fit the title on one line */
+#booha-game .joker-title, #booha-game .joker-caption, #booha-game .joker-tally, #booha-game #g-joker .mini-target { word-break: keep-all; overflow-wrap: anywhere; line-break: strict; }
+#booha-game .joker-title { font-size: clamp(1.7rem, 8.6vw, 2.6rem); }
+#booha-game .joker-caption { font-size: 1.1rem; max-width: 100%; }
+#booha-game #g-joker .keep { white-space: nowrap; display: inline-block; }
