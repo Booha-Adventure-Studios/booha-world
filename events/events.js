@@ -7,7 +7,7 @@ window.BOOHA_EVENTS = {
     parkingOpenAt: "2026-10-31T09:45:00+09:00",
     arrivalStartAt: "2026-10-31T10:00:00+09:00",
     startAt: "2026-10-31T10:00:00+09:00",
-    latestStartAt: "2026-10-31T10:30:00+09:00",
+    latestStartAt: "2026-10-31T11:00:00+09:00",
     candyEndAt: "2026-10-31T12:00:00+09:00",
     stayUntil: "2026-10-31T16:00:00+09:00",
     zombieStartAt: "2026-10-31T18:00:00+09:00",

@@ -838,7 +838,7 @@
         infoLabelEN.textContent = "Candy Forest is on!";
         infoCountdown.classList.remove("is-units");
         infoCountdown.textContent = now < latestStartAt
-          ? "受付は10:30まで / Check-in until 10:30"
+          ? "受付は11:00まで / Check-in until 11:00"
           : "12:00まで / Until 12:00";
       } else if (now < stayUntil) {
         infoLabelJP.textContent = "午後のイベント開催中";
@@ -873,8 +873,8 @@
       $("#candy-status-label-en").textContent = "Check-in open";
       countdown.classList.remove("is-units");
       countdown.textContent = duration(remaining(latestStartAt));
-      $("#candy-status-copy-jp").textContent = "10:30まで新しく始められます。キャンディの森は12:00までです。";
-      $("#candy-status-copy-en").textContent = "New families may start until 10:30. The Candy Forest ends at 12:00.";
+      $("#candy-status-copy-jp").textContent = "11:00まで新しく始められます。キャンディの森は12:00までです。";
+      $("#candy-status-copy-en").textContent = "New families may start until 11:00. The Candy Forest ends at 12:00.";
     } else if (now < candyEndAt) {
       $("#candy-status-label-jp").textContent = "受付終了・ハント中";
       $("#candy-status-label-en").textContent = "Check-in closed — hunt in progress";
