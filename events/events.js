@@ -90,7 +90,7 @@ window.BOOHA_EVENTS = {
     ],
     // Afternoon team activities. One shared password each (Bryan announces it; capitals don't matter).
     // Witch: each team gets 10-12 random ingredients with exact counts. rare: true = only about 1 team in 3 gets it.
-    // Monster: each team gets 3-4 random must-have parts; everything else is free.
+    // Monster: every team must include all the parts in the menu; bonus parts are optional.
     afternoonGames: {
       witch: {
         password: "angela",
@@ -122,20 +122,31 @@ window.BOOHA_EVENTS = {
       monster: {
         password: "karla",
         titleJP: "<ruby>森<rt>もり</rt></ruby>のモンスターづくり", titleEN: "Build a Forest Monster",
-        pickMin: 3, pickMax: 4,
+        // Every team builds a monster with ALL of these parts. Bonus parts are optional.
         items: [
-          { id: "eyes", jp: "め：どんぐりか くり 2こ", en: "Eyes: 2 acorns or chestnuts" },
-          { id: "arms", jp: "うで：えだ 2ほん", en: "Arms: 2 sticks" },
-          { id: "hair", jp: "かみのけ：ざっそうか まつば", en: "Hair: weeds or pine needles" },
-          { id: "mouth", jp: "くち：まがったえだか こいしのならび", en: "Mouth: a curved stick or a row of small stones" },
-          { id: "teeth", jp: "は：こいし", en: "Teeth: small stones" },
-          { id: "nose", jp: "はな：くりか まつぼっくり", en: "Nose: a chestnut or pine cone" },
-          { id: "spikes", jp: "せなかのトゲ：くりのいがか えだ", en: "Back spikes: chestnut shells or sticks" },
-          { id: "clothes", jp: "ふく：はっぱ（どんな<ruby>色<rt>いろ</rt></ruby>でも）", en: "Clothes: leaves (any color)" },
-          { id: "bamboo", jp: "どこかに たけ", en: "A piece of bamboo somewhere" },
-          { id: "gourd", jp: "からだか あたま：ひょうたん", en: "Body or head: a gourd", rare: true },
-          { id: "wings", jp: "はね：おおきなはっぱ 2まい", en: "Wings: 2 big leaves" },
-          { id: "hat", jp: "ぼうし：なんでもOK！", en: "A hat: anything!" }
+          { id: "size", jp: "おおきさ：うでの ながさ くらい", en: "Size: at least as long as an arm" },
+          { id: "head", jp: "あたま", en: "Head" },
+          { id: "body", jp: "からだ", en: "Body" },
+          { id: "eyes", jp: "め 2こ（どんぐり・くり）", en: "2 eyes (acorns, chestnuts)" },
+          { id: "eyebrows", jp: "まゆげ（ちいさな えだ・まつば）", en: "Eyebrows (tiny sticks, pine needles)" },
+          { id: "ears", jp: "みみ 2つ（はっぱ）", en: "2 ears (leaves)" },
+          { id: "nose", jp: "はな（くり・まつぼっくり）", en: "Nose (chestnut, pine cone)" },
+          { id: "mouth", jp: "くち（まがった えだ・こいし）", en: "Mouth (curved stick, small stones)" },
+          { id: "teeth", jp: "は（こいし・どんぐり）", en: "Teeth (small stones, acorns)" },
+          { id: "hair", jp: "かみのけ（ざっそう・まつば）", en: "Hair (weeds, pine needles)" },
+          { id: "arms", jp: "うで 2ほん（えだ）", en: "2 arms (sticks)" },
+          { id: "hands", jp: "て 2つ（はっぱ・ささのは）", en: "2 hands (leaves, bamboo leaves)" },
+          { id: "fingers", jp: "てのゆび（みじかい えだ・まつば）", en: "Fingers (short sticks, pine needles)" },
+          { id: "legs", jp: "あし 2ほん（えだ・たけ）", en: "2 legs (sticks, bamboo)" },
+          { id: "feet", jp: "あしさき 2つ（はっぱ・きのかわ）", en: "2 feet (leaves, bark)" },
+          { id: "toes", jp: "あしのゆび（こいし・どんぐり）", en: "Toes (small stones, acorns)" }
+        ],
+        bonus: [
+          { id: "wings", jp: "はね（おおきな はっぱ）", en: "Wings (big leaves)" },
+          { id: "spikes", jp: "せなかの トゲ（くりのいが・えだ）", en: "Back spikes (chestnut shells, sticks)" },
+          { id: "tail", jp: "しっぽ（えだ・ざっそう）", en: "Tail (stick, weeds)" },
+          { id: "hat", jp: "ぼうし（なんでもOK！）", en: "Hat (anything!)" },
+          { id: "gourd", jp: "ひょうたんの おなか", en: "A gourd belly" }
         ]
       }
     },
