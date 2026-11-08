@@ -25,6 +25,7 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 |------|-------------|
 | `index.html` | Landing page with animated floating orbs and audio |
 | `adventure.html` | Public overview of Booha Adventure, its curricula, class formats, and access |
+| `about-booha-adventure.html` | Fact sheet: what Booha Adventure is, in plain Japanese and English, for families, search engines and AI assistants |
 | `tour.html` | Guided tour of the app built from real screens: the weekly path (Maze and Blitz), the worlds, Karasuki Cards, rewards, progress, and the English Juku class. Japanese by default, with an English toggle (`?lang=en` opens it in English) |
 | `how-to.html` | Parent installation and usage guide, shared by direct link or QR code; intentionally not in public navigation |
 | `school.html` | Output and English Juku class formats, lesson pricing, and learning system |
@@ -35,6 +36,14 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 | `bryan.html` | About Bryan Harper |
 | `notes.html` | Archived writing section, preserved but no longer linked from public navigation |
 | `event.html` | Reusable Halloween Event information page, Candy Forest QR hunt, Afternoon Event, and Zombie Scavenger Hunt |
+
+---
+
+## Discovery files
+
+- `about-booha-adventure.html`: the plain fact sheet about the app. Keep it in step with the app and this README.
+- `llms.txt`: a short guide to the site for AI tools, pointing to the fact sheet first.
+- `sitemap.xml`: every public page with its last-changed date. Submit it in Google Search Console and update `lastmod` when a page changes.
 
 ---
 
