@@ -58,7 +58,7 @@ window.BOOHA_EVENTS = {
       phone: "0476-76-9896",
       phoneHoursJP: "受付 19:00〜21:00",
       phoneHoursEN: "Calls 19:00–21:00",
-      addressJP: "〒286-0212 千葉県富里市七栄35-21"
+      addressJP: "〒286-0221 千葉県富里市七栄35-21"
     },
     parking: {
       titleJP: "会場への行き方と駐車場",
