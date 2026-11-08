@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="Booha Cards — original English learning card decks designed by Bryan Harper for Bryan's English School in Tomisato, Chiba. Illustrated vocabulary and conversation cards for kids.">
+<meta name="description" content="Booha Cards: a growing series of English reading and pronunciation card games by Bryan Harper for Bryan's English School in Tomisato, Chiba. Decks 1 and 2 are available now.">
 <meta name="author" content="Bryan Harper">
 <title>Booha Cards — ブーハーカード</title>
   
@@ -14,10 +14,10 @@
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Booha Cards",
-  "alternativeName": "ブーハーカード",
+  "alternateName": "ブーハーカード",
   "url": "https://booha-adventure-studios.github.io/booha-world/cards.html",
   "image": "https://booha-adventure-studios.github.io/booha-world/assets/img/cards.png",
-  "description": "Original illustrated English learning card decks designed by Bryan Harper for use in English conversation lessons. Created for Bryan's English School in Tomisato, Chiba, Japan. Available for purchase — shipping available.",
+  "description": "A growing series of English reading and pronunciation card games designed by Bryan Harper. Decks 1 and 2 are available now. Created for Bryan's English School in Tomisato, Chiba, Japan. Available for purchase — shipping available.",
   "brand": {
     "@type": "Brand",
     "name": "Booha"
@@ -738,6 +738,7 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+.hero-sub.series-note { font-size: 0.82em; opacity: 0.78; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -778,6 +779,7 @@ body::before {
       <div class="color-dot" style="background:var(--purple)"></div>
     </div>
     <p class="hero-sub" id="hero-sub">英語の発音を、ゲームで身につける。ブライアン英会話教室オリジナルカードゲーム。</p>
+    <p class="hero-sub series-note" id="series-note">Booha Cardsはシリーズで、現在はデッキ1と2を販売中です。アプリの中で集める「カラスキーカード」とは別のものです。</p>
   </header>
 
   <!-- LANG TOGGLE -->
@@ -965,6 +967,8 @@ function showDeck(n) {
   const strings = {
     heroSubEN: "An original English card game from Bryan's English School. Read the cards. Say the words. Play to win.",
     heroSubJP: '英語の発音を、ゲームで身につける。ブライアン英会話教室オリジナルカードゲーム。',
+    seriesEN: 'Booha Cards is a growing series, with Decks 1 and 2 available now. They are separate from Karasuki Cards, the collectible cards inside the Booha Adventure app.',
+    seriesJP: 'Booha Cardsはシリーズで、現在はデッキ1と2を販売中です。アプリの中で集める「カラスキーカード」とは別のものです。',
     ruleLabelEN: 'The Golden Rule',
     ruleLabelJP: 'ゴールデンルール',
     ruleTextEN: `When you play a card, you must read it aloud.<br><span class="c-pink">Colors</span>, <span class="c-yellow">numbers</span>, <span class="c-blue">letters</span>, <span class="c-green">words</span> — everything.`,
@@ -1025,6 +1029,7 @@ function showDeck(n) {
 
     const s = strings;
     document.getElementById('hero-sub').textContent    = isJP ? s.heroSubJP    : s.heroSubEN;
+    document.getElementById('series-note').textContent = isJP ? s.seriesJP : s.seriesEN;
     document.getElementById('rule-label').textContent  = isJP ? s.ruleLabelJP  : s.ruleLabelEN;
     document.getElementById('rule-text').innerHTML     = isJP ? s.ruleTextJP   : s.ruleTextEN;
     document.getElementById('tab1-sub').textContent    = isJP ? s.tab1SubJP    : s.tab1SubEN;

@@ -25,11 +25,11 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 |------|-------------|
 | `index.html` | Landing page with animated floating orbs and audio |
 | `adventure.html` | Public overview of Booha Adventure, its curricula, class formats, and access |
-| `tour.html` | Guided tour of the app's profiles, worlds, games, and progress systems |
+| `tour.html` | Guided tour of the app built from real screens: the weekly path (Maze and Blitz), the worlds, Karasuki Cards, rewards, progress, and the English Juku class. Japanese by default, with an English toggle (`?lang=en` opens it in English) |
 | `how-to.html` | Parent installation and usage guide, shared by direct link or QR code; intentionally not in public navigation |
 | `school.html` | Output and English Juku class formats, lesson pricing, and learning system |
 | `curricula.html` | Three curriculum tracks with interactive design |
-| `cards.html` | Booha Cards product page |
+| `cards.html` | Booha Cards: the physical card game series (Decks 1 and 2 available now) |
 | `workshop.html` | Project maker portfolio with lightbox gallery |
 | `zukan.html` | Karasuki field guide — original illustrated characters |
 | `bryan.html` | About Bryan Harper |
@@ -50,16 +50,32 @@ Key features:
 - Authorized PIN access and saved learning progress
 - Three curriculum tracks: Pre-Boo, Boo-riculum, and Boo-Continuum
 - Weekly study decks with vocabulary, sentences, questions, audio, and Japanese support
-- Daily Check-ins that take about 3–4 minutes and record first and best results
-- Three Blitz rounds with nine game types, plus explororable game worlds and collections
+- A Daily Check of about 5 minutes on the first visit each day, with an honest Skip option; profiles record the first and best results
+- Nine weekly Maze games, plus two extra practice games (Booha Bites and Echo) and a Week Boss fight
+- Three timed Blitz rounds as an optional warm-up that runs alongside the Maze; clearing all three unlocks that week's surprise and the Karasuki Card challenge
+- Five explorable worlds: Karasuki, Utsuroba, Muenba, Grimmerglen, and Akiya (the last four open each week once all nine Maze games are done)
+- Karasuki Cards: an in-game collectible card series won through a word-memory challenge
+- Rainbow stars for prepared students, weekly medals, permanent tokens, weekly postcards, and an arcade
 - Adventure Log, My Adventure, and world-specific profile pages for progress and achievements
+- Typing games use Booha's own on-screen keyboard: no autocomplete, suggestions, or pasting
 - The same weekly content supports flipped Output lessons and English Juku
 - Bilingual English/Japanese learning throughout
 - No ads, recommendation feed, generative AI, or advertising profiles
 - PIN licensing is available to other schools
 
+Weeks run Sunday to Saturday, Tokyo time.
+
 Original content, artwork, and software remain the property of Bryan Harper. Public
 repository visibility does not grant permission to reuse them.
+
+---
+
+## Booha Cards and Karasuki Cards
+
+Two different things with similar names:
+
+- **Booha Cards** (`cards.html`) are a growing series of physical English card games. Decks 1 and 2 are available now.
+- **Karasuki Cards** are an in-game collectible card series inside the Booha Adventure app.
 
 ---
 
@@ -78,7 +94,7 @@ Karasuki is where forgotten things go.
 A fictional world that lives across three formats:
 
 - The **Zukan** (field guide) — original illustrated characters with bilingual entries
-- The **Booha Adventure** — Karasuki is the first of two explorable game worlds
+- The **Booha Adventure** — Karasuki is the first of the app's five explorable worlds
 - The **novel** — currently in progress
 
 Characters: Takachika Green, Mister Happy, Pugoo, Columbus, Tom Katsu, Amekuro, 
@@ -96,6 +112,7 @@ Bilingual English and Japanese. Featured on Facebook, Hometalk, and LIMIA.
 - **Fonts:** Notable (titles), Spectral (serif body), DM Sans (UI), Noto Sans JP, and Noto Serif JP
 - **Colors:** Warm dark charcoal backgrounds, moss green Karasuki accent
 - **Approach:** Mobile-first, touch-optimized, hand-written vanilla HTML/CSS/JavaScript
+- **Exception:** `tour.html` has its own look (Dela Gothic One and Zen Maru Gothic, a lavender light theme with a dark mode) to match the app's screens
 
 ---
 
@@ -106,12 +123,13 @@ States Air Force, stationed at Yokota Air Base. After leaving the Air Force he t
 himself into teaching — ALT work, international schools, private lessons — before 
 opening Bryan's English School in Tomisato, Chiba in 2018.
 
-He has 15+ years of English teaching experience in Japan and teaches all ages — children 
-to adults. The school now offers two formats connected by the same weekly Booha Adventure
-content: a flipped Output Lesson built around home preparation and conversation, and a
-structured English Juku lesson for independent practice and demonstration. Juku has no additional written notebook homework, but students review Booha Adventure at home. He builds
-everything himself: the school, the app, the cards, the characters, the furniture, and
-the world.
+He has 15+ years of English teaching experience and more than 20 years in Japan, and
+teaches all ages — children to adults. The school now offers two formats connected by the
+same weekly Booha Adventure content: a flipped Output Lesson built around home preparation
+and conversation, and a structured English Juku lesson for independent practice and
+demonstration. Juku has no additional written notebook homework, but students review
+Booha Adventure at home. He builds everything himself: the school, the app, the cards,
+the characters, the furniture, and the world.
 
 → [Full profile](https://booha-adventure-studios.github.io/booha-world/bryan.html)
 
