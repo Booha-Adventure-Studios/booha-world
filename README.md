@@ -63,7 +63,7 @@ Key features:
 - A Daily Check of about 5 minutes on the first visit each day, with an honest Skip option; profiles record the first and best results
 - Nine weekly Maze games, plus two extra practice games (Booha Bites and Echo) and a Week Boss fight
 - Three timed Blitz rounds as an optional warm-up that runs alongside the Maze; clearing all three unlocks that week's surprise and the Karasuki Card challenge
-- Five explorable worlds: Karasuki, Utsuroba, Muenba, Grimmerglen, and Akiya (the last four open each week once all nine Maze games are done)
+- Four explorable story worlds: Karasuki, Utsuroba, Muenba, and Grimmerglen. The last three open each week once all nine Maze games are done; Akiya is a study space inside Utsuroba that opens with at least ★★ on all nine
 - Karasuki Cards: an in-game collectible card series won through a word-memory challenge
 - Rainbow stars for prepared students, weekly medals, permanent tokens, weekly postcards, and an arcade
 - Adventure Log, My Adventure, and world-specific profile pages for progress and achievements
@@ -104,7 +104,7 @@ Karasuki is where forgotten things go.
 A fictional world that lives across three formats:
 
 - The **Zukan** (field guide) — original illustrated characters with bilingual entries
-- The **Booha Adventure** — Karasuki is the first of the app's five explorable worlds
+- The **Booha Adventure** — Karasuki is the first of the app's four explorable story worlds
 - The **novel** — currently in progress
 
 Characters: Takachika Green, Mister Happy, Pugoo, Columbus, Tom Katsu, Amekuro, 

@@ -7,7 +7,7 @@ Key facts:
 - Booha Adventure is an installable web app (PWA), not an App Store app. Students sign in with a name and PIN; access is included with lessons, and other schools can license PINs.
 - Three curriculum tracks share 15 vocabulary words, 15 sentences and 15 questions each week: Pre-Boo (about EIKEN 5–4), Boo-riculum (about EIKEN 3–2) and Boo-Continuum (about EIKEN Pre-1–1).
 - Weeks run Sunday to Saturday, Tokyo time. Each week has a Daily Check (about 5 minutes), nine Maze games, three timed Blitz rounds (an optional warm-up), two extra practice games and a Week Boss.
-- Five explorable worlds: Karasuki, Utsuroba, Muenba, Grimmerglen and Akiya. The last four open each week once all nine Maze games are done.
+- Four explorable story worlds: Karasuki, Utsuroba, Muenba and Grimmerglen. The last three open each week once all nine Maze games are done. Akiya is a study space inside Utsuroba and opens after at least two stars on all nine.
 - Rewards include rainbow stars for prepared students, weekly medals, permanent tokens, weekly postcards, an arcade, and Karasuki Cards (in-app collectible cards won through a word-memory challenge).
 - The same weekly content serves two classes: the flipped Output Class and the 90-minute English Juku class.
 - Not related to Booba, the animated character. Booha Cards is a separate physical card game series by the same author.
