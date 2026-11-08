@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ブーハー・アドベンチャー ガイドツアー | The Booha Adventure, A Guided Tour</title>
-<meta name="description" content="ブーハー・アドベンチャーのガイドツアー。ブリッツから迷路の9つのゲーム、その先の世界、ごほうびと虹色の星、記録、そして英語塾クラスまで、実際の画面で紹介します。">
+<meta name="description" content="ブーハー・アドベンチャーのガイドツアー。迷路の9つのゲームとブリッツ、その先の世界、カラスキーカード、ごほうびと虹色の星、記録、そして英語塾クラスまで、実際の画面で紹介します。">
 <meta name="author" content="Bryan Harper">
 <link rel="icon" type="image/webp" href="assets/tour/mascot-ghost-real.webp">
-<link rel="preload" as="image" href="assets/tour/v2-hub.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/tour/v3-hub.webp" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -20,7 +20,7 @@
     "name": "Bryan Harper",
     "url": "https://booha-adventure-studios.github.io/booha-world/bryan.html"
   },
-  "description": "A guided tour of The Booha Adventure: the weekly path from Blitz to the nine maze games, the worlds beyond, rewards and rainbow stars, progress, and the English Juku class, shown with real screens.",
+  "description": "A guided tour of The Booha Adventure: the weekly path through the nine maze games and Blitz, the worlds beyond, Karasuki Cards, rewards and rainbow stars, progress, and the English Juku class, shown with real screens.",
   "inLanguage": ["ja", "en"],
   "isPartOf": {
     "@type": "WebSite",
@@ -148,8 +148,8 @@
   .path{padding-block:46px 52px; background:linear-gradient(180deg, var(--bg2), var(--bg));}
   .path h2{font-family:var(--f-display); font-weight:400; text-align:center; font-size:clamp(1.5rem,3.4vw,2.1rem); line-height:1.3;}
   .path .sub{text-align:center; color:var(--muted); margin:10px auto 32px; max-width:600px;}
-  .steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); position:relative;}
-  .steps::before{content:""; position:absolute; left:12.5%; right:12.5%; top:27px; height:6px; border-radius:6px; background:var(--glow); box-shadow:0 0 14px var(--glow), 0 0 4px var(--glow);}
+  .steps{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); position:relative; max-width:960px; margin:0 auto;}
+  .steps::before{content:""; position:absolute; left:16.7%; right:16.7%; top:27px; height:6px; border-radius:6px; background:var(--glow); box-shadow:0 0 14px var(--glow), 0 0 4px var(--glow);}
   .step{position:relative; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 10px; min-width:0;}
   .step .dot{width:60px; height:60px; border-radius:50%; background:var(--surface); border:5px solid var(--glow); display:grid; place-items:center; font-family:var(--f-display); font-size:1.4rem; color:var(--glow); box-shadow:0 0 0 6px var(--bg2), 0 0 18px var(--glow-soft); z-index:1;}
   .step h3{font-size:1.04rem; font-weight:900; margin-top:14px; line-height:1.5;}
@@ -164,6 +164,15 @@
     .step h3{margin-top:6px;}
     .chips{justify-content:flex-start;}
   }
+  .laneLabel{text-align:center; font-size:.76rem; font-weight:900; letter-spacing:.1em; color:var(--glow); margin-bottom:14px;}
+  .laneLabel.pink{color:var(--pink);}
+  :root[data-lang="en"] .laneLabel{text-transform:uppercase;}
+  .lane{margin-top:34px; padding-top:22px; border-top:1px dashed var(--line);}
+  .laneRow{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0; position:relative; max-width:860px; margin:0 auto;}
+  .laneRow::before{content:""; position:absolute; left:16%; right:16%; top:50%; border-top:3px dashed var(--pink); opacity:.6;}
+  .laneStop{position:relative; z-index:1; margin:0 10px; background:var(--surface); border:1.5px solid var(--pink); border-radius:14px; padding:10px 12px; text-align:center; font-size:.82rem; color:var(--muted); line-height:1.5; min-width:0;}
+  .laneStop b{display:block; color:var(--ink); font-size:.92rem;}
+  @media(max-width:760px){ .laneRow{grid-template-columns:1fr; gap:10px;} .laneRow::before{left:50%; right:auto; top:8px; bottom:8px; border-top:0; border-left:3px dashed var(--pink);} .laneStop{margin:0;} }
   .pathFoot{display:flex; justify-content:center; flex-wrap:wrap; gap:8px 22px; margin-top:30px; font-size:.86rem; color:var(--muted);}
   .pathFoot b{color:var(--ink);}
 
@@ -268,7 +277,7 @@
       </div>
     </div>
     <div class="heroShot">
-      <div class="dev"><img src="assets/tour/v2-hub.webp" alt="Week Hub" width="800" height="540" fetchpriority="high"></div>
+      <div class="dev"><img src="assets/tour/v3-hub.webp" alt="Week Hub" width="800" height="750" fetchpriority="high"></div>
       <div class="dev small"><img src="assets/tour/v2-blitz-play.webp" alt="Vocab Blitz" width="800" height="936" loading="lazy" decoding="async"></div>
     </div>
   </div>
@@ -279,45 +288,33 @@
   <section class="path">
     <div class="wrap">
       <h2><span class="ja">一週間のみち</span><span class="en">The weekly path</span></h2>
-      <p class="sub"><span class="ja">毎週、日曜日から土曜日まで、同じ4つのステップで進みます。</span><span class="en">Every week follows the same four steps, Sunday to Saturday.</span></p>
+      <p class="sub"><span class="ja">毎週、日曜日から土曜日まで。迷路とブリッツは、どちらから始めてもOKです。</span><span class="en">Every week runs Sunday to Saturday. The Maze and Blitz are two tracks: start with either one.</span></p>
+      <div class="laneLabel"><span class="ja">メインの道</span><span class="en">Main path</span></div>
       <div class="steps">
         <div class="step"><span class="dot">1</span>
-          <h3><span class="ja">ブリッツでウォームアップ</span><span class="en">Warm up with Blitz</span></h3>
-          <p><span class="ja">単語・文・質問の3ラウンド。どれもタイムを計ります。</span><span class="en">Three timed rounds: words, sentences, questions.</span></p>
-          <div class="chips"><i style="--c:#d9468c">VOCAB</i><i style="--c:#7a5bb0">SENTENCE</i><i style="--c:#2f7d58">QUESTION</i></div></div>
-        <div class="step"><span class="dot">2</span>
           <h3><span class="ja">迷路の9つのゲーム</span><span class="en">Play the nine maze games</span></h3>
-          <p><span class="ja">単語、文、リスニング。自分のコースのレベルで取り組みます。</span><span class="en">Words, sentences, and listening, in the student's own track.</span></p>
+          <p><span class="ja">単語、文、リスニング。順番は自由、自分のコースのレベルで。</span><span class="en">Words, sentences, and listening, in any order, at the student's own level.</span></p>
           <div class="chips"><i style="--c:#d27a10">9 GAMES</i></div></div>
-        <div class="step"><span class="dot">3</span>
+        <div class="step"><span class="dot">2</span>
           <h3><span class="ja">新しい世界がひらく</span><span class="en">New worlds open</span></h3>
           <p><span class="ja">9つすべてクリアすると、その週は4つの世界が開きます。</span><span class="en">Finish all nine and four worlds open for the week.</span></p>
           <div class="chips"><i style="--c:#6e4fb0"><span class="ja">うつろば</span><span class="en">UTSUROBA</span></i><i style="--c:#2f7d58"><span class="ja">むえんば</span><span class="en">MUENBA</span></i><i style="--c:#b94e95"><span class="ja">グリマーグレン</span><span class="en">GRIMMERGLEN</span></i><i style="--c:#2f63c4"><span class="ja">あきや</span><span class="en">AKIYA</span></i></div></div>
-        <div class="step"><span class="dot">4</span>
+        <div class="step"><span class="dot">3</span>
           <h3><span class="ja">さらに練習</span><span class="en">Go further</span></h3>
           <p><span class="ja">2つの練習ゲームと、ウィークボスとの対決。</span><span class="en">Two extra practice games and the Week Boss fight.</span></p>
           <div class="chips"><i style="--c:#c2551f">BITES</i><i style="--c:#2f63c4">ECHO</i><i style="--c:#b0234a">BOSS</i></div></div>
       </div>
+      <div class="lane">
+        <div class="laneLabel pink"><span class="ja">もうひとつの道・ブリッツ</span><span class="en">Parallel track · Blitz</span></div>
+        <div class="laneRow">
+          <div class="laneStop"><b><span class="ja">3つのブリッツ</span><span class="en">Three Blitz rounds</span></b><span class="ja">いつでもOKのウォームアップ</span><span class="en">An optional warm-up, any time</span></div>
+          <div class="laneStop"><b><span class="ja">3つクリア</span><span class="en">Clear all three</span></b><span class="ja">その週だけのサプライズ</span><span class="en">A surprise for that week only</span></div>
+          <div class="laneStop"><b><span class="ja">カラスキーカード</span><span class="en">Karasuki Cards</span></b><span class="ja">カードに挑戦できる</span><span class="en">A card challenge opens</span></div>
+        </div>
+      </div>
       <div class="pathFoot">
         <span class="ja"><b>9つすべて★★</b>でアーケードが開きます</span><span class="en"><b>★★ on all nine</b> opens the arcade</span>
-        <span class="ja"><b>ブリッツを3つクリア</b>すると、その週だけのサプライズ</span><span class="en"><b>All three Blitz cleared</b> unlocks a surprise for that week only</span>
         <span class="ja"><b>毎週日曜日</b>にリセット</span><span class="en"><b>Resets</b> every Sunday</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap row flip">
-      <div>
-        <div class="tag" style="--c:var(--pink)"><span class="ja">ステップ1・ブリッツ</span><span class="en">Step 1 · Blitz</span></div>
-        <h2 class="jh"><span class="ja">3つのラウンド、3つの舞台</span><span class="en">Three timed rounds, three stages</span></h2>
-        <p class="copy ja">単語はサーカスのテント、文は不気味な森、質問はホタルの谷で。各ラウンドに目標タイムがあり、自己ベストが記録されます。3つすべてクリアすると、迷路が待っています。</p>
-        <p class="copy en">Words in a circus tent, sentences in a spooky forest, questions in a firefly glade. Each round has a target time and remembers your best. Clear all three and the Maze welcomes you in.</p>
-        <div class="dev narrow" style="margin-top:16px"><img src="assets/tour/v2-records.webp" alt="Blitz records" width="424" height="167" loading="lazy" decoding="async"></div>
-      </div>
-      <div class="shots s2">
-        <div class="dev"><img src="assets/tour/v2-blitz-ready.webp" alt="Blitz start screen" width="800" height="936" loading="lazy" decoding="async"></div>
-        <div class="dev"><img src="assets/tour/v2-blitz-play.webp" alt="A Vocab Blitz question" width="800" height="936" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </section>
@@ -325,10 +322,10 @@
   <section class="sec">
     <div class="wrap row">
       <div>
-        <div class="tag"><span class="ja">ステップ2・迷路</span><span class="en">Step 2 · The Maze</span></div>
+        <div class="tag"><span class="ja">ステップ1・迷路</span><span class="en">Step 1 · The Maze</span></div>
         <h2 class="jh"><span class="ja">迷路の中に、9つのゲーム</span><span class="en">Nine games inside the maze</span></h2>
-        <p class="copy ja">迷路の先には、コースごとに3本の木があります。プレブー、ブーリキュラム、ブーコンティニュアム。どの木にも同じ9つのゲームが、それぞれのレベルで入っています。単語が3つ、文が3つ、聞く・話すが3つです。</p>
-        <p class="copy en">The Maze opens onto three trees, one for each track: Pre-Boo, Boo-riculum, and Boo-Continuum. Each tree holds the same nine games at its own level: three for words, three for sentences, three for listening and speaking.</p>
+        <p class="copy ja">迷路の先には、コースごとに3本の木があります。プレブー、ブーリキュラム、ブーコンティニュアム。どの木にも同じ9つのゲームが、それぞれのレベルで入っています。単語が3つ、文が3つ、聞く・話すが3つです。新しい週は「Try me!」のゲームから、静かに始まります。</p>
+        <p class="copy en">The Maze opens onto three trees, one for each track: Pre-Boo, Boo-riculum, and Boo-Continuum. Each tree holds the same nine games at its own level: three for words, three for sentences, three for listening and speaking. A new week starts quietly, with one game marked "Try me!"</p>
         <div class="rainbow"><div>
           <div class="rTop"><span class="chipNew"><span class="ja">新機能</span><span class="en">NEW</span></span><b class="rStars">★★★</b></div>
           <div class="rjh"><span class="ja">虹色の星は、準備してきたしるし</span><span class="en">Rainbow stars mean you came prepared</span></div>
@@ -339,7 +336,23 @@
       </div>
       <div class="shots s2">
         <div class="dev"><img src="assets/tour/v2-maze.webp" alt="The Maze" width="800" height="936" loading="lazy" decoding="async"></div>
-        <div class="dev"><img src="assets/tour/v2-menu.webp" alt="Pre-Boo game menu" width="800" height="745" loading="lazy" decoding="async"></div>
+        <div class="dev"><img src="assets/tour/v3-menu.webp" alt="Pre-Boo game menu with rainbow stars and Try me!" width="800" height="720" loading="lazy" decoding="async"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row">
+      <div>
+        <div class="tag" style="--c:var(--pink)"><span class="ja">もうひとつの道・ブリッツ</span><span class="en">Parallel track · Blitz</span></div>
+        <h2 class="jh"><span class="ja">3つのラウンド、3つの舞台</span><span class="en">Three timed rounds, three stages</span></h2>
+        <p class="copy ja">単語はサーカスのテント、文は不気味な森、質問はホタルの谷で。各ラウンドに目標タイムがあり、自己ベストが記録されます。ブリッツは自由なウォームアップなので、迷路の前でも後でも大丈夫。3つすべてクリアすると、その週だけのサプライズと、カラスキーカードへの挑戦が待っています。</p>
+        <p class="copy en">Words in a circus tent, sentences in a spooky forest, questions in a firefly glade. Each round has a target time and remembers your best. Blitz is an optional warm-up, so it works before or after the Maze. Clear all three for a surprise that lasts only that week, and a chance at a Karasuki Card.</p>
+        <div class="dev narrow" style="margin-top:16px"><img src="assets/tour/v2-records.webp" alt="Blitz records" width="424" height="167" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="shots s2">
+        <div class="dev"><img src="assets/tour/v2-blitz-ready.webp" alt="Blitz start screen" width="800" height="936" loading="lazy" decoding="async"></div>
+        <div class="dev"><img src="assets/tour/v3-warmup.webp" alt="Maze entrance: Blitz is an optional warm-up" width="560" height="590" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </section>
@@ -347,7 +360,7 @@
   <section class="sec">
     <div class="wrap row flip">
       <div>
-        <div class="tag" style="--c:#b0234a"><span class="ja">ステップ4・おまけ</span><span class="en">Step 4 · Extra practice</span></div>
+        <div class="tag" style="--c:#b0234a"><span class="ja">ステップ3・おまけ</span><span class="en">Step 3 · Extra practice</span></div>
         <h2 class="jh"><span class="ja">2つの練習ゲームと、ウィークボス</span><span class="en">Two practice games and a boss fight</span></h2>
         <p class="copy ja"><b>ブーハー・バイツ</b>は、ブーハーが食べてしまった単語を見つけるゲーム。<b>エコー</b>は、聞いた単語を入力するゲーム。<b>ウィークボス</b>は、その週の英語を新しい形式で出題する15ラウンドの対決で、連続正解するとクリティカルヒット。勝てばその週の王冠がもらえます。</p>
         <p class="copy en"><b>Booha Bites</b>: Booha ate one word from each sentence, find it. <b>Echo</b>: hear a word, type it. <b>Week Boss</b>: fifteen rounds of this week's English in new formats, with critical hits for streaks. Win the week's crown.</p>
@@ -360,15 +373,30 @@
   </section>
 
   <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:var(--w-akiya)"><span class="ja">ブーハー・キーボード</span><span class="en">The Booha keyboard</span></div>
+        <h2 class="jh"><span class="ja">スペルは、自分の記憶だけで</span><span class="en">Spelling comes from memory, not autocomplete</span></h2>
+        <p class="copy ja">タイピングのゲームでは、iPadのキーボードではなく、ブーハー専用のキーボードを使います。予測変換も、候補の単語も、貼り付けもありません。正しいスペルは、生徒自身の記憶から出てきます。</p>
+        <p class="copy en">Typing games use Booha's own on-screen keyboard instead of the iPad's. No predictive text, no suggested words, no pasting. The spelling has to come from the student's own memory.</p>
+        <div class="facts"><span class="ja">エコー</span><span class="ja">カラスキーカード</span><span class="ja">グリマーグレン</span><span class="en">Echo</span><span class="en">Karasuki Cards</span><span class="en">Grimmerglen</span></div>
+      </div>
+      <div class="dev narrow" style="justify-self:center; width:100%"><img src="assets/tour/v3-echo.webp" alt="Echo with the Booha on-screen keyboard" width="640" height="720" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+
+  <section class="sec">
     <div class="wrap row">
       <div>
         <div class="tag" style="--c:var(--w-juku)"><span class="ja">宿題とデイリーチェック</span><span class="en">Homework and Daily Check</span></div>
         <h2 class="jh"><span class="ja">宿題と、毎日のランタン</span><span class="en">Homework and the Lantern Path</span></h2>
-        <p class="copy ja">宿題は、その週の単語と文をノートに書き写すもの。音声、印刷用の画面、英語を隠すテストモード、教室で使うプロジェクターモードがあります。短いデイリーチェックをするたびに、ランタンがひとつ灯ります。</p>
-        <p class="copy en">Homework is this week's words and sentences to copy into a notebook, with audio, a print view, a test mode that hides the English, and a projector mode for class. A short Daily Check lights one lantern a day.</p>
+        <p class="copy ja">宿題は、その週の単語と文をノートに書き写すもの。書き写した単語にはチェックを付けられ、覚えた単語は隠して練習できます。音声、印刷用の画面、英語を隠すテストモード、教室で使うプロジェクターモードもあります。</p>
+        <p class="copy ja">毎日最初に開くと、短いデイリーチェックがあります。チェックするたびにランタンがひとつ灯ります。忙しい日は「スキップ」も選べます。</p>
+        <p class="copy en">Homework is this week's words and sentences to copy into a notebook. Students tick off each one as they copy it, and can hide the words they already know. There is audio, a print view, a test mode that hides the English, and a projector mode for class.</p>
+        <p class="copy en">The first visit each day opens with a short Daily Check, and each one lights a lantern. On a busy day there is an honest "Skip today".</p>
         <div class="dev" style="margin-top:14px"><img src="assets/tour/v2-lantern.webp" alt="The Lantern Path" width="508" height="177" loading="lazy" decoding="async"></div>
       </div>
-      <div class="dev"><img src="assets/tour/v2-homework.webp" alt="Homework" width="477" height="430" loading="lazy" decoding="async"></div>
+      <div class="dev"><img src="assets/tour/v3-homework.webp" alt="Homework with copy ticks" width="740" height="810" loading="lazy" decoding="async"></div>
     </div>
   </section>
 </div>
@@ -413,6 +441,20 @@
       </div>
     </div>
   </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:var(--w-karasuki)"><span class="ja">新機能・カラスキーカード</span><span class="en">New · Karasuki Cards</span></div>
+        <h2 class="jh"><span class="ja">覚えた単語で、旅人のカードを手に入れる</span><span class="en">Win a wanderer's card with the words you remember</span></h2>
+        <p class="copy ja">その週のブリッツを3つクリアすると、カラスキに旅人のカードが現れます。10ラウンドの記憶チャレンジでは、単語を読んで覚え、消えたあとに自分で入力します。10問中8問で合格。出題は1〜6週間前の単語なので、自然に復習になります。</p>
+        <p class="copy en">Clear all three Blitz rounds in a week and a wanderer's card appears in Karasuki. The challenge is ten rounds: read a word, remember it, then type it once it disappears. Eight of ten wins the card. The words come from one to six weeks back, so it doubles as review.</p>
+        <div class="facts"><span class="ja">10ラウンド</span><span class="ja">8問で合格</span><span class="ja">週に2回まで</span><span class="ja">1週間に1枚</span><span class="en">10 rounds</span><span class="en">8 to pass</span><span class="en">2 tries a week</span><span class="en">1 card a week</span></div>
+        <div class="dev" style="margin-top:16px"><img src="assets/tour/v3-cards.webp" alt="The Karasuki Cards binder" width="764" height="475" loading="lazy" decoding="async"></div>
+      </div>
+      <div class="dev narrow" style="justify-self:center; width:100%; max-width:360px"><img src="assets/tour/v3-card.webp" alt="A Karasuki card with the words recalled and the date won" width="414" height="621" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
 </div>
 
 <!-- ======================= REWARDS ======================= -->
@@ -453,10 +495,22 @@
       <div>
         <div class="tag" style="--c:#c98f10"><span class="ja">冒険トークン</span><span class="en">Adventure tokens</span></div>
         <h2 class="jh"><span class="ja">ずっと残るトークン</span><span class="en">Tokens that stay forever</span></h2>
-        <p class="copy ja">冒険全体、自分のコース、むえんば、グリマーグレンごとに、ずっと残るトークンがあります。クラウンコレクター、ボスバスター、たびびとのホストなどには段階があり、手に入れるまで秘密のものもあります。</p>
-        <p class="copy en">Permanent tokens for the whole journey, the student's own track, Muenba, and Grimmerglen. Crown Collector, Boss Buster, Wanderer Host and others have tiers to climb, and some are secret until earned.</p>
+        <p class="copy ja">冒険全体、自分のコース、むえんば、グリマーグレンごとに、ずっと残るトークンがあります。虹色の星を集める「にじいろマスター」、クラウンコレクター、ボスバスター、たびびとのホストなどには段階があり、手に入れるまで秘密のものもあります。</p>
+        <p class="copy en">Permanent tokens for the whole journey, the student's own track, Muenba, and Grimmerglen. Rainbow Master, Crown Collector, Boss Buster, Wanderer Host and others have tiers to climb, and some are secret until earned.</p>
       </div>
-      <div class="dev"><img src="assets/tour/v2-tokens.webp" alt="Adventure tokens" width="508" height="735" loading="lazy" decoding="async"></div>
+      <div class="dev"><img src="assets/tour/v3-tokens.webp" alt="Adventure tokens" width="744" height="1102" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag" style="--c:#2f7d58"><span class="ja">新機能・えはがき</span><span class="en">New · Postcards</span></div>
+        <h2 class="jh"><span class="ja">来た週には、えはがきが1枚</span><span class="en">A postcard for every week you visit</span></h2>
+        <p class="copy ja">1日でも遊んだ週には、その週のえはがきがもらえます。5日以上来た週は、金のわくと「5日」のスタンプ付き。点数ではなく「続けて来たこと」を残す、ずっと消えないごほうびです。</p>
+        <p class="copy en">Any week with a visit earns that week's postcard. Visit five days or more and it gets a gold frame and a 5-DAY WEEK stamp. It's a permanent reward for showing up, not for scores.</p>
+      </div>
+      <div class="dev narrow" style="justify-self:center; width:100%"><img src="assets/tour/v3-postcards.webp" alt="Weekly postcards" width="382" height="155" loading="lazy" decoding="async"></div>
     </div>
   </section>
 
@@ -490,6 +544,18 @@
     <p class="ja">生徒の取り組みはすべてプロフィールに記録されるので、ご家族も先生も、その週の様子がひと目でわかります。</p>
     <p class="en">Everything a student does is recorded on their own profiles, so families and teachers can see the week at a glance.</p>
   </div>
+
+  <section class="sec">
+    <div class="wrap row flip">
+      <div>
+        <div class="tag"><span class="ja">新機能・冒険ログのまとめ</span><span class="en">New · Adventure Log summary</span></div>
+        <h2 class="jh"><span class="ja">次にやることが、ひと目でわかる</span><span class="en">The next step, at a glance</span></h2>
+        <p class="copy ja">冒険ログのいちばん上に、まとめのカードがあります。次にやることへ1タップで進めるボタン、今週の迷路・ブリッツ・チェックの進み具合、そしていちばん近いごほうびまであと少し、を表示します。</p>
+        <p class="copy en">A summary card now sits at the top of the Adventure Log: a button straight to the next thing to do, this week's Maze, Blitz and check-in progress, and how close the next unlock is.</p>
+      </div>
+      <div class="dev"><img src="assets/tour/v3-summary.webp" alt="Adventure Log summary card" width="740" height="360" loading="lazy" decoding="async"></div>
+    </div>
+  </section>
 
   <section class="sec">
     <div class="wrap row">
