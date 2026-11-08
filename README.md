@@ -43,6 +43,7 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 
 - `about-booha-adventure.html`: the plain fact sheet about the app. Keep it in step with the app and this README.
 - `llms.txt`: a short guide to the site for AI tools, pointing to the fact sheet first.
+- `zukan.html` and `workshop.html` contain a plain copy of their content inside the containers the scripts fill, so crawlers that don't run JavaScript can read it. The script replaces it on load. If you edit the data (CHARACTERS, PROJECTS, etc.), regenerate the plain copy so the two stay the same.
 - `sitemap.xml`: every public page with its last-changed date. Submit it in Google Search Console and update `lastmod` when a page changes.
 
 ---

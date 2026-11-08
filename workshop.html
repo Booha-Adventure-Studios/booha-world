@@ -185,6 +185,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 @media(max-width:680px){.project-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.lb-img{height:38vh;}.lb-panel{width:96vw;max-height:94vh;}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+
+/* plain copy shown only when JavaScript does not run; the script replaces it on load */
+.static-entry{grid-column:1/-1;max-width:68ch;margin:0 auto 28px;text-align:left;line-height:1.8;}
+.static-entry h3{margin:0 0 8px;font-size:1.05rem;}
+.static-entry h4{margin:14px 0 6px;font-size:.98rem;}
+.static-entry p{margin:0 0 10px;}
+.static-list{grid-column:1/-1;margin:0 0 12px 1.4em;line-height:1.8;}
 </style>
 </head>
 <body>
@@ -214,7 +221,24 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <span class="count-num">001 — 015</span>
   </div>
 
-  <div class="project-grid" id="project-grid"></div>
+  <div class="project-grid" id="project-grid">
+<!-- static copy for readers without JavaScript; replaced on load -->
+<article class="static-entry"><h3>001 リビング＆キッチンのリノベーション / Living Room &amp; Kitchen Renovation</h3><p lang="ja">リビングとキッチンの大規模なリノベーション。ボード＆バテンの壁、新しい天井、床の張り替えをすべて施工。オリジナルの棚とオルゴールのディスプレイを加え、家の中心に個性と温かみをつくり出した。</p><p lang="en">A major overhaul of the central living and kitchen area. Board and batten walls, a new ceiling, and updated flooring throughout. Custom shelving and a music box display were added to bring character and warmth to the heart of the house.</p><p>ボード＆バテン・天井の新設・床の張り替え・棚のカスタム / board &amp; batten, new ceiling, new flooring, custom shelving</p></article>
+<article class="static-entry"><h3>002 ピンクの寝室 / Pink Bedroom</h3><p lang="ja">寝室の完全改装。ボード＆バテンの壁と新しい天井はリビングと同様の仕上げだが、ピンクのカラーパレットとふかふかのカーペットがこの部屋だけの独自の空気をつくっている。</p><p lang="en">A complete bedroom transformation. Board and batten walls and a new ceiling mirror the living room work, but the pink palette and plush carpet give this room its own distinct energy.</p><p>ボード＆バテン・天井の新設・カーペット / board &amp; batten, new ceiling, carpet</p></article>
+<article class="static-entry"><h3>003 コーナーキャビネット / Corner Cabinet</h3><p lang="ja">チョークペイントとクリアワックスでアップサイクルしたコーナーキャビネット。新しい窓を設置したことで、そのコーナー全体の光の入り方と雰囲気が変わった。</p><p lang="en">A corner cabinet upcycled with chalk paint and clear wax, paired with a new window installation that changed the light and feel of the entire corner.</p><p>チョークペイント・クリアワックス・窓の新設 / chalk paint, clear wax, new window</p></article>
+<article class="static-entry"><h3>004 下駄箱のリノベーション / Shoe Cabinet Renovation</h3><p lang="ja">玄関の下駄箱に棚を新たに製作して設置。ペイントとウッドステインで、ただの実用品をこの空間にしっくりくるものへと変えた。</p><p lang="en">New internal shelves built inside a standard entryway shoe cabinet. Paint and wood stain transformed a utility item into something that belongs in the space.</p><p>棚の新設・ペイント・ウッドステイン / new shelves, paint, wood stain</p></article>
+<article class="static-entry"><h3>005 廊下の天井 / Hallway Ceiling</h3><p lang="ja">廊下の天井に木の板を張り、オイルステインとペイントで仕上げた。何もなかった廊下が、手づくりのぬくもりある空間へと変わった。</p><p lang="en">Wood planks installed across the hallway ceiling, finished with oil stain and paint. The corridor went from bare to rustic and hand-crafted.</p><p>木材の板張り・オイルステイン・ペイント / wood planks, oil stain, paint</p></article>
+<article class="static-entry"><h3>006 階段下のスペース / Under the Stairs</h3><p lang="ja">階段下のデッドスペースを、完全に仕上げた収納部屋へと改造。壁・床・天井・照明・カーペットをすべて新設。存在しなかった空間をつくった。</p><p lang="en">The dead space beneath the staircase converted into a fully finished storage room. New walls, floor, ceiling, lighting, and carpet — a space that didn't exist before.</p><p>壁の新設・床の新設・天井の新設・照明・カーペット / new walls, new floor, new ceiling, lighting, carpet</p></article>
+<article class="static-entry"><h3>007 ウッドファイリングキャビネット / Wood Filing Cabinet</h3><p lang="ja">ヴィンテージの木製ファイリングキャビネットをレストア。本体はブラックチョークペイントとクリアワックスで仕上げ、引き出しはポリウレタンでコーティングして木の風合いを保ちながら耐久性を高めた。</p><p lang="en">A vintage wood filing cabinet restored with black chalk paint and clear wax on the body, polyurethane coating on the drawers to preserve the natural wood while making it durable.</p><p>ブラックチョークペイント・クリアワックス・ポリウレタン / black chalk paint, clear wax, polyurethane</p></article>
+<article class="static-entry"><h3>008 ステンドグラスの窓 / Stained Glass Windows</h3><p lang="ja">端材のステンドグラスを使って、カスタムフレームのデコラティブパネルを製作。光をやわらかく透過させ、何もなかった部屋に色と個性を加えた。</p><p lang="en">Custom-framed decorative panels built from scrap stained glass. They filter light and add color and character to rooms that had none.</p><p>カスタムフレーム・端材ステンドグラス / custom frames, scrap stained glass</p></article>
+<article class="static-entry"><h3>009 ロールトップデスク / Rolltop Desk</h3><p lang="ja">クラシックなロールトップデスクを、大胆なレッドチョークペイントとダークブライワックスで仕上げ直した。風格があって堂々としている——ロールトップデスクはこうあるべき。</p><p lang="en">A classic rolltop desk refinished with bold red chalk paint and dark Briwax. Weathered and confident — exactly what a rolltop desk should be.</p><p>レッドチョークペイント・ダークブライワックス / red chalk paint, dark briwax</p></article>
+<article class="static-entry"><h3>010 アイチスーパーエイトの時計 / Aichi Super Eight Clocks</h3><p lang="ja">ヴィンテージのアイチスーパーエイトの時計を修理・再塗装。ピスタチオ・ブラック・エメラルドのミルクペイントとワックスで仕上げた。カラフルで、ヴィンテージで、長く使えるように。</p><p lang="en">A set of vintage Aichi Super Eight Clocks repaired and refinished in pistachio, black, and emerald milk paint with a protective wax finish. Colorful, vintage, and built to last.</p><p>ピスタチオミルクペイント・ブラックミルクペイント・エメラルドミルクペイント・ワックス / pistachio milk paint, black milk paint, emerald milk paint, wax</p></article>
+<article class="static-entry"><h3>011 タンバードアスタンド / Tambour Door Stand</h3><p lang="ja">タンバードア付きのコンパクトなスタンドを、ブラックチョークペイントとダークブライワックスで仕上げた。ゴールドペイントのアクセントが扉と金具の質感を引き立てている。</p><p lang="en">A compact stand with a tambour sliding door finished in black chalk paint and dark Briwax. Gold paint accents bring out the texture of the door and hardware.</p><p>ブラックチョークペイント・ダークブライワックス・ゴールドペイント / black chalk paint, dark briwax, gold paint</p></article>
+<article class="static-entry"><h3>012 キッチンの造り付け棚 / Built-in Kitchen Shelves</h3><p lang="ja">キッチンにゼロから棚を製作・設置。木材・オイルステイン・ブラックペイント・ワックスで仕上げた収納と飾り棚は、最初からそこにあったかのように空間に馴染んでいる。</p><p lang="en">Custom shelves built and installed in the kitchen from scratch. Wood, oil stain, black paint, and wax — storage and display that feels like it was always there.</p><p>木材・オイルステイン・ブラックペイント・ワックス / wood, oil stain, black paint, wax</p></article>
+<article class="static-entry"><h3>013 教室のサイン / School Signs</h3><p lang="ja">教室の入口に手製のサインポストとスウィングサインを設置。訪れた人が最初に目にするもの——そしてすぐに、ここがどんな場所かが伝わる。</p><p lang="en">Custom sign posts and swinging signs built by hand for the school entrance. The first thing visitors see — and they know immediately what kind of place this is.</p><p>サインポスト・スウィングサイン・ハンドメイド / sign post, swinging signs, hand-crafted</p></article>
+<article class="static-entry"><h3>014 ビールサイン / Beer Sign</h3><p lang="ja">木材と紙粘土で立体的なテクスチャーを表現したパブスタイルのサイン。ペイント・トップコート・精緻な金箔仕上げ。本物の古い酒場で見かけるような看板。</p><p lang="en">A pub-style sign built from wood with paper clay for 3D texture, finished with paint, a protective top coat, and intricate gold leafing. The kind of sign you'd find in a proper old tavern.</p><p>木材・紙粘土・ペイント・トップコート・金箔 / wood, paper clay, paint, top coat, gold leaf</p></article>
+<article class="static-entry"><h3>015 玄関のリノベーション / Entryway Renovation</h3><p lang="ja">玄関を新しい天井とボード＆バテンの壁でアップデートし、クリーンなホワイトペイントで仕上げた。明るく、開放的で、歓迎感がある——正しい第一印象。</p><p lang="en">The main entrance updated with a new ceiling and board and batten walls, finished in clean white paint. Bright, open, and welcoming — the right first impression.</p><p>ボード＆バテン・天井の新設・ホワイトペイント / board &amp; batten, new ceiling, white paint</p></article>
+</div>
 
   <div class="footer">Bryan Harper &nbsp;·&nbsp; <span>Bryan's Workshop</span></div>
 </div>
