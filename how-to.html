@@ -1,284 +1,490 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="保護者向けのBooha Adventureの使い方。A bilingual parent guide to using Booha Adventure.">
-<link rel="canonical" href="https://booha-adventure-studios.github.io/booha-world/how-to.html">
-<meta property="og:type" content="article">
-<meta property="og:site_name" content="Booha World">
-<meta property="og:title" content="Booha Adventure の使い方 — How-to">
-<meta property="og:description" content="保護者向けのBooha Adventureの使い方。A bilingual parent guide to using Booha Adventure.">
-<meta property="og:url" content="https://booha-adventure-studios.github.io/booha-world/how-to.html">
-<meta property="og:image" content="https://booha-adventure-studios.github.io/booha-world/assets/og/how-to.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="ja_JP">
-<meta property="og:locale:alternate" content="en_US">
-<meta name="twitter:card" content="summary_large_image">
+  <meta name="description" content="ブーハー・アドベンチャーをはじめる方へ。インストール、ログイン、毎日と毎週の流れを説明する保護者向けガイド。A bilingual getting-started guide to Booha Adventure for families.">
+  <link rel="canonical" href="https://booha-adventure-studios.github.io/booha-world/how-to.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Booha World">
+  <meta property="og:title" content="はじめての方へ | Getting started with Booha Adventure">
+  <meta property="og:description" content="ブーハー・アドベンチャーをはじめる方へ。インストール、ログイン、毎日と毎週の流れ。A getting-started guide for families.">
+  <meta property="og:url" content="https://booha-adventure-studios.github.io/booha-world/how-to.html">
+  <meta property="og:image" content="https://booha-adventure-studios.github.io/booha-world/assets/og/how-to.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="author" content="Bryan Harper">
-  <meta name="theme-color" content="#211936">
-  <title>Booha Adventure の使い方 — How-to</title>
+  <meta name="theme-color" content="#1d1714">
+  <title>はじめての方へ | ブーハー・アドベンチャー</title>
   <link rel="icon" type="image/png" href="assets/img/booha-favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Notable&family=Noto+Sans+JP:wght@400;500;700&family=Spectral:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "はじめての方へ：ブーハー・アドベンチャーの使い方",
+    "alternateName": "Getting started with Booha Adventure",
+    "inLanguage": ["ja", "en"],
+    "url": "https://booha-adventure-studios.github.io/booha-world/how-to.html",
+    "image": "https://booha-adventure-studios.github.io/booha-world/assets/og/how-to.jpg",
+    "about": { "@id": "https://booha-adventure-studios.github.io/booha-world/about-booha-adventure.html#app" },
+    "author": { "@type": "Person", "name": "Bryan Harper", "url": "https://www.bryanharper.tokyo" },
+    "step": [
+      { "@type": "HowToStep", "name": "アプリをホーム画面に追加する", "text": "ブラウザでブーハー・アドベンチャーを開き、ホーム画面に追加します。" },
+      { "@type": "HowToStep", "name": "名前とPINでログインする", "text": "生徒1人に1つのPINがあり、どの端末からでもログインできます。ログインできるのは同時に1台だけです。" },
+      { "@type": "HowToStep", "name": "毎日デイリーチェックをする", "text": "その週の英語を約5分で復習します。" },
+      { "@type": "HowToStep", "name": "毎週ゲームをして宿題をする", "text": "迷路のゲーム9つ、Blitz 3つ、練習ゲーム2つ、ウィークボス。" }
+    ]
+  }
+  </script>
   <style>
     :root {
-      --night: #211936;
-      --card: rgba(57, 42, 87, .9);
-      --card-light: rgba(73, 55, 108, .72);
-      --ivory: #fff6e7;
-      --soft: #eadff2;
-      --muted: #c4b4d4;
-      --yellow: #ffd45a;
-      --coral: #ff968f;
-      --mint: #8fe1bd;
-      --blue: #9dd9f4;
-      --lavender: #c9a8ff;
-      --line: rgba(255, 246, 231, .15);
-      --shadow: 0 22px 60px rgba(10, 5, 24, .34);
-      --radius: 24px;
+      --bark: #1d1714;
+      --felt: #2a211c;
+      --felt-2: #342922;
+      --yellow: #f5c542;
+      --chalk: #f1e7d4;
+      --dust: #a99b87;
+      --mint: #8fd1b0;
+      --line: rgba(241, 231, 212, .12);
+      --rail: 28px;
     }
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      color: var(--ivory);
+      color: var(--chalk);
       background:
-        radial-gradient(circle at 8% 8%, rgba(255, 212, 90, .16), transparent 24rem),
-        radial-gradient(circle at 94% 20%, rgba(143, 225, 189, .13), transparent 26rem),
-        radial-gradient(circle at 45% 100%, rgba(201, 168, 255, .12), transparent 30rem),
-        var(--night);
-      font: 16px/1.7 'DM Sans', system-ui, sans-serif;
+        radial-gradient(ellipse 60% 40% at 85% 0%, rgba(245, 197, 66, .10), transparent 70%),
+        var(--bark);
+      font: 400 17px/1.9 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', system-ui, sans-serif;
+      font-feature-settings: "palt" 0;
     }
+    a { color: inherit; }
+    :focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 6px; }
 
-    body::before,
-    body::after {
-      position: fixed;
-      z-index: -1;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--yellow);
-      box-shadow: 0 0 24px 8px rgba(255, 212, 90, .28);
-      content: '';
-      animation: drift 7s ease-in-out infinite;
+    /* Language: one language shown at a time */
+    html[data-lang="ja"] .en, html[data-lang="en"] .ja { display: none !important; }
+
+    .wrap { width: min(1040px, 100% - 40px); margin: 0 auto; }
+
+    /* ── Top bar ── */
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: .95rem;  white-space: nowrap; min-width: 0; }
+    .brand img { width: 34px; height: 34px; }
+    .lang { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--felt); }
+    .lang button {
+      min-width: 76px; padding: 6px 14px; border: 0; border-radius: 999px; background: transparent;
+      color: var(--dust); font-family: inherit; font-weight: 700; font-size: .82rem; line-height: 1.2; cursor: pointer; white-space: nowrap;
     }
-    body::before { top: 22%; left: 7%; }
-    body::after { right: 9%; bottom: 18%; background: var(--mint); box-shadow: 0 0 24px 8px rgba(143, 225, 189, .25); animation-delay: -3s; }
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(18px, -16px) scale(1.25); }
+    .lang button[aria-pressed="true"] { background: var(--yellow); color: var(--bark); }
+
+    /* ── Hero ── */
+    .hero { display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; gap: 40px; padding: 36px 0 64px; }
+    .hero h1 { margin: 0 0 18px; font-weight: 900; font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1.15; letter-spacing: .02em; }
+    html[data-lang="en"] .hero h1 { letter-spacing: -.01em; }
+    .hero p { max-width: 34em; margin: 0 0 30px; color: var(--chalk); opacity: .86; font-size: 1.05rem; }
+    .open {
+      display: inline-flex; align-items: center; gap: 12px; padding: 16px 26px; border-radius: 18px;
+      background: var(--yellow); color: var(--bark); font-weight: 900; font-size: 1.08rem; text-decoration: none;
+      box-shadow: 0 10px 30px rgba(245, 197, 66, .22);
     }
+    .open:hover { background: #ffd35e; }
+    .open svg { width: 18px; height: 18px; }
+    .hero-art { justify-self: center; width: min(100%, 380px); }
+    .hero-art img { display: block; width: 100%; height: auto; border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(245,197,66,.18); }
 
-    .shell { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 26px 0 60px; }
-    .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
-    .brand { display: flex; align-items: center; gap: 12px; color: var(--ivory); font-family: 'Noto Sans JP', sans-serif; font-weight: 700; }
-    .brand img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 5px 12px rgba(0,0,0,.28)); }
-    .brand .jp-main, .brand .en-sub, .eyebrow .jp-main, .eyebrow .en-sub { display: block; }
-    .brand .en-sub { margin-top: -3px; color: var(--muted); font: 600 .62rem/1.2 'DM Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; }
-    .eyebrow { color: var(--yellow); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-align: right; text-transform: uppercase; }
-    .eyebrow .en-sub { margin-top: 2px; color: var(--muted); font-size: .62rem; letter-spacing: .08em; }
-
-    .jp-main { font-family: 'Noto Sans JP', sans-serif; }
-    ruby { ruby-position: over; white-space: nowrap; }
-    rt { color: var(--yellow); font: 500 .46em/1 'Noto Sans JP', sans-serif; letter-spacing: 0; }
-    .en-sub { display: block; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: .42em; font-weight: 500; line-height: 1.35; letter-spacing: .01em; }
-    .en-text { display: block; margin-top: 5px; color: var(--muted); font: 400 .83rem/1.65 'DM Sans', sans-serif; }
-    .jp-text { display: block; }
-    .keep { white-space: nowrap; }
-
-    .hero { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 48px; padding: 68px 0 52px; }
-    .hero > * { min-width: 0; }
-    h1, h2, h3, p { margin-top: 0; }
-    h1 { max-width: 680px; margin-bottom: 20px; color: var(--ivory); font: 700 clamp(1.75rem, 4.2vw, 3.6rem)/1.35 'Noto Sans JP', Spectral, serif; letter-spacing: -.035em; }
-    h1 .jp-main { display: block; font-size: 1em; line-height: 1.45; letter-spacing: -.055em; word-break: keep-all; }
-    h1 em { color: var(--yellow); font-style: normal; }
-    h1 .en-sub { max-width: 520px; margin-top: 11px; font-size: clamp(.9rem, 1.8vw, 1.12rem); }
-    .hero-copy { max-width: 590px; color: var(--soft); font-family: 'Noto Sans JP', sans-serif; font-size: clamp(1rem, 2vw, 1.13rem); line-height: 2; }
-    .hero-copy .en-text { max-width: 560px; font-size: .98rem; }
-    .hero-art { position: relative; min-height: 350px; display: grid; place-items: center; }
-    .hero-art::before { display: none; }
-    .hero-art img { position: relative; z-index: 1; width: min(100%, 340px); max-height: 360px; object-fit: contain; animation: float 5s ease-in-out infinite, ghostGlow 2.8s ease-in-out infinite; }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(1deg); } 50% { transform: translateY(-10px) rotate(-2deg); } }
-    @keyframes ghostGlow {
-      0%, 100% { filter: drop-shadow(0 24px 26px rgba(10, 5, 24, .38)) drop-shadow(0 0 0 rgba(255, 212, 90, 0)); }
-      50% { filter: drop-shadow(0 24px 26px rgba(10, 5, 24, .38)) drop-shadow(0 0 22px rgba(255, 212, 90, .62)) drop-shadow(0 0 42px rgba(255, 150, 143, .28)); }
+    /* ── The path: one sequence, one glowing line ── */
+    .path { position: relative; padding-left: calc(var(--rail) + 34px); max-width: 760px; }
+    .path::before {
+      content: ''; position: absolute; left: calc(var(--rail) / 2 - 1.5px); top: 10px; bottom: 40px; width: 3px; border-radius: 3px;
+      background: linear-gradient(to bottom, var(--yellow), rgba(245,197,66,.55) 70%, rgba(245,197,66,0));
+      box-shadow: 0 0 18px rgba(245, 197, 66, .45);
     }
+    .stop { position: relative; padding-bottom: 64px; }
+    .stop > .node {
+      position: absolute; left: calc(-1 * (var(--rail) + 34px)); top: 2px; width: var(--rail); height: var(--rail); border-radius: 50%;
+      display: grid; place-items: center; background: var(--yellow); color: var(--bark); font-weight: 900; font-size: .9rem;
+      box-shadow: 0 0 0 6px var(--bark), 0 0 22px rgba(245, 197, 66, .6);
+    }
+    .stop h2 { margin: 0 0 6px; font-weight: 900; font-size: clamp(1.6rem, 3.6vw, 2.2rem); line-height: 1.3; }
+    .stop .sub { margin: 0 0 26px; color: var(--dust); font-size: .98rem; }
+    .stop h3 { margin: 30px 0 8px; font-weight: 700; font-size: 1.15rem; line-height: 1.5; }
+    .stop h3:first-of-type { margin-top: 0; }
+    .stop p { margin: 0 0 14px; max-width: 38em; }
+    .quiet { color: var(--dust); font-size: .93rem; }
 
-    .actions { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 27px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 8px 18px; border: 1px solid var(--line); border-radius: 999px; color: var(--night); background: var(--yellow); box-shadow: 0 8px 18px rgba(0,0,0,.18); text-align: center; text-decoration: none; transition: transform .18s ease, box-shadow .18s ease; }
-    .button:hover, .button:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,.3); }
-    .button.secondary { color: var(--ivory); background: rgba(255,255,255,.08); }
-    .button .jp-main, .button .en-sub { display: block; }
-    .button .jp-main { font-size: .88rem; font-weight: 700; line-height: 1.35; }
-    .button .en-sub { color: inherit; font-size: .68rem; line-height: 1.2; opacity: .78; }
-    .button .arrow { margin-left: 7px; color: var(--coral); font-size: 1.05rem; }
+    /* Device tabs */
+    .devices { margin: 18px 0 10px; border: 1px solid var(--line); border-radius: 20px; background: var(--felt); overflow: hidden; }
+    .tabs { display: flex; border-bottom: 1px solid var(--line); }
+    .tabs button {
+      flex: 1; padding: 12px 8px; border: 0; background: transparent; color: var(--dust);
+      font-family: inherit; font-weight: 700; font-size: .92rem; line-height: 1.3; cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -1px;
+    }
+    .tabs button[aria-selected="true"] { color: var(--chalk); border-bottom-color: var(--yellow); }
+    .panel { padding: 18px 22px 20px; }
+    .panel ol { margin: 0; padding-left: 1.4em; }
+    .panel li { padding: 3px 0; }
+    .panel li::marker { color: var(--yellow); font-weight: 900; }
+    .key { display: inline-block; padding: 0 7px; border: 1px solid rgba(241,231,212,.3); border-radius: 6px; font-weight: 700; font-size: .9em; line-height: 1.5; }
 
-    .guide { display: grid; gap: 18px; }
-    .guide > section { min-width: 0; }
-    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; min-width: 0; margin: 32px 0 12px; }
-    .section-heading h2 { flex: 1 1 auto; min-width: 0; margin-bottom: 0; color: var(--ivory); font: 700 clamp(1.2rem, 3.2vw, 1.95rem)/1.55 'Noto Sans JP', sans-serif; letter-spacing: -.035em; line-break: strict; overflow-wrap: normal; text-wrap: balance; }
-    .section-heading h2 .jp-main { display: block; word-break: keep-all; white-space: nowrap; }
-    .section-heading h2 .en-sub { margin-top: 3px; font-size: .42em; letter-spacing: .01em; }
-    .section-heading > p { flex: 0 1 38%; min-width: 0; margin-bottom: 0; color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: .84rem; text-align: right; overflow-wrap: break-word; }
-    .section-heading > p .en-text { font-size: .76rem; text-align: right; }
-    .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; min-width: 0; }
-    .card { position: relative; min-width: 0; overflow: hidden; padding: 25px 23px 23px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow); overflow-wrap: break-word; }
-    .card::after { position: absolute; right: -24px; bottom: -34px; width: 100px; height: 100px; border-radius: 50%; background: var(--accent, var(--yellow)); opacity: .12; content: ''; }
-    .card:nth-child(2) { --accent: var(--mint); }
-    .card:nth-child(3) { --accent: var(--coral); }
-    .card-number { display: inline-grid; width: 32px; height: 32px; margin-bottom: 15px; place-items: center; border-radius: 11px; color: var(--night); background: var(--accent, var(--yellow)); font-weight: 700; }
-    .card h3 { margin-bottom: 10px; color: var(--ivory); font: 700 .98rem/1.6 'Noto Sans JP', sans-serif; }
-    .card h3 .jp-main { display: block; word-break: keep-all; }
-    .card h3 .en-sub { margin-top: 2px; font-size: .72rem; }
-    .card p { position: relative; z-index: 1; margin-bottom: 0; color: var(--soft); font-family: 'Noto Sans JP', sans-serif; font-size: .9rem; line-height: 1.95; }
-    .card p + p { margin-top: 12px; }
-    .card .en-text { font-size: .8rem; line-height: 1.65; }
+    .aside { margin-top: 22px; padding: 14px 18px; border-left: 3px solid var(--yellow); border-radius: 0 14px 14px 0; background: var(--felt); }
+    .aside p { margin: 0; }
+    .aside strong { color: var(--yellow); }
+    .mail { color: var(--yellow); font-weight: 700; text-underline-offset: 4px; word-break: break-all; }
 
-    .wide-card { min-width: 0; padding: 29px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(125deg, rgba(57,42,87,.96), rgba(45,33,72,.92)); box-shadow: var(--shadow); overflow-wrap: break-word; }
-    .homework-intro .wide-card { border-color: rgba(255, 212, 90, .42); background: linear-gradient(125deg, rgba(78, 57, 108, .98), rgba(49, 39, 79, .94)); }
-    .wide-card h3 { margin-bottom: 11px; color: var(--yellow); font: 700 1.16rem/1.6 'Noto Sans JP', sans-serif; }
-    .wide-card h3 .en-sub { margin-top: 2px; font-size: .7rem; }
-    .wide-card p { color: var(--soft); font-family: 'Noto Sans JP', sans-serif; font-size: .93rem; line-height: 2; }
-    .wide-card p:last-child { margin-bottom: 0; }
-    .wide-card .en-text { font-size: .82rem; line-height: 1.65; }
-    .track-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; min-width: 0; margin-top: 17px; }
-    .track { min-width: 0; padding: 14px; border-left: 3px solid var(--accent); border-radius: 0 13px 13px 0; background: var(--card-light); overflow-wrap: break-word; }
-    .track:nth-child(1) { --accent: var(--yellow); }
-    .track:nth-child(2) { --accent: var(--mint); }
-    .track:nth-child(3) { --accent: var(--lavender); }
-    .track strong, .track span { display: block; }
-    .track strong { color: var(--ivory); font-family: 'Noto Sans JP', sans-serif; font-size: .9rem; }
-    .track span { margin-top: 3px; color: var(--muted); font-size: .79rem; }
-    .track .en-sub { margin-top: 2px; font-size: .68rem; }
-    .note { margin-top: 18px; padding: 14px 16px; border: 1px solid rgba(157, 217, 244, .3); border-radius: 14px; color: var(--soft); background: rgba(157, 217, 244, .09); font-family: 'Noto Sans JP', sans-serif; font-size: .86rem; line-height: 1.9; }
-    .note strong { color: var(--blue); }
-    .note .en-text { font-size: .78rem; }
+    /* Homework comparison: two classes side by side */
+    .classes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .class { padding: 18px 20px; border-radius: 18px; background: var(--felt); border-top: 4px solid var(--yellow); }
+    .class.juku { border-top-color: var(--mint); }
+    .class h4 { margin: 0 0 6px; font-size: 1.05rem; font-weight: 900; color: var(--yellow); }
+    .class.juku h4 { color: var(--mint); }
+    .class p { margin: 0 0 10px; font-size: .97rem; }
+    .class p:last-child { margin-bottom: 0; }
 
-    .footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 45px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); font-family: 'Noto Sans JP', sans-serif; font-size: .78rem; }
-    .footer .en-sub { display: block; margin-top: 2px; font-size: .7rem; }
-    .footer a { color: var(--ivory); text-decoration: none; }
-    .footer a:hover { color: var(--yellow); }
+    /* Reference material folds away */
+    details { border-bottom: 1px solid var(--line); }
+    details:first-of-type { border-top: 1px solid var(--line); }
+    summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 2px;
+      font-weight: 700; font-size: 1.08rem; cursor: pointer; list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; flex: none; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--felt-2); color: var(--yellow); font-size: 1.2rem; line-height: 1; transition: transform .2s ease; }
+    details[open] summary::after { transform: rotate(45deg); }
+    details > div { padding: 0 2px 18px; }
+    .tracks { margin: 8px 0 14px; padding: 0; list-style: none; }
+    .tracks li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px dashed var(--line); }
+    .tracks li span:first-child { font-weight: 700; }
+    .tracks li span:last-child { color: var(--dust); text-align: right; }
 
-    @media (max-width: 760px) {
-      .shell { width: min(100% - 24px, 620px); padding-top: 18px; }
-      .topbar { gap: 12px; }
-      .brand { font-size: .9rem; }
-      .brand img { width: 36px; height: 36px; }
-      .eyebrow { max-width: 145px; font-size: .61rem; line-height: 1.4; }
-      .hero { grid-template-columns: 1fr; gap: 12px; padding: 43px 0 34px; }
-      .hero-art { order: -1; min-height: 225px; }
-      .hero-art img { width: min(76%, 280px); max-height: 260px; }
-      h1 { font-size: clamp(1.7rem, 7.2vw, 2.65rem); line-height: 1.35; }
-      h1 .jp-main { line-height: 1.5; }
-      h1 .en-sub { font-size: .86rem; }
-      .hero-copy { font-size: .95rem; line-height: 2; }
-      .hero-copy .en-text { font-size: .83rem; }
-      .section-heading { display: block; }
-      .section-heading h2 { font-size: clamp(1.14rem, 5.5vw, 1.65rem); line-height: 1.6; }
-      .section-heading > p { margin-top: 6px; text-align: left; }
-      .section-heading > p .en-text { text-align: left; }
-      .card-grid, .track-grid { grid-template-columns: 1fr; }
-      .wide-card { padding: 23px 20px; }
-      .footer { display: block; }
-      .footer > span { display: block; margin-top: 7px; }
+    /* ── For parents: not part of the sequence ── */
+    .parents { margin-top: 24px; padding: 56px 0 24px; border-top: 1px solid var(--line); }
+    .parents h2 { margin: 0 0 28px; font-weight: 900; font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
+    .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+    .cols h3 { margin: 0 0 10px; font-size: 1.1rem; font-weight: 700; color: var(--yellow); }
+    .cols p { margin: 0 0 12px; font-size: .97rem; }
+    .help { margin: 0; padding: 0; list-style: none; }
+    .help li { margin-bottom: 12px; font-size: .97rem; }
+    .help b { display: block; }
+
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 40px; padding: 26px 0 40px; border-top: 1px solid var(--line); color: var(--dust); font-size: .88rem; }
+    footer nav { display: flex; gap: 20px; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr; gap: 26px; padding: 12px 0 48px; }
+      .hero-art { order: -1; width: min(62%, 260px); }
+      .cols { grid-template-columns: 1fr; gap: 26px; }
+    }
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .wrap { width: calc(100% - 32px); }
+      :root { --rail: 24px; }
+      .path { padding-left: calc(var(--rail) + 20px); }
+      .stop > .node { left: calc(-1 * (var(--rail) + 20px)); }
+      .classes { grid-template-columns: 1fr; }
+      .lang button { min-width: 0; padding: 6px 12px; }
+      .brand span { font-size: .82rem; }
+      .tabs button { font-size: .84rem; padding: 12px 4px; }
+      .panel { padding: 16px 16px 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      summary::after { transition: none; }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <img src="assets/img/booha_ghost.webp" alt="ブーハーのゴースト / Booha ghost">
-        <span><span class="jp-main">ブーハー・アドベンチャー</span><span class="en-sub">Booha Adventure</span></span>
+  <div class="wrap">
+    <header class="top">
+      <a class="brand" href="https://booha-adventure-studios.github.io/booha-world/">
+        <img src="assets/img/booha-favicon.png" alt="" width="34" height="34">
+        <span><span class="ja">ブーハー・アドベンチャー</span><span class="en">Booha Adventure</span></span>
+      </a>
+      <div class="lang" role="group" aria-label="言語 / Language">
+        <button type="button" data-set-lang="ja" aria-pressed="true" lang="ja">日本語</button>
+        <button type="button" data-set-lang="en" aria-pressed="false" lang="en">English</button>
       </div>
-      <span class="eyebrow"><span class="jp-main"><ruby>保護者<rt>ほごしゃ</rt></ruby><ruby>向<rt>む</rt></ruby>け</span><span class="en-sub">Parent guide</span></span>
     </header>
 
     <main>
-      <section class="hero" aria-labelledby="page-title">
+      <section class="hero">
         <div>
-          <p class="eyebrow" style="text-align:left"><span class="jp-main">ご<ruby>家族<rt>かぞく</rt></ruby>のための<ruby>簡単<rt>かんたん</rt></ruby>な<ruby>案内<rt>あんない</rt></ruby></span><span class="en-sub">A quick start for families</span></p>
-          <h1 id="page-title"><span class="jp-main"><ruby>少<rt>すこ</rt></ruby>しの<ruby>練習<rt>れんしゅう</rt></ruby>。<br><em><ruby>大<rt>おお</rt></ruby>きな<ruby>冒険<rt>ぼうけん</rt></ruby>。</em></span><span class="en-sub">A little practice. A bigger adventure.</span></h1>
-          <p class="hero-copy"><span class="jp-text">Booha Adventure は、<ruby>毎週<rt>まいしゅう</rt></ruby>の<ruby>英語<rt>えいご</rt></ruby>を<ruby>短<rt>みじか</rt></ruby>い<ruby>毎日<rt>まいにち</rt></ruby>の<ruby>習慣<rt>しゅうかん</rt></ruby>と<ruby>楽<rt>たの</rt></ruby>しいゲームに<ruby>変<rt>か</rt></ruby>え、<ruby>探検<rt>たんけん</rt></ruby>できる<ruby>世界<rt>せかい</rt></ruby>を<ruby>作<rt>つく</rt></ruby>ります。<ruby>保護者<rt>ほごしゃ</rt></ruby>の<ruby>方<rt>かた</rt></ruby>に<ruby>知<rt>し</rt></ruby>っておいてほしいことを、ここで<ruby>説明<rt>せつめい</rt></ruby>します。</span><span class="en-text">Booha Adventure turns the week’s English into a short daily routine, playful games, and a world to explore. Here is what parents need to know.</span></p>
-          <div class="actions">
-            <a class="button" href="https://www.bryanharper.tokyo" target="_blank" rel="noopener"><span><span class="jp-main">ブライアンの<ruby>公式<rt>こうしき</rt></ruby>サイト</span><span class="en-sub">Bryan’s website</span></span><span class="arrow">↗</span></a>
-            <a class="button secondary" href="https://booha-adventure-studios.github.io/booha-world/"><span><span class="jp-main">ブーハーワールド</span><span class="en-sub">Booha World</span></span><span class="arrow">↗</span></a>
-          </div>
+          <h1><span class="ja">はじめての方へ</span><span class="en">Getting started</span></h1>
+          <p>
+            <span class="ja">ブーハー・アドベンチャーは、毎週の英語を、毎日の短い習慣とゲームに変える英語学習アプリです。はじめての日にすることと、毎日・毎週の流れを順番に説明します。</span>
+            <span class="en">Booha Adventure turns each week's English into a short daily habit and a set of games. This guide walks through your first day, then the daily and weekly routine.</span>
+          </p>
+          <a class="open" href="https://www.bryanharper.tokyo/enter-booha">
+            <span class="ja">ブーハー・アドベンチャーを開く</span><span class="en">Open Booha Adventure</span>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 4h9v9M16 4 5 15" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
-        <div class="hero-art"><img src="assets/img/booha_ghost.webp" alt="ブーハーのゴースト / The Booha ghost"></div>
+        <div class="hero-art"><img src="assets/img/how-to.webp" alt="" width="600" height="600"></div>
       </section>
 
-      <div class="guide">
-        <section class="homework-intro" aria-labelledby="homework-title">
-          <div class="section-heading"><h2 id="homework-title"><span class="jp-main">アウトプットクラスの<ruby>宿題<rt>しゅくだい</rt></ruby></span><span class="en-sub">Output Class homework</span></h2><p><span class="jp-main">まずは15<ruby>単語<rt>たんご</rt></ruby>。</span><span class="en-text">Start with 15 words.</span></p></div>
-          <div class="wide-card">
-            <h3><span class="jp-main">まずは、15<ruby>単語<rt>たんご</rt></ruby></span><span class="en-sub">Start with the 15 vocabulary words</span></h3>
-            <p><span class="jp-text">アウトプットクラスの<ruby>最低限<rt>さいていげん</rt></ruby>の<ruby>宿題<rt>しゅくだい</rt></ruby>は、その<ruby>週<rt>しゅう</rt></ruby>の15<ruby>個<rt>こ</rt></ruby>の<ruby>単語<rt>たんご</rt></ruby>を、<ruby>英語<rt>えいご</rt></ruby>と<ruby>日本語<rt>にほんご</rt></ruby>で<ruby>書<rt>か</rt></ruby>くことです。</span><span class="en-text">The minimum Output Class homework is to write the 15 vocabulary words for the week in both English and Japanese.</span></p>
-            <p><span class="jp-text"><ruby>文<rt>ぶん</rt></ruby>や<ruby>質問<rt>しつもん</rt></ruby>も<ruby>書<rt>か</rt></ruby>いてみたいなら、とてもいいことです。その<ruby>週<rt>しゅう</rt></ruby>にしたことを<ruby>少<rt>すこ</rt></ruby>し<ruby>書<rt>か</rt></ruby>けたら、<ruby>最高<rt>さいこう</rt></ruby>です。<ruby>英語塾<rt>えいごじゅく</rt></ruby>クラスには、<ruby>追加<rt>ついか</rt></ruby>のノート<ruby>宿題<rt>しゅくだい</rt></ruby>はありません。</span><span class="en-text">If a student also wants to write the sentences and questions, that is great. If they write a little about what they did during the week, that is perfect. English Juku has no additional written notebook homework.</span></p>
-          </div>
-        </section>
+      <div class="path">
 
-        <section aria-labelledby="start-title">
-          <div class="section-heading"><h2 id="start-title"><span class="jp-main"><ruby>毎週<rt>まいしゅう</rt></ruby>の<ruby>流<rt>なが</rt></ruby>れ</span><span class="en-sub">The weekly rhythm</span></h2><p><span class="jp-main"><ruby>簡単<rt>かんたん</rt></ruby>な<ruby>手順<rt>てじゅん</rt></ruby>で、<ruby>少<rt>すこ</rt></ruby>しずつ<ruby>進<rt>すす</rt></ruby>みます。</span><span class="en-text">Simple steps, steady progress.</span></p></div>
-          <div class="card-grid">
-            <article class="card"><span class="card-number">1</span><h3><span class="jp-main">アプリをインストールする</span><span class="en-sub">Install the app</span></h3><p><span class="jp-text">Booha Adventure は、インストールできるウェブアプリ（PWA）です。<ruby>端末<rt>たんまつ</rt></ruby>で<ruby>開<rt>ひら</rt></ruby>き、<ruby>表示<rt>ひょうじ</rt></ruby>された<ruby>案内<rt>あんない</rt></ruby>に<ruby>従<rt>したが</rt></ruby>って、<strong>Install</strong> または <strong>Add to Home Screen</strong> を<ruby>選<rt>えら</rt></ruby>んでください。</span><span class="en-text">Booha Adventure is an installable web app, or PWA. Open it on your device and follow the prompt to choose <strong>Install</strong> or <strong>Add to Home Screen</strong>.</span></p><p><span class="jp-text">スマートフォン、タブレット、パソコンで<ruby>使<rt>つか</rt></ruby>えます。タブレットがおすすめです。</span><span class="en-text">It works on phones, tablets, and computers. A tablet is recommended.</span></p></article>
-            <article class="card"><span class="card-number">2</span><h3><span class="jp-main">デイリーチェックをする</span><span class="en-sub">Complete the Daily Check</span></h3><p><span class="jp-text"><ruby>毎週<rt>まいしゅう</rt></ruby>、<ruby>単語<rt>たんご</rt></ruby>15<ruby>個<rt>こ</rt></ruby>、<ruby>文<rt>ぶん</rt></ruby>15<ruby>個<rt>こ</rt></ruby>、<ruby>質問<rt>しつもん</rt></ruby>15<ruby>個<rt>こ</rt></ruby>を<ruby>学習<rt>がくしゅう</rt></ruby>します。デイリーチェックでは、その<ruby>週<rt>しゅう</rt></ruby>の<ruby>英語<rt>えいご</rt></ruby>を<ruby>約<rt>やく</rt></ruby>5<ruby>分<rt>ふん</rt></ruby>で<ruby>復習<rt>ふくしゅう</rt></ruby>します。</span><span class="en-text">Each week includes 15 vocabulary words, 15 sentences, and 15 questions. The Daily Check reviews the current week’s English and takes about 5 minutes.</span></p><p><span class="jp-text"><ruby>子<rt>こ</rt></ruby>どもから<ruby>大人<rt>おとな</rt></ruby>まで、すべての<ruby>生徒<rt>せいと</rt></ruby>が<ruby>毎日<rt>まいにち</rt></ruby><ruby>行<rt>おこな</rt></ruby>ってください。<ruby>完了<rt>かんりょう</rt></ruby>すると、プロフィールにチェックマークが<ruby>付<rt>つ</rt></ruby>きます。その<ruby>日<rt>ひ</rt></ruby>はじめてアプリを<ruby>開<rt>ひら</rt></ruby>くと、まずデイリーチェックが<ruby>表示<rt>ひょうじ</rt></ruby>されます。<ruby>時間<rt>じかん</rt></ruby>がない<ruby>日<rt>ひ</rt></ruby>は「スキップ」も<ruby>選<rt>えら</rt></ruby>べます。</span><span class="en-text">All students, from children to adults, should complete it every day. A checkmark appears in the student profile when it is complete. It opens the first time the app is used each day, and on a day with no time students can choose Skip.</span></p></article>
-            <article class="card"><span class="card-number">3</span><h3><span class="jp-main">ゲームをして、<ruby>探検<rt>たんけん</rt></ruby>する</span><span class="en-sub">Play and explore</span></h3><p><span class="jp-text"><ruby>毎週<rt>まいしゅう</rt></ruby>のゲームが9つと、<ruby>短<rt>みじか</rt></ruby>い Blitz ラウンドが3つあります。さらに、<ruby>練習<rt>れんしゅう</rt></ruby>ゲームが2つとウィークボスもあります。<ruby>迷路<rt>めいろ</rt></ruby>と Blitz は、どちらから<ruby>始<rt>はじ</rt></ruby>めてもかまいません。ゲームでは、<ruby>学習<rt>がくしゅう</rt></ruby>した<ruby>英語<rt>えいご</rt></ruby>を<ruby>使<rt>つか</rt></ruby>います。</span><span class="en-text">There are nine weekly games and three short Blitz rounds, plus two extra practice games and a Week Boss. Students can start with the Maze or Blitz, in either order. The games use the same English students have studied.</span></p><p><span class="jp-text">カレンダーには、ゲームを<ruby>遊<rt>あそ</rt></ruby>んだ<ruby>日<rt>ひ</rt></ruby>とデイリーチェックをした<ruby>日<rt>ひ</rt></ruby>に<ruby>印<rt>しるし</rt></ruby>が<ruby>付<rt>つ</rt></ruby>きます。<ruby>準備<rt>じゅんび</rt></ruby>してきた<ruby>生徒<rt>せいと</rt></ruby>が<ruby>迷路<rt>めいろ</rt></ruby>のゲームをテンポよくクリアすると、<ruby>虹色<rt>にじいろ</rt></ruby>の<ruby>星<rt>ほし</rt></ruby>がもらえます。</span><span class="en-text">The calendar marks each day a student played games and each day they did the Daily Check. Students who come prepared and clear the maze games at a ready pace earn rainbow stars.</span></p></article>
-          </div>
-        </section>
+        <!-- 1 -->
+        <section class="stop" id="first-day" aria-labelledby="t1">
+          <span class="node" aria-hidden="true">1</span>
+          <h2 id="t1"><span class="ja">はじめの日</span><span class="en">Your first day</span></h2>
+          <p class="sub"><span class="ja">アプリを追加して、ログインします。</span><span class="en">Add the app, then sign in.</span></p>
 
-        <section aria-labelledby="curriculum-title">
-          <div class="section-heading"><h2 id="curriculum-title"><span class="jp-main">カリキュラムを<ruby>選<rt>えら</rt></ruby>ぶ</span><span class="en-sub">Choose a curriculum</span></h2><p><span class="jp-main">3つのコース、1つの<ruby>毎週<rt>まいしゅう</rt></ruby>のリズム。</span><span class="en-text">Three tracks, one weekly rhythm.</span></p></div>
-          <div class="wide-card">
-            <p><span class="jp-text"><ruby>家庭<rt>かてい</rt></ruby>で、どのカリキュラムの<ruby>内容<rt>ないよう</rt></ruby>でも<ruby>復習<rt>ふくしゅう</rt></ruby>できます。Bryan’s English School の<ruby>小学生<rt>しょうがくせい</rt></ruby>は、<ruby>全員<rt>ぜんいん</rt></ruby>Pre-Boo を<ruby>使<rt>つか</rt></ruby>います。</span><span class="en-text">Students can review content from any curriculum at home. At Bryan’s English School, all elementary-school students use Pre-Boo.</span></p>
-            <div class="track-grid">
-              <div class="track"><strong>Pre-Boo</strong><span><ruby>英検<rt>えいけん</rt></ruby>5<ruby>級<rt>きゅう</rt></ruby>〜4<ruby>級<rt>きゅう</rt></ruby></span><span class="en-sub">EIKEN Grades 5–4</span></div>
-              <div class="track"><strong>Boo-riculum</strong><span><ruby>英検<rt>えいけん</rt></ruby>3<ruby>級<rt>きゅう</rt></ruby>〜2<ruby>級<rt>きゅう</rt></ruby></span><span class="en-sub">EIKEN Grades 3–2</span></div>
-              <div class="track"><strong>Boo-Continuum</strong><span><ruby>英検<rt>えいけん</rt></ruby><ruby>準<rt>じゅん</rt></ruby>1<ruby>級<rt>きゅう</rt></ruby>〜1<ruby>級<rt>きゅう</rt></ruby></span><span class="en-sub">EIKEN Pre-1–Grade 1 · Advanced communication</span></div>
+          <h3><span class="ja">アプリをホーム画面に追加する</span><span class="en">Add the app to your home screen</span></h3>
+          <p>
+            <span class="ja">ブーハー・アドベンチャーは、インストールできるウェブアプリ（PWA）です。App Store からではなく、ブラウザから追加します。</span>
+            <span class="en">Booha Adventure is an installable web app (PWA). You add it from your browser, not from the App Store.</span>
+          </p>
+
+          <div class="devices">
+            <div class="tabs" role="tablist" aria-label="端末 / Device">
+              <button type="button" role="tab" id="tab-ios" aria-controls="panel-ios" aria-selected="true">iPad・iPhone</button>
+              <button type="button" role="tab" id="tab-android" aria-controls="panel-android" aria-selected="false" tabindex="-1">Android</button>
+              <button type="button" role="tab" id="tab-pc" aria-controls="panel-pc" aria-selected="false" tabindex="-1"><span class="ja">パソコン</span><span class="en">Computer</span></button>
             </div>
-            <div class="note"><strong>レベルについて：</strong> <ruby>英検<rt>えいけん</rt></ruby>5<ruby>級<rt>きゅう</rt></ruby>は、<ruby>日本<rt>にほん</rt></ruby>の<ruby>中学<rt>ちゅうがく</rt></ruby>1<ruby>年生<rt>ねんせい</rt></ruby>が<ruby>主<rt>おも</rt></ruby>な<ruby>対象<rt>たいしょう</rt></ruby>です。<span class="en-text"><strong>Why these levels?</strong> EIKEN Grade 5 is generally aimed at students in their first year of junior high school in Japan.</span></div>
+            <div class="panel" role="tabpanel" id="panel-ios" aria-labelledby="tab-ios">
+              <ol class="ja">
+                <li>Safari でブーハー・アドベンチャーを開きます。</li>
+                <li>共有ボタン <span class="key">□↑</span> をタップします。</li>
+                <li>「ホーム画面に追加」を選び、「追加」をタップします。</li>
+              </ol>
+              <ol class="en">
+                <li>Open Booha Adventure in Safari.</li>
+                <li>Tap the Share button <span class="key">□↑</span>.</li>
+                <li>Choose Add to Home Screen, then tap Add.</li>
+              </ol>
+            </div>
+            <div class="panel" role="tabpanel" id="panel-android" aria-labelledby="tab-android" hidden>
+              <ol class="ja">
+                <li>Chrome でブーハー・アドベンチャーを開きます。</li>
+                <li>「インストール」をタップします。</li>
+                <li>表示されないときは、メニュー <span class="key">⋮</span> から「ホーム画面に追加」を選びます。</li>
+              </ol>
+              <ol class="en">
+                <li>Open Booha Adventure in Chrome.</li>
+                <li>Tap Install.</li>
+                <li>If it doesn't appear, open the menu <span class="key">⋮</span> and choose Add to Home Screen.</li>
+              </ol>
+            </div>
+            <div class="panel" role="tabpanel" id="panel-pc" aria-labelledby="tab-pc" hidden>
+              <ol class="ja">
+                <li>Chrome か Edge でブーハー・アドベンチャーを開きます。</li>
+                <li>アドレスバーのインストールアイコンをクリックします。</li>
+              </ol>
+              <ol class="en">
+                <li>Open Booha Adventure in Chrome or Edge.</li>
+                <li>Click the install icon in the address bar.</li>
+              </ol>
+            </div>
+          </div>
+          <p class="quiet"><span class="ja">スマートフォン、タブレット、パソコンで使えます。タブレットがおすすめです。</span><span class="en">It works on phones, tablets and computers. A tablet is recommended.</span></p>
+
+          <h3><span class="ja">名前とPINでログインする</span><span class="en">Sign in with your name and PIN</span></h3>
+          <p>
+            <span class="ja">生徒1人に1つのPINがあります。どの端末からでも、自分のアカウントにログインできます。</span>
+            <span class="en">Each student has one PIN and can sign in to their own account on any device.</span>
+          </p>
+          <p>
+            <span class="ja">ログインできるのは、同時に1台だけです。別の端末でログインすると、前の端末のログインは終わり、続きは新しい端末から始まります。兄弟で同じ端末を使うときも、それぞれ自分のPINでログインします。PINは他の人に教えないでください。</span>
+            <span class="en">Only one device can be signed in at a time. Signing in on another device ends the earlier session, and progress continues on the new one. Siblings sharing a device each sign in with their own PIN. Keep your PIN private.</span>
+          </p>
+          <div class="aside">
+            <p>
+              <span class="ja"><strong>PINを忘れたときは</strong>　メールでご連絡ください。</span>
+              <span class="en"><strong>Forgot your PIN?</strong> Please send an email.</span>
+              <a class="mail" href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a>
+            </p>
           </div>
         </section>
 
-        <section aria-labelledby="unlock-title">
-          <div class="section-heading"><h2 id="unlock-title"><span class="jp-main"><ruby>世界<rt>せかい</rt></ruby>をアンロックする</span><span class="en-sub">Unlock the wider world</span></h2><p><span class="jp-main"><ruby>進<rt>すす</rt></ruby>むと、<ruby>新<rt>あたら</rt></ruby>しい<ruby>場所<rt>ばしょ</rt></ruby>が<ruby>開<rt>ひら</rt></ruby>きます。</span><span class="en-text">Progress opens new places.</span></p></div>
-          <div class="wide-card">
-            <h3><span class="jp-main">Karasuki が<ruby>待<rt>ま</rt></ruby>っています</span><span class="en-sub">Karasuki is waiting</span></h3>
-            <p><span class="jp-text"><ruby>毎週<rt>まいしゅう</rt></ruby>の9つのゲームをすべて<ruby>完了<rt>かんりょう</rt></ruby>すると、Utsuroba、Muenba、Grimmerglen がアンロックされます。Utsuroba の<ruby>中<rt>なか</rt></ruby>にある<ruby>学習<rt>がくしゅう</rt></ruby>スペース Akiya は、9つすべてをそれぞれ2つ<ruby>以上<rt>いじょう</rt></ruby>の<ruby>星<rt>ほし</rt></ruby>で<ruby>完了<rt>かんりょう</rt></ruby>するとアンロックされます。これらのエリアでは、<ruby>英語<rt>えいご</rt></ruby>を<ruby>使<rt>つか</rt></ruby>ってクエスト、ハント、コレクション、まちがい<ruby>探<rt>さが</rt></ruby>しに<ruby>取<rt>と</rt></ruby>り<ruby>組<rt>く</rt></ruby>みます。</span><span class="en-text">Complete all nine weekly games to unlock Utsuroba, Muenba, and Grimmerglen. Akiya, a study space inside Utsuroba, unlocks after completing all nine with at least two stars each. These areas use English for quests, hunts, collections, and spot-the-change puzzles.</span></p>
-            <p><span class="jp-text">9つのゲームをすべて、それぞれ2つ<ruby>以上<rt>いじょう</rt></ruby>の<ruby>星<rt>ほし</rt></ruby>で<ruby>完了<rt>かんりょう</rt></ruby>すると、アーケードゲームがアンロックされます。</span><span class="en-text">Complete all nine games with at least two stars each to unlock the arcade games.</span></p>
-            <p><span class="jp-text">その<ruby>週<rt>しゅう</rt></ruby>の Blitz を3つすべてクリアすると、Karasuki にカラスキーカードが<ruby>現<rt>あらわ</rt></ruby>れ、<ruby>単語<rt>たんご</rt></ruby>の<ruby>記憶<rt>きおく</rt></ruby>チャレンジに<ruby>挑戦<rt>ちょうせん</rt></ruby>できます。</span><span class="en-text">Clear all three Blitz rounds in a week and a Karasuki Card appears in Karasuki, with a word-memory challenge to win it.</span></p>
-            <p><span class="jp-text"><strong>Adventure Log</strong> には、デイリーチェック、<ruby>学習<rt>がくしゅう</rt></ruby>の<ruby>進<rt>すす</rt></ruby>み<ruby>具合<rt>ぐあい</rt></ruby>、ゲームの<ruby>進<rt>すす</rt></ruby>み<ruby>具合<rt>ぐあい</rt></ruby>、<ruby>結果<rt>けっか</rt></ruby>が<ruby>記録<rt>きろく</rt></ruby>されます。<strong>My Adventure</strong> には、<ruby>星<rt>ほし</rt></ruby>、<ruby>実績<rt>じっせき</rt></ruby>、アーケードゲーム、<ruby>冒険<rt>ぼうけん</rt></ruby>の<ruby>記録<rt>きろく</rt></ruby>が<ruby>残<rt>のこ</rt></ruby>ります。Utsuroba、Muenba、Grimmerglen にも、それぞれのプロフィールがあります。</span><span class="en-text">The <strong>Adventure Log</strong> records Daily Checks, study progress, game progress, and results. <strong>My Adventure</strong> records stars, achievements, arcade games, and the wider adventure. Utsuroba, Muenba, and Grimmerglen each keep their own profile too.</span></p>
+        <!-- 2 -->
+        <section class="stop" id="every-day" aria-labelledby="t2">
+          <span class="node" aria-hidden="true">2</span>
+          <h2 id="t2"><span class="ja">毎日</span><span class="en">Every day</span></h2>
+          <p class="sub"><span class="ja">約5分のデイリーチェック。</span><span class="en">A five-minute Daily Check.</span></p>
+          <p>
+            <span class="ja">毎週、単語15個・文15個・質問15個を学びます。デイリーチェックでは、その週の英語を約5分で復習します。</span>
+            <span class="en">Each week has 15 words, 15 sentences and 15 questions. The Daily Check reviews that week's English in about five minutes.</span>
+          </p>
+          <p>
+            <span class="ja">子どもから大人まで、すべての生徒が毎日行います。その日はじめてアプリを開くと、まずデイリーチェックが表示されます。終わると、プロフィールにチェックマークが付きます。時間がない日は「スキップ」も選べます。</span>
+            <span class="en">Every student, from children to adults, does it every day. It opens first the first time the app is used each day, and a checkmark appears in the profile when it's done. On a day with no time, students can choose Skip.</span>
+          </p>
+        </section>
+
+        <!-- 3 -->
+        <section class="stop" id="every-week" aria-labelledby="t3">
+          <span class="node" aria-hidden="true">3</span>
+          <h2 id="t3"><span class="ja">毎週</span><span class="en">Every week</span></h2>
+          <p class="sub"><span class="ja">週は東京時間の日曜日0時に始まり、土曜日に終わります。</span><span class="en">Each week starts at midnight on Sunday, Tokyo time, and ends on Saturday.</span></p>
+
+          <h3><span class="ja">ゲーム</span><span class="en">Games</span></h3>
+          <p>
+            <span class="ja">迷路のゲームが9つ、短い Blitz ラウンドが3つ、練習ゲームが2つ、そしてウィークボス。迷路と Blitz は、どちらから始めてもかまいません。ゲームでは、その週に学んだ英語を使います。</span>
+            <span class="en">Nine Maze games, three short Blitz rounds, two practice games and a Week Boss. Students can start with the Maze or Blitz, in either order. The games use the English from that week.</span>
+          </p>
+          <p>
+            <span class="ja">カレンダーには、ゲームをした日とデイリーチェックをした日に印が付きます。準備してきた生徒が迷路のゲームをテンポよくクリアすると、虹色の星がもらえます。</span>
+            <span class="en">The calendar marks each day a student played and each day they did the Daily Check. Students who come prepared and clear the Maze games at a ready pace earn rainbow stars.</span>
+          </p>
+
+          <h3><span class="ja">宿題</span><span class="en">Homework</span></h3>
+          <div class="classes">
+            <div class="class">
+              <h4><span class="ja">アウトプットクラス</span><span class="en">Output Class</span></h4>
+              <p><span class="ja">最低限の宿題は、その週の単語15個を、英語と日本語で書くことです。</span><span class="en">The minimum homework is to write the week's 15 words in English and Japanese.</span></p>
+              <p><span class="ja">文や質問も書けたら、とてもいいことです。その週にしたことを少し書けたら、最高です。</span><span class="en">Writing the sentences and questions too is great. Writing a little about the week is perfect.</span></p>
+            </div>
+            <div class="class juku">
+              <h4><span class="ja">英語塾クラス</span><span class="en">English Juku</span></h4>
+              <p><span class="ja">追加のノート宿題はありません。家でブーハー・アドベンチャーを復習してから、クラスに来てください。</span><span class="en">There is no extra notebook homework. Review Booha Adventure at home before class.</span></p>
+            </div>
           </div>
         </section>
 
-        <section aria-labelledby="month-title">
-          <div class="section-heading"><h2 id="month-title"><span class="jp-main"><ruby>月<rt>つき</rt></ruby>の<ruby>学習<rt>がくしゅう</rt></ruby>サイクル</span><span class="en-sub">The monthly cycle</span></h2><p><span class="jp-main">4<ruby>週分<rt>しゅうぶん</rt></ruby>の<ruby>新<rt>あたら</rt></ruby>しい<ruby>内容<rt>ないよう</rt></ruby>。</span><span class="en-text">Four weeks of new content.</span></p></div>
-          <div class="wide-card">
-            <p><span class="jp-text">Booha Adventure では、<ruby>毎月<rt>まいげつ</rt></ruby>4<ruby>週間分<rt>しゅうかんぶん</rt></ruby>の<ruby>新<rt>あたら</rt></ruby>しい<ruby>内容<rt>ないよう</rt></ruby>があります。カレンダーに5<ruby>週目<rt>しゅうめ</rt></ruby>がある<ruby>月<rt>つき</rt></ruby>は、4<ruby>週目<rt>しゅうめ</rt></ruby>の<ruby>内容<rt>ないよう</rt></ruby>をもう<ruby>一度<rt>いちど</rt></ruby>使います。これは、<ruby>学習<rt>がくしゅう</rt></ruby>を<ruby>終<rt>お</rt></ruby>えたり、<ruby>復習<rt>ふくしゅう</rt></ruby>したりするための<ruby>時間<rt>じかん</rt></ruby>です。</span><span class="en-text">Booha Adventure has four weeks of new content each month. If the calendar includes a fifth week, Week 4 repeats. This gives students extra time to finish and review the material.</span></p>
-            <div class="note"><strong>ご<ruby>家庭<rt>かてい</rt></ruby>でのポイント：</strong> 5<ruby>週目<rt>しゅうめ</rt></ruby>も、すべての<ruby>生徒<rt>せいと</rt></ruby>はデイリーチェックを<ruby>毎日<rt>まいにち</rt></ruby>してください。アウトプットクラスで、その<ruby>週<rt>しゅう</rt></ruby>の15<ruby>単語<rt>たんご</rt></ruby>をすでに<ruby>書<rt>か</rt></ruby>いている<ruby>場合<rt>ばあい</rt></ruby>は、<ruby>文<rt>ぶん</rt></ruby>や<ruby>質問<rt>しつもん</rt></ruby>も<ruby>書<rt>か</rt></ruby>いてください。<ruby>最低限<rt>さいていげん</rt></ruby>の<ruby>宿題<rt>しゅくだい</rt></ruby>を<ruby>終<rt>お</rt></ruby>えてから<ruby>学校<rt>がっこう</rt></ruby>に<ruby>来<rt>き</rt></ruby>るようにしてください。<ruby>英語塾<rt>えいごじゅく</rt></ruby>クラスには、<ruby>追加<rt>ついか</rt></ruby>のノート<ruby>宿題<rt>しゅくだい</rt></ruby>はありません。<span class="en-text"><strong>At home:</strong> All students should still complete the Daily Check every day during a repeat week. In the Output Class, students who have already written the 15 vocabulary words should continue with the sentences and questions, and complete at least the minimum homework before coming to school. English Juku has no additional written notebook homework.</span></div>
-          </div>
-        </section>
+        <!-- 4 -->
+        <section class="stop" id="further" aria-labelledby="t4">
+          <span class="node" aria-hidden="true">4</span>
+          <h2 id="t4"><span class="ja">もっと先へ</span><span class="en">Going further</span></h2>
+          <p class="sub"><span class="ja">慣れてきたら、読んでください。</span><span class="en">For when you've settled in.</span></p>
 
-        <section aria-labelledby="week-title">
-          <div class="section-heading"><h2 id="week-title"><span class="jp-main"><ruby>週<rt>しゅう</rt></ruby>が<span class="keep"><ruby>変<rt>か</rt></ruby>わるとき</span></span><span class="en-sub">When the week changes</span></h2><p><span class="jp-main"><ruby>記録<rt>きろく</rt></ruby>は<ruby>残<rt>のこ</rt></ruby>り、<ruby>世界<rt>せかい</rt></ruby>は<ruby>新<rt>あたら</rt></ruby>しくなります。</span><span class="en-text">Records stay. The world refreshes.</span></p></div>
-          <div class="wide-card">
-            <p><span class="jp-text"><ruby>新<rt>あたら</rt></ruby>しい<ruby>週<rt>しゅう</rt></ruby>は、<ruby>東京時間<rt>とうきょうじかん</rt></ruby>の<ruby>日曜日<rt>にちようび</rt></ruby><ruby>午前<rt>ごぜん</rt></ruby>0<ruby>時<rt>じ</rt></ruby>に<ruby>始<rt>はじ</rt></ruby>まります。<ruby>追加<rt>ついか</rt></ruby>されたエリアは<ruby>土曜日<rt>どようび</rt></ruby>の<ruby>終<rt>お</rt></ruby>わりに<ruby>閉<rt>と</rt></ruby>じ、<ruby>新<rt>あたら</rt></ruby>しい<ruby>週<rt>しゅう</rt></ruby>にもう<ruby>一度<rt>いちど</rt></ruby>アンロックします。<ruby>完了<rt>かんりょう</rt></ruby>したゲームの<ruby>情報<rt>じょうほう</rt></ruby>は、プロフィールに<ruby>残<rt>のこ</rt></ruby>ります。</span><span class="en-text">Each new week begins on Sunday at midnight, Tokyo time. The additional areas close at the end of Saturday and are unlocked again in the new week. Completed game information remains recorded in the student’s profile.</span></p>
-            <p><span class="jp-text">アプリは、<ruby>生徒<rt>せいと</rt></ruby>の<ruby>学習<rt>がくしゅう</rt></ruby>と<ruby>進<rt>すす</rt></ruby>み<ruby>具合<rt>ぐあい</rt></ruby>を<ruby>続<rt>つづ</rt></ruby>けるために<ruby>必要<rt>ひつよう</rt></ruby>な<ruby>情報<rt>じょうほう</rt></ruby>を<ruby>保存<rt>ほぞん</rt></ruby>します。<ruby>生徒<rt>せいと</rt></ruby>の<ruby>情報<rt>じょうほう</rt></ruby>を<ruby>販売<rt>はんばい</rt></ruby>したり、<ruby>広告<rt>こうこく</rt></ruby>に<ruby>使<rt>つか</rt></ruby>ったりすることはありません。</span><span class="en-text">The app stores the learning and progress information needed to continue the student’s experience. It does not sell student information or use it for advertising.</span></p>
-          </div>
+          <details>
+            <summary><span class="ja">新しい世界をアンロックする</span><span class="en">Unlocking new worlds</span></summary>
+            <div>
+              <p><span class="ja">毎週の迷路のゲーム9つをすべてクリアすると、Utsuroba、Muenba、Grimmerglen が開きます。9つすべてをそれぞれ星2つ以上でクリアすると、Utsuroba の中の学習スペース Akiya と、アーケードゲームが開きます。</span><span class="en">Clear all nine weekly Maze games to open Utsuroba, Muenba and Grimmerglen. Clear all nine with at least two stars each to open Akiya, a study space inside Utsuroba, and the arcade games.</span></p>
+              <p><span class="ja">これらの世界では、英語を使ってクエスト、ハント、コレクション、まちがい探しに取り組みます。</span><span class="en">These worlds use English for quests, hunts, collections and spot-the-change puzzles.</span></p>
+              <p><span class="ja">その週の Blitz を3つすべてクリアすると、Karasuki にカラスキーカードが現れ、単語の記憶チャレンジに挑戦できます。</span><span class="en">Clear all three Blitz rounds in a week and a Karasuki Card appears in Karasuki, with a word-memory challenge to win it.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="ja">3つのカリキュラム</span><span class="en">The three curricula</span></summary>
+            <div>
+              <ul class="tracks">
+                <li><span>Pre-Boo</span><span><span class="ja">英検5級〜4級</span><span class="en">EIKEN Grades 5–4</span></span></li>
+                <li><span>Boo-riculum</span><span><span class="ja">英検3級〜2級</span><span class="en">EIKEN Grades 3–2</span></span></li>
+                <li><span>Boo-Continuum</span><span><span class="ja">英検準1級〜1級</span><span class="en">EIKEN Pre-1–Grade 1</span></span></li>
+              </ul>
+              <p><span class="ja">家庭では、どのカリキュラムの内容でも復習できます。ブライアン英会話教室の小学生は、全員 Pre-Boo を使います。英検5級は、主に中学1年生が対象の級です。</span><span class="en">At home, students can review any curriculum. At Bryan's English School, all elementary-school students use Pre-Boo. EIKEN Grade 5 is generally aimed at first-year junior high students.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="ja">月の学習サイクル</span><span class="en">The monthly cycle</span></summary>
+            <div>
+              <p><span class="ja">毎月、4週間分の新しい内容があります。5週目がある月は、4週目の内容をもう一度使います。学習を終えたり、復習したりするための時間です。</span><span class="en">Each month has four weeks of new content. In a month with a fifth week, Week 4 repeats, giving students time to finish and review.</span></p>
+              <p><span class="ja">5週目も、デイリーチェックは毎日してください。アウトプットクラスで単語15個をすでに書いている場合は、文や質問も書いてください。</span><span class="en">Keep doing the Daily Check every day during that week. In the Output Class, students who have already written the 15 words should go on to the sentences and questions.</span></p>
+            </div>
+          </details>
+
+          <details>
+            <summary><span class="ja">週が変わるとき</span><span class="en">When the week changes</span></summary>
+            <div>
+              <p><span class="ja">追加された世界は土曜日の終わりに閉じ、新しい週にもう一度アンロックします。クリアしたゲームの記録は、プロフィールに残ります。</span><span class="en">The extra worlds close at the end of Saturday and unlock again in the new week. Records of completed games stay in the student's profile.</span></p>
+            </div>
+          </details>
         </section>
       </div>
+
+      <section class="parents" id="parents" aria-labelledby="tp">
+        <h2 id="tp"><span class="ja">保護者の方へ</span><span class="en">For parents</span></h2>
+        <div class="cols">
+          <div>
+            <h3><span class="ja">進み具合を見る</span><span class="en">Seeing progress</span></h3>
+            <p><span class="ja">お子さんの端末で、またはお子さんのPINでログインすると見られます。</span><span class="en">Open the app on your child's device, or sign in with your child's PIN.</span></p>
+            <p><span class="ja">Adventure Log には、デイリーチェック、学習とゲームの進み具合、結果が記録されます。My Adventure には、星、実績、アーケードゲーム、冒険の記録が残ります。</span><span class="en">The Adventure Log records Daily Checks, study and game progress, and results. My Adventure keeps stars, achievements, arcade games and the wider adventure.</span></p>
+          </div>
+          <div>
+            <h3><span class="ja">プライバシー</span><span class="en">Privacy</span></h3>
+            <p><span class="ja">アプリに登録される個人情報は、名前だけです。学習の進み具合は記録されますが、講師や保護者を含め、だれも離れた場所から見ることはできません。</span><span class="en">The only personal information registered in the app is a name. Progress is recorded, but no one, including the teacher and parents, can view it remotely.</span></p>
+            <p><span class="ja">生徒の情報を販売したり、広告に使ったりすることはありません。広告、おすすめフィード、生成AIもありません。</span><span class="en">Student information is never sold or used for advertising. There are no ads, no recommendation feeds and no generative AI.</span></p>
+          </div>
+          <div>
+            <h3><span class="ja">困ったときは</span><span class="en">If something goes wrong</span></h3>
+            <ul class="help">
+              <li><b><span class="ja">音が出ない</span><span class="en">No sound</span></b><span class="ja">端末の音量と、消音（マナーモード）の設定を確認してください。</span><span class="en">Check the volume and the silent mode setting.</span></li>
+              <li><b><span class="ja">新しい内容が出ない</span><span class="en">New content isn't showing</span></b><span class="ja">アプリを閉じて、もう一度開いてください。</span><span class="en">Close the app and open it again.</span></li>
+              <li><b><span class="ja">ログインできない</span><span class="en">Can't sign in</span></b><span class="ja">名前とPINを確認してください。それでも入れないときは、メールでご連絡ください。</span><span class="en">Check the name and PIN. If it still doesn't work, please send an email.</span></li>
+            </ul>
+            <a class="mail" href="mailto:bryans.english@gmail.com">bryans.english@gmail.com</a>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer class="footer">
-      <span><span class="jp-main">Bryan’s English School のご<ruby>家族<rt>かぞく</rt></ruby>のために</span><span class="en-sub">Made for families at Bryan’s English School · Tomisato, Chiba</span></span>
-      <span><a href="https://www.bryanharper.tokyo" target="_blank" rel="noopener"><ruby>公式<rt>こうしき</rt></ruby>サイト</a><span class="en-sub">Bryan’s website</span> · <a href="https://booha-adventure-studios.github.io/booha-world/">Booha World</a><span class="en-sub">Booha World</span> · <a href="about-booha-adventure.html">ブーハー・アドベンチャーとは</a><span class="en-sub">What is Booha Adventure?</span></span>
+    <footer>
+      <span><span class="ja">ブライアン英会話教室（千葉県富里市）</span><span class="en">Bryan's English School, Tomisato, Chiba</span></span>
+      <nav aria-label="Links">
+        <a href="https://booha-adventure-studios.github.io/booha-world/"><span class="ja">ブーハーワールド</span><span class="en">Booha World</span></a>
+        <a href="https://www.bryanharper.tokyo"><span class="ja">公式サイト</span><span class="en">School website</span></a>
+      </nav>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var TITLES = { ja: 'はじめての方へ | ブーハー・アドベンチャー', en: 'Getting started | Booha Adventure' };
+      var buttons = document.querySelectorAll('[data-set-lang]');
+
+      function setLang(lang, updateUrl) {
+        if (lang !== 'en') lang = 'ja';
+        root.setAttribute('data-lang', lang);
+        root.setAttribute('lang', lang);
+        document.title = TITLES[lang];
+        buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-set-lang') === lang)); });
+        if (updateUrl && window.history && history.replaceState) {
+          var url = new URL(window.location.href);
+          if (lang === 'en') url.searchParams.set('lang', 'en'); else url.searchParams.delete('lang');
+          history.replaceState(null, '', url.toString());
+        }
+      }
+
+      // Japanese unless the link itself asks for English (?lang=en). No choice is remembered.
+      var params = new URLSearchParams(window.location.search);
+      setLang(params.get('lang') === 'en' ? 'en' : 'ja', false);
+      buttons.forEach(function (b) {
+        b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang'), true); });
+      });
+
+      // Device tabs (arrow keys move between tabs)
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+      function select(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+        });
+        if (focus) tab.focus();
+      }
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { select(t, false); });
+        t.addEventListener('keydown', function (e) {
+          var n = null;
+          if (e.key === 'ArrowRight') n = tabs[(i + 1) % tabs.length];
+          if (e.key === 'ArrowLeft') n = tabs[(i - 1 + tabs.length) % tabs.length];
+          if (e.key === 'Home') n = tabs[0];
+          if (e.key === 'End') n = tabs[tabs.length - 1];
+          if (n) { e.preventDefault(); select(n, true); }
+        });
+      });
+
+      // Open the right install steps for this device
+      var ua = navigator.userAgent || '';
+      var isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (/Android/i.test(ua)) select(document.getElementById('tab-android'), false);
+      else if (!isIOS && !/Mobi/i.test(ua)) select(document.getElementById('tab-pc'), false);
+    })();
+  </script>
 </body>
 </html>
