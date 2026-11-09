@@ -384,10 +384,10 @@
     .intro-title { font-family: 'Notable', sans-serif; font-weight: 400; color: #f5ecd7; font-size: 1.05rem; letter-spacing: 0.06em; margin-bottom: 14px; }
     .intro-title span { display: block; font-family: system-ui, sans-serif; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8f8472; margin-top: 4px; }
     .intro p { margin: 0 auto 12px; }
-    .intro-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 22px; }
-    .intro-links a { display: inline-flex; flex-direction: column; align-items: center; padding: 7px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(34,30,27,0.7); color: #f5ecd7; text-decoration: none; font-size: 0.85rem; line-height: 1.35; transition: border-color .2s ease; }
-    .intro-links a span { font-size: 0.68rem; color: #9a9080; }
-    .intro-links a:hover, .intro-links a:focus-visible { border-color: rgba(255, 215, 106, 0.6); outline: none; }
+    .intro-home { margin-top: 26px; }
+    .intro-home a { display: inline-flex; flex-direction: column; align-items: center; padding: 12px 24px; border-radius: 14px; border: 1px solid rgba(255, 215, 106, 0.45); background: rgba(34,30,27,0.8); color: #f5ecd7; text-decoration: none; font-size: 0.95rem; line-height: 1.45; transition: border-color .2s ease, box-shadow .2s ease; }
+    .intro-home a span { font-size: 0.72rem; color: #a89c86; }
+    .intro-home a:hover, .intro-home a:focus-visible { border-color: rgba(255, 215, 106, 0.85); box-shadow: 0 0 26px rgba(255, 210, 80, 0.18); outline: none; }
     @media (prefers-reduced-motion: reduce) { .intro { animation: none; opacity: 1; } }
     @media (max-width: 640px) { .intro { margin-top: 48px; font-size: 0.88rem; } }
 
@@ -520,19 +520,7 @@
     <p lang="en">Each week, students practice 15 words, 15 sentences and 15 questions through maze games, story worlds and collectible cards.</p>
     <p lang="ja">ブーハーワールドは、千葉県富里市のブライアン英会話教室と、講師のBryan Harperが作るプロジェクトの入口です。生徒専用の英語学習ウェブアプリ「ブーハー・アドベンチャー」、紙のカードゲーム「Booha Cards」、カラスキーの図鑑、そしてワークショップを紹介しています。</p>
     <p lang="en">Booha World is the home of Bryan's English School in Tomisato, Chiba, and the projects of its teacher, Bryan Harper: Booha Adventure, a private English learning web app for the school's students; Booha Cards, a physical card game series; the Karasuki field guide; and Bryan's Workshop.</p>
-    <nav class="intro-links" aria-label="Booha World pages">
-      <a href="about-booha-adventure.html">ブーハー・アドベンチャーとは <span>What is Booha Adventure?</span></a>
-      <a href="tour.html">ガイドツアー <span>Guided tour</span></a>
-      <a href="how-to.html">はじめての方へ <span>Getting started</span></a>
-      <a href="adventure.html">ブーハー・アドベンチャー <span>Booha Adventure</span></a>
-      <a href="school.html">クラス・料金 <span>Classes and tuition</span></a>
-      <a href="curricula.html">カリキュラム <span>Curricula</span></a>
-      <a href="cards.html">Booha Cards <span>Card games</span></a>
-      <a href="zukan.html">カラスキー図鑑 <span>Karasuki Zukan</span></a>
-      <a href="workshop.html">ワークショップ <span>Workshop</span></a>
-      <a href="bryan.html">Bryan Harper <span>About</span></a>
-      <a href="https://www.bryanharper.tokyo">公式サイト <span>bryanharper.tokyo</span></a>
-    </nav>
+    <p class="intro-home"><a href="https://www.bryanharper.tokyo">ブライアン英会話教室 公式サイト <span>Bryan's English School website</span></a></p>
   </section>
 
 <audio id="bg-audio" src="assets/audio/booha-world-index.mp3" preload="none"></audio>
