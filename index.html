@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   
 <head>
   <meta charset="UTF-8" />
   <meta name="google-site-verification" content="tA7M16ufWrZ2C4nrWlvxTegiq5fwS7k8NNmXldXcF4k" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Booha World — the English learning universe built for Bryan's English School in Tomisato, Chiba. Explore Booha Adventure, Booha Cards, the Karasuki field guide, and Bryan's Workshop.">
+  <meta name="description" content="ブーハー・アドベンチャーは、千葉県富里市のブライアン英会話教室のためにBryan Harperが作った英語学習ウェブアプリです。A whole English school inside one small ghost, plus Booha Cards and the Karasuki field guide.">
   <meta name="author" content="Bryan Harper">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Booha World | Bryan Harper · English Teacher, Tomisato Chiba" />
-  <meta property="og:description" content="Booha World — the English learning universe built for Bryan's English School in Tomisato, Chiba. Explore Booha Adventure, Booha Cards, the Karasuki field guide, and Bryan's Workshop." />
+  <meta property="og:title" content="ブーハー・アドベンチャー | Booha Adventure by Bryan Harper | Booha World, Tomisato Chiba" />
+  <meta property="og:description" content="ブーハー・アドベンチャーは、千葉県富里市のブライアン英会話教室のためにBryan Harperが作った英語学習ウェブアプリです。A whole English school inside one small ghost, plus Booha Cards and the Karasuki field guide." />
   <meta property="og:image" content="https://booha-adventure-studios.github.io/booha-world/assets/img/adventure.png" />
   <meta property="og:url" content="https://booha-adventure-studios.github.io/booha-world/" />
   <meta property="og:type" content="website" />
@@ -21,7 +21,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://booha-adventure-studios.github.io/booha-world/" />
 
-  <title>Booha World | Bryan Harper · English Teacher, Tomisato Chiba</title>
+  <title>ブーハー・アドベンチャー | Booha Adventure by Bryan Harper | Booha World, Tomisato Chiba</title>
+  <link rel="icon" type="image/png" href="assets/img/booha-favicon.png">
 
   <script type="application/ld+json">
   {
@@ -35,7 +36,15 @@
       "url": "https://www.bryanharper.tokyo",
       "sameAs": ["https://note.com/bryanharper"]
     },
-    "description": "Booha World is a hand-built creative and educational universe by Bryan Harper — native English teacher, maker, and developer based in Tomisato, Chiba, Japan.",
+    "description": "Booha World is the public home of Booha Adventure (ブーハー・アドベンチャー), the English learning web app Bryan Harper built for Bryan's English School in Tomisato, Chiba, Japan, along with Booha Cards, the Karasuki field guide and Bryan's Workshop.",
+    "inLanguage": ["ja", "en"],
+    "about": {
+      "@type": "SoftwareApplication",
+      "@id": "https://booha-adventure-studios.github.io/booha-world/about-booha-adventure.html#app",
+      "name": "Booha Adventure",
+      "alternateName": "ブーハー・アドベンチャー",
+      "url": "https://booha-adventure-studios.github.io/booha-world/about-booha-adventure.html"
+    },
     "sameAs": "https://www.bryanharper.tokyo"
   }
   </script>
@@ -387,8 +396,8 @@
 <div id="welcome-overlay" class="welcome-overlay">
   <div class="welcome-card">
     <h2 class="welcome-title">
-      Welcome to the Booha World
-      <span class="welcome-furigana">ウェルカム トゥ ザ ブーハー ワールド</span>
+      Welcome to Booha World
+      <span class="welcome-furigana">ウェルカム トゥ ブーハー ワールド</span>
     </h2>
     <button id="welcome-enter-btn" class="welcome-enter" type="button">Enter</button>
   </div>
@@ -397,7 +406,7 @@
 <button id="sound-toggle" class="sound-toggle" type="button" aria-label="Play background music" title="Play background music">♪</button>
 
 <div class="page">
-  <h1 class="title">The Booha World</h1>
+  <h1 class="title">Booha World</h1>
 
    <div class="grid">
     <a class="tile tile-adventure" href="adventure.html" data-sound="adventure">
@@ -444,7 +453,7 @@
     </nav>
   </section>
 
-<audio id="bg-audio" src="assets/audio/booha-world-index.mp3" preload="auto"></audio>
+<audio id="bg-audio" src="assets/audio/booha-world-index.mp3" preload="none"></audio>
 
 <script>
   // ── FLOATING ORBS ──
