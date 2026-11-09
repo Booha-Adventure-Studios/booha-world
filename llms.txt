@@ -35,5 +35,4 @@ Key facts:
 
 ## Optional
 
-- [Halloween Event](https://booha-adventure-studios.github.io/booha-world/event.html): the school's annual Halloween event day
 - [Sitemap](https://booha-adventure-studios.github.io/booha-world/sitemap.xml)

@@ -10,7 +10,7 @@
   <meta name="author" content="Bryan Harper">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="ブーハー・アドベンチャー | Booha Adventure by Bryan Harper | Booha World, Tomisato Chiba" />
+  <meta property="og:title" content="Booha World | ブーハー・アドベンチャー by Bryan Harper（富里市）" />
   <meta property="og:description" content="ブーハー・アドベンチャーは、千葉県富里市のブライアン英会話教室のためにBryan Harperが作った英語学習ウェブアプリです。A whole English school inside one small ghost, plus Booha Cards and the Karasuki field guide." />
   <meta property="og:image" content="https://booha-adventure-studios.github.io/booha-world/assets/og/home.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="canonical" href="https://booha-adventure-studios.github.io/booha-world/" />
 
-  <title>ブーハー・アドベンチャー | Booha Adventure by Bryan Harper | Booha World, Tomisato Chiba</title>
+  <title>Booha World | ブーハー・アドベンチャー by Bryan Harper（富里市）</title>
   <link rel="icon" type="image/png" href="assets/img/booha-favicon.png">
 
   <script type="application/ld+json">
@@ -366,14 +366,6 @@
     gap: 12px;
   }
 }
-
-    
-@media (max-width: 360px) {
-  .grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-}
     
   
     /* ── INTRO (plain text for families and search) ── */
@@ -443,16 +435,19 @@
     @media (max-width: 360px) {
       .grid .tile:last-child:nth-child(odd) { width: calc(50% - 6px); }
     }
-    @media (prefers-reduced-motion: reduce) { .tagline, .start-here { animation: none; opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .tagline, .start-here, .title, .tile { animation: none; opacity: 1; transform: none; }
+      .welcome-card, .welcome-enter { animation: none; }
+    }
 </style>
 </head>
 <body>
 
 <canvas id="orb-canvas"></canvas>
 
-<div id="welcome-overlay" class="welcome-overlay">
+<div id="welcome-overlay" class="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
   <div class="welcome-card">
-    <h2 class="welcome-title">
+    <h2 id="welcome-title" class="welcome-title">
       Welcome to Booha World
       <span class="welcome-furigana">ウェルカム トゥ ブーハー ワールド</span>
     </h2>
@@ -645,13 +640,18 @@
       drawOrb(o);
     }
 
-    requestAnimationFrame(tick);
+    if (!reduceMotion.matches) requestAnimationFrame(tick);
   }
 
+  // Reduced motion: draw the orbs once and keep them still
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   resize();
   initOrbs();
   tick();
-  window.addEventListener('resize', () => { resize(); initOrbs(); });
+  window.addEventListener('resize', () => { resize(); initOrbs(); if (reduceMotion.matches) tick(); });
+  if (reduceMotion.addEventListener) {
+    reduceMotion.addEventListener('change', (e) => { if (!e.matches) tick(); });
+  }
 
   // ── AUDIO: background music, gated behind the welcome overlay (see bottom of script) ──
   const audio = document.getElementById('bg-audio');
@@ -803,7 +803,14 @@
       setTimeout(startBGM, 400);
     });
   } else {
+    // While the gate is up, the page behind it is out of reach for keyboards and screen readers
+    const pageEl = document.querySelector('.page');
+    pageEl.inert = true;
+    pageEl.setAttribute('aria-hidden', 'true');
+    enterBtn.focus();
     enterBtn.addEventListener('click', () => {
+      pageEl.inert = false;
+      pageEl.removeAttribute('aria-hidden');
       markEntered();
       ensureCtx(); // warm the WebAudio context on this same gesture, so the first tile click has zero latency
       startBGM();
