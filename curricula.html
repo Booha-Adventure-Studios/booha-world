@@ -893,7 +893,7 @@ body::before {
   <div class="section-group">
     <div class="group-label"><span id="grp2-label">アウトプットクラス：レベル別</span></div>
 
-    <div class="level-tabs" id="level-tabs" role="tablist">
+    <div class="level-tabs" id="level-tabs" role="tablist" aria-label="レベル / Level">
       <button class="level-tab" data-target="acc-pre" role="tab">
         <span class="lang-jp-text">幼児</span><span class="lang-en-text" style="display:none">Preschool</span>
       </button>
@@ -1151,10 +1151,32 @@ body::before {
       target.classList.add('open');
       target.querySelector('.acc-btn')?.setAttribute('aria-expanded', 'true');
     }
-    tabs.forEach(t => t.classList.toggle('active', t.dataset.target === targetId));
+    tabs.forEach(t => {
+      const on = t.dataset.target === targetId;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
   }
 
-  tabs.forEach(tab => tab.addEventListener('click', () => showLevel(tab.dataset.target)));
+  // Tabs: each tab names its panel; arrow keys, Home and End move between levels
+  const tabList = [...tabs];
+  tabList.forEach((tab, i) => {
+    tab.type = 'button';
+    tab.id = 'tab-' + tab.dataset.target;
+    tab.setAttribute('aria-controls', tab.dataset.target);
+    const panel = document.getElementById(tab.dataset.target);
+    if (panel) { panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', tab.id); }
+    tab.addEventListener('click', () => showLevel(tab.dataset.target));
+    tab.addEventListener('keydown', e => {
+      let n = null;
+      if (e.key === 'ArrowRight') n = tabList[(i + 1) % tabList.length];
+      if (e.key === 'ArrowLeft') n = tabList[(i - 1 + tabList.length) % tabList.length];
+      if (e.key === 'Home') n = tabList[0];
+      if (e.key === 'End') n = tabList[tabList.length - 1];
+      if (n) { e.preventDefault(); showLevel(n.dataset.target); n.focus(); }
+    });
+  });
 
   showLevel('acc-es1');
   setLang('jp');
