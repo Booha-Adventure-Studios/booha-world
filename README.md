@@ -26,7 +26,7 @@ The student-facing Booha Adventure app is maintained in a separate repository:
 | `index.html` | Landing page with animated floating orbs and audio |
 | `adventure.html` | Public overview of Booha Adventure, its curricula, class formats, and access |
 | `about-booha-adventure.html` | Fact sheet: what Booha Adventure is, in plain Japanese and English, for families, search engines and AI assistants |
-| `tour.html` | Guided tour of the app built from real screens: the weekly path (Maze and Blitz), the worlds, Karasuki Cards, rewards, progress, and the English Juku class. Japanese by default, with an English toggle (`?lang=en` opens it in English) |
+| `tour.html` | Guided tour of the app built from real screens: the weekly rhythm (Daily Check, Blitz, then the Maze), the worlds, Karasuki Cards, rewards, progress, and the English Juku class. Japanese by default, with an English toggle (`?lang=en` opens it in English) |
 | `how-to.html` | Parent installation and usage guide, shared by direct link or QR code; intentionally not in public navigation |
 | `school.html` | Output and English Juku class formats, lesson pricing, and learning system |
 | `curricula.html` | Three curriculum tracks with interactive design |
@@ -62,7 +62,7 @@ Key features:
 - Weekly study decks with vocabulary, sentences, questions, audio, and Japanese support
 - A Daily Check of about 5 minutes on the first visit each day, with an honest Skip option; profiles record the first and best results
 - Nine weekly Maze games, plus two extra practice games (Booha Bites and Echo) and a Week Boss fight
-- Three timed Blitz rounds as an optional warm-up that runs alongside the Maze; clearing all three unlocks that week's surprise and the Karasuki Card challenge
+- Three timed Blitz rounds built from the week's homework, cleared during the week before the Maze; clearing all three unlocks that week's surprise and the Karasuki Card challenge, and students who have done that day's Daily Check and the Blitz get a special welcome at the Maze
 - Four explorable story worlds: Karasuki, Utsuroba, Muenba, and Grimmerglen. Karasuki is the hub; the last three open for the week after all nine Maze games in one curriculum are completed. Akiya is a study space inside Utsuroba that opens with at least ★★ on all nine games in one curriculum that week
 - Karasuki Cards: an in-game collectible card series won through a word-memory challenge
 - Rainbow stars for prepared students, weekly medals, permanent tokens, weekly postcards, and an arcade
