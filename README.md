@@ -61,7 +61,7 @@ Key features:
 - Three curriculum tracks: Pre-Boo, Boo-riculum, and Boo-Continuum
 - Weekly study decks with vocabulary, sentences, questions, audio, and Japanese support
 - A three-to-four-minute, all-tap Daily Check before the first adventure each day, with an honest Skip option and a reminder (never a lock) until it is done; profiles record the first and best results
-- Nine weekly Maze games, plus two extra practice games (Booha Bites and Echo) and a Week Boss fight
+- Nine weekly Maze games, plus four extra practice games (Booha Bites, Echo, Vowel Pop and Don't Talk to Poopika) and a Week Boss fight
 - Three timed Blitz rounds built from the week's homework, cleared during the week before the Maze; clearing all three unlocks that week's surprise and the Karasuki Card challenge, and students who have done that day's Daily Check and the Blitz get a special welcome at the Maze
 - Four explorable story worlds: Karasuki, Utsuroba, Muenba, and Grimmerglen. Karasuki is the hub; the last three open for the week after all nine Maze games in one curriculum are completed. Akiya is a study space inside Utsuroba that opens with at least ★★ on all nine games in one curriculum that week
 - Karasuki Cards: an in-game collectible card series won through a word-memory challenge
